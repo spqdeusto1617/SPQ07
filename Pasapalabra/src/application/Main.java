@@ -19,7 +19,7 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Hola mundo");
+		System.out.println("Hola mundo gitano");
 	}
 	
 	public static void main(String[] args) {
