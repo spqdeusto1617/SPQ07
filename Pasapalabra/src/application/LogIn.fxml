@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventosLogIn">
+   <children>
+      <Label fx:id="txtIncorrecto" layoutX="193.0" layoutY="320.0" textFill="#00c6ff">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <ImageView fitHeight="134.0" fitWidth="223.0" layoutX="347.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Desktop/LogoPasapalabra.png" />
+         </image></ImageView>
+      <Label fx:id="lblRegistrar" layoutX="430.0" layoutY="242.0" onMouseClicked="#registro" text="¿No tienes cuenta? ¡Regístrate!" textFill="#58a6d3">
+         <font>
+            <Font size="8.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label layoutX="142.0" layoutY="328.0" text="Noticias" />
+      <Polygon fill="#1fb7ff" layoutX="578.0" layoutY="391.0" rotate="-116.6" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+        <points>
+          <Double fx:value="-50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="0.0" />
+          <Double fx:value="-60.0" />
+        </points>
+      </Polygon>
+      <Label layoutX="556.0" layoutY="362.0" rotate="-53.1" text="Hola" />
+      <TextField fx:id="txtUsuario" layoutX="377.0" layoutY="161.0" text="aa" />
+      <PasswordField fx:id="txtContra" layoutX="377.0" layoutY="216.0" />
+      <CheckBox fx:id="checkRecordar" layoutX="381.0" layoutY="271.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="154.0" text="Recordar contraseña" />
+      <Button fx:id="btnLogin" layoutX="434.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#loginSession" text="Log-In" />
+      <Pagination fx:id="pagNoticias" layoutX="48.0" layoutY="63.0" pageCount="4" prefHeight="251.0" prefWidth="235.0" />
+   </children>
+</Pane>
