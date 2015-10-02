@@ -19,9 +19,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <ImageView fitHeight="134.0" fitWidth="223.0" layoutX="347.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="134.0" fitWidth="235.0" layoutX="345.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Desktop/LogoPasapalabra.png" />
+            <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
       <Label fx:id="lblRegistrar" layoutX="430.0" layoutY="242.0" onMouseClicked="#registro" text="¿No tienes cuenta? ¡Regístrate!" textFill="#58a6d3">
          <font>

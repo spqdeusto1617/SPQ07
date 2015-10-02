@@ -14,6 +14,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.WindowEvent;
 
 public class EventosLogIn extends Control implements Initializable {
 
@@ -57,6 +58,13 @@ public class EventosLogIn extends Control implements Initializable {
 	public void registro(MouseEvent event){
 		
 		
+		
+		
+	}
+	
+	public void ventanaCreada(WindowEvent event){
+		
+		System.out.println("Creada!!");
 		
 		
 	}

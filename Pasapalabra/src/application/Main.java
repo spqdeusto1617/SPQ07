@@ -10,10 +10,12 @@ import javafx.stage.WindowEvent;
 
 
 public class Main extends Application {
+	
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Pane page =  FXMLLoader.load(Main.class.getResource("hola.fxml"));
+			Pane page =  FXMLLoader.load(Main.class.getResource("../windows/LogIn.fxml"));
 			
 			Scene scene = new Scene(page);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

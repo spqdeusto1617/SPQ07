@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+  <tabs>
+    <Tab text="El programa">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Separator layoutX="116.0" layoutY="181.0" prefHeight="5.0" prefWidth="368.0" />
+                  <Label layoutX="300.0" layoutY="205.0" text="1.0" />
+                  <Text layoutX="131.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión del programa:" />
+                  <Text layoutX="131.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de versión:" />
+                  <Text layoutX="131.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Problemas?" />
+                  <Label layoutX="300.0" layoutY="241.0" text="Falta la fecha" />
+                  <Label layoutX="300.0" layoutY="283.0" text="ivan.martin@opendeusto.es" />
+                  <Label layoutX="300.0" layoutY="314.0" text="asier.gutierrez@opendeusto.es" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Quienes somos">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
