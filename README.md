@@ -17,10 +17,11 @@ Crear un juego online con accesibilidad y desplegable por cualquier persona.
   <li>Idiomas</li>
 </ul>
 
-<h5>Objetivos de código a largo plazo<h5>
+<h5>Objetivos de código a largo plazo</h5>
 <ul style="list-style-type:none">
   <li>Mejoras en el rendimiento</li>
   <li>Limpieza de código</li>
   <li>Código en inglés (nombre de variables, clases, métodos, JavaDoc...)</li>
   </ul>
+  
 <a href="https://github.com/asier-gutierrez/Pasapalabra/branches">Únete y desarrolla tu propia versión!</a>
