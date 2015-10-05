@@ -1,4 +1,4 @@
-Pasapalabra
+<h3>Pasapalabra</h3>
 
 <h4>Descripción breve</h4>
 
