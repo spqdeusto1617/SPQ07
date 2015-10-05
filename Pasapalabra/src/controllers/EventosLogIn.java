@@ -62,10 +62,10 @@ public class EventosLogIn extends Control implements Initializable {
 		
 	}
 	
-	public void ventanaCreada(WindowEvent event){
-		
-		System.out.println("Creada!!");
-		
-		
-	}
+//	public void ventanaCreada(WindowEvent event){
+//		
+//		System.out.println("Creada!!");
+//		
+//		
+//	}
 }
