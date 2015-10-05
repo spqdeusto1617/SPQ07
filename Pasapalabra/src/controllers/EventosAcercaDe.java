@@ -10,4 +10,6 @@ public class EventosAcercaDe {
 	//Recuerda que tienes que enlazar esta clase con el código fxml
 	//(Haz esta clase la clase controladora del código fxml)
 	//Si tienes dudas mira en la clase main y eventoslogin
+	//Añade un botón para ir atrás
+	//Las clases controladoras extienden de Controller
 }
