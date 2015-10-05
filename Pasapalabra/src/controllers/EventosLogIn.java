@@ -16,6 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.WindowEvent;
 
+/**Clase que gestiona los eventos de la clase LogIn.fxml
+ * @author asier.gutierrez
+ *
+ */
 public class EventosLogIn extends Control implements Initializable {
 
 	@Override
