@@ -22,5 +22,5 @@ Crear un juego online con accesibilidad y desplegable por cualquier persona.
   <li>Mejoras en el rendimiento</li>
   <li>Limpieza de código</li>
   <li>Código en inglés (nombre de variables, clases, métodos, JavaDoc...)</li>
-  
+  </ul>
 <a href="https://github.com/asier-gutierrez/Pasapalabra/branches">Únete y desarrolla tu propia versión!</a>
