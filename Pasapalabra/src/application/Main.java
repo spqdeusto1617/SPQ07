@@ -1,11 +1,14 @@
 package application;
 	
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -47,10 +50,12 @@ public class Main extends Application {
 			//Mostrar ventana
 			primaryStage.show();
 			
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 	
 	/**Método main de la clase.
 	 * @param args Argumentos de consola (no se utilizan)

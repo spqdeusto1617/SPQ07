@@ -1,20 +1,25 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
+import application.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.WindowEvent;
+import javafx.stage.Stage;
 
 /**Clase que gestiona los eventos de la clase LogIn.fxml
  * @author asier.gutierrez
@@ -55,8 +60,9 @@ public class EventosLogIn extends Control implements Initializable {
 	public void loginSession(MouseEvent event){
 		
 		txtIncorrecto.setText("Usuario y/o contraseña incorrecto/s");
-		
-		
+		//Si todo va bien:
+//		Transición de ventana
+		utilidades.deVentana.transicionVentana("AcercaDe", event);
 	}
 	
 	public void registro(MouseEvent event){
@@ -65,11 +71,5 @@ public class EventosLogIn extends Control implements Initializable {
 		
 		
 	}
-	
-//	public void ventanaCreada(WindowEvent event){
-//		
-//		System.out.println("Creada!!");
-//		
-//		
-//	}
+
 }
