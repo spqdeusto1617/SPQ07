@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.Desktop;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /**Clase que gestiona los eventos de la clase LogIn.fxml
@@ -48,6 +50,12 @@ public class EventosLogIn extends Control implements Initializable {
 	private TextField txtUsuario;
 	
 	@FXML
+	private ImageView estadoServidor;
+	
+	@FXML
+	private ImageView forkUs;
+	
+	@FXML
 	private Label lblRegistrar;
 	
 	public void loginSession(MouseEvent event){
@@ -60,6 +68,20 @@ public class EventosLogIn extends Control implements Initializable {
 	
 	public void registro(MouseEvent event){
 		
+		utilidades.deVentana.transicionVentana("Registro", event);
+		
+		
+		
+	}
+	
+	public void irAGitHub(MouseEvent event){
+		
+		try {
+	        Desktop.getDesktop().browse(new URL("https://github.com/asier-gutierrez/Pasapalabra").toURI());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	
 		
 		
 		

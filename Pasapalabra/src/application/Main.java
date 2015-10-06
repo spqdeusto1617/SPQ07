@@ -43,7 +43,8 @@ public class Main extends Application {
 			
 			//Poner escena
 			primaryStage.setScene(scene);
-			
+			primaryStage.setResizable(false);
+			primaryStage.sizeToScene();
 			//Mostrar ventana
 			primaryStage.show();
 			
