@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -12,90 +14,90 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Separator layoutX="116.0" layoutY="200.0" prefHeight="5.0" prefWidth="368.0" />
-                  <Label layoutX="352.0" layoutY="222.0" text="1.0" />
-                  <Text layoutX="131.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión del programa:" />
-                  <Text layoutX="131.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de versión:" />
-                  <Text layoutX="131.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Problemas?" />
-                  <Label layoutX="325.0" layoutY="258.0" text="Falta la fecha" />
-                  <Label layoutX="300.0" layoutY="298.0" text="ivan.martin@opendeusto.es" />
-                  <Label layoutX="300.0" layoutY="332.0" text="asier.gutierrez@opendeusto.es" />
+                  <Separator layoutX="116.0" layoutY="211.0" prefHeight="5.0" prefWidth="368.0" />
+                  <Label layoutX="360.0" layoutY="231.0" text="1.0" />
+                  <Text layoutX="131.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión del programa:" />
+                  <Text layoutX="144.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de versión:" />
+                  <Text layoutX="143.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Problemas?" />
+                  <Label layoutX="333.0" layoutY="267.0" text="Falta la fecha" />
+                  <Label fx:id="lblcorreodeivan" layoutX="294.0" layoutY="304.0" onMousePressed="#copiarcorreodeivan" text="ivan.martin@opendeusto.es" />
+                  <Label fx:id="lblcorreodeasier" layoutX="286.0" layoutY="338.0" onMousePressed="#copiarcorreodeasier" text="asier.gutierrez@opendeusto.es" />
                   <Text fontSmoothingType="LCD" layoutX="129.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requisitos de sistema" textAlignment="CENTER" wrappingWidth="334.13671875">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text layoutX="116.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SO:" wrappingWidth="30.13671875">
+                  <Text layoutX="79.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SO:" wrappingWidth="30.13671875">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="169.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Windows Vista+ ">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="280.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mac OS X 10.8.3+" wrappingWidth="115.13671875">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="407.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ubuntu Linux 12.04+" wrappingWidth="130.13671875">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="109.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RAM:" wrappingWidth="39.13671875">
+                  <Text layoutX="129.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Windows Vista+ ">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="162.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="128Mb" textAlignment="CENTER" wrappingWidth="118.13671875">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="164.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mínimos" textAlignment="CENTER" wrappingWidth="115.13671875">
+                  <Text layoutX="279.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mac OS X 10.8.3+" wrappingWidth="126.13671875">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="397.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendados" wrappingWidth="113.13671875">
+                  <Text layoutX="432.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ubuntu Linux 12.04+" wrappingWidth="154.13671875">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="428.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="512Mb" wrappingWidth="52.13671875">
+                  <Text layoutX="74.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RAM:" wrappingWidth="39.13671875">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="43.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espacio en disco:">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="190.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="124Mb" textAlignment="CENTER" wrappingWidth="62.13671875">
+                  <Text layoutX="162.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="128Mb" textAlignment="CENTER" wrappingWidth="118.13671875">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="423.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1Gb" textAlignment="CENTER" wrappingWidth="50.755859375">
+                  <Text layoutX="164.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mínimos" textAlignment="CENTER" wrappingWidth="115.13671875">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="35.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión de java" textAlignment="CENTER" wrappingWidth="120.501953125">
+                  <Text layoutX="396.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendados" wrappingWidth="113.13671875">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="195.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java7" textAlignment="CENTER" wrappingWidth="52.13671875">
+                  <Text layoutX="427.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="512Mb" wrappingWidth="52.13671875">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Text layoutX="423.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java8" textAlignment="CENTER" wrappingWidth="49.888671875">
+                  <Text layoutX="37.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espacio en disco:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="190.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="124Mb" textAlignment="CENTER" wrappingWidth="62.13671875">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="424.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1Gb" textAlignment="CENTER" wrappingWidth="50.755859375">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="33.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión de java:" textAlignment="CENTER" wrappingWidth="120.501953125">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="195.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java7" textAlignment="CENTER" wrappingWidth="52.13671875">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="425.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java8" textAlignment="CENTER" wrappingWidth="49.888671875">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -105,7 +107,109 @@
     </Tab>
     <Tab text="Quienes somos">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iván Martín Rodríguez" textAlignment="CENTER" wrappingWidth="244.13671875">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="369.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asier Gutiérrez Fandiño" textAlignment="CENTER" wrappingWidth="218.044921875">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="30.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="19.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residencia:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="28.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="19.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivación:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="231.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desarrolladores">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="169.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="148.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="111.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="111.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar un proyecto para la asignatura de programación y aprender acerca de javafx para el futuro" textAlignment="CENTER" wrappingWidth="167.583984375">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Separator layoutX="316.0" layoutY="50.0" orientation="VERTICAL" prefHeight="271.0" prefWidth="1.0">
+                     <opaqueInsets>
+                        <Insets top="2.0" />
+                     </opaqueInsets>
+                  </Separator>
+                  <Text layoutX="350.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="467.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="332.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residencia:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="445.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="340.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="408.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="330.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivación:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="421.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar un proyecto para la asignatura de programación y aprender acerca de javafx para el futuro" wrappingWidth="143.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+               </children></AnchorPane>
       </content>
     </Tab>
   </tabs>
