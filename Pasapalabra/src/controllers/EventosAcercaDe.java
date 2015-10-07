@@ -1,9 +1,12 @@
 package controllers;
 
-import java.awt.Label;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
+import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
@@ -12,7 +15,7 @@ import javafx.scene.input.MouseEvent;
  * @author asier.gutierrez
  *
  */
-public class EventosAcercaDe extends Control {
+public class EventosAcercaDe extends Control implements Initializable {
 	//Recuerda usar JavaDoc para cada método
 	//Recuerda que tienes que añadir los listener y todo eso
 	//Recuerda que tienes que enlazar esta clase con el código fxml
@@ -21,6 +24,11 @@ public class EventosAcercaDe extends Control {
 	//Añade un botón para ir atrás
 	//Las clases controladoras extienden de Controller
 
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		
+	}
 	@FXML
 	private Label lblcorreodeivan;
 
@@ -46,6 +54,8 @@ public class EventosAcercaDe extends Control {
         clipboard.setContent(content);
 		
 	}
+
+	
 
 
 }

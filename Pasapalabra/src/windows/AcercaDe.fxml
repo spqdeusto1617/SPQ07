@@ -8,20 +8,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventosAcercaDe">
   <tabs>
     <Tab text="El programa">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Separator layoutX="116.0" layoutY="211.0" prefHeight="5.0" prefWidth="368.0" />
-                  <Label layoutX="360.0" layoutY="231.0" text="1.0" />
-                  <Text layoutX="131.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión del programa:" />
-                  <Text layoutX="144.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de versión:" />
-                  <Text layoutX="143.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Problemas?" />
-                  <Label layoutX="333.0" layoutY="267.0" text="Falta la fecha" />
+                  <Label layoutX="296.0" layoutY="231.0" text="1.0" />
+                  <Text layoutX="109.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión del programa:" />
+                  <Text layoutX="130.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de versión:" />
+                  <Text layoutX="156.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Problemas?" />
+                  <Label layoutX="294.0" layoutY="267.0" text="Falta la fecha" />
                   <Label fx:id="lblcorreodeivan" layoutX="294.0" layoutY="304.0" onMousePressed="#copiarcorreodeivan" text="ivan.martin@opendeusto.es" />
-                  <Label fx:id="lblcorreodeasier" layoutX="286.0" layoutY="338.0" onMousePressed="#copiarcorreodeasier" text="asier.gutierrez@opendeusto.es" />
+                  <Label fx:id="lblcorreodeasier" layoutX="294.0" layoutY="336.0" onMousePressed="#copiarcorreodeasier" text="asier.gutierrez@opendeusto.es" />
                   <Text fontSmoothingType="LCD" layoutX="129.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requisitos de sistema" textAlignment="CENTER" wrappingWidth="334.13671875">
                      <font>
                         <Font size="19.0" />
@@ -164,7 +163,7 @@
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <Separator layoutX="316.0" layoutY="50.0" orientation="VERTICAL" prefHeight="271.0" prefWidth="1.0">
+                  <Separator layoutX="300.0" layoutY="48.0" orientation="VERTICAL" prefHeight="271.0" prefWidth="1.0">
                      <opaqueInsets>
                         <Insets top="2.0" />
                      </opaqueInsets>
