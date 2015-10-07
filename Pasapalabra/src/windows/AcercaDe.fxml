@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
@@ -14,93 +16,41 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="296.0" layoutY="231.0" text="1.0" />
+                  <Label layoutX="281.0" layoutY="231.0" text="1.0" />
                   <Text layoutX="109.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión del programa:" />
-                  <Text layoutX="130.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de versión:" />
-                  <Text layoutX="156.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Problemas?" />
-                  <Label layoutX="294.0" layoutY="267.0" text="Falta la fecha" />
-                  <Label fx:id="lblcorreodeivan" layoutX="294.0" layoutY="304.0" onMousePressed="#copiarcorreodeivan" text="ivan.martin@opendeusto.es" />
-                  <Label fx:id="lblcorreodeasier" layoutX="294.0" layoutY="336.0" onMousePressed="#copiarcorreodeasier" text="asier.gutierrez@opendeusto.es" />
+                  <Text layoutX="133.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de versión:" />
+                  <Text layoutX="157.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Problemas?" />
+                  <Label layoutX="282.0" layoutY="259.0" text="Falta la fecha" />
+                  <Label fx:id="lblcorreodeivan" layoutX="280.0" layoutY="288.0" onMousePressed="#copiarcorreodeivan" text="ivan.martin@opendeusto.es">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
+                  <Label fx:id="lblcorreodeasier" layoutX="279.0" layoutY="316.0" onMousePressed="#copiarcorreodeasier" text="asier.gutierrez@opendeusto.es">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Label>
                   <Text fontSmoothingType="LCD" layoutX="129.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requisitos de sistema" textAlignment="CENTER" wrappingWidth="334.13671875">
                      <font>
                         <Font size="19.0" />
                      </font>
                   </Text>
-                  <Text layoutX="79.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SO:" wrappingWidth="30.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="129.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Windows Vista+ ">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="279.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mac OS X 10.8.3+" wrappingWidth="126.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="432.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ubuntu Linux 12.04+" wrappingWidth="154.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="74.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RAM:" wrappingWidth="39.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="162.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="128Mb" textAlignment="CENTER" wrappingWidth="118.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="164.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mínimos" textAlignment="CENTER" wrappingWidth="115.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="396.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendados" wrappingWidth="113.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="427.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="512Mb" wrappingWidth="52.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="37.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espacio en disco:">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="190.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="124Mb" textAlignment="CENTER" wrappingWidth="62.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="424.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1Gb" textAlignment="CENTER" wrappingWidth="50.755859375">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="33.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión de java:" textAlignment="CENTER" wrappingWidth="120.501953125">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="195.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java7" textAlignment="CENTER" wrappingWidth="52.13671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="425.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java8" textAlignment="CENTER" wrappingWidth="49.888671875">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
+                  <Text layoutX="104.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SO:" wrappingWidth="30.13671875" />
+                  <Text layoutX="136.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Windows Vista+ " />
+                  <Text layoutX="279.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mac OS X 10.8.3+" wrappingWidth="126.13671875" />
+                  <Text layoutX="432.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ubuntu Linux 12.04+" wrappingWidth="154.13671875" />
+                  <Text layoutX="94.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RAM:" wrappingWidth="39.13671875" />
+                  <Text layoutX="162.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="128Mb" textAlignment="CENTER" wrappingWidth="118.13671875" />
+                  <Text layoutX="164.0" layoutY="81.0" text="Mínimos" textAlignment="CENTER" underline="true" wrappingWidth="115.13671875" />
+                  <Text layoutX="404.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendados" underline="true" wrappingWidth="113.13671875" />
+                  <Text layoutX="430.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="512Mb" wrappingWidth="52.13671875" />
+                  <Text layoutX="21.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espacio en disco:" />
+                  <Text layoutX="190.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="124Mb" textAlignment="CENTER" wrappingWidth="62.13671875" />
+                  <Text layoutX="424.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1Gb" textAlignment="CENTER" wrappingWidth="50.755859375" />
+                  <Text layoutX="20.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión de java:" textAlignment="CENTER" wrappingWidth="120.501953125" />
+                  <Text layoutX="195.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java7" textAlignment="CENTER" wrappingWidth="52.13671875" />
+                  <Text layoutX="425.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java8" textAlignment="CENTER" wrappingWidth="49.888671875" />
+                  <Separator layoutX="104.0" layoutY="210.0" prefHeight="0.0" prefWidth="381.0" />
+                  <ImageView fitHeight="58.0" fitWidth="515.0" layoutX="39.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" />
                </children></AnchorPane>
       </content>
     </Tab>

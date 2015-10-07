@@ -24,8 +24,7 @@ public class EventosLogIn extends Control implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
+		// TODO Elementos a inicializar cuando se enciende la ventana.
 	}
 	
 	@FXML
