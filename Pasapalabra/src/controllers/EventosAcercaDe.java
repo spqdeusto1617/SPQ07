@@ -27,35 +27,50 @@ public class EventosAcercaDe extends Control implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@FXML
 	private Label lblcorreodeivan;
 
+	/**Método para copiar al clipboard (o portapapeles) 
+	 * el elemento seleccionado (en este caso, el correo).
+	 */
 	public void copiarcorreodeivan(MouseEvent event){
 
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent content = new ClipboardContent();
-        content.putString(lblcorreodeivan.getText());
-        
-        clipboard.setContent(content);
+		final ClipboardContent content = new ClipboardContent();
+		content.putString(lblcorreodeivan.getText());
 		
+		clipboard.setContent(content);
+
 	}
 
 	@FXML
 	private Label lblcorreodeasier;
 
+	/**
+		Método idéntico al anterior (copiarcorreodeivan) 
+	 */
 	public void copiarcorreodeasier(MouseEvent event){
-
-		final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent content = new ClipboardContent();
-        content.putString(lblcorreodeasier.getText());
-        
-        clipboard.setContent(content);
 		
+		final Clipboard clipboard = Clipboard.getSystemClipboard();
+		final ClipboardContent content = new ClipboardContent();
+		content.putString(lblcorreodeasier.getText());
+		
+		clipboard.setContent(content);
+
 	}
 
-	
+	/**Método para volver a la ventana de login.
+	 */
+	public void VolveralLog(MouseEvent event){
+
+		utilidades.deVentana.transicionVentana("LogIn", event);
+
+
+
+	}
+
 
 
 }

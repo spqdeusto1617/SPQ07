@@ -43,14 +43,21 @@
                   <Text layoutX="164.0" layoutY="81.0" text="Mínimos" textAlignment="CENTER" underline="true" wrappingWidth="115.13671875" />
                   <Text layoutX="404.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recomendados" underline="true" wrappingWidth="113.13671875" />
                   <Text layoutX="430.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="512Mb" wrappingWidth="52.13671875" />
-                  <Text layoutX="21.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espacio en disco:" />
+                  <Text layoutX="29.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Espacio en disco:" />
                   <Text layoutX="190.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="124Mb" textAlignment="CENTER" wrappingWidth="62.13671875" />
                   <Text layoutX="424.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1Gb" textAlignment="CENTER" wrappingWidth="50.755859375" />
                   <Text layoutX="20.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión de java:" textAlignment="CENTER" wrappingWidth="120.501953125" />
                   <Text layoutX="195.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java7" textAlignment="CENTER" wrappingWidth="52.13671875" />
                   <Text layoutX="425.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java8" textAlignment="CENTER" wrappingWidth="49.888671875" />
                   <Separator layoutX="104.0" layoutY="210.0" prefHeight="0.0" prefWidth="381.0" />
-                  <ImageView fitHeight="58.0" fitWidth="515.0" layoutX="39.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button fx:id="btnVolver" layoutX="39.0" layoutY="321.0" mnemonicParsing="false" onMousePressed="#VolveralLog" text="Volver" textAlignment="CENTER">
+                     <effect>
+                        <GaussianBlur radius="0.0" />
+                     </effect>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                </children></AnchorPane>
       </content>
     </Tab>
@@ -60,32 +67,32 @@
                <children>
                   <Text layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iván Martín Rodríguez" textAlignment="CENTER" wrappingWidth="244.13671875">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="18.0" />
                      </font>
                   </Text>
                   <Text layoutX="369.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asier Gutiérrez Fandiño" textAlignment="CENTER" wrappingWidth="218.044921875">
                      <font>
-                        <Font size="20.0" />
+                        <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="30.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
+                  <Text layoutX="49.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
                   <Text layoutX="19.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residencia:">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
                   <Text layoutX="28.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="19.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivación:">
+                  <Text layoutX="11.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivación:">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
                   <Text layoutX="231.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Desarrolladores">
@@ -93,24 +100,24 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text layoutX="169.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
+                  <Text layoutX="126.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="148.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
+                  <Text layoutX="126.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="111.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
+                  <Text layoutX="126.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="111.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar un proyecto para la asignatura de programación y aprender acerca de javafx para el futuro" textAlignment="CENTER" wrappingWidth="167.583984375">
+                  <Text layoutX="122.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar un proyecto para la asignatura de programación y aprender acerca de javafx para el futuro" textAlignment="CENTER" wrappingWidth="164.583984375">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
                   <Separator layoutX="300.0" layoutY="48.0" orientation="VERTICAL" prefHeight="271.0" prefWidth="1.0">
@@ -118,44 +125,44 @@
                         <Insets top="2.0" />
                      </opaqueInsets>
                   </Separator>
-                  <Text layoutX="350.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
+                  <Text layoutX="352.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="467.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
+                  <Text layoutX="421.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="332.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residencia:">
+                  <Text layoutX="326.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residencia:">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="445.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
+                  <Text layoutX="421.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="340.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
+                  <Text layoutX="341.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="408.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
+                  <Text layoutX="421.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
                   <Text layoutX="330.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivación:">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
                   <Text layoutX="421.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar un proyecto para la asignatura de programación y aprender acerca de javafx para el futuro" wrappingWidth="143.0">
                      <font>
-                        <Font size="15.0" />
+                        <Font size="14.0" />
                      </font>
                   </Text>
                </children></AnchorPane>
