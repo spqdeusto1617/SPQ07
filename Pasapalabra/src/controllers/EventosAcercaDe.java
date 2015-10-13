@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
@@ -29,8 +30,27 @@ public class EventosAcercaDe extends Control implements Initializable {
 		// TODO Auto-generated method stub
 
 	}
+	//Variable para que se pueda realizar la transición de la info: copiado a portapapeles
+	public int alturaDelMensaje=0;
+	
+	
+	//Hilo creado para la animación del portapapeles
+	HiloPortapapeles portapapeles=new HiloPortapapeles();
+	
+	
+	
+	@FXML
+	private ImageView lblTextocopiadoPortapapeles;
+	
+	@FXML
+	private ImageView lblCierreTextoPortapapeles;
+
+	
+
 	@FXML
 	private Label lblcorreodeivan;
+
+
 
 	/**Método para copiar al clipboard (o portapapeles) 
 	 * el elemento seleccionado (en este caso, el correo).
@@ -40,9 +60,11 @@ public class EventosAcercaDe extends Control implements Initializable {
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
 		final ClipboardContent content = new ClipboardContent();
 		content.putString(lblcorreodeivan.getText());
-		
-		clipboard.setContent(content);
 
+		clipboard.setContent(content);
+		
+		new Thread(portapapeles).start();
+		
 	}
 
 	@FXML
@@ -52,13 +74,16 @@ public class EventosAcercaDe extends Control implements Initializable {
 		Método idéntico al anterior (copiarcorreodeivan) 
 	 */
 	public void copiarcorreodeasier(MouseEvent event){
-		
+
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
 		final ClipboardContent content = new ClipboardContent();
 		content.putString(lblcorreodeasier.getText());
-		
-		clipboard.setContent(content);
 
+		clipboard.setContent(content);
+		
+		
+		new Thread(portapapeles).start();
+		
 	}
 
 	/**Método para volver a la ventana de login.
@@ -72,5 +97,48 @@ public class EventosAcercaDe extends Control implements Initializable {
 	}
 
 
+	/**
+	 * Método para cerrar el diálogo de: copiado a portapapeles. Resetea ambos componentes a 0. No funciona
+	 * a menos que los dos componentes terminen de llegar a su posición.
+	 */
+	public void Cierrepresionado(MouseEvent event){
+		if(alturaDelMensaje==-40){
+		alturaDelMensaje=0;
+		lblTextocopiadoPortapapeles.setY(alturaDelMensaje);
+		lblCierreTextoPortapapeles.setY(alturaDelMensaje);
+		}
+	}
+
+
+	
+	
+	/**Hilo para hacer la animación del portapapeles
+	 * Baja de 0 a -40 los dos elementos a la vez, para que vayan sincronizados
+	 *@author Iván
+	 */
+	class HiloPortapapeles implements Runnable {
+
+		@Override
+		public void run() {
+		
+			while(alturaDelMensaje>-40){
+				lblTextocopiadoPortapapeles.setY(alturaDelMensaje);
+				lblCierreTextoPortapapeles.setY(alturaDelMensaje);
+				try {
+					Thread.sleep(40);
+					alturaDelMensaje--;
+
+				} catch (InterruptedException e) {
+					
+					e.printStackTrace();
+				}
+
+			}
+
+		}
+
+	}
+
+	
 
 }
