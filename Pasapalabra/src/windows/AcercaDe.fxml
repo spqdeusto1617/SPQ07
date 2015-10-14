@@ -14,7 +14,7 @@
   <tabs>
     <Tab text="El programa">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane fx:id="panelElPrograma" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="281.0" layoutY="231.0" text="1.0" />
                   <Text layoutX="109.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión del programa:" />
@@ -58,12 +58,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <ImageView fx:id="lblTextocopiadoPortapapeles" fitHeight="122.0" fitWidth="357.0" layoutX="111.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="ivTextoCopiadoPortapapeles" fitHeight="122.0" fitWidth="357.0" layoutX="111.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/acercaDe/Datoscopiados.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="lblCierreTextoPortapapeles" fitHeight="14.0" fitWidth="13.0" layoutX="445.0" layoutY="371.0" onMousePressed="#Cierrepresionado" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="ivCierreTextoPortapapeles" fitHeight="14.0" fitWidth="13.0" layoutX="445.0" layoutY="371.0" onMousePressed="#Cierrepresionado" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/acercaDe/cerrarDialogo.png" />
                      </image>
@@ -125,7 +125,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="122.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar un proyecto para la asignatura de programación y aprender acerca de javafx para el futuro" textAlignment="CENTER" wrappingWidth="164.583984375">
+                  <Text layoutX="122.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar un proyecto para la asignatura de programación y aprender acerca de javafx para el futuro" wrappingWidth="164.583984375">
                      <font>
                         <Font size="14.0" />
                      </font>

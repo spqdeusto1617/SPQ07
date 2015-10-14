@@ -3,14 +3,19 @@ package controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**Clase que gestiona los eventos de la clase AcercaDe.fxml
  * @author asier.gutierrez
@@ -40,11 +45,13 @@ public class EventosAcercaDe extends Control implements Initializable {
 	
 	
 	@FXML
-	private ImageView lblTextocopiadoPortapapeles;
+	private ImageView ivTextoCopiadoPortapapeles;
 	
 	@FXML
-	private ImageView lblCierreTextoPortapapeles;
+	private ImageView ivCierreTextoPortapapeles;
 
+	@FXML
+	private AnchorPane panelElPrograma;
 	
 
 	@FXML
@@ -102,10 +109,12 @@ public class EventosAcercaDe extends Control implements Initializable {
 	 * a menos que los dos componentes terminen de llegar a su posición.
 	 */
 	public void Cierrepresionado(MouseEvent event){
-		if(alturaDelMensaje==-40){
+		if(alturaDelMensaje==-30){
 		alturaDelMensaje=0;
-		lblTextocopiadoPortapapeles.setY(alturaDelMensaje);
-		lblCierreTextoPortapapeles.setY(alturaDelMensaje);
+		
+		new Thread(new HiloEliminarPortapapeles(alturaDelMensaje, ivCierreTextoPortapapeles, ivTextoCopiadoPortapapeles, panelElPrograma)).run();
+//		lblTextocopiadoPortapapeles.setY(alturaDelMensaje);
+//		lblCierreTextoPortapapeles.setY(alturaDelMensaje);
 		}
 	}
 
@@ -113,7 +122,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 	
 	
 	/**Hilo para hacer la animación del portapapeles
-	 * Baja de 0 a -40 los dos elementos a la vez, para que vayan sincronizados
+	 * Baja de 0 a -30 los dos elementos a la vez, para que vayan sincronizados
 	 *@author Iván
 	 */
 	class HiloPortapapeles implements Runnable {
@@ -121,11 +130,11 @@ public class EventosAcercaDe extends Control implements Initializable {
 		@Override
 		public void run() {
 		
-			while(alturaDelMensaje>-40){
-				lblTextocopiadoPortapapeles.setY(alturaDelMensaje);
-				lblCierreTextoPortapapeles.setY(alturaDelMensaje);
+			while(alturaDelMensaje>-30){
+				ivTextoCopiadoPortapapeles.setY(alturaDelMensaje);
+				ivCierreTextoPortapapeles.setY(alturaDelMensaje);
 				try {
-					Thread.sleep(40);
+					Thread.sleep(15);
 					alturaDelMensaje--;
 
 				} catch (InterruptedException e) {
@@ -134,6 +143,45 @@ public class EventosAcercaDe extends Control implements Initializable {
 				}
 
 			}
+
+		}
+
+	}
+	
+	/**Hilo para hacer la animación del portapapeles
+	 * Hace desaparecer los dos elementos de manera sincronizada
+	 *@author Iván
+	 */
+	class HiloEliminarPortapapeles implements Runnable {
+		public int alturaDelMensaje;
+		public ImageView equis;
+		public ImageView dialogo;
+		public AnchorPane panel;
+		public HiloEliminarPortapapeles(int alturaDelMensaje, ImageView equis,ImageView dialogo, AnchorPane panel){
+			this.alturaDelMensaje = alturaDelMensaje;
+			this.equis = equis;
+			this.dialogo = dialogo;
+			this.panel = panel;
+			
+		}
+		@Override
+		public void run() {
+		double opacidad= 100;
+			while(opacidad>0){
+				equis.setOpacity(opacidad);
+				dialogo.setOpacity(opacidad);
+				panel.requestLayout();
+				try {
+					Thread.sleep(100);
+					opacidad--;
+				} catch (InterruptedException e) {
+					
+					e.printStackTrace();
+				}
+
+			}
+			equis.setY(0);
+			dialogo.setY(0);
 
 		}
 
