@@ -110,7 +110,7 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text layoutX="126.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
+                  <Text fx:id="txtEdadIvan" layoutX="126.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -140,7 +140,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="421.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
+                  <Text fx:id="txtEdadAsier" layoutX="421.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
                      <font>
                         <Font size="14.0" />
                      </font>

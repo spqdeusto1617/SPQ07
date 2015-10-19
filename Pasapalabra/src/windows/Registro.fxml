@@ -10,23 +10,59 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventosRegistro">
    <children>
-      <ImageView fitHeight="85.0" fitWidth="85.0" layoutX="258.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="ImgImagenUsuario" fitHeight="85.0" fitWidth="85.0" layoutX="258.0" layoutY="30.0" onMousePressed="#cambiarImagen" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></ImageView>
-      <TextField fx:id="txtNombreUsuario" layoutX="89.0" layoutY="115.0" />
-      <TextField fx:id="txtCorreoUsuario" layoutX="89.0" layoutY="154.0" />
-      <PasswordField fx:id="pflContrasenya" layoutX="89.0" layoutY="252.0" />
-      <PasswordField fx:id="pfdRepetirContrasenya" layoutX="89.0" layoutY="301.0" />
-      <DatePicker fx:id="dpFechaNacimiento" layoutX="359.0" layoutY="128.0" />
+         </cursor>
+         <image>
+            <Image url="@../images/registro/default%20user%20image.png" />
+         </image></ImageView>
+      <TextField fx:id="txtNombreUsuario" layoutX="89.0" layoutY="115.0" onKeyTyped="#comprobarDatosUsuario" />
+      <TextField fx:id="txtCorreoUsuario" layoutX="89.0" layoutY="175.0" onKeyTyped="#comprobarMailUsuario" />
+      <PasswordField fx:id="pflContrasenya" layoutX="89.0" layoutY="252.0" onKeyTyped="#comprobarContrasenya1" />
+      <PasswordField fx:id="pfdRepetirContrasenya" layoutX="89.0" layoutY="314.0" onKeyTyped="#comprobarContrasenya2" />
+      <DatePicker fx:id="dpFechaNacimiento" editable="false" layoutX="359.0" layoutY="128.0" />
       <Text layoutX="89.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <Text layoutX="89.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Contraseña" />
+      <Text layoutX="89.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Contraseña" />
       <Text layoutX="89.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario" />
-      <Text layoutX="89.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo electrónico" />
+      <Text layoutX="91.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo electrónico" />
       <Text layoutX="391.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de nacimiento" />
-      <Button fx:id="btnCrear" layoutX="500.0" layoutY="326.0" mnemonicParsing="false" onMousePressed="#CrearUsuario" text="Crear" />
+      <Button fx:id="btnCrear" disable="true" layoutX="500.0" layoutY="326.0" mnemonicParsing="false" onMousePressed="#CrearUsuario" text="Crear" />
       <Button fx:id="btnCancelar" layoutX="365.0" layoutY="326.0" mnemonicParsing="false" onMousePressed="#CancelarUsuario" text="Cancelar" />
       <Text layoutX="249.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserta tu imagen" />
+      <Text layoutX="369.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Antes de terminar, lea los" textAlignment="CENTER" wrappingWidth="169.2421875">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text fx:id="TerminosCondiciones" fill="#0645ad" layoutX="355.0" layoutY="289.0" onMousePressed="#IrATerminos" strokeType="OUTSIDE" strokeWidth="0.0" text="términos y condiciones de servicio" textAlignment="CENTER" wrappingWidth="198.2421875">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <CheckBox fx:id="chkTerminos" layoutX="343.0" layoutY="305.0" mnemonicParsing="false" onAction="#aceptaTerminos" text="Acepto los términos y condiciones" />
+      <Text fx:id="texUsuarioInvalido" fill="RED" layoutX="2.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="El nombre de usuario tiene que tener entre 8-16 caracteres" textAlignment="CENTER" wrappingWidth="293.5078125">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
+      <Text fx:id="texMailIncorrecto" fill="RED" layoutX="14.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email incorrecto" textAlignment="CENTER" wrappingWidth="293.5078125">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
+      <Text fx:id="texContrasenyaCorta" fill="RED" layoutX="14.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña corta" textAlignment="CENTER" wrappingWidth="293.5078125">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
+      <Text fx:id="texContrasenyaEncaja" fill="RED" layoutX="14.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Las contraseñas no son iguales" textAlignment="CENTER" wrappingWidth="293.5078125">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
