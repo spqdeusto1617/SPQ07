@@ -2,6 +2,7 @@ package controllers;
 
 import java.net.URL;
 import java.text.DateFormat;
+
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Calendar;
@@ -9,6 +10,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
@@ -20,6 +23,7 @@ import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 /**Clase que gestiona los eventos de la clase AcercaDe.fxml
  * @author asier.gutierrez
@@ -204,19 +208,27 @@ public class EventosAcercaDe extends Control implements Initializable {
 		@Override
 		public void run() {
 		double opacidad= 100;
-			while(opacidad>0){
-				equis.setOpacity(opacidad);
-				dialogo.setOpacity(opacidad);
-				panel.requestLayout();
-				try {
-					Thread.sleep(100);
-					opacidad--;
-				} catch (InterruptedException e) {
-					
-					e.printStackTrace();
-				}
-
-			}
+		FadeTransition ft = new FadeTransition(Duration.millis(3000), equis);
+		ft.setFromValue(1.0);
+		ft.setToValue(0.0);
+//		ft.setCycleCount(Timeline.INDEFINITE);
+		ft.setAutoReverse(false);
+		ft.play();
+		ft.stop();
+//			while(opacidad>0){
+//				equis.setOpacity(opacidad);
+//				dialogo.setOpacity(opacidad);
+//				panel.requestLayout();
+//				try {
+//					Thread.sleep(100);
+//					opacidad--;
+//					
+//				} catch (InterruptedException e) {
+//					
+//					e.printStackTrace();
+//				}
+//
+//			}
 			equis.setY(0);
 			dialogo.setY(0);
 

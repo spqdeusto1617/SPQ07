@@ -48,7 +48,7 @@
       <Text layoutX="37.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado del servidor" />
       <ImageView fx:id="estadoServidor" fitHeight="18.0" fitWidth="19.0" layoutX="14.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/desconectado.png" />
+            <Image url="@../images/conectado.png" />
          </image>
       </ImageView>
       <Text layoutX="377.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario" />

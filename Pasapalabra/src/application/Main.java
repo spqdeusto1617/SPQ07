@@ -52,6 +52,10 @@ public class Main extends Application {
 			primaryStage.show();
 			
 			
+				
+			
+			
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -62,15 +66,11 @@ public class Main extends Application {
 	 * @param args Argumentos de consola (no se utilizan)
 	 */
 	public static void main(String[] args) {
+		
 		if (lockInstance("block.dat"))
 			launch(args);
 		else{
-			//TODO Tiene que funcionar esto
-//			Alert alert = new Alert(AlertType.ERROR);
-//			alert.setTitle("Error Dialog");
-//			alert.setHeaderText("Look, an Error Dialog");
-//			alert.showAndWait();
-			Platform.exit();
+			RutinaMonoInstancia.main(args);
 		}
 	}
 	
@@ -98,4 +98,5 @@ public class Main extends Application {
 	    }
 	    return false;
 	}
+	
 }

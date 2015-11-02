@@ -16,11 +16,11 @@
       <content>
         <AnchorPane fx:id="panelElPrograma" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label layoutX="281.0" layoutY="231.0" text="1.0" />
+                  <Label fx:id="lblVersionPrograma" layoutX="281.0" layoutY="231.0" text="1.0" />
                   <Text layoutX="109.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Versión del programa:" />
                   <Text layoutX="133.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de versión:" />
                   <Text layoutX="157.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Problemas?" />
-                  <Label layoutX="282.0" layoutY="259.0" text="Falta la fecha" />
+                  <Label fx:id="lblFecha" layoutX="282.0" layoutY="259.0" text="Falta la fecha" />
                   <Label fx:id="lblcorreodeivan" layoutX="280.0" layoutY="288.0" onMousePressed="#copiarcorreodeivan" text="ivan.martin@opendeusto.es">
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -75,17 +75,17 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Text layoutX="14.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iván Martín Rodríguez" textAlignment="CENTER" wrappingWidth="244.13671875">
+                  <Text layoutX="19.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iván Martín Rodríguez" textAlignment="CENTER" wrappingWidth="244.13671875">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="369.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asier Gutiérrez Fandiño" textAlignment="CENTER" wrappingWidth="218.044921875">
+                  <Text layoutX="355.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Asier Gutiérrez Fandiño" textAlignment="CENTER" wrappingWidth="218.044921875">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="49.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
+                  <Text layoutX="57.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -95,12 +95,12 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="28.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
+                  <Text layoutX="35.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="11.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivación:">
+                  <Text layoutX="20.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivación:">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -110,17 +110,17 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Text fx:id="txtEdadIvan" layoutX="126.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
+                  <Text fx:id="txtEdadIvan" layoutX="121.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="126.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
+                  <Text layoutX="123.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="126.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
+                  <Text layoutX="123.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -135,32 +135,32 @@
                         <Insets top="2.0" />
                      </opaqueInsets>
                   </Separator>
-                  <Text layoutX="352.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
+                  <Text layoutX="366.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="txtEdadAsier" layoutX="421.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
+                  <Text fx:id="txtEdadAsier" layoutX="413.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="19 años">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="326.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residencia:">
+                  <Text layoutX="329.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residencia:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="421.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
+                  <Text layoutX="414.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bilbao, España">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="341.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
+                  <Text layoutX="344.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="421.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
+                  <Text layoutX="415.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grado en ing. informática">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -170,7 +170,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="421.0" layoutY="255.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar un proyecto para la asignatura de programación y aprender acerca de javafx para el futuro" wrappingWidth="143.0">
+                  <Text layoutX="414.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Realizar un proyecto para la asignatura de programación y aprender acerca de javafx para el futuro" wrappingWidth="172.0">
                      <font>
                         <Font size="14.0" />
                      </font>

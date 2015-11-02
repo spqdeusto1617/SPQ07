@@ -24,7 +24,15 @@ public class EventosLogIn extends Control implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	
+		
+//		try {
+//			Socket s = new Socket(Servidor.obtenerIP(), 1025);
+//			s.close();
+//		} catch (Exception e){
+//			estadoServidor.setImage(new Image("images/desconectado.png"));
+//		}
+
+		
 	}
 	
 	@FXML
