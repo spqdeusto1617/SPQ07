@@ -2,7 +2,6 @@ package controllers;
 
 import java.net.URL;
 import java.text.DateFormat;
-
 import java.time.LocalDate;
 import java.time.Year;
 import java.util.Calendar;
@@ -47,32 +46,46 @@ public class EventosAcercaDe extends Control implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
+		
 		//Comprueba edad de Iván
-		Calendar cal = new GregorianCalendar(1996, 10, 1);
-	    Calendar now = new GregorianCalendar();
-	 
+		
+		Calendar cal = new GregorianCalendar(1996,8,18);
+	    
+		Calendar now = new GregorianCalendar();
+	    
+
 		int res = now.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
 	
-	    if ((cal.get(Calendar.MONTH) > now.get(Calendar.MONTH))
-	        || (cal.get(Calendar.MONTH) == now.get(Calendar.MONTH) && cal.get(Calendar.DAY_OF_MONTH) > now
-	            .get(Calendar.DAY_OF_MONTH))) {
-	      res--;
-	    }
-	   
+		if(cal.get(Calendar.MONTH)==now.get(Calendar.MONTH)+1){
+			
+			if(cal.get(Calendar.DAY_OF_MONTH)>now.get(Calendar.DAY_OF_MONTH)){
+				
+				res=res-1;
+			}
+		
+		}
+	
+		txtEdadIvan.setText(""+res+" años");
+		
+		
 	    //Comprueba edad de Asier
-	    txtEdadIvan.setText(""+res+" años");
+		Calendar cal2 = new GregorianCalendar(1996, 10, 18);
+		
+	    Calendar now2 = new GregorianCalendar();
+	    
+	    int res2 = now2.get(Calendar.YEAR) - cal2.get(Calendar.YEAR);
+	
+		if(cal2.get(Calendar.MONTH)==now2.get(Calendar.MONTH)+1){
+			
+			if(cal2.get(Calendar.DAY_OF_MONTH)>now2.get(Calendar.DAY_OF_MONTH)){
+				
+				res2=res2-1;
+			}
+		}
+		
+		txtEdadAsier.setText(""+res2+" años");
+		
 
-//	    Calendar cal2 = new GregorianCalendar(1996, 10, 18);
-//	    Calendar now2 = new GregorianCalendar();
-//	    
-//		int res2 = now2.get(Calendar.YEAR) - cal2.get(Calendar.YEAR);
-//	    if ((cal2.get(Calendar.MONTH) > now2.get(Calendar.MONTH))
-//	        || (cal2.get(Calendar.MONTH) == now2.get(Calendar.MONTH) && cal2.get(Calendar.DAY_OF_MONTH) > now2
-//	            .get(Calendar.DAY_OF_MONTH))) {
-//	      res2--;
-//	    }
-//	   
-//	    txtEdadAsier.setText(""+res2+" años");
 	}
 	//Variable para que se pueda realizar la transición de la info: copiado a portapapeles
 	public int alturaDelMensaje=0;
@@ -90,11 +103,11 @@ public class EventosAcercaDe extends Control implements Initializable {
 	private ImageView ivCierreTextoPortapapeles;
 
 	@FXML
-	private AnchorPane panelElPrograma;
+	private AnchorPane panelDelPrograma;
 	
 
 	@FXML
-	private Label lblcorreodeivan;
+	private Label lblCorreoDeIvan;
 	
 	
 
@@ -107,7 +120,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
 		final ClipboardContent content = new ClipboardContent();
-		content.putString(lblcorreodeivan.getText());
+		content.putString(lblCorreoDeIvan.getText());
 
 		clipboard.setContent(content);
 		
@@ -116,7 +129,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 	}
 
 	@FXML
-	private Label lblcorreodeasier;
+	private Label lblCorreoDeAsier;
 
 	/**
 		Método idéntico al anterior (copiarcorreodeivan) 
@@ -125,7 +138,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
 		final ClipboardContent content = new ClipboardContent();
-		content.putString(lblcorreodeasier.getText());
+		content.putString(lblCorreoDeAsier.getText());
 
 		clipboard.setContent(content);
 		
@@ -153,7 +166,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 		if(alturaDelMensaje==-30){
 		alturaDelMensaje=0;
 		
-		new Thread(new HiloEliminarPortapapeles(alturaDelMensaje, ivCierreTextoPortapapeles, ivTextoCopiadoPortapapeles, panelElPrograma)).run();
+		new Thread(new HiloEliminarPortapapeles(alturaDelMensaje, ivCierreTextoPortapapeles, ivTextoCopiadoPortapapeles, panelDelPrograma)).run();
 //		lblTextocopiadoPortapapeles.setY(alturaDelMensaje);
 //		lblCierreTextoPortapapeles.setY(alturaDelMensaje);
 		}
