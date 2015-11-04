@@ -68,6 +68,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		
 		if (lockInstance("block.dat"))
+			//Aquí se carga toda la aplicación
 			launch(args);
 		else{
 			RutinaMonoInstancia.main(args);

@@ -1,31 +1,30 @@
 package principal;
 
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application{
+	public final Connection conexionBDUsuarios = null;
+	public final Connection conexionBDPreguntas = null;
 	
-	
+	@SuppressWarnings("resource")
 	public static void main(String args[]) {
 		final int portNumber = 1025;
 		System.out.println("Creando servidor en el puerto:" + portNumber);
 		ServerSocket serverSocket = null;
-		try {
-			serverSocket = new ServerSocket(portNumber);
-		} catch (IOException e) {
+		try{
+		serverSocket = new ServerSocket(portNumber);
+		serverSocket.setSoTimeout(120000);//TODO REVISAR ESTO
+		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println("Error al iniciar");
-			System.exit(0);
 		}
+		
 		while (true) {
 			Socket socket = null;
 			try {
@@ -36,6 +35,12 @@ public class Main {
 			}
 			new Thread(new TratamientoBienvenida(socket)).run();
 		}
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		
+		
 	}
 	
 

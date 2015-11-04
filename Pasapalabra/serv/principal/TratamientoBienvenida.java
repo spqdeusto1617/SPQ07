@@ -36,7 +36,7 @@ public class TratamientoBienvenida implements Runnable{
 			s.close();
 		}
 		}catch(Exception e){
-			System.out.println("Excepción de Bienvenida");
+			
 		}
 		
 		
