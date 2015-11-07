@@ -26,11 +26,6 @@ public class Main extends Application {
 	
 	
 	
-	
-	
-	
-	
-	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -87,20 +82,6 @@ public class Main extends Application {
 		}
 	}
 	
-	
-	private static Boolean logExists(){
-		  try {
-		    FileHandler handler = new FileHandler(Main.class.getName(),true);
-		    log.setUseParentHandlers(false);
-		    log.addHandler(handler);
-		  }
-		 catch (  Exception ex) {
-		    log.log(Level.FINEST,"Ya hay un archivo log de " + Main.class.getName());
-		    
-		    return false;
-		  }
-		  return true;
-		}
 	private static boolean lockInstance(final String lockFile) {
 	    try {
 	        final File file = new File(lockFile);
