@@ -3,6 +3,10 @@ package application;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileLock;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -18,11 +22,19 @@ import javafx.stage.Stage;
  *
  */
 public class Main extends Application {
+	public static Logger log = utilidades.AppLogger.getWindowLogger(Main.class.getName());
+	
+	
+	
+	
+	
+	
 	
 	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			utilidades.AppLogger.crearLogHandler(log, Main.class.getName());
 			//Cargar página con el FXML elegido
 			Pane page =  FXMLLoader.load(Main.class.getResource("../windows/LogIn.fxml"));
 			
@@ -75,6 +87,20 @@ public class Main extends Application {
 		}
 	}
 	
+	
+	private static Boolean logExists(){
+		  try {
+		    FileHandler handler = new FileHandler(Main.class.getName(),true);
+		    log.setUseParentHandlers(false);
+		    log.addHandler(handler);
+		  }
+		 catch (  Exception ex) {
+		    log.log(Level.FINEST,"Ya hay un archivo log de " + Main.class.getName());
+		    
+		    return false;
+		  }
+		  return true;
+		}
 	private static boolean lockInstance(final String lockFile) {
 	    try {
 	        final File file = new File(lockFile);

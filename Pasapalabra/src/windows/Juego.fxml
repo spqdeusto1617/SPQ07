@@ -30,7 +30,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Text fx:id="textoJugar" fill="WHITE" layoutX="80.0" layoutY="125.0" onMouseClicked="#btnJugar" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Jugar" wrappingWidth="39.440731048583984">
+      <Text fx:id="textoJugar" fill="WHITE" layoutX="80.0" layoutY="125.0" onMouseClicked="#btnJugar" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Jugar" wrappingWidth="44.10186767578125">
          <font>
             <Font size="15.0" />
          </font>
@@ -87,7 +87,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text layoutX="220.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecciona modo de juego" textAlignment="CENTER" wrappingWidth="420.7160224914551">
+      <Text layoutX="191.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecciona modo de juego" textAlignment="CENTER" wrappingWidth="456.6403999328613">
          <font>
             <Font size="34.0" />
          </font>
@@ -107,7 +107,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Text layoutX="220.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecciona tipo de preguntas" textAlignment="CENTER" wrappingWidth="464.31250381469727">
+      <Text layoutX="220.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selecciona tipo de preguntas" textAlignment="CENTER" wrappingWidth="502.89795303344727">
          <font>
             <Font size="34.0" />
          </font>
