@@ -5,10 +5,13 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.XMLFormatter;
-
 import application.Main;
 
-/**Clase para de utilidad para crear un archivo log en las demás clases
+/**Clase para de utilidad para crear un archivo log en las demás clases.
+ * Parece que está adaptada solamente para ventanas pero está más que preparada para
+ * hacer frente a cualquier tipo de código java, sea o no ventana.
+ * He usado la palabra window para que sea más sencillo el encontrar el método
+ * cuando se programa.
  * @author asier.gutierrez
  *
  */
@@ -30,6 +33,14 @@ public class AppLogger {
 	
 	
 	/**Método para crear un handler dado un Logger.
+	 * 
+	 * Se podría usar la propiedad del sistema user.home pero es mejor tenerlo modular.
+	 * Cual es el problema? 
+	 * 
+	 * ->En todos los sistemas operativos puedes cambiar el directorio de usuario,
+	 * pero bueno... con el método .mkdirs(); crea ya las carpetas necesarias para
+	 * llegar al directorio especificado.
+	 * 
 	 * @param wLogger el logger de la clase de la cual queremos crear un handler.
 	 * @return true/false dependiendo de si se ha podido crear o no. Generalmente siempre se va a poder.
 	 */

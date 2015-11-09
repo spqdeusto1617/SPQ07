@@ -10,7 +10,10 @@ import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
@@ -29,6 +32,9 @@ import javafx.util.Duration;
  *
  */
 public class EventosAcercaDe extends Control implements Initializable {
+	
+	public static boolean animacionEnProceso;
+
 	//Recuerda usar JavaDoc para cada método
 	//Recuerda que tienes que añadir los listener y todo eso
 	//Recuerda que tienes que enlazar esta clase con el código fxml
@@ -163,7 +169,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 	 * a menos que los dos componentes terminen de llegar a su posición.
 	 */
 	public void Cierrepresionado(MouseEvent event){
-		if(alturaDelMensaje==-30){
+		if(alturaDelMensaje==-30 && !EventosAcercaDe.animacionEnProceso){
 		alturaDelMensaje=0;
 		
 		new Thread(new HiloEliminarPortapapeles(alturaDelMensaje, ivCierreTextoPortapapeles, ivTextoCopiadoPortapapeles, panelDelPrograma)).run();
@@ -184,7 +190,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 		@Override
 		public void run() {
 		
-			while(alturaDelMensaje>-30){
+			while(alturaDelMensaje>-30 && !EventosAcercaDe.animacionEnProceso){
 				ivTextoCopiadoPortapapeles.setY(alturaDelMensaje);
 				ivCierreTextoPortapapeles.setY(alturaDelMensaje);
 				try {
@@ -221,13 +227,40 @@ public class EventosAcercaDe extends Control implements Initializable {
 		@Override
 		public void run() {
 		double opacidad= 100;
-		FadeTransition ft = new FadeTransition(Duration.millis(3000), equis);
+		
+		
+		FadeTransition ft = new FadeTransition(Duration.millis(1000), equis);
 		ft.setFromValue(1.0);
 		ft.setToValue(0.0);
 //		ft.setCycleCount(Timeline.INDEFINITE);
 		ft.setAutoReverse(false);
-		ft.play();
-		ft.stop();
+		FadeTransition ft2 = new FadeTransition(Duration.millis(1000), dialogo);
+		ft2.setFromValue(1.0);
+		ft2.setToValue(0.0);
+//		ft.setCycleCount(Timeline.INDEFINITE);
+		ft2.setAutoReverse(false);
+		
+		ParallelTransition pt = new ParallelTransition(ft2,ft);
+		pt.setOnFinished(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				equis.setY(0);
+				dialogo.setY(0);
+				dialogo.setOpacity(100.0);
+				equis.setOpacity(100.0);
+				animacionEnProceso = false;
+			}
+		});
+		EventosAcercaDe.animacionEnProceso = true;
+		pt.play();
+		
+//		try {
+//			Thread.sleep(3000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //			while(opacidad>0){
 //				equis.setOpacity(opacidad);
 //				dialogo.setOpacity(opacidad);
@@ -242,8 +275,6 @@ public class EventosAcercaDe extends Control implements Initializable {
 //				}
 //
 //			}
-			equis.setY(0);
-			dialogo.setY(0);
 
 		}
 

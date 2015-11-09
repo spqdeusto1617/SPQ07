@@ -21,11 +21,11 @@
                   <Text layoutX="133.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha de versión:" />
                   <Text layoutX="157.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="¿Problemas?" />
                   <Label fx:id="lblFecha" layoutX="282.0" layoutY="259.0" text="Falta la fecha" />
-                  <Label fx:id="lblcorreodeivan" layoutX="280.0" layoutY="288.0" onMousePressed="#copiarcorreodeivan" text="ivan.martin@opendeusto.es">
+                  <Label fx:id="lblCorreoDeIvan" layoutX="280.0" layoutY="288.0" onMousePressed="#copiarcorreodeivan" text="ivan.martin@opendeusto.es">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>
-                  <Label fx:id="lblcorreodeasier" layoutX="279.0" layoutY="316.0" onMousePressed="#copiarcorreodeasier" text="asier.gutierrez@opendeusto.es">
+                  <Label fx:id="lblCorreoDeAsier" layoutX="279.0" layoutY="316.0" onMousePressed="#copiarcorreodeasier" text="asier.gutierrez@opendeusto.es">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Label>
