@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventosEliminarCuenta.java">
+<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventosCambiarContrasenya.java">
    <children>
       <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="600.0" layoutX="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="200.0" />
       <Rectangle fx:id="rectanguloJugar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="100.0" onMouseClicked="#btnJugar" opacity="0.3" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
@@ -88,43 +88,40 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text layoutX="280.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce el Email:">
+      <Text layoutX="280.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce tu contraseña actual:">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text layoutX="440.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar Cuenta">
+      <Text layoutX="400.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambio de Contraseña">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Text layoutX="280.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce la contraseña: ">
+      <Text layoutX="280.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce tu nueva Contraseña:">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Text layoutX="280.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repite la contraseña:">
+      <Text layoutX="280.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repite tu nueva contraseña:">
          <font>
             <Font size="13.0" />
          </font>
       </Text>
-      <Rectangle fx:id="rectanguloCancelarCambios" arcHeight="5.0" arcWidth="5.0" fill="#62c91da3" height="35.0" layoutX="285.0" layoutY="438.0" onMouseClicked="#btnMiPerfil" onMousePressed="#cancelarCambios" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="72.0">
+      <Rectangle fx:id="rectanguloCancelar" arcHeight="5.0" arcWidth="5.0" fill="#ff2b21a3" height="35.0" layoutX="285.0" layoutY="438.0" onMousePressed="#cancelarCambios" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="72.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Text fx:id="txtCanclearCambios" layoutX="299.0" layoutY="460.0" onMousePressed="#cancelarCambios" strokeType="OUTSIDE" strokeWidth="0.0" text="Cancelar" />
-      <Text fx:id="txtEliminarCuenta" layoutX="614.0" layoutY="460.0" onMouseClicked="#eliminarCuenta" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Text>
-      <Rectangle fx:id="rectanguloEliminarCuenta" arcHeight="5.0" arcWidth="5.0" fill="#ff0900a3" height="35.0" layoutX="600.0" layoutY="438.0" onMouseClicked="#eliminarCuenta" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="72.0">
+      <Text fx:id="txtCancelar" layoutX="299.0" layoutY="460.0" onMousePressed="#cancelarCambios" strokeType="OUTSIDE" strokeWidth="0.0" text="Cancelar" />
+      <Text fx:id="txtCambiarContrasenya" layoutX="614.0" layoutY="460.0" onMousePressed="#cambiarContrasenya" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar" />
+      <Rectangle fx:id="rectanguloCambiarContrasenya" arcHeight="5.0" arcWidth="5.0" fill="#2e662da3" height="35.0" layoutX="600.0" layoutY="438.0" onMousePressed="#cambiarContrasenya" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="72.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <PasswordField fx:id="tfdMailUsuario" layoutX="525.0" layoutY="105.0" prefHeight="25.0" prefWidth="170.0" />
-      <PasswordField fx:id="psfContrasenyaUsuario" layoutX="525.0" layoutY="216.0" prefHeight="25.0" prefWidth="170.0" />
-      <PasswordField fx:id="psfContrasenyaEncaja" layoutX="525.0" layoutY="326.0" prefHeight="25.0" prefWidth="170.0" />
+      <PasswordField fx:id="psfContrasenyaActual" layoutX="525.0" layoutY="105.0" prefHeight="25.0" prefWidth="170.0" />
+      <PasswordField fx:id="psfContrasenyaNueva" layoutX="525.0" layoutY="216.0" prefHeight="25.0" prefWidth="170.0" />
+      <PasswordField fx:id="psfContrasenyaNuevaEncaja" layoutX="525.0" layoutY="326.0" prefHeight="25.0" prefWidth="170.0" />
    </children>
 </Pane>
