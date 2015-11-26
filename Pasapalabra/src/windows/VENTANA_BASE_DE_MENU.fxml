@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--   ESTA PLANTILLA ESTÁ OBSOLETA: POR FAVOR, VISITA LA VERSIÓN 2.0 DE ESTA PLANTILLA:    -->
+<!-- VENTANA_BASE_DE_MENU_V2.fxml -->
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>

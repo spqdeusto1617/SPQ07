@@ -15,6 +15,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Polygon;
+import javafx.scene.text.Text;
 
 /**Clase que gestiona los eventos de la clase LogIn.fxml
  * @author asier.gutierrez
@@ -31,8 +33,6 @@ public class EventosLogIn extends Control implements Initializable {
 //		} catch (Exception e){
 //			estadoServidor.setImage(new Image("images/desconectado.png"));
 //		}
-
-		
 	}
 	
 	@FXML
@@ -60,17 +60,21 @@ public class EventosLogIn extends Control implements Initializable {
 	private ImageView estadoServidor;
 	
 	@FXML
-	private ImageView forkUs;
+	private Polygon fuPoly;
+	
+	@FXML
+	private Text forkUs;
 	
 	@FXML
 	private Label lblRegistrar;
+	
 	
 	public void loginSession(MouseEvent event){
 		
 		txtIncorrecto.setText("Usuario y/o contraseña incorrecto/s");
 		//Si todo va bien:
 //		Transición de ventana
-		utilidades.deVentana.transicionVentana("AcercaDe", event);
+		utilidades.deVentana.transicionVentana("Juego", event);
 	}
 	
 	public void registro(MouseEvent event){

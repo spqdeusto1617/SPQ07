@@ -1,21 +1,37 @@
 package utilidades;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
+import java.util.Optional;
+import java.util.logging.Logger;
 
 import application.Main;
+import controllers.ClaseExtensora;
+import controllers.EventosJuego;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**Clase de utilidad para ventanas
+/**Clase de utilidad para ventanas.<br>
+ * <p>.<i>trasicionVentana</i> - Método para transición de fxml usando FXMLLoader.
+ * <p>.<i>centrarVentana</i> - Método para centrar ventanas.
  * @author asier.gutierrez
- *
  */
 public class deVentana {
 
+	//Loger de la clase deVentana
+	public static Logger log = utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
 
 	/**Método para la transición de una ventana a otra.
 	 * @param nombreFichero Nombre sin extensión por la cual se
@@ -37,5 +53,127 @@ public class deVentana {
 			e.printStackTrace();
 		}
 		app_stage.setScene(new Scene((Parent) panel));
+		centrarVentana(app_stage);
 	}
+	
+	/**Método para centrar una ventana. Para centrar la ventana es necesario
+	 * que la ventana esté mostrada, si no aparece en la esquina superior izquierda.
+	 * @param frame De la clase Stage. Es la ventana que quieres centrar.
+	 */
+	public static void centrarVentana(Stage frame) {
+	    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+	    int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+	    int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+	    frame.setX(x);
+	    frame.setY(y);
+	}
+	
+
+	/**<h1>Clase para cerrar sesión en la aplicación.</h1>
+	 * </br>
+	 * <i>*Necesario evento de ratón y conexión en curso.</i>
+	 * 
+	 * @param event Evento de ratón.
+	 */
+	public static void cerrarSesion(MouseEvent event){
+	//Crea alerta de tipo confirmación
+	Alert alert = new Alert(AlertType.CONFIRMATION);
+	//Pone título
+	alert.setTitle("Cerrar sesión");
+	//Pone cabecera
+	alert.setHeaderText("¿Está seguro de querer cerrar sesión?");
+	//Pone contenido
+	alert.setContentText("Si cierra perderá la partida en curso que\n"
+			+ "pueda estar jugando o los cambios que esté"
+			+ "haciendo en su cuenta si no los ha guardado aún.");
+
+	//Añade modalidad
+	alert.initModality(Modality.APPLICATION_MODAL);
+	//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
+	alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+	//Mostrar y bloquear ventana padre hasta aceptar o rechazar.
+	Optional<ButtonType> result = alert.showAndWait();
+	
+	//Ha pulsado ok?
+	if (result.get() == ButtonType.OK){
+		//Si
+		//VUELTA A CONFIRMAR
+		//Crear alerta de tipo confirmación
+		Alert alert2 = new Alert(AlertType.CONFIRMATION);
+		//Pone título
+		alert2.setTitle("Cerrar sesión");
+		//Pone cabecera
+		alert2.setHeaderText("¿Está seguro?");
+		//Pone contenido
+		alert2.setContentText("No se podrá volver atrás.");
+		//Añade modalidad
+		alert2.initModality(Modality.APPLICATION_MODAL);
+		//Añade 'dueño'
+		alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		//Muestra y espera hasta resultado
+		Optional<ButtonType> result2 = alert2.showAndWait();
+		
+		//Ha pulsado ok?
+		if (result2.get() == ButtonType.OK){
+			//Si
+		    //TODO CERRAR SESIÓN
+			//En la clase del servidor habrá una rutina para cerrar sesión.
+			
+			//
+			utilidades.deVentana.transicionVentana("LogIn", event);
+		} else {
+			//No
+		    //NADA
+		}
+	} else {
+		//No
+	    //NADA
+	}
+	}
+	//Eventos generalizados para plantillas descendientes [SIN REDEFINICIÓN DE ELEMENTOS] de VENTANA_BASE_DE_MENU_V2.fxml
+	
+	//
+	
+	/**Método para dado un evento de hover sube el nivel de transparencia (de 0.2 a 0.8).
+	 * Cuando pierde el el hover baja el nivel de transparencia a 0.2 otra vez.
+	 * </br>
+	 **Por hover nos referimos al selector hover de CSS
+	 *</br></br>
+	 *<i>Evento generalizado para plantilla descendiente [SIN REDEFINICIÓN DE ELEMENTOS] de VENTANA_BASE_DE_MENU_V2.fxml</i>
+	 *
+	 * @param event Evento de onMouseEntered/onMouseExited
+	 * @param eventosMenu Clase controladora de eventos (Ver texto en itálica) en la que se produce el evento y desde la cual se llama a este.
+	 */
+	public static void efectoTransparenciaOnHover(MouseEvent event, ClaseExtensora eventosMenu){
+	double op = 0.2;
+	if(event.getEventType().equals("MOUSE_ENTERED")) op = 0.8;
+	System.out.println(event.getEventType());
+	
+	if(event.getSource().getClass().getName()=="javafx.scene.shape.Rectangle"){
+		if(((Rectangle) event.getSource()).getId().equals("rectanguloAmigos")){
+			eventosMenu.textoAmigos.setOpacity(op);
+			eventosMenu.rectanguloAmigos.setOpacity(op);
+		}else if(((Rectangle) event.getSource()).getId().equals("rectanguloMiPerfil")){
+			eventosMenu.textoMiPerfil.setOpacity(op);
+			eventosMenu.rectanguloMiPerfil.setOpacity(op);
+		}else{
+			eventosMenu.textoEstadisticas.setOpacity(op);
+			eventosMenu.rectanguloEstadisticas.setOpacity(op);
+		}
+	}else{
+		if(((Text) event.getSource()).getText().equals("Amigos")){
+			eventosMenu.textoAmigos.setOpacity(op);
+			eventosMenu.rectanguloAmigos.setOpacity(op);
+		}else if(((Text) event.getSource()).getText().equals("Mi perfil")){
+			eventosMenu.textoMiPerfil.setOpacity(op);
+			eventosMenu.rectanguloMiPerfil.setOpacity(op);
+		}else{
+			eventosMenu.textoEstadisticas.setOpacity(op);
+			eventosMenu.rectanguloEstadisticas.setOpacity(op);
+		}
+	}
+	}
+	
+	
+	
 }

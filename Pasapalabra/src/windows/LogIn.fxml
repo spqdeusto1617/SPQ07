@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.paint.*?>
@@ -23,7 +24,7 @@
          <image>
             <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
-      <Label fx:id="lblRegistrar" layoutX="426.0" layoutY="233.0" onMouseClicked="#registro" prefHeight="16.0" prefWidth="114.0" text="¿No tienes cuenta? ¡Regístrate!" textFill="#58a6d3">
+      <Label fx:id="lblRegistrar" layoutX="424.0" layoutY="233.0" onMouseClicked="#registro" prefHeight="16.0" prefWidth="119.0" text="¿No tienes cuenta? ¡Regístrate!" textFill="#58a6d3">
          <font>
             <Font size="8.0" />
          </font>
@@ -35,16 +36,8 @@
       <TextField fx:id="txtUsuario" layoutX="377.0" layoutY="151.0" />
       <PasswordField fx:id="txtContra" layoutX="377.0" layoutY="207.0" />
       <CheckBox fx:id="checkRecordar" layoutX="381.0" layoutY="267.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="154.0" text="Recordar contraseña" />
-      <Button fx:id="btnLogin" layoutX="434.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#loginSession" text="Log-In" />
       <Pagination fx:id="pagNoticias" layoutX="48.0" layoutY="63.0" pageCount="4" prefHeight="251.0" prefWidth="235.0" />
-      <ImageView fx:id="forkUs" fitHeight="119.0" fitWidth="141.0" layoutX="487.0" layoutY="287.0" onMouseClicked="#irAGitHub" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/ForkUs.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
+      <Button fx:id="btnLogin" layoutX="434.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#loginSession" text="Log-In" />
       <Text layoutX="37.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estado del servidor" />
       <ImageView fx:id="estadoServidor" fitHeight="18.0" fitWidth="19.0" layoutX="14.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -53,5 +46,26 @@
       </ImageView>
       <Text layoutX="377.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario" />
       <Text layoutX="377.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
+      <Polygon fx:id="fuPoly" fill="#00c7ed" layoutX="576.0" layoutY="389.0" onMouseClicked="#irAGitHub" rotate="135.0" scaleX="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+        <points>
+          <Double fx:value="-50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="50.0" />
+          <Double fx:value="40.0" />
+          <Double fx:value="0.0" />
+          <Double fx:value="-60.0" />
+        </points>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Polygon>
+      <Text fx:id="forkUs" fill="WHITE" layoutX="505.0" layoutY="354.0" onMouseClicked="#irAGitHub" rotate="-45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fork us on GitHub!" textAlignment="CENTER" wrappingWidth="102.93511605262756">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
    </children>
 </Pane>

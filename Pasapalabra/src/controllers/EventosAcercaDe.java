@@ -1,24 +1,18 @@
 package controllers;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.Year;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -33,7 +27,7 @@ import javafx.util.Duration;
  */
 public class EventosAcercaDe extends Control implements Initializable {
 	
-	public static boolean animacionEnProceso;
+	public boolean animacionEnProceso;
 
 	//Recuerda usar JavaDoc para cada método
 	//Recuerda que tienes que añadir los listener y todo eso
@@ -169,7 +163,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 	 * a menos que los dos componentes terminen de llegar a su posición.
 	 */
 	public void Cierrepresionado(MouseEvent event){
-		if(alturaDelMensaje==-30 && !EventosAcercaDe.animacionEnProceso){
+		if(alturaDelMensaje==-30 && animacionEnProceso){
 		alturaDelMensaje=0;
 		
 		new Thread(new HiloEliminarPortapapeles(alturaDelMensaje, ivCierreTextoPortapapeles, ivTextoCopiadoPortapapeles, panelDelPrograma)).run();
@@ -190,7 +184,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 		@Override
 		public void run() {
 		
-			while(alturaDelMensaje>-30 && !EventosAcercaDe.animacionEnProceso){
+			while(alturaDelMensaje>-30 && !animacionEnProceso){
 				ivTextoCopiadoPortapapeles.setY(alturaDelMensaje);
 				ivCierreTextoPortapapeles.setY(alturaDelMensaje);
 				try {
@@ -226,9 +220,6 @@ public class EventosAcercaDe extends Control implements Initializable {
 		}
 		@Override
 		public void run() {
-		double opacidad= 100;
-		
-		
 		FadeTransition ft = new FadeTransition(Duration.millis(1000), equis);
 		ft.setFromValue(1.0);
 		ft.setToValue(0.0);
@@ -252,7 +243,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 				animacionEnProceso = false;
 			}
 		});
-		EventosAcercaDe.animacionEnProceso = true;
+		animacionEnProceso = true;
 		pt.play();
 		
 //		try {
