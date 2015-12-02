@@ -1,8 +1,11 @@
 
 package controllers;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -10,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,19 +24,30 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**Clase que gestiona los eventos de la clase Registro.fxml
  * @author asier.gutierrez
@@ -45,9 +60,12 @@ public class EventosRegistro extends Control implements Initializable {
 	//(Haz esta clase la clase controladora del código fxml)
 	//Si tienes dudas mira en la clase main y eventoslogin
 
+	//Otro stage para cargar la ventada de términos y condiciones de servivio de la app (EULA)
+	//(Mirar eventosregistro.java IrATerminos para más info)
+
 
 	@FXML
-	private TextField txtNombreUsuario;
+	private  TextField txtNombreUsuario;
 
 
 	@FXML
@@ -71,55 +89,64 @@ public class EventosRegistro extends Control implements Initializable {
 	@FXML
 	private Button btnCrear;
 
-	private boolean datoscorrectos=false;
-
-	@FXML
-	private Text texUsuarioInvalido;
-
-	@FXML
-	private Text texMailIncorrecto;
-
-	@FXML
-	private Text texContrasenyaCorta;
-
-	@FXML
-	private Text texContrasenyaEncaja;
-	
-	@FXML
-	private Text texDateIncorrecto;
+	private boolean datosCorrectos=false;
 
 	@FXML
 	private DatePicker fcNacimiento;
 
 	private File file;
 
-	public static boolean Terminos=false;
-	
+	private boolean Terminos=false;
+
+
+	ContextMenu userNameValidator = new ContextMenu();
+
+
+	ContextMenu userMailValidator = new ContextMenu();
+
+	ContextMenu userPasswordValidator = new ContextMenu();
+
+	ContextMenu userPasswordValidator2 = new ContextMenu();
+
+	ContextMenu userDateValidator = new ContextMenu();
+
 	SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		texUsuarioInvalido.setVisible(false);
-		texMailIncorrecto.setVisible(false);	
-		texContrasenyaCorta.setVisible(false);
-		texContrasenyaEncaja.setVisible(false);
-		texDateIncorrecto.setVisible(false);
-		
+
+
+		userNameValidator.getItems().add(
+				new MenuItem("El nombre de usuario tiene que tener entre 8-16 caracteres"));
+
+		userMailValidator.getItems().add(
+				new MenuItem("El correo no es válido"));
+
+		userPasswordValidator.getItems().add(
+				new MenuItem("Contraseña corta"));
+
+		userPasswordValidator2.getItems().add(
+				new MenuItem("Las contraseñas no coinciden"));
+
+		userDateValidator.getItems().add(
+				new MenuItem("No puedes haber nacido en el futuro"));
+
 		pfdRepetirContrasenya.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			
+
 			//Focuslost del texto de: repetir contraseña, que comprueba que ambas contraseñas sean iguales
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
 				if(pflContrasenya.getText().compareTo(pfdRepetirContrasenya.getText())!=0){
-					datoscorrectos=false;
-					texContrasenyaEncaja.setVisible(true);
+					datosCorrectos=false;
+
+					userPasswordValidator2.show(pfdRepetirContrasenya, Side.BOTTOM, 0, 0);
 
 				}
 				else{
-
-					datoscorrectos=true;
-					texContrasenyaEncaja.setVisible(false);
+					userPasswordValidator2.hide();
+					datosCorrectos=true;
+					chkTerminos.setSelected(false);
 				}
 
 
@@ -135,13 +162,15 @@ public class EventosRegistro extends Control implements Initializable {
 	public void comprobarNombreUsuario(Event event){
 
 		if(txtNombreUsuario.getLength()<7||txtNombreUsuario.getLength()>15){
-			datoscorrectos=false;
-			texUsuarioInvalido.setVisible(true);
+			datosCorrectos=false;
+			userNameValidator.show(txtNombreUsuario, Side.BOTTOM, 0, 0);
 
 		}
 		else{
-			datoscorrectos=true;
-			texUsuarioInvalido.setVisible(false);
+			userNameValidator.hide();
+			datosCorrectos=true;
+			chkTerminos.setSelected(false);
+
 		}
 
 	}
@@ -158,12 +187,13 @@ public class EventosRegistro extends Control implements Initializable {
 		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(txtCorreoUsuario.getText());
 
 		if(matcher.matches()){
-			datoscorrectos=true;
-			texMailIncorrecto.setVisible(false);
+			datosCorrectos=true;
+			userMailValidator.hide();
+			chkTerminos.setSelected(false);
 		}
 		else{
-			texMailIncorrecto.setVisible(true);
-			datoscorrectos=false;
+			userMailValidator.show(txtCorreoUsuario, Side.BOTTOM, 0, 0);
+			datosCorrectos=false;
 		}
 	}
 
@@ -174,12 +204,13 @@ public class EventosRegistro extends Control implements Initializable {
 	public void comprobarContrasenya1(Event event){
 
 		if(pflContrasenya.getText().length()<7){
-			datoscorrectos=false;
-			texContrasenyaCorta.setVisible(true);
+			datosCorrectos=false;
+			userPasswordValidator.show(pflContrasenya, Side.BOTTOM, 0, 0);
 		}
 		else{
-			datoscorrectos=true;
-			texContrasenyaCorta.setVisible(false);
+			datosCorrectos=true;
+			userPasswordValidator.hide();
+			chkTerminos.setSelected(false);
 		}
 	}
 
@@ -205,11 +236,18 @@ public class EventosRegistro extends Control implements Initializable {
 	 * se bloquea el botón, y no avanza 
 	 * @param event el evento de ratón
 	 */
-	public void CrearUsuario(MouseEvent event){
+	public void crearUsuario(MouseEvent event){
 		if(txtNombreUsuario.getText().length()==0||txtCorreoUsuario.getText().length()==0||pflContrasenya.getText().length()==0||pfdRepetirContrasenya.getText().length()==0)
 		{
-			datoscorrectos=false;
-			btnCrear.setDisable(false);
+			datosCorrectos=false;
+			btnCrear.setDisable(true);
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Parece que falla algo");
+
+			alert.setContentText("Parece que hay algún problema con los datos. Por favor, revise los datos antes de registrarse.");
+
+			alert.showAndWait();
+			chkTerminos.setSelected(false);
 
 		}
 		else{
@@ -222,7 +260,7 @@ public class EventosRegistro extends Control implements Initializable {
 	/**Método que cancela el usuario que se iba a crear, si así lo considera
 	 * @param event
 	 */
-	public void CancelarUsuario(MouseEvent event){
+	public void cancelarUsuario(MouseEvent event){
 
 		utilidades.deVentana.transicionVentana("LogIn", event);
 
@@ -245,19 +283,29 @@ public class EventosRegistro extends Control implements Initializable {
 		try{
 			//AnotherStage2: para que lance el filechooser
 			file = fileChooser.showOpenDialog(stageFilechooser);
-			System.out.println(file.getAbsolutePath());
+			String path="file:///"+file.getAbsolutePath();
+
+			ImgImagenUsuario.setImage(new Image(path));
 		}catch(Exception a){
-			a.printStackTrace();
+			//TODO: meter un logger con la extepción
+			//a.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error al leer la imagen");
+
+			alert.setContentText("Se ha producido un error a la hora de leer la imagen. Por favor intenteló otra vez.");
+
+			alert.showAndWait();
+
 		}
 
 
 	}
-	
+
 	/**Método que valida la fecha que mete el usuario, si la fecha de nacimiento que mete es mayor a la actual,
 	 * no le deja poner esa fecha.
 	 * @param event el evento de ratón
 	 */
-	public void ComprobarDia(Event event){
+	public void comprobarDia(Event event){
 		@SuppressWarnings("unused")
 		String st = null;
 		if(dpFechaNacimiento!=null){
@@ -267,61 +315,132 @@ public class EventosRegistro extends Control implements Initializable {
 				System.out.println("Error");	
 			}
 		}
-		  DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd ");
-		   //get current date time with Date()
-		   Date date = new Date();
-		   Date date2 = Date.from(dpFechaNacimiento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
-		   dateFormat.format(date);
-		   if(date.after(date2)){
-			   datoscorrectos=true; 
-			   texDateIncorrecto.setVisible(false);
-		   }
-		   else{
-			   datoscorrectos=false;  
-			   texDateIncorrecto.setVisible(true);
-		   }
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd ");
+		//get current date time with Date()
+		Date date = new Date();
+		Date date2 = Date.from(dpFechaNacimiento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+		dateFormat.format(date);
+		if(date.after(date2)){
+			datosCorrectos=true; 
+			userDateValidator.hide();
+			chkTerminos.setSelected(false);
+		}
+		else{
+			datosCorrectos=false;  
+			userDateValidator.show(dpFechaNacimiento, Side.BOTTOM, -35, 0);
+		}
 	}
 
 
 	/**Método para que el usuario lea los términos y condiciones (Eula)
 	 * @param event: el evento de ratón
 	 */
-	@SuppressWarnings({ "static-access" })
-	public void IrATerminos(MouseEvent event){
-		//Otro stage para cargar la ventada de términos y condiciones de servivio de la app (EULA)
-		//(Mirar eventosregistro.java IrATerminos para más info)
-		Stage stageTerminosyCondiciones = new Stage();
-		FXMLLoader Loader = new FXMLLoader() ; 
-		Parent Root = null;
 
-		try {
-			Root = Loader.load(Main.class.getResource("../windows/EULA.fxml"));
-		} catch (IOException e) {
+	public void irATerminos(MouseEvent event){
+		//TODO: meter el pad
+		URL res = getClass().getClassLoader().getResource("pdfEULA/EULA.pdf");
+		
+			File ficheroPDF=new File((res.getPath()));
 
-			e.printStackTrace();
+
+			//		FXMLLoader Loader = new FXMLLoader() ; 
+			//		Parent Root =null;
+			//		
+			//
+			//		try {
+			//			Root = (AnchorPane) Loader.load(this.getClass().getResource("../windows/EULA.fxml").openStream());
+			//			//Root = Loader.load(Main.class.getResource("../windows/EULA.fxml"));
+			//		} catch (IOException e) {
+			//
+			//			e.printStackTrace();
+			//		}
+			//		Stage stageTerminosyCondiciones = new Stage();
+			//		
+			//		Scene Scene = new Scene(Root);
+			//		stageTerminosyCondiciones.setScene(Scene);
+			//		stageTerminosyCondiciones.setResizable(false);
+			//		stageTerminosyCondiciones.show();
+			try{	 
+				new Thread(new Runnable() {  
+					@Override  
+					public void run() {  
+						try {  
+							Desktop.getDesktop().open(ficheroPDF);  
+						} catch (IOException e) {  
+							// TODO introducir logger de error
+
+						}  
+					}  
+				}).start();  
+			}catch(Exception a){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText("Parece que hubo un error");
+				alert.setContentText("No se pudo abrir el archivo con un visor de PDF, se mostrará a continuación");
+				//TODO: texto
+				
+
+				// Create expandable Exception.
+				StringWriter sw = new StringWriter();
+				PrintWriter pw = new PrintWriter(sw);
+				
+				String textoEULA =""; 
+
+				Label label = new Label("The exception stacktrace was:");
+
+				TextArea textArea = new TextArea(textoEULA);
+				textArea.setEditable(false);
+				textArea.setWrapText(true);
+
+				textArea.setMaxWidth(Double.MAX_VALUE);
+				textArea.setMaxHeight(Double.MAX_VALUE);
+				GridPane.setVgrow(textArea, Priority.ALWAYS);
+				GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+				GridPane expContent = new GridPane();
+				expContent.setMaxWidth(Double.MAX_VALUE);
+				expContent.add(label, 0, 0);
+				expContent.add(textArea, 0, 1);
+
+				// Set expandable Exception into the dialog pane.
+				alert.getDialogPane().setExpandableContent(expContent);
+
+				alert.showAndWait();	
+				
+//				Stage anotherStage = new Stage();
+//				Pane page ;
+//				try {
+//					page = FXMLLoader.load(Main.class.getResource("../windows/EULA.fxml"));
+//					 Scene anotherScene = new Scene(page);
+//			            anotherStage.setScene(anotherScene);
+//			            anotherStage.show();
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}// FXML for second stage
+//	           // Parent anotherRoot = page.load();
+//	           
+
+			}
 		}
 
-		Scene Scene = new Scene(Root);
-		stageTerminosyCondiciones.setScene(Scene);
-		stageTerminosyCondiciones.setResizable(false);
-		stageTerminosyCondiciones.show();
+		 
+	
 
 
-
-	}
 
 	/**Método para comprobar si el usuario ha aceptado el eula o no (en caso de que no los acepte, el botón de crear
-	 * no está enable
+	 * no está aactivo)
 	 * @param event: el evento del pulsador
 	 */
 	public void aceptaTerminos(Event event){
 		if(txtNombreUsuario.getText().length()==0||txtCorreoUsuario.getText().length()==0||pflContrasenya.getText().length()==0||pfdRepetirContrasenya.getText().length()==0||dpFechaNacimiento==null)
 		{
-			datoscorrectos=false;
+			datosCorrectos=false;
 
 		}
 
-		if(chkTerminos.isSelected()&&datoscorrectos==true){
+		if(chkTerminos.isSelected()&&datosCorrectos==true){
 			btnCrear.setDisable(false);
 
 		}
