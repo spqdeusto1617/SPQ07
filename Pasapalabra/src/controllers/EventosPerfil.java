@@ -21,7 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class EventosPerfil extends Control implements Initializable {
+public class EventosPerfil extends ClaseExtensora implements Initializable {
 	
 	 @FXML
 	    private Text textoESPanel;

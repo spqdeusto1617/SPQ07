@@ -13,7 +13,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class EventosEstadisticas extends Control implements Initializable {
+public class EventosEstadisticas extends ClaseExtensora implements Initializable {
 
     @FXML
     private Text textoESPanel;

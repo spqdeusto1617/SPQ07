@@ -3,10 +3,6 @@ package utilidades;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import javafx.beans.property.Property;
-import javafx.collections.ObservableMap;
 import javafx.scene.Node;
 
 public class RPanel implements Runnable{
@@ -74,7 +70,7 @@ public class RPanel implements Runnable{
 			}
 			}
 			try {
-				Thread.sleep(3);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

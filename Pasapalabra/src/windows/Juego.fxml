@@ -66,8 +66,8 @@
          <image>
             <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
-      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="170.0" layoutX="14.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logeado como:" />
+      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="34.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logead@ como:" />
       <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
       <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="15.0" layoutY="565.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
          <cursor>
@@ -92,17 +92,17 @@
             <Font size="34.0" />
          </font>
       </Text>
-      <Rectangle fx:id="vsAleatorio" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="225.0" layoutY="110.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="vsAleatorio" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="225.0" layoutY="110.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="vsAmigo" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="470.0" layoutY="110.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="vsAmigo" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="470.0" layoutY="110.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rTodos" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="227.0" layoutY="281.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rTodos" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="227.0" layoutY="281.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -112,27 +112,27 @@
             <Font size="34.0" />
          </font>
       </Text>
-      <Rectangle fx:id="rArte" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="311.0" layoutY="347.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rArte" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="311.0" layoutY="347.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rHist" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="586.0" layoutY="381.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rHist" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="586.0" layoutY="381.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rGeo" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="530.0" layoutY="298.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="tdpSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#00ff95a3" height="35.0" layoutX="12.0" layoutY="691.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rEntret" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="517.0" layoutY="468.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rEntret" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="517.0" layoutY="468.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rCien" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="266.0" layoutY="457.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rCien" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="266.0" layoutY="457.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -152,66 +152,107 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <Circle fx:id="circuloPlus" fill="#38ffd4c0" layoutX="185.0" layoutY="15.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Text fx:id="textoPlus" fill="WHITE" layoutX="180.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+">
+      <Circle fx:id="circuloPlus" fill="#38ffd4c0" layoutX="185.0" layoutY="15.0" onMouseClicked="#masInfo" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Circle>
+      <Text fx:id="textoPlus" fill="WHITE" layoutX="180.0" layoutY="20.0" onMouseClicked="#masInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="+">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
-      <Text fx:id="tVSAleatorio" fill="WHITE" layoutX="260.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Aleatorio">
+      <Text fx:id="tVSAleatorio" fill="WHITE" layoutX="260.0" layoutY="135.0" onMouseClicked="#eleccionHecha" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Aleatorio">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
-      <Text fx:id="tVSAmigo" fill="WHITE" layoutX="515.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Amigo">
+      <Text fx:id="tVSAmigo" fill="WHITE" layoutX="515.0" layoutY="135.0" onMouseClicked="#eleccionHecha" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Amigo">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
-      <Text fill="WHITE" layoutX="640.0" layoutY="569.0" onMouseClicked="#aJugar" strokeType="OUTSIDE" strokeWidth="0.0" text="¡Jugar!">
+      <Text fx:id="textoRJug" fill="WHITE" layoutX="640.0" layoutY="569.0" onMouseClicked="#aJugar" strokeType="OUTSIDE" strokeWidth="0.0" text="¡Jugar!">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
-      <Text fx:id="tTodos" fill="#686767" layoutX="290.0" layoutY="305.0" stroke="#c9c9c9" strokeType="OUTSIDE" strokeWidth="0.0" text="Todos">
+      <Text fx:id="tTodos" fill="#686767" layoutX="290.0" layoutY="305.0" onMouseClicked="#eleccionHecha" stroke="#c9c9c9" strokeType="OUTSIDE" strokeWidth="0.0" text="Todos">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
-      <Text fx:id="tGeo" fill="#686767" layoutX="575.0" layoutY="323.0" stroke="#a1a0a0" strokeType="OUTSIDE" strokeWidth="0.0" text="Geografía">
-         <font>
-            <Font name="Arial" size="19.0" />
-         </font>
-      </Text>
-      <Text fx:id="tArte" fill="#686767" layoutX="380.0" layoutY="373.0" stroke="#a1a0a0" strokeWidth="0.0" text="Arte">
-         <font>
-            <Font name="Arial" size="19.0" />
-         </font>
-      </Text>
-      <Text fx:id="tHist" fill="#686767" layoutX="640.0" layoutY="405.0" stroke="#a1a0a0" strokeWidth="0.0" text="Historia">
-         <font>
-            <Font name="Arial" size="19.0" />
-         </font>
-      </Text>
-      <Text fx:id="tEntret" fill="#686767" layoutX="535.0" layoutY="493.0" stroke="#a1a0a0" strokeWidth="0.0" text="Entretenimiento">
-         <font>
-            <Font name="Arial" size="19.0" />
-         </font>
-      </Text>
-      <Text fx:id="tCien" fill="#686767" layoutX="320.0" layoutY="483.0" stroke="#a1a0a0" strokeWidth="0.0" text="Ciencia">
-         <font>
-            <Font name="Arial" size="19.0" />
-         </font>
-      </Text>
-      <Rectangle fx:id="rDep" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="323.0" layoutY="520.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rGeo" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="533.0" layoutY="299.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Text fx:id="tDep" fill="#686767" layoutX="370.0" layoutY="545.0" stroke="#a1a0a0" strokeWidth="0.0" text="Deportes">
+      <Text fx:id="tGeo" fill="#686767" layoutX="575.0" layoutY="323.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeType="OUTSIDE" strokeWidth="0.0" text="Geografía">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="tArte" fill="#686767" layoutX="380.0" layoutY="373.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Arte">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="tHist" fill="#686767" layoutX="640.0" layoutY="405.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Historia">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="tEntret" fill="#686767" layoutX="535.0" layoutY="493.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Entretenimiento">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="tCien" fill="#686767" layoutX="320.0" layoutY="483.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Ciencia">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Rectangle fx:id="rDep" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="323.0" layoutY="520.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Text fx:id="tDep" fill="#686767" layoutX="370.0" layoutY="545.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Deportes">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
       <Rectangle fx:id="rContestar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="-5.0" layoutY="622.0" onMouseClicked="#btnContestar" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
@@ -220,5 +261,54 @@
       </Rectangle>
       <Rectangle fx:id="rPreguntas" arcHeight="5.0" arcWidth="5.0" fill="#9536ff8f" height="103.0" layoutX="185.0" layoutY="622.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="552.0" />
       <TextArea fx:id="taPreguntas" layoutX="190.0" layoutY="626.0" prefHeight="93.0" prefWidth="542.0" wrapText="true" />
+      <Rectangle fx:id="mdjSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#ff21bca3" height="35.0" layoutX="-25.0" layoutY="654.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="tdpNSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="635.0" layoutY="-58.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="mdjNSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="461.0" layoutY="-58.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="fondoCarga" arcHeight="5.0" arcWidth="5.0" height="608.0" layoutX="-4.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="808.0">
+         <fill>
+            <LinearGradient endX="0.31730769230769235" endY="1.0" startX="0.3173076923076923">
+               <stops>
+                  <Stop color="#40cef2" />
+                  <Stop color="WHITE" offset="0.7992565055762081" />
+                  <Stop color="#41ff2c" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor>
+      </Rectangle>
+      <Text fx:id="textoCargaTranquil" fill="WHITE" layoutX="185.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TRANQUIL@" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica" size="73.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor>
+      </Text>
+      <ProgressBar fx:id="barraCarga" layoutX="185.0" layoutY="445.0" prefHeight="30.0" prefWidth="435.0">
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor></ProgressBar>
+      <Text fx:id="textoCargaBuscandoPartida" fill="WHITE" layoutX="225.0" layoutY="550.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BUSCANDO PARTIDA" textAlignment="CENTER">
+         <font>
+            <Font name="Helvetica" size="35.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor>
+      </Text>
    </children>
 </Pane>

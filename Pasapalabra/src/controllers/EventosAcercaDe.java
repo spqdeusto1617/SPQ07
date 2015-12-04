@@ -151,7 +151,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 	 */
 	public void VolveralLog(MouseEvent event){
 
-		utilidades.deVentana.transicionVentana("LogIn", event);
+		utilidades.deVentana.transicionVentana("Juego", event);
 
 
 

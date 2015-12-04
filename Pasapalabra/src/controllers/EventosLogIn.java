@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
@@ -24,6 +25,8 @@ import javafx.scene.text.Text;
  */
 public class EventosLogIn extends Control implements Initializable {
 
+	public static Image iAvatar;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

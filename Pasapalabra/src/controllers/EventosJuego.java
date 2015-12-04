@@ -2,15 +2,19 @@ package controllers;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -126,6 +130,13 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     @FXML public Text tCien;
     @FXML public Text tEntret;
     @FXML public Text tDep;
+    @FXML public Text textoRJug;
+    
+    //Rectangulos de estilo
+    @FXML public Rectangle tdpSeleccionado;
+    @FXML public Rectangle tdpNSeleccionado;
+    @FXML public Rectangle mdjSeleccionado;
+    @FXML public Rectangle mdjNSeleccionado;
     
     
     //Elementos de la gui de juego no inicializados [Salvo algunos para copiar el StyleSheet ya que en javafx no se pueden clonar los nodos].
@@ -133,6 +144,13 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     @FXML public Rectangle rContestar;
     @FXML public Rectangle rPreguntas;
     @FXML public TextArea taPreguntas;
+    
+    //Pantalla de carga
+    @FXML public Rectangle fondoCarga;
+    @FXML public ProgressBar barraCarga;
+    @FXML public Text textoCargaTranquil;
+    @FXML public Text textoCargaBuscandoPartida;
+    
     
     public Thread hiloDeCarga = new Thread(new RCarga(this));
     //_________________________________________
@@ -243,6 +261,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
     @FXML
     void aJugar(MouseEvent event){
+		if(!preguntasBienSeleccionadas())return;
     	if(juegoEnCurso) return;
     	/*Inhabilitamos rápidamente que el botón de jugar vuelva a poder ser pulsado.
     	*(Es posible que después de varias comprobaciones necesitemos volverlo a poner a falso)
@@ -253,27 +272,91 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     	//Algo con servidor
     	
     	//Cerrar panel
-    	new Thread(new RPanel( ventanaMenuDentro, menuDesplegable )).start();
+//    	new Thread(new RPanel( ventanaMenuDentro, menuDesplegable )).start();
+    	Platform.runLater(new RPanel(ventanaMenuDentro, menuDesplegable));
     	//Eliminar selección de modo de juego y preguntas
     	eliminarOpcionesPartida(true);
     	
     	
     	//Dibujar letras
-    	crearRosco(true,panelLetrasJugador);
-    	crearRosco(false,panelLetrasContrincante);
-    	anyadirGUI();
+    	Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				crearRosco(true,panelLetrasJugador);
+		    	crearRosco(false,panelLetrasContrincante);
+		    	anyadirGUI();
+			}
+		});
+//    	crearRosco(true,panelLetrasJugador);
+//    	crearRosco(false,panelLetrasContrincante);
+//    	anyadirGUI();
     	
     	//Seteamos Z del menú
     	
     	
     }
+    @FXML
+    void eleccionHecha(MouseEvent event){
+    	for (ObjetoSeleccionPregunta objetoSeleccionPregunta : aLEleccion) {
+			if(event.getSource().equals(objetoSeleccionPregunta.getRectangulo()) 
+					|| event.getSource().equals(objetoSeleccionPregunta.getTexto()) 
+					|| event.getSource().equals(objetoSeleccionPregunta.getTituloSeccion())){
+				if(objetoSeleccionPregunta.isElegido()){
+					//No se hace nada porque ya está elegido.
+				}else{
+					if(objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
+						for (ObjetoSeleccionPregunta objetoSeleccionPregunta1 : aLEleccion) {
+							if(objetoSeleccionPregunta1.isModoDeJuego_notTipoPregunta()){
+								if(objetoSeleccionPregunta == objetoSeleccionPregunta1){
+									objetoSeleccionPregunta1.setElegido(true);
+									objetoSeleccionPregunta1.getRectangulo().setFill(mdjSeleccionado.getFill());
+									objetoSeleccionPregunta1.getRectangulo().setStroke(mdjSeleccionado.getStroke());
+								}else{
+									objetoSeleccionPregunta1.setElegido(false);
+									objetoSeleccionPregunta1.getRectangulo().setFill(mdjNSeleccionado.getFill());
+									objetoSeleccionPregunta1.getRectangulo().setStroke(mdjNSeleccionado.getStroke());
+								}
+							}
+						}
+					}else if (!objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
+						for (ObjetoSeleccionPregunta objetoSeleccionPregunta2 : aLEleccion) {
+							if(!objetoSeleccionPregunta2.isModoDeJuego_notTipoPregunta()){
+								if(objetoSeleccionPregunta == objetoSeleccionPregunta2){
+									objetoSeleccionPregunta2.setElegido(true);
+									objetoSeleccionPregunta2.getRectangulo().setFill(tdpSeleccionado.getFill());
+									objetoSeleccionPregunta2.getRectangulo().setStroke(tdpSeleccionado.getStroke());
+								}else if(!objetoSeleccionPregunta2.isSeccion_notSeleccionable()){
+									objetoSeleccionPregunta2.setElegido(false);
+									objetoSeleccionPregunta2.getRectangulo().setFill(tdpNSeleccionado.getFill());
+									objetoSeleccionPregunta2.getRectangulo().setStroke(tdpNSeleccionado.getStroke());
+								}
+							}
+						}
+					}
+				}
+				
+			}
+		}
+    	
+    }
+    
     
     @FXML
     void btnContestar(MouseEvent event) {
     	//Algo
     }
     
+    @FXML
+    void masInfo(MouseEvent event){
+    	if(!juegoEnCurso){
+    		utilidades.deVentana.transicionVentana("AcercaDe", event);
+    	}
+    }
+    
     public void eliminarOpcionesPartida(boolean eliminar_notAnyadir){
+    	panel.getChildren().remove(textoRJug);
+    	panel.getChildren().remove(rJug);
     	if(eliminar_notAnyadir){
     		for (ObjetoSeleccionPregunta osp : aLEleccion) {
     			if(osp.isSeccion_notSeleccionable()){
@@ -323,6 +406,12 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 			 
 			 panel.getChildren().add(iv);
+			 try {
+				Thread.sleep(30);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			//A—ADIMOS EL LABEL AL ARRAYLIST DE LABELS
 			aLImgV.add(iv);
@@ -350,7 +439,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		else resultado = (int)(150 * Math.cos((360/27.0)*vecesHechoX*(Math.PI/180)-Math.PI/2)) + 575;
 		
 		vecesHechoX++;
-		System.out.println(resultado);
+//		System.out.println(resultado);
 		return resultado;
 	}
     
@@ -366,7 +455,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		resultado = (int)(150 * Math.sin((360/27.0)*vecesHechoY*(Math.PI/180)-Math.PI/2)) +200;
 		
 		vecesHechoY++;
-		System.out.println(resultado);
+//		System.out.println(resultado);
 		return resultado;
 	}
 	
@@ -410,9 +499,53 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		
 		//Añadir elementos
 		panel.getChildren().add(tfRespuesta);
+		try {
+			Thread.sleep(1);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		pqGuiCargando(true);
 	}
     
-    
+    void pqGuiCargando(boolean poner_notQuitar){
+    	if(poner_notQuitar){
+    	fondoCarga.setX(0.0);
+    	fondoCarga.setY(0.0);
+    	fondoCarga.setTranslateZ(999);
+    	
+    	barraCarga.setLayoutX(185.0);
+    	barraCarga.setLayoutY(455.0);
+    	
+    	textoCargaTranquil.setX(185.0);
+    	textoCargaTranquil.setY(110.0);
+    	
+    	textoCargaBuscandoPartida.setX(225.0);
+    	textoCargaBuscandoPartida.setY(550.0);
+    	}else{
+    		
+    	}
+    }
+	
+	boolean preguntasBienSeleccionadas(){
+		int count = 0;
+		for (ObjetoSeleccionPregunta objetoSeleccionPregunta : aLEleccion) {
+			if(objetoSeleccionPregunta.isElegido()) count++;
+			if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
+				if(objetoSeleccionPregunta.getTexto().getText().equals("VS Amigo")){
+					if(objetoSeleccionPregunta.isElegido()){
+						//Dialogo VS Amigo no disponible en versión 1.0;
+						return false;
+					}
+				}
+			}
+		}
+		if(count == 2) return true; 
+		else{
+			//Dialogo elige modo y el tema
+			return false;
+			}
+	}
     
     /**Método que gestiona la E/S del panel
      * @param event Evento sucedido
@@ -427,7 +560,8 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     		a.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
     		a.showAndWait();
     	}else{
-    		new Thread(new RPanel( ventanaMenuDentro, menuDesplegable )).start();
+    		Platform.runLater(new RPanel( ventanaMenuDentro, menuDesplegable ));
+//    		new Thread(new RPanel( ventanaMenuDentro, menuDesplegable )).start();
     		
     		
 //    	     Path path = new Path();
@@ -448,7 +582,29 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		panel.getChildren().remove(fondoCarga);
+		panel.getChildren().remove(barraCarga);
+		panel.getChildren().remove(textoCargaTranquil);
+		panel.getChildren().remove(textoCargaBuscandoPartida);
 		panel.applyCss();
+		if(EventosLogIn.iAvatar!=null){
+			imagenAvatar.setImage(EventosLogIn.iAvatar);
+		}else{
+			String imagen = "fPerfil";
+			Random rand = new Random();
+			int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+			if(randomNum == 666){
+				imagen = "fPerfilPirata";
+			}
+			
+			Image i = new Image("images/"+ imagen +".png",imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+			imagenAvatar.setImage(i);
+		}
+		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
+		imagenAvatar.setClip(clip);
+		imagenAvatar.setSmooth(true); 
+        imagenAvatar.setCache(true); 
+		
 		//Rellenar ArrayList menu desplegable
 		this.menuDesplegable = new ArrayList<Node>();
 		//Rectángulos y círculos
@@ -503,7 +659,5 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		//TODO Setear username
 		
 	}
-
-	
 
 }

@@ -15,12 +15,12 @@ public class Main extends Application{
 	
 	@SuppressWarnings("resource")
 	public static void main(String args[]) {
-		final int portNumber = 1025;
+		final int portNumber = 1025; //TODO Revisar si existen apps importantes que puedan utilizar este puerto
 		System.out.println("Creando servidor en el puerto:" + portNumber);
 		ServerSocket serverSocket = null;
 		try{
 		serverSocket = new ServerSocket(portNumber);
-		serverSocket.setSoTimeout(120000);//TODO REVISAR ESTO
+		serverSocket.setSoTimeout(120000);//TODO REVISAR ESTO DOS MINUTOS IGUAL ES DEMASIADO.......
 		}catch(Exception e){
 			e.printStackTrace();
 		}
