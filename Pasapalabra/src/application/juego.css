@@ -12,3 +12,22 @@
 .text-area .scroll-bar:vertical:disabled {
     -fx-opacity: 0;
 }
+#information{
+	-fx-fill:linear-gradient( from 0.0% 0.0% to 100.0% 100.0%, rgb(254,80,235) 0.0, rgb(98,219,255) 100.0);
+}
+
+#username{
+	-fx-fill:linear-gradient( from 0.0% 0.0% to 100.0% 100.0%, rgb(58,252,25) 0.0, rgb(247,255,0) 100.0);
+}
+
+#seleccionado{
+	-fx-opacity: 0.8;
+}
+
+#deseleccionado{
+	-fx-opacity: 0.3;
+}
+
+.text-field{
+	-fx-accent: linear-gradient( from 0.0% 0.0% to 100.0% 100.0%, rgb(37,255,56) 0.0, rgb(39,232,247) 100.0) ;
+}

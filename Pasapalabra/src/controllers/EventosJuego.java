@@ -18,6 +18,8 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,11 +29,13 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import objetos.BotonJuego;
 import objetos.ObjetoSeleccionPregunta;
 import utilidades.RCarga;
 import utilidades.RPanel;
@@ -47,6 +51,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	//*COMIENZO DE DECLARACIÓN DE ATRIBUTOS*
 	//_________________________________________
 	public static final int PUNTOSTOTALES = 27;
+	public Image imagenDelRival;
 	public int vecesHechoX = 0;
 	public int vecesHechoY = 0;
 	public boolean juegoEnCurso = false;
@@ -55,7 +60,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
 	public ArrayList<Node> menuDesplegable; //Colección de todos los elementos del menu desplegable.
 	public ArrayList<ObjetoSeleccionPregunta> aLEleccion; //Elección del tipo de juego que se quiere llevar a cabo.
-	
+	public ArrayList<BotonJuego> aLBotonesJuego;
 	
 	
 	//Declaración del panel
@@ -144,6 +149,24 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     @FXML public Rectangle rContestar;
     @FXML public Rectangle rPreguntas;
     @FXML public TextArea taPreguntas;
+    @FXML public Rectangle rPasar;
+    @FXML public Text textoContestar;
+    @FXML public Text textoPasar;
+    @FXML public ImageView imgUsuario;
+    @FXML public ImageView imgRival;
+    @FXML public Text textoTiempoUsuario;
+    @FXML public Text textoTiempoRival;
+    
+    @FXML public Text textoPuntuacionU;
+    @FXML public Text textoPuntuacionR;
+    
+    @FXML public Rectangle rRendirse;
+    @FXML public Text textoRendirse;
+    
+    @FXML public Text textoUsernameUser;
+    @FXML public Text textoUsernameRival;
+    
+    
     
     //Pantalla de carga
     @FXML public Rectangle fondoCarga;
@@ -258,6 +281,12 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     	utilidades.deVentana.cerrarSesion(event);
     }
     
+    @FXML
+    void btnRendirse(MouseEvent event){
+    	
+    	
+    }
+    
 
     @FXML
     void aJugar(MouseEvent event){
@@ -267,8 +296,6 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     	*(Es posible que después de varias comprobaciones necesitemos volverlo a poner a falso)
     	*/
     	juegoEnCurso = true;
-    	//Comprobamos si los elementos están bien clicados
-    	
     	//Algo con servidor
     	
     	//Cerrar panel
@@ -346,12 +373,25 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     void btnContestar(MouseEvent event) {
     	//Algo
     }
+    @FXML
+    void btnPasar(MouseEvent event) {
+    	//Algo
+    }
     
     @FXML
     void masInfo(MouseEvent event){
     	if(!juegoEnCurso){
     		utilidades.deVentana.transicionVentana("AcercaDe", event);
     	}
+    }
+    
+    @FXML
+    void entradoCSS(MouseEvent event){
+    	BotonJuego.seleccionar_notDeseleccionar(true,aLBotonesJuego,event);
+    }
+    @FXML
+    void salidoCSS(MouseEvent event){
+    	BotonJuego.seleccionar_notDeseleccionar(false,aLBotonesJuego,event);
     }
     
     public void eliminarOpcionesPartida(boolean eliminar_notAnyadir){
@@ -403,7 +443,6 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			
 				iv.setImage(new Image("images/letras/azul/"+letraABC+"-blue.png"));
 			} 
-
 			 
 			 panel.getChildren().add(iv);
 			 try {
@@ -480,9 +519,103 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		
 		//Botón contestar
 		//Parte rectángulo
-		rContestar.setLayoutX(315);
+		rContestar.setLayoutX(205);
 		rContestar.setLayoutY(540);
-		rContestar.setOpacity(0.7);
+		rContestar.setOpacity(0.3);
+		rPasar.setLayoutX(420);
+		rPasar.setLayoutY(540);
+		rPasar.setOpacity(0.3);
+		textoContestar.setLayoutX(245);
+		textoContestar.setLayoutY(565);
+		textoPasar.setLayoutX(478);
+		textoPasar.setLayoutY(565);
+		
+		imgUsuario.setLayoutX(150);
+		imgUsuario.setLayoutY(100);
+		imgRival.setLayoutX(525);
+		imgRival.setLayoutY(100);
+		
+		textoTiempoUsuario.setLayoutX(20);
+		textoTiempoUsuario.setLayoutY(350);
+		textoTiempoRival.setLayoutX(720);
+		textoTiempoRival.setLayoutY(350);
+		
+		textoPuntuacionU.setLayoutX(160);
+		textoPuntuacionU.setLayoutY(30);
+		textoPuntuacionR.setLayoutX(540);
+		textoPuntuacionR.setLayoutY(30);
+		
+		rRendirse.setLayoutX(620);
+		rRendirse.setLayoutY(560);
+		rRendirse.setOpacity(0.3);
+		textoRendirse.setLayoutX(670);
+		textoRendirse.setLayoutY(585);
+		
+		textoUsernameRival.setLayoutX(525);
+		textoUsernameRival.setLayoutY(300);
+		
+		textoUsernameUser.setLayoutX(150);
+		textoUsernameUser.setLayoutY(300);
+		
+		aLBotonesJuego = new ArrayList<>();
+		aLBotonesJuego.add(new BotonJuego(rRendirse, textoRendirse));
+		aLBotonesJuego.add(new BotonJuego(rPasar, textoPasar));
+		aLBotonesJuego.add(new BotonJuego(rContestar, textoContestar));
+		
+		//Usuario
+		if(EventosLogIn.iAvatar!=null){
+			imgUsuario.setImage(EventosLogIn.iAvatar);
+		}else{
+			String imagen = "fPerfil";
+			Random rand = new Random();
+			int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+			if(randomNum == 666){
+				imagen = "fPerfilPirata";
+			}
+			
+			Image i = new Image("images/"+ imagen +".png",imgUsuario.getBoundsInLocal().getWidth(),imgUsuario.getBoundsInLocal().getHeight(),false,true);
+			imgUsuario.setImage(i);
+		}
+		Circle clip = new Circle((imgUsuario.getX()+imgUsuario.getBoundsInParent().getWidth())/2, (imgUsuario.getY()+imgUsuario.getBoundsInParent().getHeight())/2, imgUsuario.getBoundsInLocal().getHeight()/2);
+		imgUsuario.setClip(clip);
+		imgUsuario.setSmooth(true); 
+        imgUsuario.setCache(true); 
+		
+        //Rival
+        if(imagenDelRival!=null){
+			imgRival.setImage(imagenDelRival);
+		}else{
+			String imagen = "fPerfil";
+			Random rand = new Random();
+			int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+			if(randomNum == 666){
+				imagen = "fPerfilPirata";
+			}
+			
+			Image i = new Image("images/"+ imagen +".png",imgRival.getBoundsInLocal().getWidth(),imgRival.getBoundsInLocal().getHeight(),false,true);
+			imgRival.setImage(i);
+		}
+		Circle clip2 = new Circle((imgRival.getX()+imgRival.getBoundsInParent().getWidth())/2, (imgRival.getY()+imgRival.getBoundsInParent().getHeight())/2, imgUsuario.getBoundsInLocal().getHeight()/2);
+		imgRival.setClip(clip2);
+		imgRival.setSmooth(true); 
+		imgRival.setCache(true); 
+		
+		
+		
+		
+		//Efectos
+		DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(Color.DODGERBLUE);
+        dropShadow.setRadius(25);
+        dropShadow.setSpread(0.5);
+        dropShadow.setBlurType(BlurType.GAUSSIAN);
+        textoPuntuacionU.setEffect(dropShadow);
+        textoTiempoUsuario.setEffect(dropShadow);
+		textoTiempoRival.setEffect(dropShadow);
+		textoPuntuacionR.setEffect(dropShadow);
+		textoUsernameRival.setEffect(dropShadow);
+		textoUsernameUser.setEffect(dropShadow);
+		
 		
 //		rContestar.setY(60);
 //		System.out.println(rContestar.getBoundsInParent());
@@ -506,6 +639,9 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			e.printStackTrace();
 		}
 		pqGuiCargando(true);
+
+//		panel.getStylesheets().add("application/juego.css");
+//		panel.getStylesheets().remove("application/application.css");
 	}
     
     void pqGuiCargando(boolean poner_notQuitar){

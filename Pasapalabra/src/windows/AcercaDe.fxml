@@ -50,7 +50,7 @@
                   <Text layoutX="195.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java7" textAlignment="CENTER" wrappingWidth="52.13671875" />
                   <Text layoutX="425.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java8" textAlignment="CENTER" wrappingWidth="49.888671875" />
                   <Separator layoutX="104.0" layoutY="210.0" prefHeight="0.0" prefWidth="381.0" />
-                  <Button fx:id="btnVolver" layoutX="39.0" layoutY="321.0" mnemonicParsing="false" onMousePressed="#VolveralLog" text="Volver" textAlignment="CENTER">
+                  <Button fx:id="btnVolver" layoutX="39.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#volver" text="Volver" textAlignment="CENTER">
                      <effect>
                         <GaussianBlur radius="0.0" />
                      </effect>
@@ -67,6 +67,9 @@
                      <image>
                         <Image url="@../images/acercaDe/cerrarDialogo.png" />
                      </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ImageView>
                </children></AnchorPane>
       </content>

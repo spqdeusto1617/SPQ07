@@ -1,5 +1,11 @@
 package conexion;
+
+import java.net.Socket;
+
+import com.google.api.services.drive.Drive;
+
 public class Servidor {
+	public static Socket s = null;
 	
 	/**
 	   * Download a file's content.

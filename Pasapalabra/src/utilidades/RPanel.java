@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import javafx.scene.Node;
+import javafx.scene.text.Text;
 
 public class RPanel implements Runnable{
 	//Atributos
@@ -20,6 +21,14 @@ public class RPanel implements Runnable{
 	//Método de interfaz
 	@Override
 	public void run() {
+		for (Node node : cajaDeControl) {
+			if(node.getId().equals("textoESPanel")){
+				if(abrir_cerrar_panel) ((Text) node).setText("<<");
+				else ((Text) node).setText(">>");
+			break;
+			}
+		}
+		
 		if(!abrir_cerrar_panel){
 			for(int i = 0; i<200;i++){
 			for (Node nodo : cajaDeControl) {

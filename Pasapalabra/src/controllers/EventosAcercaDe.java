@@ -149,7 +149,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 
 	/**Método para volver a la ventana de login.
 	 */
-	public void VolveralLog(MouseEvent event){
+	public void volver(MouseEvent event){
 
 		utilidades.deVentana.transicionVentana("Juego", event);
 
@@ -163,7 +163,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 	 * a menos que los dos componentes terminen de llegar a su posición.
 	 */
 	public void Cierrepresionado(MouseEvent event){
-		if(alturaDelMensaje==-30 && animacionEnProceso){
+		if(alturaDelMensaje==-30 && !animacionEnProceso){
 		alturaDelMensaje=0;
 		
 		new Thread(new HiloEliminarPortapapeles(alturaDelMensaje, ivCierreTextoPortapapeles, ivTextoCopiadoPortapapeles, panelDelPrograma)).run();

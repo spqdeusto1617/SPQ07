@@ -127,6 +127,12 @@ public class Main extends Application {
 	                       System.out.println("Unable to remove lock file: " + lockFile +  e);
 	                       log.log(Level.WARNING, "El bloqueo del archivo ha sufrido un problema al cerrar el programa", e);
 	                    }
+	                    log.log(Level.FINEST, "Toca cerrar conexión con servidor.");
+	                    try{
+	                    	if(conexion.Servidor.s != null) conexion.Servidor.s.close();
+	                    }catch(Exception a){
+	                    	log.log(Level.WARNING, "Error en el cierre de conexión en el socket: " + conexion.Servidor.s,a);
+	                    }
 	                }
 	            });
 	            log.log(Level.FINEST, "Archivo creado y bloqueado satisfactoriamente: true.");

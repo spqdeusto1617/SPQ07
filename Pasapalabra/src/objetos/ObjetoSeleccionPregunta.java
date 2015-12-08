@@ -11,7 +11,7 @@ public class ObjetoSeleccionPregunta {
 	boolean elegido;
 	boolean modoDeJuego_notTipoPregunta;
 	boolean seccion_notSeleccionable;
-	//O pude ser sólo texto, en cuyo caso lo llamaremos título.
+	//O puede ser sólo texto, en cuyo caso lo llamaremos título.
 	
 	Text tituloSeccion;
 	
