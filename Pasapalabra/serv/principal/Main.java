@@ -20,7 +20,7 @@ public class Main extends Application{
 		ServerSocket serverSocket = null;
 		try{
 		serverSocket = new ServerSocket(portNumber);
-		serverSocket.setSoTimeout(120000);//TODO REVISAR ESTO DOS MINUTOS IGUAL ES DEMASIADO.......
+//		serverSocket.setSoTimeout(120000);//TODO REVISAR ESTO DOS MINUTOS IGUAL ES DEMASIADO.......
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -43,5 +43,4 @@ public class Main extends Application{
 		
 	}
 	
-
 }

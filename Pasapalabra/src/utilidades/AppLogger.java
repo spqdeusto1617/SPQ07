@@ -57,7 +57,7 @@ public class AppLogger {
 				
 				try{
 					handler = new FileHandler("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\Logs\\"+nombreClase+".xml",true);
-				}catch(Exception macEx){
+				}catch(Exception winEx){
 					new File("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\Logs\\").mkdirs();
 					handler = new FileHandler("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\Logs\\"+nombreClase+".xml",true);
 					//Si ya no funciona lo dejamos.
@@ -80,7 +80,7 @@ public class AppLogger {
 				
 				try{
 					handler = new FileHandler("/home/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+nombreClase+".xml",true);
-				}catch(Exception macEx){
+				}catch(Exception linEx){
 					new File("/home/"+System.getProperty("user.name")+"/Pasapalabra/Logs/").mkdirs();
 					handler = new FileHandler("/home/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+nombreClase+".xml",true);
 					//Si ya no funciona lo dejamos.

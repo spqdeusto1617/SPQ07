@@ -330,7 +330,7 @@ public class EventosRegistro extends Control implements Initializable {
 	 */
 
 	public void irATerminos(MouseEvent event){
-		//TODO: meter el pad
+		
 		URL res = getClass().getClassLoader().getResource("pdfEULA/EULA.pdf");
 		
 			File ficheroPDF=new File((res.getPath()));
@@ -370,6 +370,7 @@ public class EventosRegistro extends Control implements Initializable {
 				alert.setTitle("Error");
 				alert.setHeaderText("Parece que hubo un error");
 				alert.setContentText("No se pudo abrir el archivo con un visor de PDF, se mostrará a continuación");
+				
 				//TODO: texto
 				
 
