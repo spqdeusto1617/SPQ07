@@ -20,7 +20,9 @@ public class Main extends Application{
 		ServerSocket serverSocket = null;
 		try{
 		serverSocket = new ServerSocket(portNumber);
-//		serverSocket.setSoTimeout(120000);//TODO REVISAR ESTO DOS MINUTOS IGUAL ES DEMASIADO.......
+//		serverSocket.setSoTimeout(120000);//NO ES PARA LO QUE SE CREÍA INICIALMENTE QUE SERVÍA. ESTO SIRVE PARA
+		//QUE SI NO LLEGA UNA SOLICITUD EN ESTE TIEMPO, EL SERVIDOR SE APAGA. LO QUE SE CREÍA ERA QUE EL TIMEOUT
+		//ERA POR SI UN SOCKET DEJABA DE CONTESTAR. SE TENDRÁ QUE VER CÓMO HACER ESO ENTONCES.
 		}catch(Exception e){
 			e.printStackTrace();
 		}
