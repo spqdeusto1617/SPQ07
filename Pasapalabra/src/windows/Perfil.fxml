@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<!-- Esta versión ha sido creada para que utilidades.deVentana.java generalice eventos de todas las ventanas basadas en esta plantilla -->
+
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -14,24 +15,24 @@
 
 <Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventosPerfil">
    <children>
-      <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="600.0" layoutX="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="200.0" />
-      <Rectangle fx:id="rectanguloJugar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="100.0" onMouseClicked="#btnJugar" opacity="0.3" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
+      <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
+      <Rectangle fx:id="rectanguloJugar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="100.0" onMouseClicked="#btnJugar" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectanguloMiPerfil" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="260.0" onMouseClicked="#btnMiPerfil" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
+      <Rectangle fx:id="rectanguloMiPerfil" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="260.0" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectanguloEstadisticas" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="340.0" onMouseClicked="#btnEstadisticas" opacity="0.3" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
+      <Rectangle fx:id="rectanguloEstadisticas" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="340.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectanguloAmigos" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="180.0" onMouseClicked="#btnAmigos" opacity="0.3" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
+      <Rectangle fx:id="rectanguloAmigos" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="180.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Text fx:id="textoJugar" fill="WHITE" layoutX="80.0" layoutY="125.0" onMouseClicked="#btnJugar" opacity="0.3" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Jugar" wrappingWidth="39.440731048583984">
+      <Text fx:id="textoJugar" fill="WHITE" layoutX="80.0" layoutY="125.0" onMouseClicked="#btnJugar" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Jugar" wrappingWidth="44.10186767578125">
          <font>
             <Font size="15.0" />
          </font>
@@ -39,7 +40,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="textoAmigos" fill="WHITE" layoutX="73.0" layoutY="205.0" onMouseClicked="#btnAmigos" opacity="0.3" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Amigos" wrappingWidth="53.024166107177734">
+      <Text fx:id="textoAmigos" fill="WHITE" layoutX="73.0" layoutY="205.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Amigos" wrappingWidth="53.024166107177734">
          <font>
             <Font size="15.0" />
          </font>
@@ -47,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="textoMiPerfil" fill="WHITE" layoutX="70.0" layoutY="285.0" onMouseClicked="#btnMiPerfil" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Mi perfil" wrappingWidth="59.024169921875">
+      <Text fx:id="textoMiPerfil" fill="WHITE" layoutX="70.0" layoutY="285.0" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Mi perfil" wrappingWidth="59.024169921875">
          <font>
             <Font size="15.0" />
          </font>
@@ -55,7 +56,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="textoEstadisticas" fill="WHITE" layoutX="55.0" layoutY="365.0" onMouseClicked="#btnEstadisticas" opacity="0.3" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Estadísticas" wrappingWidth="86.33687973022461">
+      <Text fx:id="textoEstadisticas" fill="WHITE" layoutX="55.0" layoutY="365.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Estadísticas" wrappingWidth="86.33687973022461">
          <font>
             <Font size="15.0" />
          </font>
@@ -63,12 +64,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <ImageView fx:id="logopsp" fitHeight="67.0" fitWidth="221.0" layoutX="39.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="logopsp" fitHeight="88.0" fitWidth="151.0" layoutX="24.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
       <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="170.0" layoutX="14.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logeado como:" />
+      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logeado como:" />
       <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
       <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="15.0" layoutY="565.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
          <cursor>
@@ -88,36 +89,47 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="texCambiarMail" layoutX="427.0" layoutY="107.0" onMousePressed="#cambioMail" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar mi mail" textAlignment="CENTER" x="9.0">
+      <Circle fx:id="circuloPlus" fill="#38ffd4c0" layoutX="185.0" layoutY="15.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Text fx:id="textoPlus" fill="WHITE" layoutX="180.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+">
          <font>
-            <Font size="13.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <Text fx:id="texEliminarCuenta" layoutX="427.0" layoutY="337.0" onMousePressed="#eliminarCuenta" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar mi cuenta" y="1.0">
+      <Rectangle fx:id="rectanguloCambiarDatos" arcHeight="5.0" arcWidth="5.0" fill="#fff521a3" height="35.0" layoutX="415.0" layoutY="100.0" onMouseClicked="#btnCambiar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="rectanguloEliminarCuenta" arcHeight="5.0" arcWidth="5.0" fill="#fc0e0ea3" height="35.0" layoutX="415.0" layoutY="255.0" onMouseClicked="#btnEliminar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <ImageView fx:id="imgCambioFotoPerfil" fitHeight="150.0" fitWidth="200.0" layoutX="405.0" layoutY="380.0" onMouseClicked="#cambioImagen" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Text fx:id="txtCambiarDatos" layoutX="443.0" layoutY="122.0" onMouseClicked="#btnCambiar" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar mis datos">
          <font>
-            <Font size="13.0" />
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="txtEliminarCuenta" layoutX="443.0" layoutY="277.0" onMouseClicked="#btnCambiar" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar mi cuenta">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text layoutX="443.0" layoutY="573.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar mi imagen">
+         <font>
+            <Font name="System Bold" size="13.0" />
          </font>
       </Text>
-      <Rectangle fx:id="rectanguloCambioMail" arcHeight="5.0" arcWidth="5.0" fill="#4e21ffa3" height="35.0" layoutX="400.0" layoutY="85.0" onMousePressed="#cambioMail" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="160.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Rectangle>
-      <Rectangle fx:id="rectanguloEliminarCuenta" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="35.0" layoutX="400.0" layoutY="315.0" onMousePressed="#eliminarCuenta" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="160.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Rectangle>
-      <Rectangle fx:id="rectanguloCambiarContrasenya" arcHeight="5.0" arcWidth="5.0" fill="#87852ba3" height="35.0" layoutX="400.0" layoutY="200.0" onMousePressed="#cambiarContrasenya" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="160.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Rectangle>
-      <Text fx:id="texCambiarContrasenya" layoutX="427.0" layoutY="222.0" onMousePressed="#cambiarContrasenya" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar contraseña" />
-      <ImageView fx:id="imgAvatar2" fitHeight="128.0" fitWidth="160.0" layoutX="400.0" layoutY="434.0" onMousePressed="#cambiaImagen" pickOnBounds="true" preserveRatio="true">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></ImageView>
-      <Text layoutX="432.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar mi imagen" />
    </children>
 </Pane>

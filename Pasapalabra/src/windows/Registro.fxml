@@ -17,11 +17,11 @@
          <image>
             <Image url="@../images/Registro/DUI.png" />
          </image></ImageView>
-      <TextField fx:id="txtNombreUsuario" layoutX="88.0" layoutY="120.0" onKeyTyped="#comprobarNombreUsuario" prefHeight="25.0" prefWidth="151.0" />
-      <TextField fx:id="txtCorreoUsuario" layoutX="88.0" layoutY="187.0" onKeyTyped="#comprobarMailUsuario" prefHeight="25.0" prefWidth="151.0" />
-      <PasswordField fx:id="pflContrasenya" layoutX="417.0" layoutY="68.0" onKeyTyped="#comprobarContrasenya1" prefHeight="25.0" prefWidth="151.0" />
-      <PasswordField fx:id="pfdRepetirContrasenya" layoutX="417.0" layoutY="154.0" onAction="#comprobarContrasenya2" prefHeight="25.0" prefWidth="151.0" />
-      <DatePicker fx:id="dpFechaNacimiento" editable="false" layoutX="417.0" layoutY="241.0" onAction="#comprobarDia" prefHeight="25.0" prefWidth="151.0" />
+      <TextField fx:id="txtNombreUsuario" layoutX="88.0" layoutY="120.0" onKeyTyped="#comprobarNombreUsuario" prefHeight="25.0" prefWidth="165.0" />
+      <TextField fx:id="txtCorreoUsuario" layoutX="88.0" layoutY="187.0" onKeyTyped="#comprobarMailUsuario" prefHeight="25.0" prefWidth="165.0" />
+      <PasswordField fx:id="pflContrasenya" layoutX="417.0" layoutY="68.0" onKeyTyped="#comprobarContrasenya1" prefHeight="25.0" prefWidth="165.0" />
+      <PasswordField fx:id="pfdRepetirContrasenya" layoutX="417.0" layoutY="154.0" onAction="#comprobarContrasenya2" prefHeight="25.0" prefWidth="165.0" />
+      <DatePicker fx:id="dpFechaNacimiento" editable="false" layoutX="417.0" layoutY="241.0" onAction="#comprobarDia" prefHeight="25.0" prefWidth="165.0" />
       <Text layoutX="417.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" />
       <Text layoutX="417.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repetir Contraseña" />
       <Text layoutX="88.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario" />

@@ -3,140 +3,144 @@ package controllers;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.swing.text.TabableView;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class EventosAmigos extends ClaseExtensora implements Initializable {
-	  @FXML
-	    private Text textoESPanel;
+	@FXML public Pane panel;
 
-	    @FXML
-	    private Text textoMiPerfil;
+	public static Logger log = utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
+	//Declaración del panel
+	@FXML public Text textoESPanel;
 
-	    @FXML
-	    private ImageView logopsp;
+	@FXML public Text textoMiPerfil;
 
-	    @FXML
-	    private Text textoCerrarSesion;
+	@FXML public ImageView logopsp;
 
-	    @FXML
-	    private Rectangle rectanguloPanel;
+	@FXML public Text textoCerrarSesion;
 
-	    @FXML
-	    private Rectangle rectanguloCerrarSesion;
+	@FXML public Text textoPlus;
 
-	    @FXML
-	    private Rectangle rectanguloAmigos;
+	@FXML public Rectangle rectanguloPanel;
 
-	    @FXML
-	    private Text textoJugar;
+	@FXML public Circle circuloPlus;
 
-	    @FXML
-	    private Rectangle rectanguloMiPerfil;
+	@FXML public Rectangle rectanguloCerrarSesion;
 
-	    @FXML
-	    private Rectangle rectanguloJugar;
+	@FXML public Rectangle rectanguloAmigos;
 
-	    @FXML
-	    private Text textoAmigos;
+	@FXML public Text textoJugar;
 
-	    @FXML
-	    private Circle circuloPanel;
+	@FXML public Text textoLogeadoComo;
 
-	    @FXML
-	    private Text textoNombreDeUsuario;
+	@FXML public Rectangle rectanguloMiPerfil;
 
-	    @FXML
-	    private Text textoEstadisticas;
+	@FXML public Rectangle rectanguloJugar;
 
-	    @FXML
-	    private ImageView imagenAvatar;
+	@FXML public Text textoAmigos;
 
-	    @FXML
-	    private Rectangle rectanguloEstadisticas;
+	@FXML public Circle circuloPanel;
 
-	    @FXML
-	    private Pane panel;
-	    
-	    @FXML
-	    private TableView<?> tblAmigos;
-	    
-	    @FXML
-	    private TextField tfdBuscarAmigos;
-	
-	 @FXML
-	    void btnCerrarSesion(ActionEvent event) {
-	    	Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Cerrar sesión");
-			alert.setHeaderText("¿Está seguro de querer cerrar sesión?");
-			alert.setContentText("Si cierra perderá la partida en curso que\n"
-					+ "pueda estar jugando o los cambios que esté"
-					+ "haciendo en su cuenta si no los ha guardado aún.");
-			Optional<ButtonType> result = alert.showAndWait();
-			
-			if (result.get() == ButtonType.OK){
-				//VUELTA A CONFIRMAR
-				Alert alert2 = new Alert(AlertType.CONFIRMATION);
-				alert2.setTitle("Cerrar sesión");
-				alert2.setHeaderText("¿Está seguro?");
-				alert2.setContentText("No se podrá volver atrás.");
-				Optional<ButtonType> result2 = alert2.showAndWait();
-				if (result2.get() == ButtonType.OK){
-				    //CERRAR SESIÓN
-					
-				} else {
-				    //NADA
-				}
-			} else {
-			    //NADA
-			}
-	    }
-	 void btnJugar(ActionEvent event){
-		 
-		 utilidades.deVentana.transicionVentana("Juego", event);
-	 }
-	 
-	 void btnPerfil(ActionEvent event){
-		 
-		 utilidades.deVentana.transicionVentana("Perfil", event);
-	 }
+	@FXML public Text textoNombreDeUsuario;
 
-	   void btnAmigos(ActionEvent event) {
-	    	
-	    		Alert alert = new Alert(AlertType.INFORMATION);
-	    		alert.setTitle("Información");
-	    		alert.setHeaderText(null);
-	    		alert.setContentText("Ya estás en la ventana de amigos, selecciona una opción.");
-	    		alert.showAndWait();
-	    	
-	    }
+	@FXML public Text textoEstadisticas;
+
+	@FXML public ImageView imagenAvatar;
+
+	@FXML public Rectangle rectanguloEstadisticas;
+
+	@FXML public Rectangle rectanguloBuscarAmigos;
+
+	@FXML public Text texTextoBuscarAmigos;
+
+	@FXML public TableView<?>tblTablaAmigos;
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Verificar si el usuario tiene amigos
+		panel.getStylesheets().add("application/application.css");
+		rectanguloAmigos.setOpacity(1f);
+		rectanguloEstadisticas.setOpacity(0.3f);
+		rectanguloJugar.setOpacity(0.3f);
+		rectanguloMiPerfil.setOpacity(0.3f);
+		tblTablaAmigos.setPlaceholder(new Label("No tienes amigos aun."));
+	}
+
+	public void btnBuscarAmigos(MouseEvent event){
+		//TODO: buscar amigos
+	}
+	public void btnJugar(MouseEvent event){
+		utilidades.deVentana.transicionVentana("Juego", event);
+	}
+
+	public void btnAmigos(MouseEvent event){
+		Alert alert = new Alert(AlertType.INFORMATION);
+		log.log(Level.FINEST, "Alerta de información creada");
+		//Añadimos título a la alerta
+		alert.setTitle("Información");
+		log.log(Level.FINEST, "Título añadido a la alerta");
+		//Dejamos que la cabecera sea nula
+		alert.setHeaderText(null);
+		log.log(Level.FINEST, "Cabecera nula añadida a la alerta");
+		//Añadimos el contenido que tendrá la alerta
+		alert.setContentText("Ya estás en la ventana de amigos, selecciona algo.");
+		log.log(Level.FINEST, "Contenido de texto añadido a la alerta");
+		//Añadimos modalidad de la alerta
+		alert.initModality(Modality.APPLICATION_MODAL);
+		log.log(Level.FINEST, "Añadida modalidad para la alerta");
+		//Añadimos dueño de la alerta (Ventana sobre la cual se ejecutará)
+		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		log.log(Level.FINEST, "Añadido dueño sobre el cual se ejecuta la alerta. Se mostrará la alerta...");
+		//Muestra la alerta y espera a que el usuario cierre la ventana
+		alert.showAndWait();
+		log.log(Level.FINEST, "Alerta de información creada, mostrada y cerrada");
+	}
+
+	public void btnMiPerfil(MouseEvent event){
+		utilidades.deVentana.transicionVentana("Perfil", event);
+	}
 
 
-	 @Override
-		public void initialize(URL location, ResourceBundle resources) {
-			// TODO Cargar lista de amigos
-			//TODO buscar amigos
-			//TODO recibir notificaciones de amistad
-		 	//TODO: gettear el nombre de perfil
-		 	//TODO: gettear la imagen de perfil
-		 tblAmigos.setPlaceholder(new Label("No hay amigos disponibles"));
-		}
+	public void btnEstadisticas(MouseEvent event){
+		utilidades.deVentana.transicionVentana("Estadisticas", event);
+	}
+	public void btnCerrarSesion(MouseEvent event){
+		utilidades.deVentana.cerrarSesion(event);
+	}
+	//Elimina nivel de transparencia
+	@FXML
+	void entrado(MouseEvent event) {
+		utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+	}
 
-	 void btnBuscarAmigos(ActionEvent event){
-		//TODO: buscar amigo
-		 //tfdBuscarAmigos.gettext();
-	 }
+	//Añade nivel de transparencia
+	@FXML
+	void salido(MouseEvent event) {
+		utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+	}
+	public void esPanel(MouseEvent event){
+		//TODO: cerrar panel	
+	}
 }
