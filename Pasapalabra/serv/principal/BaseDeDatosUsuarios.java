@@ -11,10 +11,13 @@ import java.util.Date;
 
 public class BaseDeDatosUsuarios {
 	public static final String nombreBaseDatos = "dbUsuarios";
-//	public static Connection c =null;
-//	public static Statement s = null;
+	public static Connection c ;
+	public static Statement s ;
 
-	public static void iniciarConexion(Connection c,Statement s){
+	/**
+	 * Método para iniciar la conexión con la BBDD (se ha implementado al iniciar el servidor, para no tener que estar abriendo la conexión todo el rato) 
+	 */
+	public static void iniciarConexion(){
 
 
 		try {
@@ -30,10 +33,13 @@ public class BaseDeDatosUsuarios {
 
 	}
 
-	public static boolean cerrarConexion(Connection c,Statement s){
+	/**Método para cerrar la conexión con la base de datos
+	 * @return
+	 */
+	public static boolean cerrarConexion(){
 		try {
 			s.close();
-			
+
 			c.close();
 			return true;
 		} catch (SQLException e) {
@@ -44,13 +50,8 @@ public class BaseDeDatosUsuarios {
 	}
 
 	public static void crearTablaBD() {
-		
+
 		try {
-			Connection c = null;
-			Statement s = null ;
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:Usuarios.db");
-			//System.out.println("Opened database successfully");
 
 			s = c.createStatement();
 			String sql =  "CREATE TABLE USUARIOS"
@@ -84,40 +85,39 @@ public class BaseDeDatosUsuarios {
 			c.close();
 		} catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		//	System.out.println("Tabla no creada");
+			//	System.out.println("Tabla no creada");
 			System.exit(0);
 		}
 		//System.out.println("Tabla creada correctamente");
 
 	}
-	public static boolean nuevoUsuario(String nombreUsuario,
+	/**Método para crear un nuevo usuario
+	 * @param nombreUsuario el nombre de usuario
+	 * @param email su Mail
+	 * @param password su contraseña
+	 * @param fechaNacimiento su fecha de nacimiento
+	 * @param path_to_image la ruta de suu imagen
+	 * @throws SQLException si hay algún error (generalmente, si el Nombre de usuario existe, o el Mail)
+	 */
+	public static void nuevoUsuario(String nombreUsuario,
 			String email,
 			String password,
 			Date fechaNacimiento,
-			String path_to_image
-			){
-		Connection c = null;
-		Statement s = null ;
+			String path_to_image) throws SQLException{
+
 		try{
 			String query;
 			String num_id;
-			try {
-				Class.forName("org.sqlite.JDBC");
-				c = DriverManager.getConnection("jdbc:sqlite:Usuarios.db");
-				s = c.createStatement();
-			} catch ( Exception e ) {
-				System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-				System.exit(0);
-			}
+
 			//iniciarConexion(c,s);
 			//TODO VALIDAR DATOS!
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String datestring = dateFormat.format(fechaNacimiento); 
 			query = "SELECT count(*) FROM USUARIOS";
-			
+
 			ResultSet rs= s.executeQuery(query);
 			int	resultado=rs.getInt(1);
-		
+
 			if(resultado==0){
 
 				num_id="0";
@@ -132,7 +132,7 @@ public class BaseDeDatosUsuarios {
 			}
 
 
-			
+
 			query = "INSERT INTO USUARIOS "
 					+ "(NOMBRE_USUARIO, ID, EMAIL, PASSWORD, FECHA_DE_NACIMIENTO, PATH_TO_IMAGE)"
 					+ " VALUES"
@@ -152,28 +152,44 @@ public class BaseDeDatosUsuarios {
 			//System.out.println(query);
 			s.executeUpdate(query);
 
-			cerrarConexion(c,s);
-			return true;
-		}catch(Exception e){
-			
-			e.printStackTrace();
 
-			return false;
+
+		}catch(Exception e){
+
+			try {
+				if(e.getMessage().endsWith("USUARIOS.NOMBRE_USUARIO")){
+
+					throw new SQLException("Usuario repetido");
+
+				}
+				else if (e.getMessage().endsWith("USUARIOS.EMAIL")){
+					throw new SQLException("Email repetido");
+				}
+				else{
+					throw new SQLException(e.getMessage());
+				}
+			} catch(Error a){
+
+			}
 		}
 
 	}
 
-	public static String[] getUsuarioPorNombreOID(String nombre,String id){
-		Connection c=null;
-		Statement s=null;
-		iniciarConexion(c, s);
-		String[] ret = new String[8];
+	/** Método para conseguir toda la información de un usario
+	 * @param nombre su nombre de usuario
+	 * @param id su id
+	 * @param contrasenya la contraseña
+	 * @return un array de Strings con toda la información
+	 * @throws SQLException si hay algún problema (generalmente, que no exista)
+	 */
+	public static String[] getUsuarioPorNombreOID(String nombre,String id,String contrasenya) throws SQLException{
+		String[] ret = new String[9];
 		String query = null;
 		if(nombre != null){
-			query = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO ='"+nombre+"'";
+			query = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO ='"+nombre+"'AND PASSWORD='"+contrasenya+"'";
 		}else if(id != null){
-			query = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO ='"+id+"'";
-		}else return null;
+			query = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO ='"+id+"'AND PASSWORD='"+contrasenya+"'";
+		}else throw new SQLException("Nombre e ID vacios");
 		try {
 
 			ResultSet res = s.executeQuery(query);
@@ -187,20 +203,94 @@ public class BaseDeDatosUsuarios {
 			ret[7] = res.getString("PARTIDAS_PERDIDAS");
 			ret[8] = res.getString("PARTIDAS_EMPATADAS");
 		} catch (SQLException e) {
-			e.printStackTrace();
-			cerrarConexion(c, s);
-			return null;
+			if(e.getMessage().endsWith("USUARIOS.NOMBRE_USUARIO")){
+				throw new SQLException("Ese usuario no existe");}
+			else{
+				throw new SQLException(e.getMessage());
+			}
 		}
-		cerrarConexion(c, s);
+
 		return ret;
 	}
 
+	/**Método para cambiar los datos del usuario, bien el mail, bien la contraña, o bien el path
+	 * Para que funcione, se ha de pasar lo que uno quiere cambiar (EJ: pass), y el resto pasar nulls(path y Mail)
+	 * @param nombreUsuario:el nombre del usuario a cambiar
+	 * @param email: el Email a cambiar
+	 * @param password:la contraseña nueva
+	 * @param path_to_image: la ruta de la imagens
+	 * @throws SQLException: en caso de que algo termine mal
+	 */
+	public static void cambiarDatosUsuario(String nombreUsuario,
+			String email,
+			String password,
+			String path_to_image) throws SQLException{
 
-	public static void main(String[] args) throws SQLException {
+		try{
+			String query = "";
+			
+
+			//iniciarConexion(c,s);
+			//TODO VALIDAR DATOS!
+
+			if(path_to_image!=null){
+				query="UPDATE USUARIOS SET PATH_TO_IMAGE='"+path_to_image+"' WHERE NOMBRE_USUARIO='"+nombreUsuario+"'";
+				
+				s.executeUpdate(query);
+			}
+			else if(password!=null){
+				query="UPDATE USUARIOS SET PASSWORD='"+password+"' WHERE NOMBRE_USUARIO='"+nombreUsuario+"'";
+				
+				s.executeUpdate(query);
+			}
+
+			else if(email!=null){
+				query="UPDATE USUARIOS SET EMAIL='"+email+"' WHERE NOMBRE_USUARIO='"+nombreUsuario+"'";
+				
+				s.executeUpdate(query);
+			}
+			else{
+				throw new SQLException("Error con los null");
+			}
+
+			
+			
+
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new SQLException("Error con los datos");
+		}
+
+	}
+
+	/**Método para eliminar el usuario
+	 * @param nombre_usuario el nombre de usuario
+	 * @param contrasenya la contraseña (por mayor seguridad)
+	 * @throws SQLException si hay algún error
+	 */
+	public static void eliminar_Usuario(String nombre_usuario,String contrasenya) throws SQLException{
+		String query = "DELETE FROM USUARIOS WHERE NOMBRE_USUARIO='"+nombre_usuario+"' AND PASSWORD='"+contrasenya+"'";
+		try {
+			s.executeUpdate(query);
+			
+		} catch (SQLException e) {
 		
-		nuevoUsuario("paco", "das@fafaf.com", "12345234a534", new Date(), "C://micara.png");
+			e.printStackTrace();
+			throw new SQLException("Error al eliminar");
+		}
+	}
+	public static void main(String[] args) throws SQLException {
+		iniciarConexion();
 
 
+				try{
+					//nuevoUsuario("pacoa", "daas@fafaf.com", "12345234a534", new Date(), "C://micara.png");
+					eliminar_Usuario("asatrfwesgerh", "reherjh4j6");
+				}catch(Exception a){
+					a.printStackTrace();
+				}
+		
+		cerrarConexion();
 	}
 
 }

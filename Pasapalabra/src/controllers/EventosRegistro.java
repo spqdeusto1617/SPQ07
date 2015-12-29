@@ -7,15 +7,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.swing.text.Utilities;
+
+import org.omg.CORBA.UserException;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,6 +33,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Control;
@@ -108,11 +115,18 @@ public class EventosRegistro extends Control implements Initializable {
 	ContextMenu userPasswordValidator2 = new ContextMenu();
 
 	ContextMenu userDateValidator = new ContextMenu();
+	
+	ContextMenu userNameElegido = new ContextMenu();
+	
+	ContextMenu userMailElegido = new ContextMenu();
 
 
+	public static String[]Datos_usuario=new String[5];
+	
+	public static boolean MailExiste=false;
 
-
-
+	public static boolean UsuarioExiste=false;
+	
 	SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 
 
@@ -136,7 +150,12 @@ public class EventosRegistro extends Control implements Initializable {
 		userDateValidator.getItems().add(
 				new MenuItem("Tienes que tener al menos 13 años para poder jugar"));
 
-
+		userNameElegido.getItems().add(
+				new MenuItem("El nombre de usuario ya existe"));
+		
+		userMailElegido.getItems().add(
+				new MenuItem("El correo ya existe"));
+		
 		pfdRepetirContrasenya.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
 
@@ -166,7 +185,9 @@ public class EventosRegistro extends Control implements Initializable {
 	 * @param event el evento de ratón
 	 */
 	public void comprobarNombreUsuario(Event event){
-
+		if(userNameElegido.isShowing()){
+			userNameElegido.hide();
+		}
 		if(txtNombreUsuario.getLength()<7||txtNombreUsuario.getLength()>15){
 			datosCorrectos=false;
 			userNameValidator.show(txtNombreUsuario, Side.BOTTOM, 0, 0);
@@ -176,7 +197,7 @@ public class EventosRegistro extends Control implements Initializable {
 			userNameValidator.hide();
 			datosCorrectos=true;
 			chkTerminos.setSelected(false);
-
+			
 		}
 
 	}
@@ -186,16 +207,21 @@ public class EventosRegistro extends Control implements Initializable {
 	 * @param event el evento de ratón
 	 */
 	public void comprobarMailUsuario(Event event){
+		if(userMailElegido.isShowing()){
+			userMailElegido.hide();
+		}
 		Pattern VALID_EMAIL_ADDRESS_REGEX = 
 				Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
 
 		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(txtCorreoUsuario.getText());
-
+		
 		if(matcher.matches()){
 			datosCorrectos=true;
 			userMailValidator.hide();
 			chkTerminos.setSelected(false);
+			
+			
 		}
 		else{
 			userMailValidator.show(txtCorreoUsuario, Side.BOTTOM, 0, 0);
@@ -217,6 +243,7 @@ public class EventosRegistro extends Control implements Initializable {
 			datosCorrectos=true;
 			userPasswordValidator.hide();
 			chkTerminos.setSelected(false);
+			
 		}
 	}
 
@@ -260,7 +287,93 @@ public class EventosRegistro extends Control implements Initializable {
 
 		}
 		else{
-			utilidades.deVentana.transicionVentana("LogIn", event);
+			try{
+				Datos_usuario[0]=txtNombreUsuario.getText();
+				
+				Datos_usuario[1]=txtCorreoUsuario.getText();
+				
+				Datos_usuario[2]=pflContrasenya.getText();
+				
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				
+				alert.setTitle("Crear nuevo usuario");
+				
+				alert.setHeaderText("¿Está seguro?");
+				
+				alert.setContentText("¿Está seguro de que desea crear el anterior usuario?");
+
+				
+				alert.initModality(Modality.APPLICATION_MODAL);
+				//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
+				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				
+				Optional<ButtonType> result = alert.showAndWait();
+
+				if (result.get() == ButtonType.OK){
+					
+					utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Crear_Usuario.toString(), Datos_usuario);
+					
+					Alert alert2 = new Alert(AlertType.INFORMATION);
+					
+					alert2.setTitle("Usuario creado con éxito");
+					
+					alert2.setHeaderText("Éxito en la operación");
+					
+					alert2.setContentText("Se ha creado el usuario con éxito");
+
+					
+					alert2.initModality(Modality.APPLICATION_MODAL);
+					//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
+					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					
+					alert2.showAndWait();
+					
+					
+					utilidades.deVentana.transicionVentana("LogIn", event);
+				}
+			}catch(Exception a){
+				Alert alert2 = new Alert(AlertType.ERROR);
+				
+				alert2.setTitle("Error al tramitar la creación de usuario");
+				
+				alert2.setHeaderText("Error cuando se intentó crear el usuario");
+				
+				alert2.setContentText("Se ha produciod un error cuando intentaba crear su usario, por favor, revise la información y cambielá si es necesario");
+
+				
+				alert2.initModality(Modality.APPLICATION_MODAL);
+				//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
+				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				
+				alert2.showAndWait();
+				if(MailExiste){
+					userMailElegido.show(txtCorreoUsuario, Side.BOTTOM, 0, 0);
+					chkTerminos.setSelected(false);
+					btnCrear.setDisable(true);
+				}
+				else if(UsuarioExiste){
+					userNameElegido.show(txtNombreUsuario, Side.BOTTOM, 0, 0);
+					chkTerminos.setSelected(false);
+					btnCrear.setDisable(true);
+				}
+				else{
+					Alert alert3 = new Alert(AlertType.ERROR);
+					
+					alert3.setTitle("Error inesperado");
+					
+					alert3.setHeaderText("Un error inesperado ocurrió");
+					
+					alert3.setContentText("Parece que ha ocurrido un error inesperado, por favor, intenteló de nuevo más tarde");
+
+					
+					alert3.initModality(Modality.APPLICATION_MODAL);
+					//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
+					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					
+					alert3.showAndWait();	
+				}
+			}
+			
 		}
 
 	}
@@ -270,10 +383,27 @@ public class EventosRegistro extends Control implements Initializable {
 	 * @param event
 	 */
 	public void cancelarUsuario(MouseEvent event){
+		//Crea alerta de tipo confirmación
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		//Pone título
+		alert.setTitle("Cancelar el nuevo usuario");
+		//Pone cabecera
+		alert.setHeaderText("¿Está seguro?");
+		//Pone contenido
+		alert.setContentText("¿Está seguro de que desea descartar el usuario que está creando?");
 
-		utilidades.deVentana.transicionVentana("LogIn", event);
+		//Añade modalidad
+		alert.initModality(Modality.APPLICATION_MODAL);
+		//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
+		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		//Mostrar y bloquear ventana padre hasta aceptar o rechazar.
+		Optional<ButtonType> result = alert.showAndWait();
 
-
+		//Ha pulsado ok?
+		if (result.get() == ButtonType.OK){
+			utilidades.deVentana.transicionVentana("LogIn", event);
+		}
+		
 	}
 
 	/**FileChooser para la imagen de usuario. Solo acepta imágenes del tipo: jpg, gif, bmp o png
@@ -306,12 +436,11 @@ public class EventosRegistro extends Control implements Initializable {
 			}
 			else{
 				String path="file:///"+file.getAbsolutePath();
-
+				Datos_usuario[4]=file.getAbsolutePath();
 				ImgImagenUsuario.setImage(new Image(path));
 			}
 		}catch(Exception a){
-			//TODO: meter un logger con la extepción
-			//a.printStackTrace();
+			
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error al leer la imagen");
 
@@ -336,18 +465,21 @@ public class EventosRegistro extends Control implements Initializable {
 			try {
 				st = ft.format(ft.parse(this.dpFechaNacimiento.getValue().toString()));
 			} catch (ParseException e) {
-				System.out.println("Error");	
+				
 			}
 		}
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd ");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		//get current date time with Date()
 		Date date = new Date();
 		Date date2 = Date.from(dpFechaNacimiento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 		dateFormat.format(date);
+		
 		if(date.getYear()-date2.getYear()>13){
 			datosCorrectos=true; 
 			userDateValidator.hide();
 			chkTerminos.setSelected(false);
+			
+			Datos_usuario[3]=dateFormat.format(date2);
 		}
 		else{
 			datosCorrectos=false;  
@@ -361,7 +493,7 @@ public class EventosRegistro extends Control implements Initializable {
 	 */
 
 	public void irATerminos(MouseEvent event){
-
+		//TODO: reparar esto
 		URL res = getClass().getClassLoader().getResource("pdfEULA/EULA.pdf");
 
 		File ficheroPDF=new File((res.getPath()));
@@ -374,11 +506,18 @@ public class EventosRegistro extends Control implements Initializable {
 					try {  
 						Desktop.getDesktop().open(ficheroPDF);  
 					} catch (IOException e) {  
-						// TODO introducir logger de error
+						
 
 					}  
 				}  
-			}).start();  
+			}).start(); 
+			try {
+				Thread.sleep(4000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+			chkTerminos.setDisable(false);
 		}catch(Exception a){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
@@ -400,20 +539,14 @@ public class EventosRegistro extends Control implements Initializable {
 			//			            anotherStage.setScene(anotherScene);
 			//			            anotherStage.show();
 			//				} catch (IOException e) {
-			//					// TODO Auto-generated catch block
+			//					
 			//					e.printStackTrace();
 			//				}// FXML for second stage
 			//	           // Parent anotherRoot = page.load();
 			//	           
 
 		}
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		chkTerminos.setDisable(false);
+		
 	}
 
 

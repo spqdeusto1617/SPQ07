@@ -2,8 +2,11 @@ package controllers;
 
 import java.net.URL;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -14,6 +17,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -88,6 +92,24 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		panel.getStylesheets().add("application/application.css");
+		textoNombreDeUsuario.setText(utilidades.Conexion_cliente.Datos_Usuario.get(0));
+		if(EventosLogIn.iAvatar!=null){
+			imagenAvatar.setImage(EventosLogIn.iAvatar);
+		}else{
+			String imagen = "fPerfil";
+			Random rand = new Random();
+			int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+			if(randomNum == 666){
+				imagen = "fPerfilPirata";
+			}
+			
+			Image i = new Image("images/"+ imagen +".png",imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+			imagenAvatar.setImage(i);
+		}
+		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
+		imagenAvatar.setClip(clip);
+		imagenAvatar.setSmooth(true); 
+		imagenAvatar.setCache(true); 
 	}
 	
 	public void btnEliminarCuenta(Event event){
@@ -106,14 +128,83 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 			alert2.setTitle("Confirmar cambios");
 			alert2.setHeaderText("¿Realmente está seguro?");
 			alert2.setContentText("Lamento ser pesado, pero si elimina su cuenta se perderán todos sus datos, partidas, amigos..., ¿está completamente seguro?");
-			alert.initModality(Modality.APPLICATION_MODAL);
+			alert2.initModality(Modality.APPLICATION_MODAL);
 			
 			//Elijo el dueño de la alerta (o la base) de la misma.
-			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			Optional<ButtonType> result2 = alert2.showAndWait();
 			if (result2.get() == ButtonType.OK){
-				//TODO: validar datos
-				//TODO: eliminar cuenta
+				boolean datos_Correctos=true;
+				if(!tfdCorreo.getText().equals(utilidades.Conexion_cliente.Datos_Usuario.get(2))){
+					datos_Correctos=false;
+					Alert alert3 = new Alert(AlertType.ERROR);
+					alert3.setTitle("Mail no coincide");
+					alert3.setHeaderText("El mail no coincide con el suyo");
+					alert3.setContentText("Su antiguo mail no coincide, por favor, revíseló de nuevo");
+					alert3.initModality(Modality.APPLICATION_MODAL);
+					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert3.showAndWait();
+				}
+				if(!pfdContrasenya.getText().equals(pfdRepetirContrasenya.getText())){
+					datos_Correctos=false;
+					Alert alert3 = new Alert(AlertType.ERROR);
+					alert3.setTitle("Contraseñas no coinciden");
+					alert3.setHeaderText("Las contraseñas no coinciden");
+					alert3.setContentText("Las contrasñeas no coinciden, por favor, reviselas y vuelva a intentarlo");
+					alert3.initModality(Modality.APPLICATION_MODAL);
+					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert3.showAndWait();
+				}
+				if(!pfdContrasenya.getText().equals(utilidades.Conexion_cliente.Datos_Usuario.get(3))){
+					datos_Correctos=false;
+					Alert alert3 = new Alert(AlertType.ERROR);
+					alert3.setTitle("Contraseña incorrecta");
+					alert3.setHeaderText("Su contraseña es incorrecta");
+					alert3.setContentText("Su contraseña no es correcta, revísela de nuevo");
+					alert3.initModality(Modality.APPLICATION_MODAL);
+					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert3.showAndWait();
+				}
+				
+				
+				if(datos_Correctos==true){
+					try{
+						String[]Datos=new String[4];
+
+						Datos[0]=utilidades.Conexion_cliente.Datos_Usuario.get(0);
+						Datos[1]=utilidades.Conexion_cliente.Datos_Usuario.get(2);
+						Datos[2]=utilidades.Conexion_cliente.Datos_Usuario.get(3);	
+						Datos[3]=utilidades.Conexion_cliente.Datos_Usuario.get(5);
+						utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Eliminar.toString(), Datos);
+						
+						Alert alert3 = new Alert(AlertType.INFORMATION);
+						alert3.setTitle("Éxito al eliminar su cuenta");
+						alert3.setHeaderText("Se ha eliminado su cuenta con éxito");
+						alert3.setContentText("Se ha producido la eliminación de su cuenta, procedemos a enviarlo al LogIn");
+						alert3.initModality(Modality.APPLICATION_MODAL);
+						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert3.showAndWait();
+						utilidades.Conexion_cliente.Datos_Usuario.removeAll(utilidades.Conexion_cliente.Datos_Usuario);
+						utilidades.deVentana.transicionVentana("LogIn", event);
+					}catch(Exception a){
+						Alert alert3 = new Alert(AlertType.INFORMATION);
+						alert3.setTitle("Se produjo un error al tramitar sus datos");
+						alert3.setHeaderText("Parece que se ha producido un error al cambiar los datos");
+						alert3.setContentText("Se ha producido un error al intentar cambiar los datos, por favor, intenteló de nuevo más tarde");
+						alert3.initModality(Modality.APPLICATION_MODAL);
+						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert3.showAndWait();
+					}
+				}
+				else{
+					Alert alert3 = new Alert(AlertType.INFORMATION);
+					alert3.setTitle("Revise los problemas");
+					alert3.setHeaderText("Ha habido problemas al tramitar la solicitud");
+					alert3.setContentText("Hay errores con sus datos, por favor, reviselós y vuelva a intentarlo");
+					alert3.initModality(Modality.APPLICATION_MODAL);
+					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert3.showAndWait();
+				}
 			}
 			else{
 				

@@ -3,6 +3,7 @@ package utilidades;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -119,11 +120,18 @@ public class deVentana {
 			//Ha pulsado ok?
 			if (result2.get() == ButtonType.OK){
 				//Si
-				//TODO CERRAR SESIÓN
+				
 				//En la clase del servidor habrá una rutina para cerrar sesión.
-
+				String[] Datos=new String[1];
+				Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
+				try {
+					Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
+					utilidades.deVentana.transicionVentana("LogIn", event);
+				} catch (Exception e) {
+					//TODO: gestionar la excepción(¿mensaje de error?)
+				} 
 				//
-				utilidades.deVentana.transicionVentana("LogIn", event);
+				
 			} else {
 				//No
 				//NADA

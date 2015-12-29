@@ -8,31 +8,31 @@ import java.sql.Statement;
 import java.util.Random;
 
 public class BaseDeDatosPreguntas {
-	//	private static Connection C ;
-	//	private static Statement S ;
+		private static Connection C ;
+		private static Statement S ;
 
 
-	//	public static void iniciarConexion(){
-	//
-	//
-	//		try {
-	//			Class.forName("org.sqlite.JDBC");
-	//			C = DriverManager.getConnection("jdbc:sqlite:Preguntas.db");
-	//			S = C.createStatement();
-	//		} catch ( Exception e ) {
-	//			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	//			System.exit(0);
-	//		}
-	//
-	//
-	//
-	//	}
+		public static void iniciarConexion(){
+	
+	
+			try {
+				Class.forName("org.sqlite.JDBC");
+				C = DriverManager.getConnection("jdbc:sqlite:Preguntas.db");
+				S = C.createStatement();
+			} catch ( Exception e ) {
+				System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+				System.exit(0);
+			}
+	
+	
+	
+		}
 
-	public static boolean cerrarConexion(Connection c,Statement s){
+	public static boolean cerrarConexion(){
 		try {
-			s.close();
+			S.close();
 
-			c.close();
+			C.close();
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,32 +41,10 @@ public class BaseDeDatosPreguntas {
 
 	}
 	public static void crearTablaBD() {
-		Connection c = null ;
-		Statement s = null ;
-		int id = 0;
-		try{
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:Preguntas.db");
-			s = c.createStatement();
-		} catch ( Exception e ) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			System.exit(0);
-		}
-		try {
-			c = DriverManager.getConnection("jdbc:sqlite:Preguntas.db");
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			s = c.createStatement();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		
 
 		try {
-			s.executeUpdate("create table Preguntas " +
+			S.executeUpdate("create table Preguntas " +
 					"(Pregunta string NOT NULL UNIQUE,Respuesta String NOT NULL,Id int NOT NULL PRIMARY KEY" +
 					",  Evaluada boolean DEFAULT false, Creador String default 'Admin',Letra String,Valoracion int DEFAULT 0,Tipo String default 'Todos')");
 			System.out.println("Tabla creada");
@@ -75,38 +53,14 @@ public class BaseDeDatosPreguntas {
 			// e.printStackTrace();  
 
 		}
-		cerrarConexion(c,s);
+		
 	}
 	public static void meterPreguntas(String pregunta,String respuesta,String Creador,char Letra,Tipo_pregunta tipo_de_pregunta){
-		Connection c = null ;
-		Statement s = null ;
 		int id = 0;
-		try{
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:Preguntas.db");
-			s = c.createStatement();
-		} catch ( Exception e ) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			System.exit(0);
-		}
-		//	iniciarConexion();
-		try {
-			c = DriverManager.getConnection("jdbc:sqlite:Preguntas.db");
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			s = c.createStatement();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
 		try{
 			try{
 				String query = "SELECT MAX(ID) FROM Preguntas";
-				ResultSet rs= s.executeQuery(query);
+				ResultSet rs= S.executeQuery(query);
 				id=rs.getInt(1);
 
 				id++;
@@ -116,49 +70,27 @@ public class BaseDeDatosPreguntas {
 				id=0;
 			}
 			//TODO: cambiar el true por false al terminar de meter preguntas, para que no se autorizen todas las preguntas enviadas
-			s.executeUpdate("INSERT INTO Preguntas VALUES('"+pregunta+"','"+respuesta+"',"+id+",'"+true+"','"+Creador+"','"+new StringBuilder().append(Letra).toString()+"',"+0+",'"+tipo_de_pregunta.toString() +"')");
+			S.executeUpdate("INSERT INTO Preguntas VALUES('"+pregunta+"','"+respuesta+"',"+id+",'"+true+"','"+Creador+"','"+new StringBuilder().append(Letra).toString()+"',"+0+",'"+tipo_de_pregunta.toString() +"')");
 		}catch(Exception a){
 			a.printStackTrace();
 			System.out.println("Ya existe esos valores");
 		}
-		cerrarConexion(c,s);
+		
 	}
 	public static void obtenerpreguntasportipo(Tipo_pregunta tipo,char letra_de_la_pregunta){
-		Connection c = null ;
-		Statement s = null ;
-
-		try{
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:Preguntas.db");
-			s = c.createStatement();
-		} catch ( Exception e ) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			//System.exit(0);
-		}
 		
-		try {
-			c = DriverManager.getConnection("jdbc:sqlite:Preguntas.db");
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			s = c.createStatement();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+
 		
 		try{
 			String query = "SELECT COUNT(*) FROM Preguntas WHERE Evaluada='"+true+"'AND Letra='"+letra_de_la_pregunta+"'AND tipo='"+tipo.toString()+"'";
 
-			ResultSet rs= s.executeQuery(query);
+			ResultSet rs= S.executeQuery(query);
 
 			int total=rs.getInt(1);
 		
 			Random rand=new Random();
 			int randomNum = rand.nextInt(total) ;
-			ResultSet rs2= s.executeQuery("SELECT * FROM Preguntas WHERE Evaluada='"+true+"'AND Letra='"+letra_de_la_pregunta+"'AND tipo='"+tipo.toString()+"'");
+			ResultSet rs2= S.executeQuery("SELECT * FROM Preguntas WHERE Evaluada='"+true+"'AND Letra='"+letra_de_la_pregunta+"'AND tipo='"+tipo.toString()+"'");
 			int contador=0;
 			
 			

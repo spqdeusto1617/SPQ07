@@ -2,6 +2,7 @@ package controllers;
 
 import java.net.URL;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -86,6 +88,24 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 		rectanguloJugar.setOpacity(0.3f);
 		rectanguloMiPerfil.setOpacity(0.3f);
 		tblTablaAmigos.setPlaceholder(new Label("No tienes amigos aun."));
+		textoNombreDeUsuario.setText(utilidades.Conexion_cliente.Datos_Usuario.get(0));
+		if(EventosLogIn.iAvatar!=null){
+			imagenAvatar.setImage(EventosLogIn.iAvatar);
+		}else{
+			String imagen = "fPerfil";
+			Random rand = new Random();
+			int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+			if(randomNum == 666){
+				imagen = "fPerfilPirata";
+			}
+			
+			Image i = new Image("images/"+ imagen +".png",imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+			imagenAvatar.setImage(i);
+		}
+		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
+		imagenAvatar.setClip(clip);
+		imagenAvatar.setSmooth(true); 
+		imagenAvatar.setCache(true); 
 	}
 
 	public void btnBuscarAmigos(MouseEvent event){

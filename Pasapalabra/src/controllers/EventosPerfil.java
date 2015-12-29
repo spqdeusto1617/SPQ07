@@ -2,7 +2,9 @@ package controllers;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,16 +82,42 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 	    
 	    @FXML public Text txtEliminarCuenta;
 	    
+	   // public static ArrayList<String> Datos_Necesarios_Cliente=new ArrayList<>();
+	    
 	    private File file;
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			// TODO Auto-generated method stub
-			panel.getStylesheets().add("application/application.css");
+//			Datos_Necesarios_Cliente.add(utilidades.Conexion_cliente.Datos_Usuario.get(0));//Nombre usuario
+//			Datos_Necesarios_Cliente.add(utilidades.Conexion_cliente.Datos_Usuario.get(2));//Mail
+//			Datos_Necesarios_Cliente.add(utilidades.Conexion_cliente.Datos_Usuario.get(3));//Pass
+//			Datos_Necesarios_Cliente.add(utilidades.Conexion_cliente.Datos_Usuario.get(5));//Path
+			textoNombreDeUsuario.setText(utilidades.Conexion_cliente.Datos_Usuario.get(0));
+			//panel.getStylesheets().add("application/application.css");
 			rectanguloAmigos.setOpacity(0.3f);
 			rectanguloEstadisticas.setOpacity(0.3f);
 			rectanguloJugar.setOpacity(0.3f);
 			rectanguloMiPerfil.setOpacity(1f);
+			if(EventosLogIn.iAvatar!=null){
+				imagenAvatar.setImage(EventosLogIn.iAvatar);
+				imgCambioFotoPerfil.setImage(EventosLogIn.iAvatar);
+			}else{
+				String imagen = "fPerfil";
+				Random rand = new Random();
+				int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+				if(randomNum == 666){
+					imagen = "fPerfilPirata";
+				}
+				
+				Image i = new Image("images/"+ imagen +".png",imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+				imagenAvatar.setImage(i);
+				imgCambioFotoPerfil.setImage(i);
+			}
+			Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
+			imagenAvatar.setClip(clip);
+			imagenAvatar.setSmooth(true); 
+			imagenAvatar.setCache(true); 
 		}
 		
 		public void btnCambiar (MouseEvent event){
@@ -123,10 +151,34 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 
 				}
 				else{
-				String path="file:///"+file.getAbsolutePath();
+					try{
+						String path="file:///"+file.getAbsolutePath();
+						
+						EventosLogIn.iAvatar=new Image(path);
+						String[]Datos=new String[4];
+					
+						Datos[0]=utilidades.Conexion_cliente.Datos_Usuario.get(0);
+						Datos[1]=utilidades.Conexion_cliente.Datos_Usuario.get(2);
+						Datos[2]=utilidades.Conexion_cliente.Datos_Usuario.get(3);	
+						Datos[3]=file.getAbsolutePath();
+						
+				utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Imagen.toString(), Datos);
+				utilidades.Conexion_cliente.Datos_Usuario.add(5, path);
 				//TODO: cambiar la imagen en la BBDD
 				imgCambioFotoPerfil.setImage(new Image(path));
 				imagenAvatar.setImage(new Image(path));
+					}catch(Exception a){
+						a.printStackTrace();
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Error al cambiar la imagen");
+						
+						alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						
+						alert.setContentText("Se ha producido un error inesperado cuando se intentó cambiar la imagen, por favor, inténtelo de nuevo más tarde.");
+
+						alert.showAndWait();
+						
+					}
 				}
 			}catch(Exception a){
 				//TODO: meter un logger con la extepción
@@ -135,6 +187,8 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 				alert.setTitle("Error al leer la imagen");
 
 				alert.setContentText("Se ha producido un error a la hora de leer la imagen. Por favor intenteló otra vez.");
+				
+				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 
 				alert.showAndWait();
 

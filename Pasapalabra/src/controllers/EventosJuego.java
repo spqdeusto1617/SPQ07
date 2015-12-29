@@ -723,6 +723,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		panel.getChildren().remove(textoCargaTranquil);
 		panel.getChildren().remove(textoCargaBuscandoPartida);
 		panel.applyCss();
+		textoNombreDeUsuario.setText(utilidades.Conexion_cliente.Datos_Usuario.get(0));
 		if(EventosLogIn.iAvatar!=null){
 			imagenAvatar.setImage(EventosLogIn.iAvatar);
 		}else{

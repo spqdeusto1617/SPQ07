@@ -68,8 +68,8 @@
          <image>
             <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
-      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="170.0" layoutX="14.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logeado como:" />
+      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="34.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logead@ como:" />
       <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
       <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="15.0" layoutY="565.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
          <cursor>
@@ -105,7 +105,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <ImageView fx:id="imgCambioFotoPerfil" fitHeight="150.0" fitWidth="200.0" layoutX="405.0" layoutY="380.0" onMouseClicked="#cambioImagen" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgCambioFotoPerfil" fitHeight="128.0" fitWidth="128.0" layoutX="439.0" layoutY="391.0" onMouseClicked="#cambioImagen" pickOnBounds="true" preserveRatio="true">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -118,7 +118,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="txtEliminarCuenta" layoutX="443.0" layoutY="277.0" onMouseClicked="#btnCambiar" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar mi cuenta">
+      <Text fx:id="txtEliminarCuenta" layoutX="443.0" layoutY="277.0" onMouseClicked="#btnEliminar" strokeType="OUTSIDE" strokeWidth="0.0" text="Eliminar mi cuenta">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

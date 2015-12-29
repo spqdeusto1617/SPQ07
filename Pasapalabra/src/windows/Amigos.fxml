@@ -68,8 +68,8 @@
          <image>
             <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
-      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="170.0" layoutX="14.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logeado como:" />
+      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="34.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logead@ como:" />
       <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
       <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="15.0" layoutY="565.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
          <cursor>
