@@ -32,8 +32,8 @@ public class RPanel implements Runnable{
 			}
 		}
 		
-		if(!abrir_cerrar_panel){
-			for(i = 0; i<200;i++){
+		if(!abrir_cerrar_panel) i = 200; else i = 0;
+//			for(i = 0; i<200;i++){
 				Platform.runLater(new Runnable() {
 					
 					@Override
@@ -48,7 +48,7 @@ public class RPanel implements Runnable{
 //							                System.out.println( "Propiedad " + pn.getName() + " = " + pn.getValue() );
 //							        }
 //							}
-						
+						nodo.toFront();
 						Class<?> c = nodo.getClass();
 						Method ms[] = c.getMethods();
 						// System.out.println( c.getName() + " -- " + Arrays.asList( ms ) );
@@ -67,6 +67,7 @@ public class RPanel implements Runnable{
 								tieneX  = true;
 								try {
 									m.invoke( nodo, new Double(-i) );
+									
 								} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -95,14 +96,14 @@ public class RPanel implements Runnable{
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-			}	
+//			}	
 				
-			}else{
-			//CERRAR
-				System.out.println("NADA");
-			
-		
-		}	
+//			}else{
+//			//CERRAR
+//				System.out.println("NADA");
+//			
+//		
+//		}	
 	}
 
 }

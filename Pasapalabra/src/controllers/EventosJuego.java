@@ -236,7 +236,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     @FXML
     void btnAmigos(MouseEvent event) {
     	if(juegoEnCurso){
-    		//
+    		//TODO warning juego en curso
     		
     		
     		
@@ -283,7 +283,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     
     @FXML
     void btnRendirse(MouseEvent event){
-    	
+    	//SERVIDOR
     	
     }
     
@@ -296,7 +296,24 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     	*(Es posible que después de varias comprobaciones necesitemos volverlo a poner a falso)
     	*/
     	juegoEnCurso = true;
-    	//Algo con servidor
+    	//Servidor
+    	//aLEleccion es el arrayList de la elección (Modalidad + Tema) y todos los elementos
+    	for (ObjetoSeleccionPregunta obsp : aLEleccion) {
+			if (obsp.isElegido()) {
+				if(obsp.isModoDeJuego_notTipoPregunta()){
+					//ESTE ES EL MODO DE JUEGO ELEGIDO
+					obsp.getTexto();
+				
+					}else{
+					//ESTE ES EL TEMA DE JUEGO ELEGIDO
+					obsp.getTexto();
+					}
+				}
+			
+		}
+    	//
+    	//Hasta encontrar partida, aquí.
+    	//Aquí se crearía un hilo que estaría esperando y que no se reanudaría hasta que se encontrase una partida
     	
     	//Cerrar panel
 //    	new Thread(new RPanel( ventanaMenuDentro, menuDesplegable )).start();
@@ -315,13 +332,6 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		    	anyadirGUI();
 			}
 		});
-//    	crearRosco(true,panelLetrasJugador);
-//    	crearRosco(false,panelLetrasContrincante);
-//    	anyadirGUI();
-    	
-    	//Seteamos Z del menú
-    	
-    	
     }
     @FXML
     void eleccionHecha(MouseEvent event){
@@ -368,15 +378,27 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     	
     }
     
+    //Servidor - Así se han seteado los textos del tiempo y la puntuación.
+    //Se deben modificar con el paso del tiempo.
+    /*
+    @FXML public Text textoTiempoUsuario;
+    @FXML public Text textoTiempoRival;
     
+    @FXML public Text textoPuntuacionU;
+    @FXML public Text textoPuntuacionR;
+    */
     @FXML
     void btnContestar(MouseEvent event) {
-    	//Algo
+    	//SERVIDOR
+    	//Respuesta
+    	tfRespuesta.getText();
     }
     @FXML
     void btnPasar(MouseEvent event) {
+    	//SERVIDOR
     	//Algo
     }
+    //Para usar el textBox 
     
     @FXML
     void masInfo(MouseEvent event){
@@ -561,7 +583,8 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		aLBotonesJuego.add(new BotonJuego(rRendirse, textoRendirse));
 		aLBotonesJuego.add(new BotonJuego(rPasar, textoPasar));
 		aLBotonesJuego.add(new BotonJuego(rContestar, textoContestar));
-		
+		//Servidor
+		//Imagen del usuario y del rival
 		//Usuario
 		if(EventosLogIn.iAvatar!=null){
 			imgUsuario.setImage(EventosLogIn.iAvatar);
@@ -600,8 +623,12 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		imgRival.setSmooth(true); 
 		imgRival.setCache(true); 
 		
-		
-		
+		//Servidor - Así se han declarado los textos de los nombres de usuario
+		//Hay que setearlos
+		/*
+	    @FXML public Text textoUsernameUser;
+	    @FXML public Text textoUsernameRival;
+		*/
 		
 		//Efectos
 		DropShadow dropShadow = new DropShadow();
@@ -635,9 +662,9 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		try {
 			Thread.sleep(1);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//TODO gui cargando
 		pqGuiCargando(true);
 
 //		panel.getStylesheets().add("application/juego.css");
@@ -697,6 +724,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     		a.showAndWait();
     	}else{
     		Platform.runLater(new RPanel( ventanaMenuDentro, menuDesplegable ));
+    		ventanaMenuDentro = !ventanaMenuDentro;
 //    		new Thread(new RPanel( ventanaMenuDentro, menuDesplegable )).start();
     		
     		
@@ -723,7 +751,8 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		panel.getChildren().remove(textoCargaTranquil);
 		panel.getChildren().remove(textoCargaBuscandoPartida);
 		panel.applyCss();
-		textoNombreDeUsuario.setText(utilidades.Conexion_cliente.Datos_Usuario.get(0));
+		//SERVIDOR
+		//TODO Cargar imagen personal
 		if(EventosLogIn.iAvatar!=null){
 			imagenAvatar.setImage(EventosLogIn.iAvatar);
 		}else{
@@ -787,12 +816,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		aLEleccion.add(new ObjetoSeleccionPregunta(tDep, rDep, false));
 		
 		panel.getStylesheets().add("application/application.css");
-		//TODO Cargar imagen personal
-		
-		//TODO Setear "estoy conectado" o ya lo setea login¿? o como¿?
-		
-		//TODO Setear chat¿?
-		
+		//SERVIDOR
 		//TODO Setear username
 		
 	}
