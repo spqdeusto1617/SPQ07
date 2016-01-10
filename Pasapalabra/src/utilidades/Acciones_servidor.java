@@ -1,6 +1,6 @@
 package utilidades;
 
-/**Enum para indicar al servidor qué acción ha de realizar
+/**Enum para indicar al servidor qué acción ha de realizar el servidor según el cliente.
  * @author Iván
  *
  */

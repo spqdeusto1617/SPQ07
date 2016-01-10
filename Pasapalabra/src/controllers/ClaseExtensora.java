@@ -8,8 +8,12 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class ClaseExtensora extends Control{
-
+/**Clase para generalizar el menú
+ * @author asier.gutierrez
+ *
+ */
+public abstract class ClaseExtensora extends Control{
+//Declaración de todos los elementos del menú
 	   	@FXML public Text textoESPanel;
 
 	    @FXML public Text textoMiPerfil;

@@ -2,21 +2,15 @@ package controllers;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Control;
-import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,9 +24,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class EventosPerfil extends ClaseExtensora implements Initializable {
+	//Se define un logger
+	public static Logger log = utilidades.AppLogger.getWindowLogger(EventosPerfil.class.getName());
+	
 	@FXML public Pane panel;
 	
-	public static Logger log = utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
 		//Declaración del panel
 	    @FXML public Text textoESPanel;
 
@@ -238,7 +234,7 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 		
 		
 		
-		  //Elimina nivel de transparencia
+		//Elimina nivel de transparencia
 	    @FXML
 	    void entrado(MouseEvent event) {
 	    	utilidades.deVentana.efectoTransparenciaOnHover(event, this);
@@ -250,6 +246,6 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 	    	utilidades.deVentana.efectoTransparenciaOnHover(event, this);
 	    }
 		public void esPanel(MouseEvent event){
-		//TODO: cerrar panel	
+		//TODO: cerrar panel EDIT: ABRIR Y CERRAR	
 		}
 }
