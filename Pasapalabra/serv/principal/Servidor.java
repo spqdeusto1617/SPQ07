@@ -1,8 +1,5 @@
 package principal;
 
-import java.awt.BorderLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,39 +10,57 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 /**Clase del servidor (réplica de la de Andoni Eguíluz del examen final)
  * @author Iván
  *Aquí se crea el servidor, y una interfaz para gestionarlo
  */
-public class Servidor {
+public class Servidor extends Application{
+	public static final int PUERTO_DEL_SERVIDOR = 9898;
+	public static String s2 = "";
+	public static Logger log = utilidades.AppLogger.getWindowLogger(Servidor.class.getName());
 	private static ServerSocket servidor = null;//El socket del servidor
 	static boolean funcionando;//Si está el servidor funcionando
-	private static JTextArea ListaMensajes = null;//Donde sale la info
 	static ArrayList<String> Datos_Usuario=new ArrayList<>();//Los datos del cliente que solicita algo (habría que cambiarlo, porque si no, puede que accedan varios a la vez y fastidiarla
 	static ArrayList<String>Clientes_conectados=new ArrayList<>();//Los clientes conectados
 	static String[]Datos_Enviar_Usuario;//Los datos a enviar al usuario (si son varios)
+	public static void addMensaje(String s) {
+		Servidor.s2 = s2 + s;
+		if(s2.length()>300){
+			Servidor.s2 = s2.substring(200);
+		}
+	}
 	/**
 	 * Hilo para iniciar el servidor
-	 */
+	 */	
 	public void inicio_servidor() {
 		(new Thread() {
 			@Override
 			public void run() {
 				try {
 					funcionando = true;
-					servidor = new ServerSocket(9898);
+					servidor = new ServerSocket(PUERTO_DEL_SERVIDOR);
 
 					while (funcionando) {
 
@@ -53,7 +68,7 @@ public class Servidor {
 
 						Conexion_Servidor conexion=new Conexion_Servidor(servidor.accept());  
 
-						ListaMensajes.append("Ha entrado un usuario nuevo\n");
+						addMensaje("Ha entrado un usuario nuevo\n");
 						conexion.start();
 					}} catch (Exception e) {
 					} finally {
@@ -96,21 +111,21 @@ public class Servidor {
 				// Recibe la acción que va a hacer el cliente
 				accion = in.readLine();
 
-				ListaMensajes.append("Quiere: "+accion+"\n");
+				addMensaje("Quiere: "+accion+"\n");
 				out.writeObject( "ACK" );
 				switch (accion) {
 				case "Comprobar":
 					//TODO: terminar esto(faltan noticias)
-					ListaMensajes.append("Comprobación realizada\n");
+					addMensaje("Comprobación realizada\n");
 					break;
 				case "Crear_Usuario":
 
 
-					ListaMensajes.append("Empiezo a recibir la información\n");
+					addMensaje("Empiezo a recibir la información\n");
 					do{
 
 						dato=in.readLine();
-						ListaMensajes.append("Ha introducido: "+dato+"\n");
+						addMensaje("Ha introducido: "+dato+"\n");
 						if(!"FIN".equals(dato)){
 							Datos_Usuario.add(dato);
 						}
@@ -147,12 +162,12 @@ public class Servidor {
 					break;
 				case "Log":
 
-					ListaMensajes.append("Empiezo a recibir la información\n");
+					addMensaje("Empiezo a recibir la información\n");
 
 					do{
 
 						dato=in.readLine();
-						ListaMensajes.append("Ha introducido: "+dato+"\n");
+						addMensaje("Ha introducido: "+dato+"\n");
 						if(!"FIN".equals(dato)){
 							Datos_Usuario.add(dato);
 						}
@@ -165,7 +180,7 @@ public class Servidor {
 						for (String string : Datos_Enviar_Usuario) {
 
 							out.writeObject(string);
-							ListaMensajes.append("Le envío: "+string+"\n");
+							addMensaje("Le envío: "+string+"\n");
 							dato = in.readLine();
 							if (!"ACK".equals(dato)) throw new IOException( "Conexión errónea: " + dato );
 						}
@@ -187,7 +202,7 @@ public class Servidor {
 					break;
 				case "Imagen":
 
-					ListaMensajes.append("Empiezo a recibir la información\n");
+					addMensaje("Empiezo a recibir la información\n");
 
 
 					out.writeObject("ACK");
@@ -203,7 +218,7 @@ public class Servidor {
 					break;
 				case "Pass":
 
-					ListaMensajes.append("Empiezo a recibir la información\n");
+					addMensaje("Empiezo a recibir la información\n");
 					out.writeObject("ACK");
 					Datos_Usuario.add(in.readLine());
 					out.writeObject("ACK");
@@ -239,11 +254,11 @@ public class Servidor {
 
 					break;
 				case "Eliminar":
-					ListaMensajes.append("Empiezo a recibir la información\n");
+					addMensaje("Empiezo a recibir la información\n");
 					do{
 
 						dato=in.readLine();
-						ListaMensajes.append("Ha introducido: "+dato+"\n");
+						addMensaje("Ha introducido: "+dato+"\n");
 						if(!"FIN".equals(dato)){
 							Datos_Usuario.add(dato);
 						}
@@ -254,7 +269,7 @@ public class Servidor {
 						BaseDeDatosUsuarios.eliminar_Usuario(Datos_Usuario.get(0), Datos_Usuario.get(2));
 						Clientes_conectados.remove(Datos_Usuario.get(0));
 						out.writeObject("BIEN");
-						ListaMensajes.append("Eliminado con éxito\n");
+						addMensaje("Eliminado con éxito\n");
 					}catch (SQLException e) {
 						out.writeObject("SQL");
 					}
@@ -275,7 +290,7 @@ public class Servidor {
 				if (!"END".equals(accion)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + accion );
 				out.writeObject( "ACK" );
 
-				ListaMensajes.append("Conexión finalizada\n");
+				addMensaje("Conexión finalizada\n");
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -294,37 +309,98 @@ public class Servidor {
 
 	/** Clase de ventana visual del servidor
 	 */
-	@SuppressWarnings("serial")
-	private static class VentanaCaptura extends JFrame {
-		public VentanaCaptura() {
-			setTitle( "Pasapalabra - Servidor" );
-			setSize( 600, 400 );
-			setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-			// Componentes
-			ListaMensajes = new JTextArea( 8, 10 );
-			ListaMensajes.setEditable(false);
-			getContentPane().add( new JScrollPane(ListaMensajes), BorderLayout.SOUTH );
-			// Escuchadores
-			addWindowListener( new WindowAdapter() {
-				@Override
-				public void windowClosing(WindowEvent e) {
-					Servidor.cierre_servidor();
-					BaseDeDatosPreguntas.cerrarConexion();
-					BaseDeDatosUsuarios.cerrarConexion();
-				}
-			} );
 
-		}
-	}
+
 
 	public static void main(String[] args) {
 		BaseDeDatosPreguntas.iniciarConexion();
 		BaseDeDatosUsuarios.iniciarConexion();
-		VentanaCaptura v=new VentanaCaptura();
-		v.setVisible(true);
-		Servidor s=new Servidor();
+		Servidor s = new Servidor();
 		s.inicio_servidor();
-		ListaMensajes.append("Esperando conexión con algún cliente...\n");
+		addMensaje("Esperando conexión con algún cliente...\n");
+		launch(args);
 		try { Thread.sleep(10); } catch (InterruptedException e) {}
+	}
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+			try {
+				utilidades.AppLogger.crearLogHandler(log, Servidor.class.getName());
+				//Cargar página con el FXML elegido
+				SplitPane page =  FXMLLoader.load(Servidor.class.getResource("Servidor.fxml"));
+				log.log(Level.FINEST, "Cargado fichero FXML de LogIn en el pane");
+				
+				
+				//Añadir la página a la escena
+				Scene scene = new Scene(page);
+				log.log(Level.FINEST, "Añadido pane a la escena");
+				
+				//Añadir a la escena el CSS
+				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				log.log(Level.FINEST, "Añadido css a la escena");
+				
+				//Usarse para servidor.
+				//Puede que se necesite algún día.
+				//Añadir un escuchador para cuando se cierre la ventana 
+				primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				    @Override
+				    public void handle(WindowEvent event) {
+				    	Alert alert = new Alert(AlertType.CONFIRMATION);
+				    	alert.setTitle("Salir de la aplicación");
+				    	alert.setHeaderText("¿Está segur@ de que desea salir de la aplicación?");
+				    	alert.setContentText("Si sale de la aplicación, todos los usuarios conectados al servidor perderán el progreso que estén haciendo en este momento.\n\n¿Está segur@?");
+
+				    	alert.initModality(Modality.APPLICATION_MODAL);
+			    		alert.initOwner((Stage)event.getSource());
+			    		alert.showAndWait();
+				    	Optional<ButtonType> result = alert.showAndWait();
+				    	if (result.get() == ButtonType.OK){
+				    		Servidor.cierre_servidor();
+							BaseDeDatosPreguntas.cerrarConexion();
+							BaseDeDatosUsuarios.cerrarConexion();
+							Platform.exit();
+							System.exit(0);
+				    	} else {
+				    	   event.consume();
+				    	}
+				    }
+				});
+				
+				
+				
+				//Icono
+				primaryStage.getIcons().add(new Image("images/iconopsp.png"));
+				log.log(Level.FINEST, "Añadido icono a la ventana");
+				//Título de la ventana
+				primaryStage.setTitle("Pasapalabra - Servidor");
+				log.log(Level.FINEST, "Añadido título a la ventana");
+				
+				
+				//Poner escena
+				primaryStage.setScene(scene);
+				log.log(Level.FINEST, "Añadida escena a la ventana");
+				
+				//No se puede hacer resize
+				primaryStage.setResizable(false);
+				//Por ello, desactivamos los botones para hacer resize (maximizar)
+				primaryStage.initStyle(StageStyle.UTILITY);
+				log.log(Level.FINEST, "Desactivados botones resize de la ventana");
+				
+				primaryStage.sizeToScene();
+				//Mostrar ventana
+				primaryStage.show();
+				log.log(Level.FINEST, "Ventana mostrada");
+				//Centrar ventana
+				utilidades.deVentana.centrarVentana(primaryStage);
+				log.log(Level.FINEST, "Centrada la ventana");
+				
+					
+				
+				
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+				log.log(Level.SEVERE, "Error en start de Main.java", e);
+			}
+		
 	}
 }
