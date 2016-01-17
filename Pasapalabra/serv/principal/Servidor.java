@@ -27,6 +27,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -326,7 +327,7 @@ public class Servidor extends Application{
 			try {
 				utilidades.AppLogger.crearLogHandler(log, Servidor.class.getName());
 				//Cargar página con el FXML elegido
-				SplitPane page =  FXMLLoader.load(Servidor.class.getResource("Servidor.fxml"));
+				Pane page =  FXMLLoader.load(Servidor.class.getResource("Servidor.fxml"));
 				log.log(Level.FINEST, "Cargado fichero FXML de LogIn en el pane");
 				
 				
