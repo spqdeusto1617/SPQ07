@@ -77,7 +77,7 @@ public class BaseDeDatosPreguntas {
 		}
 		
 	}
-	public static void obtenerpreguntasportipo(Tipo_pregunta tipo,char letra_de_la_pregunta){
+	public static Preguntas obtenerpreguntasportipo(Tipo_pregunta tipo,char letra_de_la_pregunta){
 		
 
 		
@@ -101,10 +101,11 @@ public class BaseDeDatosPreguntas {
 					String Respuesta = rs2.getString("Respuesta");
 					String creador=rs2.getString("Creador");
 					String letra=rs2.getString("Letra");
-					System.out.println(Pregunta + "\t" + Respuesta +
-							"\t" + letra +
-							"\t" + creador);
-					break;
+//					System.out.println(Pregunta + "\t" + Respuesta +
+//							"\t" + letra +
+//							"\t" + creador);
+				
+					return new Preguntas(Pregunta, Respuesta, letra.charAt(0), creador);
 				}
 				contador++;
 			}
@@ -112,14 +113,16 @@ public class BaseDeDatosPreguntas {
 		} catch (SQLException e ) {
 			e.printStackTrace();
 		}
+		return null;
+		
 	}
 
 
 	public static void main(String[] args) {
-		
+		iniciarConexion();
 
-		//meterPreguntas("Con la b", "a",  "Paco", 'b',Tipo_pregunta.Historia);
-
+		meterPreguntas("U: elemento químico conocido popularmente por su naturaleza radioactiva", "Uranio",  "Admin", 'u',Tipo_pregunta.Todos);
+		cerrarConexion();
 		//obtenerpreguntasportipo(Tipo_pregunta.Historia, 'b');
 	}
 
