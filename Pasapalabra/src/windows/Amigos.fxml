@@ -95,14 +95,6 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <TableView fx:id="tblTablaAmigos" layoutX="268.0" layoutY="60.0" prefHeight="430.0" prefWidth="455.0">
-        <columns>
-          <TableColumn editable="false" prefWidth="154.0" text="Nombre" />
-          <TableColumn editable="false" minWidth="0.0" prefWidth="48.0" text="Estado" />
-            <TableColumn editable="false" prefWidth="62.0" text="Retar" />
-            <TableColumn editable="false" prefWidth="205.0" text="Acciones" />
-        </columns>
-      </TableView>
       <Text layoutX="468.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Amigos">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -123,6 +115,11 @@
          <font>
             <Font size="13.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
+      <TableView fx:id="tblTablaAmigos" layoutX="254.0" layoutY="60.0" prefHeight="413.0" prefWidth="459.0" />
+      <Button fx:id="boton" layoutX="215.0" layoutY="487.0" mnemonicParsing="false" onMousePressed="#Anyadir" text="Boton" />
    </children>
 </Pane>

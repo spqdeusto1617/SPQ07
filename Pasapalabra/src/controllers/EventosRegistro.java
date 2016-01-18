@@ -3,7 +3,10 @@ package controllers;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.URL;
@@ -115,25 +118,27 @@ public class EventosRegistro extends Control implements Initializable {
 	ContextMenu userPasswordValidator2 = new ContextMenu();
 
 	ContextMenu userDateValidator = new ContextMenu();
-	
+
 	ContextMenu userNameElegido = new ContextMenu();
-	
+
 	ContextMenu userMailElegido = new ContextMenu();
 
 
 	public static String[]Datos_usuario=new String[5];
-	
+
 	public static boolean MailExiste=false;
+	
+	
 
 	public static boolean UsuarioExiste=false;
-	
+
 	SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-
+		
 		//panel.getStylesheets().add("application/application.css");
 		userNameValidator.getItems().add(
 				new MenuItem("El nombre de usuario tiene que tener entre 8-16 caracteres"));
@@ -152,10 +157,10 @@ public class EventosRegistro extends Control implements Initializable {
 
 		userNameElegido.getItems().add(
 				new MenuItem("El nombre de usuario ya existe"));
-		
+
 		userMailElegido.getItems().add(
 				new MenuItem("El correo ya existe"));
-		
+
 		pfdRepetirContrasenya.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
 
@@ -178,7 +183,8 @@ public class EventosRegistro extends Control implements Initializable {
 			}
 		} );
 		chkTerminos.setDisable(true);
-
+		
+			
 	}
 
 	/**Método para comprobar que el usuario ha introducido un nombre que tiene entre 8 y 16 caracteres
@@ -197,7 +203,7 @@ public class EventosRegistro extends Control implements Initializable {
 			userNameValidator.hide();
 			datosCorrectos=true;
 			chkTerminos.setSelected(false);
-			
+
 		}
 
 	}
@@ -211,17 +217,17 @@ public class EventosRegistro extends Control implements Initializable {
 			userMailElegido.hide();
 		}
 		Pattern VALID_EMAIL_ADDRESS_REGEX = 
-				Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+				Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{1,6}$", Pattern.CASE_INSENSITIVE);
 
 
 		Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(txtCorreoUsuario.getText());
-		
+
 		if(matcher.matches()){
 			datosCorrectos=true;
 			userMailValidator.hide();
 			chkTerminos.setSelected(false);
-			
-			
+
+
 		}
 		else{
 			userMailValidator.show(txtCorreoUsuario, Side.BOTTOM, 0, 0);
@@ -243,7 +249,7 @@ public class EventosRegistro extends Control implements Initializable {
 			datosCorrectos=true;
 			userPasswordValidator.hide();
 			chkTerminos.setSelected(false);
-			
+
 		}
 	}
 
@@ -289,62 +295,62 @@ public class EventosRegistro extends Control implements Initializable {
 		else{
 			try{
 				Datos_usuario[0]=txtNombreUsuario.getText();
-				
+
 				Datos_usuario[1]=txtCorreoUsuario.getText();
-				
+
 				Datos_usuario[2]=pflContrasenya.getText();
-				
+
 				Alert alert = new Alert(AlertType.CONFIRMATION);
-				
+
 				alert.setTitle("Crear nuevo usuario");
-				
+
 				alert.setHeaderText("¿Está seguro?");
-				
+
 				alert.setContentText("¿Está seguro de que desea crear el anterior usuario?");
 
-				
+
 				alert.initModality(Modality.APPLICATION_MODAL);
 				//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
 				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				
+
 				Optional<ButtonType> result = alert.showAndWait();
 
 				if (result.get() == ButtonType.OK){
-					
+
 					utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Crear_Usuario.toString(), Datos_usuario);
-					
+
 					Alert alert2 = new Alert(AlertType.INFORMATION);
-					
+
 					alert2.setTitle("Usuario creado con éxito");
-					
+
 					alert2.setHeaderText("Éxito en la operación");
-					
+
 					alert2.setContentText("Se ha creado el usuario con éxito");
 
-					
+
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-					
+
 					alert2.showAndWait();
-					
+
 					
 					utilidades.deVentana.transicionVentana("LogIn", event);
 				}
 			}catch(Exception a){
 				Alert alert2 = new Alert(AlertType.ERROR);
-				
+
 				alert2.setTitle("Error al tramitar la creación de usuario");
-				
+
 				alert2.setHeaderText("Error cuando se intentó crear el usuario");
-				
+
 				alert2.setContentText("Se ha produciod un error cuando intentaba crear su usario, por favor, revise la información y cambielá si es necesario");
 
-				
+
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				
+
 				alert2.showAndWait();
 				if(MailExiste){
 					userMailElegido.show(txtCorreoUsuario, Side.BOTTOM, 0, 0);
@@ -358,22 +364,22 @@ public class EventosRegistro extends Control implements Initializable {
 				}
 				else{
 					Alert alert3 = new Alert(AlertType.ERROR);
-					
+
 					alert3.setTitle("Error inesperado");
-					
+
 					alert3.setHeaderText("Un error inesperado ocurrió");
-					
+
 					alert3.setContentText("Parece que ha ocurrido un error inesperado, por favor, intenteló de nuevo más tarde");
 
-					
+
 					alert3.initModality(Modality.APPLICATION_MODAL);
 					//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-					
+
 					alert3.showAndWait();	
 				}
 			}
-			
+
 		}
 
 	}
@@ -401,9 +407,10 @@ public class EventosRegistro extends Control implements Initializable {
 
 		//Ha pulsado ok?
 		if (result.get() == ButtonType.OK){
+			
 			utilidades.deVentana.transicionVentana("LogIn", event);
 		}
-		
+
 	}
 
 	/**FileChooser para la imagen de usuario. Solo acepta imágenes del tipo: jpg, gif, bmp o png
@@ -426,7 +433,7 @@ public class EventosRegistro extends Control implements Initializable {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Tamaño excesivo");
 				alert.initModality(Modality.APPLICATION_MODAL);
-				
+
 				//Elijo el dueño de la alerta (o la base) de la misma.
 				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert.setContentText("Parece que la imagen es muy grande, por favor, introduzca una imagen más pequeña (tamaño máximo: 5Mb).");
@@ -440,7 +447,7 @@ public class EventosRegistro extends Control implements Initializable {
 				ImgImagenUsuario.setImage(new Image(path));
 			}
 		}catch(Exception a){
-			
+
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error al leer la imagen");
 
@@ -465,7 +472,7 @@ public class EventosRegistro extends Control implements Initializable {
 			try {
 				st = ft.format(ft.parse(this.dpFechaNacimiento.getValue().toString()));
 			} catch (ParseException e) {
-				
+
 			}
 		}
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -473,12 +480,12 @@ public class EventosRegistro extends Control implements Initializable {
 		Date date = new Date();
 		Date date2 = Date.from(dpFechaNacimiento.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 		dateFormat.format(date);
-		
+
 		if(date.getYear()-date2.getYear()>13){
 			datosCorrectos=true; 
 			userDateValidator.hide();
 			chkTerminos.setSelected(false);
-			
+
 			Datos_usuario[3]=dateFormat.format(date2);
 		}
 		else{
@@ -493,10 +500,17 @@ public class EventosRegistro extends Control implements Initializable {
 	 */
 
 	public void irATerminos(MouseEvent event){
-		//TODO: reparar esto
-		URL res = getClass().getClassLoader().getResource("pdfEULA/EULA.pdf");
+		//TODO: ¿path en el jar?
 
-		File ficheroPDF=new File((res.getPath()));
+		String path="src/pdfEULA/EULA.pdf";
+		//Usarlo si lo acabamos exportando a .jar
+		//		try {
+		//			path = ExportResource("src/pdfEULA/EULA.pdf");
+		//		} catch (Exception e1) {
+		//			// TODO Auto-generated catch block
+		//			
+		//		}
+		File ficheroPDF=new File((path));
 
 
 		try{	 
@@ -506,7 +520,7 @@ public class EventosRegistro extends Control implements Initializable {
 					try {  
 						Desktop.getDesktop().open(ficheroPDF);  
 					} catch (IOException e) {  
-						
+
 
 					}  
 				}  
@@ -514,7 +528,7 @@ public class EventosRegistro extends Control implements Initializable {
 			try {
 				Thread.sleep(4000);
 			} catch (InterruptedException e) {
-				
+
 				e.printStackTrace();
 			}
 			chkTerminos.setDisable(false);
@@ -524,10 +538,10 @@ public class EventosRegistro extends Control implements Initializable {
 			alert.setHeaderText("Parece que hubo un error");
 			alert.setContentText("No se pudo abrir el archivo con un visor de PDF. Por favor, comprueba si tiene algún visor de pdf instalado e intenteló de nuevo.");
 			alert.initModality(Modality.APPLICATION_MODAL);
-			
+
 			//Elijo el dueño de la alerta (o la base) de la misma.
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-			
+
 
 			alert.showAndWait();	
 
@@ -546,11 +560,44 @@ public class EventosRegistro extends Control implements Initializable {
 			//	           
 
 		}
-		
+
 	}
 
 
+	/**
+	 * Export a resource embedded into a Jar file to the local file path.
+	 *
+	 * @param resourceName ie.: "/SmartLibrary.dll"
+	 * @return The path to the exported resource
+	 * @throws Exception
+	 */
+	@SuppressWarnings("resource")
+	static public String ExportResource(String resourceName) throws Exception {
+		InputStream stream = null;
+		OutputStream resStreamOut = null;
+		String jarFolder;
+		try {
+			stream = EventosRegistro.class.getResourceAsStream(resourceName);//note that each / is a directory down in the "jar tree" been the jar the root of the tree
+			if(stream == null) {
+				throw new Exception("Cannot get resource \"" + resourceName + "\" from Jar file.");
+			}
 
+			int readBytes;
+			byte[] buffer = new byte[4096];
+			jarFolder = new File(EventosRegistro.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getPath().replace('\\', '/');
+			resStreamOut = new FileOutputStream(jarFolder + resourceName);
+			while ((readBytes = stream.read(buffer)) > 0) {
+				resStreamOut.write(buffer, 0, readBytes);
+			}
+		} catch (Exception ex) {
+			throw ex;
+		} finally {
+			//            stream.close();
+			//            resStreamOut.close();
+		}
+
+		return jarFolder + resourceName;
+	}
 
 
 

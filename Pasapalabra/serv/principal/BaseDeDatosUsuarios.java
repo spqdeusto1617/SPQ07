@@ -183,7 +183,7 @@ public class BaseDeDatosUsuarios {
 	 * @throws SQLException si hay algún problema (generalmente, que no exista)
 	 */
 	public static String[] getUsuarioPorNombreOID(String nombre,String id,String contrasenya) throws SQLException{
-		String[] ret = new String[9];
+		String[] ret = new String[10];
 		String query = null;
 		if(nombre != null){
 			query = "SELECT * FROM USUARIOS WHERE NOMBRE_USUARIO ='"+nombre+"'AND PASSWORD='"+contrasenya+"'";
@@ -199,9 +199,11 @@ public class BaseDeDatosUsuarios {
 			ret[3] = res.getString("PASSWORD");
 			ret[4] = res.getString("FECHA_DE_NACIMIENTO");
 			ret[5] = res.getString("PATH_TO_IMAGE");
+			int Partidas_Ganadas=res.getInt("PARTIDAS_GANADAS");
 			ret[6] = res.getString("PARTIDAS_GANADAS");
 			ret[7] = res.getString("PARTIDAS_PERDIDAS");
 			ret[8] = res.getString("PARTIDAS_EMPATADAS");
+			ret[9] = Pos_Usuario_Ranking(Partidas_Ganadas);
 		} catch (SQLException e) {
 			if(e.getMessage().endsWith("USUARIOS.NOMBRE_USUARIO")){
 				throw new SQLException("Ese usuario no existe");}
@@ -279,13 +281,24 @@ public class BaseDeDatosUsuarios {
 			throw new SQLException("Error al eliminar");
 		}
 	}
+	public static String Pos_Usuario_Ranking(int Partidas_Ganadas){
+		String query = "SELECT COUNT(*)+1 FROM USUARIOS WHERE PARTIDAS_GANADAS>"+Partidas_Ganadas+"";
+		try {
+			ResultSet res = s.executeQuery(query);
+			return  res.getString(1);
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			return null;
+		}
+	}
 	public static void main(String[] args) throws SQLException {
 		iniciarConexion();
 
 
 				try{
-					//nuevoUsuario("pacoa", "daas@fafaf.com", "12345234a534", new Date(), "C://micara.png");
-					eliminar_Usuario("asatrfwesgerh", "reherjh4j6");
+					String a=Pos_Usuario_Ranking(5);
+					System.out.println(a);
 				}catch(Exception a){
 					a.printStackTrace();
 				}

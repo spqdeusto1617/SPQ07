@@ -1,6 +1,7 @@
 package controllers;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -74,8 +75,15 @@ public class EventosEstadisticas extends ClaseExtensora implements Initializable
 
     @FXML
     private Circle circuloPlus;
-
     
+    public static ArrayList<String> Datos_Usuario_Estadisticas=new ArrayList<String>();;
+    /*Posiciones:
+     * 0: partidas ganadas
+     * 1: partidas perdidas
+     * 2:partidas empatadas
+     * 3:partidas totales jugadas
+     * 4: posición en el ranking
+     */
     @FXML
     void btnJugar(ActionEvent event) {
 
@@ -122,6 +130,9 @@ public class EventosEstadisticas extends ClaseExtensora implements Initializable
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		
+		for (String string : Datos_Usuario_Estadisticas) {
+			System.out.println(string);
+		}
 	}
 
 }

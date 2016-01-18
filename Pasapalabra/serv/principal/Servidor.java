@@ -1,9 +1,13 @@
 package principal;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
@@ -13,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,6 +51,7 @@ public class Servidor extends Application{
 	static ArrayList<String> Datos_Usuario=new ArrayList<>();//Los datos del cliente que solicita algo (habría que cambiarlo, porque si no, puede que accedan varios a la vez y fastidiarla
 	static ArrayList<String>Clientes_conectados=new ArrayList<>();//Los clientes conectados
 	static String[]Datos_Enviar_Usuario;//Los datos a enviar al usuario (si son varios)
+	static TreeMap<String, ArrayList<Tipo_Amigo>>Amigos_usuarios=new TreeMap<>();
 	public static void addMensaje(String s) {
 		Servidor.s2 = s2 + s;
 		if(s2.length()>300){
@@ -102,9 +108,12 @@ public class Servidor extends Application{
 		}
 
 		public void run(){
+			ArrayList<String> Datos_Usuario=new ArrayList<>();
+			ArrayList<Preguntas>Preguntas=new ArrayList<>();
 			String accion="";
 			String dato="";
 			try {
+
 				BufferedReader in = new BufferedReader( new InputStreamReader(socket.getInputStream()) );
 				ObjectOutputStream out = new ObjectOutputStream( socket.getOutputStream() ); 
 				// Envía mensaje de comunicación establecida
@@ -117,6 +126,8 @@ public class Servidor extends Application{
 				switch (accion) {
 				case "Comprobar":
 					//TODO: terminar esto(faltan noticias)
+
+
 					addMensaje("Comprobación realizada\n");
 					break;
 				case "Crear_Usuario":
@@ -133,6 +144,7 @@ public class Servidor extends Application{
 						out.writeObject("ACK");
 
 					}while(!"FIN".equals(dato));
+
 					try{	
 						DateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
 						Date startDate = null;
@@ -148,8 +160,11 @@ public class Servidor extends Application{
 						}
 						BaseDeDatosUsuarios.nuevoUsuario(Datos_Usuario.get(0), Datos_Usuario.get(1), Datos_Usuario.get(2),startDate , Datos_Usuario.get(4));
 						out.writeObject("BIEN");
-					}catch (Exception e) {
+						ArrayList<Tipo_Amigo>Tipo=new ArrayList<Tipo_Amigo>();
+						Amigos_usuarios.put(Datos_Usuario.get(0), Tipo);
 
+					}catch (Exception e) {
+						e.printStackTrace();
 						if(e.getMessage().endsWith("Usuario repetido")){
 							out.writeObject("USER");
 
@@ -175,31 +190,112 @@ public class Servidor extends Application{
 						out.writeObject("ACK");
 
 					}while(!"FIN".equals(dato));
-					try{
-						Datos_Enviar_Usuario=BaseDeDatosUsuarios.getUsuarioPorNombreOID(Datos_Usuario.get(0), null, Datos_Usuario.get(1));
-						out.writeObject("BIEN");
-						for (String string : Datos_Enviar_Usuario) {
 
-							out.writeObject(string);
-							addMensaje("Le envío: "+string+"\n");
+					if(Clientes_conectados.contains(Datos_Usuario.get(0))){
+						out.writeObject("ACTIVO");
+					}
+					else{
+						try{
+							Datos_Enviar_Usuario=BaseDeDatosUsuarios.getUsuarioPorNombreOID(Datos_Usuario.get(0), null, Datos_Usuario.get(1));
+							out.writeObject("BIEN");
+							for (String string : Datos_Enviar_Usuario) {
+
+								out.writeObject(string);
+								addMensaje("Le envío: "+string+"\n");
+								dato = in.readLine();
+								if (!"ACK".equals(dato)) throw new IOException( "Conexión errónea: " + dato );
+							}
+							out.writeObject("FIN");
+
 							dato = in.readLine();
+
 							if (!"ACK".equals(dato)) throw new IOException( "Conexión errónea: " + dato );
+
+
+							Clientes_conectados.add(Datos_Enviar_Usuario[0]);
+						}catch (SQLException e) {
+							out.writeObject("SQL");
+
 						}
-						out.writeObject("FIN");
-
-						dato = in.readLine();
-						if (!"ACK".equals(dato)) throw new IOException( "Conexión errónea: " + dato );
-						Clientes_conectados.add(Datos_Enviar_Usuario[0]);
-						System.out.println(Datos_Enviar_Usuario[0]);
-					}catch (SQLException e) {
-						out.writeObject("SQL");
-
 					}
 					break;
 				case "Jugar":
 					//TODO: terminar esto
+					dato=in.readLine();
+					int Preguntas_bien=0;
+					int Preguntas_mal=0;
+					if(dato.equals("Todos")){
+						boolean ya_hay_n=false;
+						for(char alphabet = 'a'; alphabet <= 'z';alphabet++) {
 
+							if(alphabet=='o'&&ya_hay_n==false){
+								alphabet--;
+								ya_hay_n=true;
+								Preguntas.add(BaseDeDatosPreguntas.obtenerpreguntasportipo(Tipo_pregunta.Todos, 'ñ'));
+							}
+							else{
+								Preguntas.add(BaseDeDatosPreguntas.obtenerpreguntasportipo(Tipo_pregunta.Todos, alphabet));
+							}
+						}
 
+						out.writeObject("Ok");
+						
+						
+						boolean Rendirse=false;
+						boolean Todas_respondidas=false;
+						
+						while(Todas_respondidas==false&&Rendirse==false){
+							
+							for(int i=0;i<Preguntas.size();i++) {
+								dato=in.readLine();
+								if (!"OK".equals(dato)) throw new IOException( "Conexión errónea: " + dato );
+								
+								if(!Preguntas.get(i).respondida==true){
+									
+								out.writeObject(Preguntas.get(i).Pregunta);
+								out.writeObject(Preguntas.get(i).letra);
+								dato=in.readLine();
+								if(dato.equals("Pasapalabra")){
+									out.writeObject("Ok");
+								}
+								else if(dato.equals("Rendirse")){
+									Rendirse=true;
+									System.out.println("Se rinde");
+									i=Preguntas.size();
+									for(int j=0;j<Preguntas.size();j++){
+										if(Preguntas.get(j).respondida==false){
+											Preguntas_mal++;
+										}
+									}
+								}
+								else if(dato.equalsIgnoreCase(Preguntas.get(i).Respuesta)){
+									Preguntas_bien++;
+									Preguntas.get(i).respondida=true;
+									out.writeObject("Bien");
+								}
+								else{
+									Preguntas_mal++;
+									Preguntas.get(i).respondida=true;
+									out.writeObject("Mal");
+								}
+								Todas_respondidas=TodasRespondidas(Preguntas);
+								
+							}
+							}
+						}
+						out.reset();
+						out.writeObject("Fin");
+						out.writeObject(Preguntas_bien);
+
+						out.writeObject(Preguntas_mal);
+						addMensaje("Juego acabado");
+						return;
+						//in.readLine();
+						//if (!"Ok".equals(dato)) throw new IOException( "Conexión errónea: " + dato );
+					}
+					else{
+						out.writeObject("Error");
+					}
 					break;
 				case "Imagen":
 
@@ -269,6 +365,7 @@ public class Servidor extends Application{
 					try{
 						BaseDeDatosUsuarios.eliminar_Usuario(Datos_Usuario.get(0), Datos_Usuario.get(2));
 						Clientes_conectados.remove(Datos_Usuario.get(0));
+						Amigos_usuarios.remove(Datos_Usuario.get(0));
 						out.writeObject("BIEN");
 						addMensaje("Eliminado con éxito\n");
 					}catch (SQLException e) {
@@ -276,19 +373,167 @@ public class Servidor extends Application{
 					}
 					break;
 				case "Delog":
+					try{
+						dato=in.readLine();
+						Clientes_conectados.remove(dato);
+						out.writeObject("BIEN");
+					}catch (Exception e) {
+						out.writeObject("ERROR");
+					}
+					break;
+				case "Amigos":
 					dato=in.readLine();
-					Clientes_conectados.remove(dato);
-					out.writeObject("BIEN");
+					out.writeObject("ACK");
+					String nombre_Usuario=dato;
+					if(Amigos_usuarios.get(nombre_Usuario).size()>0){
+
+						out.writeObject("OK");
+						//						for (int i=0;i<Amigos_usuarios.get(dato).size();i++) {
+						//							try{
+						//								System.out.println(Amigos_usuarios.get(dato).get(i).Nombre_usuario);
+						//								BaseDeDatosUsuarios.nuevoUsuario(Amigos_usuarios.get(dato).get(i).Nombre_usuario, "0", "0", new Date(), "0");
+						//								BaseDeDatosUsuarios.eliminar_Usuario(Amigos_usuarios.get(dato).get(i).Nombre_usuario, "0");
+						//								Amigos_usuarios.get(dato).remove(i);
+						//							}catch(Exception a){
+						//								a.printStackTrace();
+						//							}
+						//						}
+
+						for (int i=0;i<Amigos_usuarios.get(nombre_Usuario).size();i++) {
+							if(Clientes_conectados.contains(Amigos_usuarios.get(nombre_Usuario).get(i).Nombre_usuario)){
+								Amigos_usuarios.get(nombre_Usuario).get(i).setEstado_amigo(true);
+							}
+							else{
+								Amigos_usuarios.get(nombre_Usuario).get(i).setEstado_amigo(false);
+							}
+							out.writeObject(Amigos_usuarios.get(nombre_Usuario).get(i).Nombre_usuario);
+							out.writeObject(Amigos_usuarios.get(nombre_Usuario).get(i).Solicitud_aceptada);
+							out.writeObject(Amigos_usuarios.get(nombre_Usuario).get(i).Solicitud_enviada);
+							out.writeObject(Amigos_usuarios.get(nombre_Usuario).get(i).Solicitud_pendiente);
+							out.writeObject(Amigos_usuarios.get(nombre_Usuario).get(i).Estado_amigo);
+							addMensaje("Le envío: "+Amigos_usuarios.get(nombre_Usuario).get(i)+"\n");
+							dato = in.readLine();
+							if (!"ACK".equals(dato)) throw new IOException( "Conexión errónea: " + dato );
+						}
+						out.writeObject("FIN");
+					}else{
+						out.writeObject("NADIE");
+					}
+
+					break;
+				case"Add_Amigo":
+					dato=in.readLine();
+					String amigo="";
+					if(Amigos_usuarios.containsKey(dato)){
+						amigo=dato;
+						out.writeObject("OK");
+						dato=in.readLine();
+						if(dato.equals("OK")){
+							//TODO: "enviar" solicitud
+							dato=in.readLine();
+
+							try{
+								if(!Amigos_usuarios.get(dato).contains(new Tipo_Amigo(amigo, false, false, false))){
+									Amigos_usuarios.get(dato).add(new Tipo_Amigo(amigo, false, true, true));
+
+
+									Amigos_usuarios.get(amigo).add(new Tipo_Amigo(dato, false, false, true));
+									out.writeObject("OK");
+								}
+								else {
+									out.writeObject("REPE");	
+								}
+							}catch(Exception a){
+								System.out.println("Error");
+								a.printStackTrace();
+							}
+
+							//Amigos_usuarios.put(dato, new Tipo_Amigo(dato, false, true, true));
+
+						}
+						else if(dato.equals("NO_OK")){
+							//NADA
+						}
+					}
+					else{
+						out.writeObject("NO_CONTIENE");
+					}
+					break;
+				case "Acept_Amigo":
+					dato=in.readLine();
+					String amigo2=dato;
+
+
+					out.writeObject("OK");
+					dato=in.readLine();
+					if(dato.equals("OK")){
+						//TODO: "enviar" solicitud
+						dato=in.readLine();
+
+						try{
+
+							Amigos_usuarios.get(dato).remove(amigo2);
+							Amigos_usuarios.get(amigo2).remove(dato);
+
+
+							Amigos_usuarios.get(dato).add(new Tipo_Amigo(amigo2, true, false, false));
+
+
+							Amigos_usuarios.get(amigo2).add(new Tipo_Amigo(dato, true, false, false));
+
+						}catch(Exception a){
+							System.out.println("Error");
+							a.printStackTrace();
+						}
+
+						//Amigos_usuarios.put(dato, new Tipo_Amigo(dato, false, true, true));
+						out.writeObject("OK");
+					}
+
+					break;
+				case "Delete_Amigo":
+					dato=in.readLine();
+					String amigo3=dato;
+
+
+					out.writeObject("OK");
+					dato=in.readLine();
+					if(dato.equals("OK")){
+						//TODO: "enviar" solicitud
+						dato=in.readLine();
+
+						try{
+
+							Amigos_usuarios.get(dato).remove(amigo3);
+
+
+							Amigos_usuarios.get(amigo3).remove(dato);
+
+							out.writeObject("OK");
+
+						}catch(Exception a){
+							out.writeObject("NO_CONTIENE");
+						}
+
+						//Amigos_usuarios.put(dato, new Tipo_Amigo(dato, false, true, true));
+
+					}
+
+					break;
 				default:
 					break;
 				}
-
+				//				for (Map.Entry<String,ArrayList<Tipo_Amigo>> entry : Amigos_usuarios.entrySet()) {
+				//					String key = entry.getKey();
+				//					System.out.println("El usuario "+ key+" tiene: "+entry.getValue().toString());
+				//				}
+				escribeAFichero();
 				Datos_Usuario.removeAll(Datos_Usuario);
 				out.reset();
 
 				accion = in.readLine();
 
-				if (!"END".equals(accion)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + accion );
+				if (!"END".equals(accion)) throw new IOException( "Conexión errónea: respuesta  inesperada: " + accion );
 				out.writeObject( "ACK" );
 
 				addMensaje("Conexión finalizada\n");
@@ -308,6 +553,32 @@ public class Servidor extends Application{
 
 	}
 
+	@SuppressWarnings("unchecked")
+	public static void leeDeFichero() {
+		try {	//Nombre del archivo
+			FileInputStream fin = new FileInputStream("Amigos.amg"); 
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			Amigos_usuarios = ( TreeMap<String, ArrayList<Tipo_Amigo>> ) ois.readObject();//La extructura a cargar
+			ois.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+	}
+
+	public static void escribeAFichero() {
+		try {	//Nombre del archivo
+			FileOutputStream fout = new FileOutputStream("Amigos.amg");
+			ObjectOutputStream oos = new ObjectOutputStream(fout);
+			oos.writeObject( Amigos_usuarios);//Lo que se va a guardar
+			oos.close();
+		} catch (IOException e)
+		{  
+			e.printStackTrace();
+			System.out.println("No se han podido cargar los datos");
+		}
+	}
+
 	/** Clase de ventana visual del servidor
 	 */
 
@@ -324,84 +595,128 @@ public class Servidor extends Application{
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-			try {
-				utilidades.AppLogger.crearLogHandler(log, Servidor.class.getName());
-				//Cargar página con el FXML elegido
-				Pane page =  FXMLLoader.load(Servidor.class.getResource("Servidor.fxml"));
-				log.log(Level.FINEST, "Cargado fichero FXML de LogIn en el pane");
-				
-				
-				//Añadir la página a la escena
-				Scene scene = new Scene(page);
-				log.log(Level.FINEST, "Añadido pane a la escena");
-				
-				//Añadir a la escena el CSS
-				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-				log.log(Level.FINEST, "Añadido css a la escena");
-				
-				//Usarse para servidor.
-				//Puede que se necesite algún día.
-				//Añadir un escuchador para cuando se cierre la ventana 
-				primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				    @Override
-				    public void handle(WindowEvent event) {
-				    	Alert alert = new Alert(AlertType.CONFIRMATION);
-				    	alert.setTitle("Salir de la aplicación");
-				    	alert.setHeaderText("¿Está segur@ de que desea salir de la aplicación?");
-				    	alert.setContentText("Si sale de la aplicación, todos los usuarios conectados al servidor perderán el progreso que estén haciendo en este momento.\n\n¿Está segur@?");
+		try {
+			utilidades.AppLogger.crearLogHandler(log, Servidor.class.getName());
+			//Cargar página con el FXML elegido
+			Pane page =  FXMLLoader.load(Servidor.class.getResource("Servidor.fxml"));
+			log.log(Level.FINEST, "Cargado fichero FXML de LogIn en el pane");
 
-				    	alert.initModality(Modality.APPLICATION_MODAL);
-			    		alert.initOwner((Stage)event.getSource());
-			    		alert.showAndWait();
-				    	Optional<ButtonType> result = alert.showAndWait();
-				    	if (result.get() == ButtonType.OK){
-				    		Servidor.cierre_servidor();
-							BaseDeDatosPreguntas.cerrarConexion();
-							BaseDeDatosUsuarios.cerrarConexion();
-							Platform.exit();
-							System.exit(0);
-				    	} else {
-				    	   event.consume();
-				    	}
-				    }
-				});
-				
-				
-				
-				//Icono
-				primaryStage.getIcons().add(new Image("images/iconopsp.png"));
-				log.log(Level.FINEST, "Añadido icono a la ventana");
-				//Título de la ventana
-				primaryStage.setTitle("Pasapalabra - Servidor");
-				log.log(Level.FINEST, "Añadido título a la ventana");
-				
-				
-				//Poner escena
-				primaryStage.setScene(scene);
-				log.log(Level.FINEST, "Añadida escena a la ventana");
-				
-				//No se puede hacer resize
-				primaryStage.setResizable(false);
-				//Por ello, desactivamos los botones para hacer resize (maximizar)
-				primaryStage.initStyle(StageStyle.UTILITY);
-				log.log(Level.FINEST, "Desactivados botones resize de la ventana");
-				
-				primaryStage.sizeToScene();
-				//Mostrar ventana
-				primaryStage.show();
-				log.log(Level.FINEST, "Ventana mostrada");
-				//Centrar ventana
-				utilidades.deVentana.centrarVentana(primaryStage);
-				log.log(Level.FINEST, "Centrada la ventana");
-				
-					
-				
-				
-				
-			} catch(Exception e) {
-				e.printStackTrace();
-				log.log(Level.SEVERE, "Error en start de Main.java", e);
-			}
-		
+
+			//Añadir la página a la escena
+			Scene scene = new Scene(page);
+			log.log(Level.FINEST, "Añadido pane a la escena");
+
+			//Añadir a la escena el CSS
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			log.log(Level.FINEST, "Añadido css a la escena");
+
+			//Usarse para servidor.
+			//Puede que se necesite algún día.
+			//Añadir un escuchador para cuando se cierre la ventana 
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				@Override
+				public void handle(WindowEvent event) {
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("Salir de la aplicación");
+					alert.setHeaderText("¿Está segur@ de que desea salir de la aplicación?");
+					alert.setContentText("Si sale de la aplicación, todos los usuarios conectados al servidor perderán el progreso que estén haciendo en este momento.\n\n¿Está segur@?");
+
+					alert.initModality(Modality.APPLICATION_MODAL);
+					alert.initOwner((Stage)event.getSource());
+					alert.showAndWait();
+					Optional<ButtonType> result = alert.showAndWait();
+					if (result.get() == ButtonType.OK){
+						Servidor.cierre_servidor();
+						BaseDeDatosPreguntas.cerrarConexion();
+						BaseDeDatosUsuarios.cerrarConexion();
+						Platform.exit();
+						System.exit(0);
+					} else {
+						event.consume();
+					}
+				}
+			});
+
+
+
+			//Icono
+			primaryStage.getIcons().add(new Image("images/iconopsp.png"));
+			log.log(Level.FINEST, "Añadido icono a la ventana");
+			//Título de la ventana
+			primaryStage.setTitle("Pasapalabra - Servidor");
+			log.log(Level.FINEST, "Añadido título a la ventana");
+
+
+			//Poner escena
+			primaryStage.setScene(scene);
+			log.log(Level.FINEST, "Añadida escena a la ventana");
+
+			//No se puede hacer resize
+			primaryStage.setResizable(false);
+			//Por ello, desactivamos los botones para hacer resize (maximizar)
+			primaryStage.initStyle(StageStyle.UTILITY);
+			log.log(Level.FINEST, "Desactivados botones resize de la ventana");
+
+			primaryStage.sizeToScene();
+			//Mostrar ventana
+			primaryStage.show();
+			log.log(Level.FINEST, "Ventana mostrada");
+			//Centrar ventana
+			utilidades.deVentana.centrarVentana(primaryStage);
+			log.log(Level.FINEST, "Centrada la ventana");
+
+
+
+
+
+		} catch(Exception e) {
+			e.printStackTrace();
+			log.log(Level.SEVERE, "Error en start de Main.java", e);
+		}
+
 	}
+	public static boolean TodasRespondidas(ArrayList<Preguntas> aPreguntas){
+		for (Preguntas preguntas : aPreguntas) {
+			if(preguntas.respondida==false){
+				return false;
+			}
+		}
+		return true;
+	}
+}
+class Tipo_Amigo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1606968345161920544l;
+	String Nombre_usuario;
+	boolean Solicitud_aceptada;
+	boolean Solicitud_enviada;
+	boolean Solicitud_pendiente;
+	boolean Estado_amigo=false;
+	public Tipo_Amigo(String nombre,boolean solicitud_aceptada,boolean solicitud_enviada,boolean Solicitud_pendiente){
+		this.Nombre_usuario=nombre;
+		this.Solicitud_aceptada=solicitud_aceptada;
+		this.Solicitud_enviada=solicitud_enviada;
+		this.Solicitud_pendiente=Solicitud_pendiente;
+	}
+	public void setEstado_amigo(boolean estado_amigo) {
+		Estado_amigo = estado_amigo;
+	}
+	@Override
+	public boolean equals(Object arg0) {
+		if(arg0 instanceof Tipo_Amigo){
+			return this.Nombre_usuario.equals(((Tipo_Amigo) arg0).Nombre_usuario);
+		}
+		else{
+			return false;
+		}
+	}
+	@Override
+	public String toString() {
+		return "Tipo_Amigo [Nombre_usuario=" + Nombre_usuario + ", Solicitud_aceptada=" + Solicitud_aceptada
+				+ ", Solicitud_enviada=" + Solicitud_enviada + ", Solicitud_pendiente=" + Solicitud_pendiente
+				+ ", Estado_amigo=" + Estado_amigo + "]";
+	}
+
 }

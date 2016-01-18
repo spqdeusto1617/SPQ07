@@ -27,6 +27,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import utilidades.Conexion_cliente;
 
 /**Clase que gestiona los eventos de la clase LogIn.fxml
  * @author asier.gutierrez
@@ -125,6 +126,19 @@ public class EventosLogIn extends Control implements Initializable {
 				}
 				
 			}
+			
+				String Partidas_Ganadas=Conexion_cliente.Datos_Usuario.get(6);
+				String Partidas_Empatadas=Conexion_cliente.Datos_Usuario.get(8);
+				String Partidas_Perdidas=Conexion_cliente.Datos_Usuario.get(7);
+				
+				int Partidas_Jugadas_Totales=Integer.parseInt(Partidas_Empatadas.substring(0))+Integer.parseInt(Partidas_Ganadas.substring(0))+Integer.parseInt(Partidas_Perdidas.substring(0));
+				String Partidas_totates=Integer.toString(Partidas_Jugadas_Totales);
+				String Pos_Ranking=Conexion_cliente.Datos_Usuario.get(9);
+				EventosEstadisticas.Datos_Usuario_Estadisticas.add(Partidas_Ganadas);
+				EventosEstadisticas.Datos_Usuario_Estadisticas.add(Partidas_Perdidas);
+				EventosEstadisticas.Datos_Usuario_Estadisticas.add(Partidas_Empatadas);
+				EventosEstadisticas.Datos_Usuario_Estadisticas.add(Partidas_totates);
+				EventosEstadisticas.Datos_Usuario_Estadisticas.add(Pos_Ranking);
 			log.log(Level.FINEST, "LogIn OK. Transición de ventana a Juego");
 			utilidades.deVentana.transicionVentana("Juego", event);
 		} catch (SQLException e) {
@@ -133,11 +147,11 @@ public class EventosLogIn extends Control implements Initializable {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Usuario o contraseña incorrectos");
 
-			alert.setContentText("El usuario y/o la contraseña que has introducido son incorrectas, por favor, revise los datos y vuelva a intentarlo");
+			alert.setContentText("El usuario y/o la contraseña que has introducido son incorrectos, por favor, revise los datos y vuelva a intentarlo");
 			alert.initModality(Modality.APPLICATION_MODAL);		
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
-			
+			txtContra.setText("");
 		}catch (IOException e) {
 			log.log(Level.INFO, "Error de LogIn", e);
 			//Aviso
@@ -148,10 +162,23 @@ public class EventosLogIn extends Control implements Initializable {
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
-		}
+			txtContra.setText("");
+		}catch (SecurityException e) {
+			log.log(Level.INFO, "Error de LogIn", e);
+			//Aviso
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Usuario conectado actualmente");
+
+			alert.setContentText("Parece que su usuario ya está conectado en otro dispositivo. Si cree que esto es un error, o desconoce por qué está pasando, contacte con los administradores lo antes posible");
+			alert.initModality(Modality.APPLICATION_MODAL);	
+			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert.showAndWait();
+			txtContra.setText("");
 	
 		
-		}else{
+		}
+		}
+		else{
 			log.log(Level.INFO, "Error de LogIn - El usuario no ha insertado nada.");
 			//Si el usuario no ha insertado nada en los campos de login se le avisará.
 			Alert alert = new Alert(AlertType.ERROR);

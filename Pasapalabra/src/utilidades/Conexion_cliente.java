@@ -3,12 +3,26 @@ package utilidades;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.TreeMap;
 
+import controllers.EventosAmigos;
+import controllers.EventosJuego;
 import controllers.EventosLogIn;
 import controllers.EventosRegistro;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 
 /**Clase de utilidad para realizar la conexión del cliente con el servidor
  * @author Iván
@@ -20,6 +34,13 @@ public class Conexion_cliente {
 	private static PrintWriter out;//Para escribir los datos al servidor
 	public static final String Ip_Local="127.0.0.1";//La ip local (para pruebas)
 	public static ArrayList<String>Datos_Usuario=new ArrayList<>();//Un arraylist con todos los datos del cliente
+	public static  ArrayList<Tipo_Amigo>Amigos_usuarios=new ArrayList<Tipo_Amigo>();
+	public static String Pregunta="";
+	public static String Respuesta="";
+	public static boolean Acierto=false;
+	public static int Correctas=0;
+	public static int Incorrectas=0;
+	public static char Letra_Actual;
 
 	/**Método de utilidad para poder lanzar la conexión con el servidor
 	 * @param ip :la ip del servidor
@@ -28,27 +49,32 @@ public class Conexion_cliente {
 	 * @throws IOException :si hay algún problema con el servidor
 	 * @throws SQLException :si el usuario introduce algo mal
 	 */
-	public static void lanzaConexion( String ip, String accion,String[]datos_cliente) throws IOException, SQLException{
+	public static void lanzaConexion( String ip, String accion,String[]datos_cliente) throws IOException, SQLException,SecurityException,Error{
 		// Pide la dirección del servidor
 
 		if (!ip.equals("")) {
 			try {
+				Object respuesta =null;
 
-				// Realiza la conexión e inicializa los flujos de comunicación
-				socket = new Socket(ip, 9898);
+				if(!accion.equals("Obtener_Pregunta")&&!accion.equals("Responder_Pregunta")){
+					// Realiza la conexión e inicializa los flujos de comunicación
+					System.out.println();
+					socket = new Socket(ip, 9898);
 
-				in = new ObjectInputStream( socket.getInputStream() );
+					in = new ObjectInputStream( socket.getInputStream() );
 
-				out = new PrintWriter(socket.getOutputStream(), true);
-				// Consume el Ack (confirmación = acknowledge) del servidor
-				Object respuesta = in.readObject();
-				if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
-				// Envía el usuario
+					out = new PrintWriter(socket.getOutputStream(), true);
+					// Consume el Ack (confirmación = acknowledge) del servidor
+					respuesta = in.readObject();
+					if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+					// Envía el usuario
 
-				out.println( accion );
-				// Espera el Ack
-				respuesta = in.readObject();
-				if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: " + respuesta );
+					out.println( accion );
+					// Espera el Ack
+					respuesta = in.readObject();
+					if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: " + respuesta );
+				}
+
 				switch (accion) {
 				case "Comprobar":
 					//TODO: terminar esto(faltan noticias)
@@ -94,10 +120,20 @@ public class Conexion_cliente {
 
 						if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: " + respuesta );
 					}
+
 					out.println("FIN");
 					respuesta = in.readObject();
 					if(!"ACK".equals(respuesta))throw new IOException( "Conexión errónea: " + respuesta );
-					respuesta = in.readObject();
+					respuesta=in.readObject();
+
+					if("ACTIVO".equals(respuesta)){
+						out.println( "END" );
+						respuesta = in.readObject();
+						if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+						socket.close();
+						throw new SecurityException("Usuario activo");
+					}
+
 					if("BIEN".equals(respuesta)){
 
 						do{
@@ -109,6 +145,7 @@ public class Conexion_cliente {
 							}
 							out.println("ACK");
 						}while(!"FIN".equals(respuesta));
+
 					}
 					else if("SQL".equals(respuesta)){
 
@@ -120,9 +157,69 @@ public class Conexion_cliente {
 					}
 					break;
 				case "Jugar":
-					//TODO: terminar esto
+					out.println("Todos");
+					respuesta=in.readObject();
+					if(respuesta.equals("Ok")){
 
+						return;
+					}
+					else if(respuesta.equals("Error")){
+
+					}
 					break;
+				case "Obtener_Pregunta":
+
+
+					out.println("OK");
+					respuesta= in.readObject();
+				
+					if(!respuesta.equals("Fin")){
+						System.out.println(respuesta);
+					Pregunta=(String) respuesta;
+					respuesta=in.readObject();
+					Letra_Actual=(char) respuesta;
+					
+					return;
+					}
+					
+					EventosJuego.juegoEnCurso=false;
+					Correctas=(int) in.readObject();
+					Incorrectas=(int) in.readObject();
+					
+					//out.println("Ok");
+					//FIXME: Software caused connection abort ¿por qué da esto?
+					return;
+				case "Responder_Pregunta":
+
+					out.println(Respuesta);
+					
+					respuesta=in.readObject();
+					
+					if(!respuesta.equals("Fin")){
+						if(respuesta.equals("Bien")){
+							Acierto=true;
+						}
+						else if("Mal".equals(respuesta)){
+							Acierto=false;
+						}
+						else if("Ok".equals(respuesta)){
+
+						}
+
+						return;
+					}
+					EventosJuego.juegoEnCurso=false;
+					Correctas=(int) in.readObject();
+					Incorrectas=(int) in.readObject();
+//					System.out.println("Fin");
+//					EventosJuego.juegoEnCurso=false;
+//					respuesta=in.readObject();
+//					if (!"Ok".equals(respuesta)) throw new IOException( "Conexión errónea: " + Respuesta );
+//					Correctas=(int) in.readObject();
+//					Incorrectas=(int) in.readObject();
+//					System.out.println(Correctas+" Correctas "+Incorrectas +" Incorrectas");
+//					out.println("Ok");
+					return;
 				case "Imagen":
 
 
@@ -162,6 +259,46 @@ public class Conexion_cliente {
 
 
 					break;
+				case "Amigos":
+					out.println(datos_cliente[0]);
+					respuesta=in.readObject();
+					if(!"ACK".equals(respuesta))throw new IOException( "Conexión errónea: " + respuesta );
+					respuesta=in.readObject();
+
+					if(respuesta.equals("NADIE")){
+						EventosAmigos.TieneAmigos=false;
+					}
+					else{
+						try{
+							do{
+								respuesta=in.readObject();
+								EventosAmigos.TieneAmigos=true;
+
+								System.out.println(respuesta);
+								if(!"FIN".equals(respuesta)){
+									String nombre_Usuario=(String) respuesta;
+									boolean aceptada=(boolean) in.readObject();
+									boolean enviada=(boolean) in.readObject();
+									boolean pendiente=(boolean) in.readObject();
+									boolean estado=(boolean) in.readObject();
+									if(aceptada==false&&enviada==false){
+										nombre_Usuario=nombre_Usuario+" (Pendiente)";
+									}
+									else if(aceptada==false&&enviada==true){
+										nombre_Usuario=nombre_Usuario+" (Enviada)";
+									}
+									Tipo_Amigo tipo=new Tipo_Amigo(nombre_Usuario, aceptada, enviada, pendiente,estado);
+									Amigos_usuarios.add(tipo);
+									out.println("ACK");
+								}
+
+
+							}while(!"FIN".equals(respuesta));
+						}catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+					break;
 				case "Estadisticas":
 					//TODO: terminar esto
 					break;
@@ -190,12 +327,111 @@ public class Conexion_cliente {
 					break;
 				case "Delog":
 					out.println(datos_cliente[0]);
+					Datos_Usuario.removeAll(Datos_Usuario);
 					respuesta = in.readObject();
 					if (!"BIEN".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+					break;
+				case"Add_Amigo":
+					out.println(datos_cliente[0]);
+					respuesta=in.readObject();
+					if(respuesta.equals("OK")){
+						Alert alert = new Alert(AlertType.CONFIRMATION);
+						alert.setTitle("Usuario encontrado");
+						alert.setHeaderText(datos_cliente[0]+" encontrado");
+						alert.setContentText("¿Quieres enviar la solicitud?");
+
+						Optional<ButtonType> result = alert.showAndWait();
+						if (result.get() == ButtonType.OK){
+							out.println("OK");
+							out.println(Datos_Usuario.get(0));
+							respuesta=in.readObject();
+
+							if(respuesta.equals("OK")){
+
+							}
+							else if(respuesta.equals("REPE")){
+								out.println( "END" );
+								respuesta = in.readObject();
+								if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+								socket.close();
+								throw new IOException("Solicitud ya enviada");
+							}
+						} else {
+							out.println("NO_OK");
+						}
+					}
+					else if(respuesta.equals("NO_CONTIENE")){
+						out.println( "END" );
+						respuesta = in.readObject();
+						if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+						socket.close();
+						throw new SQLException("No existe ese usuario");
+					}
+					else throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+					break;
+				case "Acept_Amigo":
+					out.println(datos_cliente[0]);
+					respuesta=in.readObject();
+					if(respuesta.equals("OK")){
+
+
+						out.println("OK");
+						out.println(Datos_Usuario.get(0));
+						respuesta=in.readObject();
+
+						if(!respuesta.equals("OK")){
+							out.println( "END" );
+							respuesta = in.readObject();
+							if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+							socket.close();
+							throw new IOException("Error al realizar los cambios");
+						}
+
+
+					}
+					else if(respuesta.equals("NO_CONTIENE")){
+						out.println( "END" );
+						respuesta = in.readObject();
+						if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+						socket.close();
+						throw new SQLException("No existe ese usuario");
+					}
+					break;
+				case "Delete_Amigo":
+					out.println(datos_cliente[0]);
+					respuesta=in.readObject();
+					if(respuesta.equals("OK")){
+
+
+						out.println("OK");
+						out.println(Datos_Usuario.get(0));
+						respuesta=in.readObject();
+
+						if(!respuesta.equals("OK")){
+							out.println( "END" );
+							respuesta = in.readObject();
+							if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+							socket.close();
+							throw new IOException("Error al realizar los cambios");
+						}
+
+
+					}
+					else if(respuesta.equals("NO_CONTIENE")){
+						out.println( "END" );
+						respuesta = in.readObject();
+						if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
+						socket.close();
+						throw new SQLException("No existe ese usuario");
+					}
+					break;
+
+
 				default:
 					break;
 				}
 				//Procedimiento para finalizar la conexión
+				
 				out.println( "END" );
 				respuesta = in.readObject();
 				if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );
@@ -211,3 +447,5 @@ public class Conexion_cliente {
 	}
 
 }
+
+

@@ -1,34 +1,53 @@
 package controllers;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
 import javax.swing.text.TabableView;
+import javax.swing.text.View;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import utilidades.Tipo_Amigo;
 
 public class EventosAmigos extends ClaseExtensora implements Initializable {
 	@FXML public Pane panel;
@@ -77,17 +96,69 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 
 	@FXML public Text texTextoBuscarAmigos;
 
-	@FXML public TableView<?>tblTablaAmigos;
-
+	@FXML public TableView<Person>tblTablaAmigos;
+	
+	@FXML public Button boton;
+		
+	@FXML public TextField txtTextoAmigos;
+    private final ObservableList<Person> data =
+            FXCollections.observableArrayList(new Person("A","K"));
+	public static boolean TieneAmigos; 
+	
+	//final HBox hb = new HBox();
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Verificar si el usuario tiene amigos
+		
+		String[]Datos=new String[1];
+		Datos[0]=utilidades.Conexion_cliente.Datos_Usuario.get(0);
+		TableColumn firstNameCol = new TableColumn("Nombre amigo");
+        firstNameCol.setMinWidth(100);
+        firstNameCol.setCellValueFactory(
+                new PropertyValueFactory<>("Nombre amigo"));
+ 
+        TableColumn lastNameCol = new TableColumn("Estado amigo");
+        lastNameCol.setMinWidth(100);
+        lastNameCol.setCellValueFactory(
+                new PropertyValueFactory<>("Estado amigo"));
+ 
+        tblTablaAmigos.setItems(data);
+        tblTablaAmigos.getColumns().addAll(firstNameCol, lastNameCol);
+      
+ 
+        
+	    
+		try {
+			utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Amigos.toString(), Datos);
+			
+			
+			for(int i=0;i<utilidades.Conexion_cliente.Amigos_usuarios.size();i++){
+			
+			}
+			   
+		} catch (Exception e) {
+			e.printStackTrace();
+			Alert alert3 = new Alert(AlertType.INFORMATION);
+			alert3.setTitle("Se produjo un error al tramitar sus datos");
+			alert3.setHeaderText("Parece que se ha producido un error al obtener sus amigos");
+			alert3.setContentText("Se ha producido un error al intentar obtner sus amigos, por favor, intenteló de nuevo más tarde");
+			alert3.initModality(Modality.APPLICATION_MODAL);
+		
+			alert3.showAndWait();
+			
+		}
 		panel.getStylesheets().add("application/application.css");
 		rectanguloAmigos.setOpacity(1f);
 		rectanguloEstadisticas.setOpacity(0.3f);
 		rectanguloJugar.setOpacity(0.3f);
 		rectanguloMiPerfil.setOpacity(0.3f);
+		if(TieneAmigos==false){
 		tblTablaAmigos.setPlaceholder(new Label("No tienes amigos aun."));
+		}
+		else{
+			//TODO: meter los amigos
+		}
 		textoNombreDeUsuario.setText(utilidades.Conexion_cliente.Datos_Usuario.get(0));
 		if(EventosLogIn.iAvatar!=null){
 			imagenAvatar.setImage(EventosLogIn.iAvatar);
@@ -107,10 +178,69 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 		imagenAvatar.setSmooth(true); 
 		imagenAvatar.setCache(true); 
 	}
-
-	public void btnBuscarAmigos(MouseEvent event){
-		//TODO: buscar amigos
+	public void Anyadir(MouseEvent event){
+		 data.add(new Person("Z","P"));
 	}
+	public void btnBuscarAmigos(MouseEvent event){
+		
+			String[]Dato=new String[1];
+			
+			if(txtTextoAmigos.getText().equals(utilidades.Conexion_cliente.Datos_Usuario.get(0))){
+				Alert alert3 = new Alert(AlertType.ERROR);
+				alert3.setTitle("Error");
+				alert3.setHeaderText("Te estás enviando una solicitud de amistad a ti mismo");
+				alert3.setContentText("Parece que te estás enviando una solicitud de amistad a ti mismo, seguro que tienes a alguien a quien enviar la solicitud aparte de a ti mismo");
+				alert3.initModality(Modality.APPLICATION_MODAL);
+			
+				alert3.showAndWait();
+			}else{
+				Dato[0]=txtTextoAmigos.getText();
+				try {
+					utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Add_Amigo.toString(), Dato);
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Éxito al enviar la solicitud");
+
+					alert.setContentText("La solicitud se envió con éxito a su amigo");
+					alert.initModality(Modality.APPLICATION_MODAL);	
+					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert.showAndWait();
+				} 
+				catch (IOException e) {
+					//Aviso
+				
+					if(e.getMessage().contains("Solicitud ya enviada")){
+						
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Error al enviar la solicitud");
+
+						alert.setContentText("Usted ya envió una solicitud a ese usuario. Por favor, espere a la respuesta");
+						alert.initModality(Modality.APPLICATION_MODAL);	
+						alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert.showAndWait();
+					}
+					else{
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error al conectarse con el servidor");
+
+					alert.setContentText("Parece que ha habido un problema a la hora de extablecer conexión con el servidor, por favor inténtelo de nuevo más tarde");
+					alert.initModality(Modality.APPLICATION_MODAL);	
+					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert.showAndWait();
+					}
+				}
+				catch (SQLException e) {
+					//Aviso
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Ese usuario no existe");
+
+					alert.setContentText("Parece que el usuario que ha introducido no existe. Asegurese de que lo ha introducido correctamente");
+					alert.initModality(Modality.APPLICATION_MODAL);	
+					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert.showAndWait();
+				}
+				
+			}
+							}
 	public void btnJugar(MouseEvent event){
 		utilidades.deVentana.transicionVentana("Juego", event);
 	}
@@ -163,4 +293,54 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel	
 	}
+}
+
+class Person {
+	 
+//    private final SimpleStringProperty nombreUsuario;
+//    private final SimpleBooleanProperty estado;
+//
+//    Person(String fName, boolean lName) {
+//        this.nombreUsuario = new SimpleStringProperty(fName);
+//        this.estado = new SimpleBooleanProperty(lName);
+//    }
+//
+//    public String getFirstName() {
+//        return nombreUsuario.get();
+//    }
+//
+//    public void setFirstName(String fName) {
+//    	nombreUsuario.set(fName);
+//    }
+//
+//	public SimpleBooleanProperty getEstado() {
+//		return estado;
+//	}
+
+	private final SimpleStringProperty firstName;
+    private final SimpleStringProperty lastName;
+
+    Person(String fName, String lName) {
+        this.firstName = new SimpleStringProperty(fName);
+        this.lastName = new SimpleStringProperty(lName);
+    }
+    public String getFirstName() {
+        return firstName.get();
+    }
+
+    public void setFirstName(String fName) {
+        firstName.set(fName);
+    }
+
+    public String getLastName() {
+        return lastName.get();
+    }
+
+    public void setLastName(String fName) {
+        lastName.set(fName);
+    }
+
+	
+
+
 }
