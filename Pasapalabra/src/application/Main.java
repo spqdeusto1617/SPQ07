@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 import java.net.Socket;
 import java.nio.channels.FileLock;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.text.Utilities;
 
+import controllers.EventosJuego;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -50,22 +52,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		try {
-			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-				public void handle(WindowEvent we) {
-					if(!utilidades.Conexion_cliente.Datos_Usuario.isEmpty()){
-
-						String[] Datos=new String[1];
-						Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
-						try {
-							Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
-							utilidades.deVentana.transicionVentana("LogIn", we);
-						} catch (Exception e) {
-							//TODO: gestionar la excepción(¿mensaje de error?)
-						} 
-					}
-				}
-			});        
-			primaryStage.close();
+			
 			utilidades.AppLogger.crearLogHandler(log, Main.class.getName());
 			//Cargar página con el FXML elegido  
 			Pane page =  FXMLLoader.load(getClass().getResource("/windows/LogIn.fxml")); //Lo he dejado así porque sino, a la hora de exportarlo a un jar, no funciona el propio jar
@@ -85,15 +72,39 @@ public class Main extends Application {
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override public void handle(WindowEvent t) {
 					if(!utilidades.Conexion_cliente.Datos_Usuario.isEmpty()){
-
 						String[] Datos=new String[1];
-						Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
-						try {
-							Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
-							utilidades.deVentana.transicionVentana("LogIn", t);
-						} catch (Exception e) {
-							//TODO: gestionar la excepción(¿mensaje de error?)
-						} 
+						if(EventosJuego.juegoEnCurso==false){
+							
+							Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
+							try {
+								Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
+								
+							} catch (Exception e) {
+								//TODO: gestionar la excepción(¿mensaje de error?)
+							} 
+						}else{
+							Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
+							System.out.println("Nos rendimos, al cerrar la ventana");
+							utilidades.Conexion_cliente.Respuesta="Rendirse";
+							try {
+								utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+								Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
+							} catch (SecurityException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (Error e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+						
 					}
 				}
 			});
@@ -141,18 +152,18 @@ public class Main extends Application {
 	 * @param args Argumentos de consola (no se utilizan)
 	 */
 	public static void main(String[] args) {
-		launch(args);
-		//		if (lockInstance("block.dat")){
-		//			//Aquí se carga toda la aplicación
-		//			launch(args);
-		//			log.log(Level.FINEST, "Ventana cargada. FIN HILO MAIN.JAVA");
-		//			
-		//			//Hilo main muerto.
-		//		}else{
-		//			log.log(Level.INFO, "Ventana NO cargada. Ya hay una instancia de la clase. Se ejecuta hilo de advertencia soporte único a monoinstancia");
-		//			//Cargamos el hilo de rutina monoinstancia. Nuestro hilo main muere después.
-		//			RutinaMonoInstancia.main(args);
-		//		}
+		
+				if (lockInstance("block.dat")){
+					//Aquí se carga toda la aplicación
+					launch(args);
+					log.log(Level.FINEST, "Ventana cargada. FIN HILO MAIN.JAVA");
+					
+					//Hilo main muerto.
+				}else{
+					log.log(Level.INFO, "Ventana NO cargada. Ya hay una instancia de la clase. Se ejecuta hilo de advertencia soporte único a monoinstancia");
+					//Cargamos el hilo de rutina monoinstancia. Nuestro hilo main muere después.
+					RutinaMonoInstancia.main(args);
+				}
 	}
 
 	private static boolean lockInstance(final String lockFile) {

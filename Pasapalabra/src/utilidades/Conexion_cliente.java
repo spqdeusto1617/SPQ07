@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.Socket;
+import java.net.SocketException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -157,50 +158,62 @@ public class Conexion_cliente {
 					}
 					break;
 				case "Jugar":
-					out.println("Todos");
+					out.println(datos_cliente[1]);
 					respuesta=in.readObject();
 					if(respuesta.equals("Ok")){
 
 						return;
 					}
 					else if(respuesta.equals("Error")){
-
+						throw new SecurityException("Error al leer el tipo de pregunta");
 					}
 					break;
 				case "Obtener_Pregunta":
 
+					try{
+						out.println("OK");//FIXME: ¿por qué da Socket exception?
+						
+						respuesta= in.readObject();
+						
+						if(!respuesta.equals("Fin")){
 
-					out.println("OK");
-					respuesta= in.readObject();
-				
-					if(!respuesta.equals("Fin")){
-						System.out.println(respuesta);
-					Pregunta=(String) respuesta;
-					respuesta=in.readObject();
-					Letra_Actual=(char) respuesta;
-					
-					return;
+							Pregunta=(String) respuesta;
+							respuesta=in.readObject();
+							Letra_Actual=(char) respuesta;
+
+							return;
+						}
+
+
+						System.out.println("A acabar en pregunta");
+						Correctas=(int) in.readObject();
+
+
+						Incorrectas=(int) in.readObject();
+
+						EventosJuego.juegoEnCurso=false;
+					}catch (SocketException e) {
+						System.out.println("Al catch");
+						
+						EventosJuego.juegoEnCurso=false;
 					}
-					
-					EventosJuego.juegoEnCurso=false;
-					Correctas=(int) in.readObject();
-					Incorrectas=(int) in.readObject();
-					
 					//out.println("Ok");
 					//FIXME: Software caused connection abort ¿por qué da esto?
 					return;
 				case "Responder_Pregunta":
 
 					out.println(Respuesta);
-					
+
 					respuesta=in.readObject();
 					
 					if(!respuesta.equals("Fin")){
 						if(respuesta.equals("Bien")){
 							Acierto=true;
+							Correctas++;
 						}
 						else if("Mal".equals(respuesta)){
 							Acierto=false;
+							Incorrectas++;
 						}
 						else if("Ok".equals(respuesta)){
 
@@ -208,17 +221,19 @@ public class Conexion_cliente {
 
 						return;
 					}
-					EventosJuego.juegoEnCurso=false;
+					System.out.println("A acabar en respuesta");
 					Correctas=(int) in.readObject();
 					Incorrectas=(int) in.readObject();
-//					System.out.println("Fin");
-//					EventosJuego.juegoEnCurso=false;
-//					respuesta=in.readObject();
-//					if (!"Ok".equals(respuesta)) throw new IOException( "Conexión errónea: " + Respuesta );
-//					Correctas=(int) in.readObject();
-//					Incorrectas=(int) in.readObject();
-//					System.out.println(Correctas+" Correctas "+Incorrectas +" Incorrectas");
-//					out.println("Ok");
+					EventosJuego.juegoEnCurso=false;
+
+					//					System.out.println("Fin");
+					//					EventosJuego.juegoEnCurso=false;
+					//					respuesta=in.readObject();
+					//					if (!"Ok".equals(respuesta)) throw new IOException( "Conexión errónea: " + Respuesta );
+					//					Correctas=(int) in.readObject();
+					//					Incorrectas=(int) in.readObject();
+					//					System.out.println(Correctas+" Correctas "+Incorrectas +" Incorrectas");
+					//					out.println("Ok");
 					return;
 				case "Imagen":
 
@@ -300,7 +315,7 @@ public class Conexion_cliente {
 					}
 					break;
 				case "Estadisticas":
-					//TODO: terminar esto
+					
 					break;
 				case "Eliminar":
 					for (String string : datos_cliente) {
@@ -431,7 +446,7 @@ public class Conexion_cliente {
 					break;
 				}
 				//Procedimiento para finalizar la conexión
-				
+
 				out.println( "END" );
 				respuesta = in.readObject();
 				if (!"ACK".equals(respuesta)) throw new IOException( "Conexión errónea: respuesta del servidor inesperada: " + respuesta );

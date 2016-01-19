@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -68,7 +69,7 @@ public class Servidor extends Application{
 				try {
 					funcionando = true;
 					servidor = new ServerSocket(PUERTO_DEL_SERVIDOR);
-
+					leeDeFichero();
 					while (funcionando) {
 
 
@@ -224,10 +225,10 @@ public class Servidor extends Application{
 					dato=in.readLine();
 					int Preguntas_bien=0;
 					int Preguntas_mal=0;
-					if(dato.equals("Todos")){
+					if(dato.equals("Todos")||dato.equals("Geografía")||dato.equals("Entretenimiento")||dato.equals("Ciencia")||dato.equals("Historia")||dato.equals("Arte")||dato.equals("Deportes")){
 						boolean ya_hay_n=false;
 						for(char alphabet = 'a'; alphabet <= 'z';alphabet++) {
-
+						
 							if(alphabet=='o'&&ya_hay_n==false){
 								alphabet--;
 								ya_hay_n=true;
@@ -237,7 +238,7 @@ public class Servidor extends Application{
 								Preguntas.add(BaseDeDatosPreguntas.obtenerpreguntasportipo(Tipo_pregunta.Todos, alphabet));
 							}
 						}
-
+						
 						out.writeObject("Ok");
 						
 						
@@ -247,20 +248,21 @@ public class Servidor extends Application{
 						while(Todas_respondidas==false&&Rendirse==false){
 							
 							for(int i=0;i<Preguntas.size();i++) {
+								if(!Preguntas.get(i).respondida==true){
 								dato=in.readLine();
 								if (!"OK".equals(dato)) throw new IOException( "Conexión errónea: " + dato );
-								
-								if(!Preguntas.get(i).respondida==true){
 									
 								out.writeObject(Preguntas.get(i).Pregunta);
+								
 								out.writeObject(Preguntas.get(i).letra);
 								dato=in.readLine();
+								System.out.println(dato+" respuesta del usuario");
 								if(dato.equals("Pasapalabra")){
 									out.writeObject("Ok");
 								}
 								else if(dato.equals("Rendirse")){
 									Rendirse=true;
-									System.out.println("Se rinde");
+									
 									i=Preguntas.size();
 									for(int j=0;j<Preguntas.size();j++){
 										if(Preguntas.get(j).respondida==false){
@@ -279,15 +281,19 @@ public class Servidor extends Application{
 									out.writeObject("Mal");
 								}
 								Todas_respondidas=TodasRespondidas(Preguntas);
+								System.out.println("Todas respondidas: "+Todas_respondidas);
 								
 							}
+								
 							}
 						}
 						out.reset();
 						out.writeObject("Fin");
+						System.out.println("Despues de enviar fin, envío las preguntas");
 						out.writeObject(Preguntas_bien);
-
+						System.out.println("Preguntas bien enviadas");
 						out.writeObject(Preguntas_mal);
+						System.out.println("Preguntas mal enviadas");
 						addMensaje("Juego acabado");
 						return;
 						//in.readLine();
@@ -295,8 +301,9 @@ public class Servidor extends Application{
 					}
 					else{
 						out.writeObject("Error");
+						return;
 					}
-					break;
+				
 				case "Imagen":
 
 					addMensaje("Empiezo a recibir la información\n");
@@ -528,6 +535,10 @@ public class Servidor extends Application{
 				//					System.out.println("El usuario "+ key+" tiene: "+entry.getValue().toString());
 				//				}
 				escribeAFichero();
+//				for (Map.Entry<String,ArrayList<Tipo_Amigo>> entry : Amigos_usuarios.entrySet()) {
+//					String key = entry.getKey();
+//					System.out.println("El usuario "+ key+" tiene: "+entry.getValue().toString());
+//				}
 				Datos_Usuario.removeAll(Datos_Usuario);
 				out.reset();
 
@@ -675,8 +686,10 @@ public class Servidor extends Application{
 		}
 
 	}
+	
 	public static boolean TodasRespondidas(ArrayList<Preguntas> aPreguntas){
 		for (Preguntas preguntas : aPreguntas) {
+			
 			if(preguntas.respondida==false){
 				return false;
 			}
