@@ -86,6 +86,7 @@ public class EventosLogIn extends Control implements Initializable {
 			utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Comprobar.toString(),null);
 			log.log(Level.INFO, "Conexión iniciada.");
 		}catch(Exception a){
+			a.printStackTrace();
 			log.log(Level.WARNING, "No se ha podido establecer conexión con el servidor", a);
 			//Alertamos al usuario de que no hay conexión con servidor
 			Alert alert = new Alert(AlertType.ERROR);

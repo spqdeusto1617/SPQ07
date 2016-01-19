@@ -1,5 +1,6 @@
 package utilidades;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
@@ -42,7 +43,9 @@ public class Conexion_cliente {
 	public static int Correctas=0;
 	public static int Incorrectas=0;
 	public static char Letra_Actual;
-
+	public static boolean Mi_Turno;
+	public static String Nombre_j2;
+	
 	/**Método de utilidad para poder lanzar la conexión con el servidor
 	 * @param ip :la ip del servidor
 	 * @param accion :la acción que se quiere realizar (es un ENUM, mirar la clase: Acciones_servidor para más info)
@@ -50,7 +53,7 @@ public class Conexion_cliente {
 	 * @throws IOException :si hay algún problema con el servidor
 	 * @throws SQLException :si el usuario introduce algo mal
 	 */
-	public static void lanzaConexion( String ip, String accion,String[]datos_cliente) throws IOException, SQLException,SecurityException,Error{
+	public static void lanzaConexion( String ip, String accion,String[]datos_cliente) throws IOException, SQLException,SecurityException,SocketException{
 		// Pide la dirección del servidor
 
 		if (!ip.equals("")) {
@@ -61,7 +64,7 @@ public class Conexion_cliente {
 					// Realiza la conexión e inicializa los flujos de comunicación
 					System.out.println();
 					socket = new Socket(ip, 9898);
-
+					socket.setSoTimeout(6000);
 					in = new ObjectInputStream( socket.getInputStream() );
 
 					out = new PrintWriter(socket.getOutputStream(), true);
@@ -79,7 +82,7 @@ public class Conexion_cliente {
 				switch (accion) {
 				case "Comprobar":
 					//TODO: terminar esto(faltan noticias)
-
+					
 					break;
 				case "Crear_Usuario":
 
@@ -158,23 +161,54 @@ public class Conexion_cliente {
 					}
 					break;
 				case "Jugar":
+					System.out.println("A jugar");
 					out.println(datos_cliente[1]);
+					try{
+					respuesta=in.readObject();
+					}catch (EOFException e) {
+						e.printStackTrace();
+						lanzaConexion(Ip_Local, "DeJuego", datos_cliente);
+						
+						throw new SocketException("Partida no encontrada");
+					}
+					System.out.println(respuesta);
+					if(respuesta.equals("Encontrado")){
+
+						System.out.println("Encontrado");
+					}
+					else{
+						throw new SecurityException("Error al buscar");
+					}
 					respuesta=in.readObject();
 					if(respuesta.equals("Ok")){
 
-						return;
+
 					}
 					else if(respuesta.equals("Error")){
 						throw new SecurityException("Error al leer el tipo de pregunta");
 					}
-					break;
+					respuesta=in.readObject();
+					if(respuesta.equals("Turno")){
+						Mi_Turno=true;
+
+					}
+					else if(respuesta.equals("No turno")){
+						Mi_Turno=false;
+					}
+					else{
+						throw new SecurityException("Error en el turno");
+					}
+					out.println(Datos_Usuario.get(0));
+					Nombre_j2=(String) in.readObject();
+					System.out.println("Y a jugar");
+					return;
 				case "Obtener_Pregunta":
 
 					try{
 						out.println("OK");//FIXME: ¿por qué da Socket exception?
-						
+
 						respuesta= in.readObject();
-						
+
 						if(!respuesta.equals("Fin")){
 
 							Pregunta=(String) respuesta;
@@ -194,7 +228,7 @@ public class Conexion_cliente {
 						EventosJuego.juegoEnCurso=false;
 					}catch (SocketException e) {
 						System.out.println("Al catch");
-						
+
 						EventosJuego.juegoEnCurso=false;
 					}
 					//out.println("Ok");
@@ -205,7 +239,7 @@ public class Conexion_cliente {
 					out.println(Respuesta);
 
 					respuesta=in.readObject();
-					
+
 					if(!respuesta.equals("Fin")){
 						if(respuesta.equals("Bien")){
 							Acierto=true;
@@ -315,7 +349,7 @@ public class Conexion_cliente {
 					}
 					break;
 				case "Estadisticas":
-					
+
 					break;
 				case "Eliminar":
 					for (String string : datos_cliente) {
@@ -441,7 +475,9 @@ public class Conexion_cliente {
 					}
 					break;
 
-
+				case "DeJuego":
+					out.println(datos_cliente[1]);
+					break;
 				default:
 					break;
 				}

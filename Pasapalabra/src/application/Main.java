@@ -152,18 +152,18 @@ public class Main extends Application {
 	 * @param args Argumentos de consola (no se utilizan)
 	 */
 	public static void main(String[] args) {
-		
-				if (lockInstance("block.dat")){
-					//Aquí se carga toda la aplicación
-					launch(args);
-					log.log(Level.FINEST, "Ventana cargada. FIN HILO MAIN.JAVA");
-					
-					//Hilo main muerto.
-				}else{
-					log.log(Level.INFO, "Ventana NO cargada. Ya hay una instancia de la clase. Se ejecuta hilo de advertencia soporte único a monoinstancia");
-					//Cargamos el hilo de rutina monoinstancia. Nuestro hilo main muere después.
-					RutinaMonoInstancia.main(args);
-				}
+		launch(args);
+//				if (lockInstance("block.dat")){
+//					//Aquí se carga toda la aplicación
+//					launch(args);
+//					log.log(Level.FINEST, "Ventana cargada. FIN HILO MAIN.JAVA");
+//					
+//					//Hilo main muerto.
+//				}else{
+//					log.log(Level.INFO, "Ventana NO cargada. Ya hay una instancia de la clase. Se ejecuta hilo de advertencia soporte único a monoinstancia");
+//					//Cargamos el hilo de rutina monoinstancia. Nuestro hilo main muere después.
+//					RutinaMonoInstancia.main(args);
+//				}
 	}
 
 	private static boolean lockInstance(final String lockFile) {
