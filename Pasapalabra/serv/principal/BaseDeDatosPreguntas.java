@@ -55,6 +55,13 @@ public class BaseDeDatosPreguntas {
 		}
 		
 	}
+	/**Método para introducir preguntas a la base de datos de preguntas
+	 * @param pregunta la pregunta
+	 * @param respuesta la respuesta
+	 * @param Creador el creador
+	 * @param Letra la letra que sería
+	 * @param tipo_de_pregunta el tipo de pregunta (revisar Tipo_pregunta.java)
+	 */
 	public static void meterPreguntas(String pregunta,String respuesta,String Creador,char Letra,Tipo_pregunta tipo_de_pregunta){
 		int id = 0;
 		try{
@@ -77,6 +84,11 @@ public class BaseDeDatosPreguntas {
 		}
 		
 	}
+	/**Método que obtiene preguntas aleatoriamente de las preguntas disponibles dependiendo de la letra que se que quiera y del tipo de pregunta
+	 * @param tipo el tipo de pregunta
+	 * @param letra_de_la_pregunta  la letra
+	 * @return la pregunta (tipo pregunta)
+	 */
 	public static Preguntas obtenerpreguntasportipo(Tipo_pregunta tipo,char letra_de_la_pregunta){
 		
 

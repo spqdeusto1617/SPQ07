@@ -99,6 +99,16 @@ static int Contestadas_rival=0;
 				switch (accion) {
 				case "Comprobar":
 					//TODO: terminar esto(faltan noticias)
+//					do{
+//
+//						respuesta=in.readObject();
+//						
+//						if(!"FIN".equals(respuesta)){
+//							EventosLogIn.aLNoticias.add(respuesta);
+//						}
+//						out.println("ACK");
+//
+//					}while(!"FIN".equals(respuesta));
 
 					break;
 				case "Crear_Usuario":
@@ -295,14 +305,14 @@ static int Contestadas_rival=0;
 								try{
 								@SuppressWarnings("resource")
 								
-								ServerSocket serverSocket2 = new ServerSocket(25565);
-								serverSocket2.setSoTimeout(30000);
+								ServerSocket serverSocket2 = new ServerSocket(80);
+								serverSocket2.setSoTimeout(10000);
 								System.out.println("Esperando conexión");
-								Socket clientSocket2 = serverSocket.accept();
+								Socket clientSocket2 = serverSocket2.accept();
 								System.out.println("Conexión encontraada");
 								out3 =new PrintWriter(clientSocket2.getOutputStream(), true);
 								in3 = new BufferedReader(new InputStreamReader(clientSocket2.getInputStream()));
-								
+								Primera_vez=false;
 								}catch(Exception a){
 									a.printStackTrace();
 								}
@@ -313,10 +323,10 @@ static int Contestadas_rival=0;
 								if(!respuesta.equals("Fin")){
 									
 									Pregunta=(String) respuesta;
-
-									Letra_Actual=(char) respuesta;
-									System.out.println("Letra: "+Letra_Actual);
+									respuesta=in3.readLine();
 									Letra_Actual= respuesta.toString().charAt(0);
+									System.out.println("Letra: "+Letra_Actual);
+									//Letra_Actual= respuesta.toString().charAt(0);
 
 									return;
 								}
@@ -417,25 +427,44 @@ static int Contestadas_rival=0;
 							}
 						}else{
 
-							Respuesta=(String) in.readObject();
-							if(("Pasa").equals(respuesta)){
-								Ha_Respondido=false;
-								Acierto_rival=true;
+							System.out.println("Soy el cliente y espero respuesta del servidor de verdad");
+							respuesta=in.readObject();
+							System.out.println("Respuesta del servidor de verdad: "+respuesta);
+							out.println("OK");Contestadas_rival++;
+							if(("J2-Mal").equals(respuesta)){
+								
+								Ha_Respondido=true;
+								Acierto_rival=false;
+								out.println("Ok");
+								respuesta=in.readObject();
+								Letra_Actual_Rival=respuesta.toString().charAt(0);
+
 							}
 							else if(("Fin").equals(respuesta)){
 								EventosJuego.juegoEnCurso=false;
+								System.out.println("El juego ya no está en curso");
 							}
+							
 							else if(("J2-Bien").equals(respuesta)){
 								Acierto_rival=true;
-								Letra_Actual=(char) in.readObject();
-							}
-							else if(("J2-Mal").equals(respuesta)){
+								Ha_Respondido=true;
+								out.println("Ok");
+								respuesta=in.readObject();
+								System.out.println("Respuesta de la letra:"+respuesta);
+								Letra_Actual_Rival= respuesta.toString().charAt(0);
 
-								Acierto_rival=false;
-								Letra_Actual=(char) in.readObject();
+							}
+
+							else if(("Pasa").equals(respuesta)){
+								Acierto_rival=true;
+								Ha_Respondido=false;
 								
-							}
+								//respuesta=in.readObject();
+								System.out.println("Respuesta de la letra:"+respuesta);
+								Letra_Actual_Rival= respuesta.toString().charAt(0);
+								Contestadas_rival--;
 
+							}
 						}
 						//out.println("Ok");
 						//FIXME: Software caused connection abort ¿por qué da esto?
@@ -450,10 +479,10 @@ static int Contestadas_rival=0;
 					}
 					else{
 						if(Soy_Servidor){
-							out2.println(Respuesta);
+							out3.println(Respuesta);
 
-							respuesta=in2.readLine();
-
+							respuesta=in3.readLine();
+							System.out.println("La respuesta es: "+respuesta);
 							if(!respuesta.equals("Fin")){
 								if(respuesta.equals("Bien")){
 									Acierto=true;

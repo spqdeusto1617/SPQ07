@@ -127,7 +127,7 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
         tblTablaAmigos.getColumns().addAll(firstNameCol, lastNameCol);
       
  
-        
+        //Intenta obtener los amigos que tiene (si no hay, se indicaría que no tiene)
 	    
 		try {
 			utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Amigos.toString(), Datos);
@@ -181,6 +181,10 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 	public void Anyadir(MouseEvent event){
 		 data.add(new Person("Z","P"));
 	}
+	/**AccionListener para buscar amigos. Se envía el amigo a buscar al servidor (previamente evaluado que no esté en su lista) y se le da la obción de enviar la 
+	 * solicitud o no. Si contesta afirmativo, se añade una solicitud a ambos
+	 * @param event
+	 */
 	public void btnBuscarAmigos(MouseEvent event){
 		
 			String[]Dato=new String[1];
@@ -295,6 +299,10 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 	}
 }
 
+/**Clase interna para gestionar los amigos (deprecated)
+ * @author Ivan
+ *
+ */
 class Person {
 	 
 //    private final SimpleStringProperty nombreUsuario;

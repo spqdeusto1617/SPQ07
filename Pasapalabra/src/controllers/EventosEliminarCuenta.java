@@ -112,6 +112,9 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 		imagenAvatar.setCache(true); 
 	}
 	
+	/**Accionlistener para eliminar la cuenta, si se quiere (tras validar datos), se eliminará la cuenta de la base de datos 
+	 * @param event el evento de ventana
+	 */
 	public void btnEliminarCuenta(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmar cambios");
@@ -216,7 +219,9 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 		}
 	}
 	
-	
+	/**Botón para descartar los cambios realizados. Si se acepta rechazarlos, se vuelve a la ventana anterior
+	 * @param event el evneto de ventana
+	 */
 	public void btnDescartar(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Descartar cambios");

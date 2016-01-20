@@ -85,12 +85,9 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			// TODO Auto-generated method stub
-//			Datos_Necesarios_Cliente.add(utilidades.Conexion_cliente.Datos_Usuario.get(0));//Nombre usuario
-//			Datos_Necesarios_Cliente.add(utilidades.Conexion_cliente.Datos_Usuario.get(2));//Mail
-//			Datos_Necesarios_Cliente.add(utilidades.Conexion_cliente.Datos_Usuario.get(3));//Pass
-//			Datos_Necesarios_Cliente.add(utilidades.Conexion_cliente.Datos_Usuario.get(5));//Path
+//		
 			textoNombreDeUsuario.setText(utilidades.Conexion_cliente.Datos_Usuario.get(0));
-			//panel.getStylesheets().add("application/application.css");
+			
 			rectanguloAmigos.setOpacity(0.3f);
 			rectanguloEstadisticas.setOpacity(0.3f);
 			rectanguloJugar.setOpacity(0.3f);
@@ -124,6 +121,9 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 			utilidades.deVentana.transicionVentana("EliminarCuenta", event);
 		}
 		
+		/**AccionListener para poder cambiar la imagen del usuario
+		 * @param event el evento de ventana
+		 */
 		public void cambioImagen (MouseEvent event){
 			//Otro stage para cargar el filechooser
 			Stage stageFilechooser = new Stage();

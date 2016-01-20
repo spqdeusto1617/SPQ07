@@ -141,7 +141,17 @@ public class Servidor extends Application{
 				switch (accion) {
 				case "Comprobar":
 					//TODO: terminar esto(faltan noticias)
-
+//					for (int i=0;i<CVentanaCaptura.aLNoticias.size();i++) {
+//
+//						out.println(CVentanaCaptura.aLNoticias.get(i));
+//						accion = in.readLine();
+//
+//						if (!"ACK".equals(accion)) throw new IOException( "Conexión errónea: " + accion );
+//					}
+//					out.writeObject("Fin");
+//					accion = in.readLine();
+//
+//					if (!"ACK".equals(accion)) throw new IOException( "Conexión errónea: " + accion );
 					addMensaje("Comprobación realizada\n");
 					break;
 				case "Crear_Usuario":
@@ -391,10 +401,10 @@ public class Servidor extends Application{
 							}
 							try{
 								System.out.println("A dormir");
-								Thread.sleep(5000);
+								Thread.sleep(10000);
 								System.out.println("Fin de dormir");
 								@SuppressWarnings("resource")
-								Socket socket3 =  new Socket("127.0.0.1", 25565);
+								Socket socket3 =  new Socket("127.0.0.1", 80);
 
 								OutputStream os2  = socket3.getOutputStream();
 								PrintWriter out3  = new PrintWriter(os2, true);
@@ -428,7 +438,7 @@ public class Servidor extends Application{
 
 												out3.println("Ok");
 
-
+												
 												out.writeObject("Pasa");
 
 												//TODO: ¿letra?
@@ -441,11 +451,13 @@ public class Servidor extends Application{
 												i=Preguntas_Jugador2.size();
 											}
 											else if(dato.equalsIgnoreCase(Preguntas_Jugador1.get(i).Respuesta)){
-
+												
 												Preguntas_bien_jugador_2++;
 												Preguntas_Jugador2.get(i).respondida=true;
 												out3.println("Bien");
 												out.writeObject("J2-Bien");
+												in.readLine();
+												Letra_Actual_J2=Preguntas_Jugador1.get(i).letra;
 												out.writeObject(Letra_Actual_J2);
 
 											}
@@ -457,6 +469,8 @@ public class Servidor extends Application{
 												Preguntas_Jugador2.get(i).respondida=true;
 												out3.println("Mal");
 												out.writeObject("J2-Mal");
+												in.readLine();
+												Letra_Actual_J2=Preguntas_Jugador1.get(i).letra;
 												out.writeObject(Letra_Actual_J2);
 
 
@@ -483,7 +497,7 @@ public class Servidor extends Application{
 								out3.println(Preguntas_mal_jugador2);
 								System.out.println("Preguntas mal enviadas");
 							}catch(Exception a){
-
+								a.printStackTrace();
 							}
 							if(Preguntas_bien_jugador_1>Preguntas_bien_jugador_2){
 								BaseDeDatosUsuarios.Anyadir_registro_partida(Nombre_j1, Nombre_j2, "victoria");

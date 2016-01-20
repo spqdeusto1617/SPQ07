@@ -1,5 +1,9 @@
 package principal;
 
+/**Clase de utilidad para poder gestionar las preguntas de los jugadores
+ * @author Ivan
+ *
+ */
 public class Preguntas{
 	String Pregunta;
 	String Respuesta;

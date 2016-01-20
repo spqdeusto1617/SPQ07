@@ -121,6 +121,9 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 		imagenAvatar.setCache(true); 
 	}
 
+	/**AccionListener para Cambiar tu correo, te pide validar datos, y si son correctos, intenta cambiarlo en el servidor 
+	 * @param event el evento de acción
+	 */
 	public void btnCambiarCorreo(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmar cambios");
@@ -222,6 +225,9 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 		}
 	}
 
+	/**Idéntico que el correo, pero con la contraseña
+	 * @param event el evento
+	 */
 	public void btnCambiarContrasenya(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmar cambios");
@@ -322,6 +328,9 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 		}
 	}
 
+	/**Botón para descartar los cambios realizados. Si se acepta rechazarlos, se vuelve a la ventana anterior
+	 * @param event el evneto de ventana
+	 */
 	public void btnDescartar(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Descartar cambios");

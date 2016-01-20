@@ -281,6 +281,10 @@ public class BaseDeDatosUsuarios {
 			throw new SQLException("Error al eliminar");
 		}
 	}
+	/**Método para obtener la posición en el ranking que ocupa un usuario (relativo a partidas ganadas)
+	 * @param Partidas_Ganadas la cantidad de partidas ganadas
+	 * @return devuelve los gugadores que tienen más victorias que el usuario +1
+	 */
 	public static String Pos_Usuario_Ranking(int Partidas_Ganadas){
 		String query = "SELECT COUNT(*)+1 FROM USUARIOS WHERE PARTIDAS_GANADAS>"+Partidas_Ganadas+"";
 		try {
@@ -292,6 +296,11 @@ public class BaseDeDatosUsuarios {
 			return null;
 		}
 	}
+	/**Método para guardar el resultado de una partida
+	 * @param Usuario_1 el primer usuario 
+	 * @param Usuario_2 el segundo usuario
+	 * @param Resultado el resultado (relativo al jugador 1)
+	 */
 	public static void Anyadir_registro_partida(String Usuario_1, String Usuario_2, String Resultado){
 		String query ="";
 		
