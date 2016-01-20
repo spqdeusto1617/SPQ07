@@ -292,13 +292,51 @@ public class BaseDeDatosUsuarios {
 			return null;
 		}
 	}
+	public static void Anyadir_registro_partida(String Usuario_1, String Usuario_2, String Resultado){
+		String query ="";
+		
+		if(Resultado.equalsIgnoreCase("Victoria")){
+			 query = "UPDATE USUARIOS SET PARTIDAS_GANADAS=PARTIDAS_GANADAS+1 WHERE NOMBRE_USUARIO='"+Usuario_1+"'";
+		}
+		else if(Resultado.equalsIgnoreCase("Empate")){
+			query = "UPDATE USUARIOS SET PARTIDAS_EMPATADAS=PARTIDAS_EMPATADAS+1 WHERE NOMBRE_USUARIO='"+Usuario_1+"'";
+		}
+		else if(Resultado.equalsIgnoreCase("Derrota")){
+			query = "UPDATE USUARIOS SET PARTIDAS_PERDIDAS=PARTIDAS_PERDIDAS+1 WHERE NOMBRE_USUARIO='"+Usuario_1+"'";
+		}
+		try {
+			s.executeUpdate(query);
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		}
+		if(Resultado.equalsIgnoreCase("Victoria")){
+			 query = "UPDATE USUARIOS SET PARTIDAS_PERDIDAS=PARTIDAS_PERDIDAS+1 WHERE NOMBRE_USUARIO='"+Usuario_2+"'";
+		}
+		else if(Resultado.equalsIgnoreCase("Empate")){
+			query = "UPDATE USUARIOS SET PARTIDAS_EMPATADAS=PARTIDAS_EMPATADAS+1 WHERE NOMBRE_USUARIO='"+Usuario_2+"'";
+		}
+		else if(Resultado.equalsIgnoreCase("Derrota")){
+			query = "UPDATE USUARIOS SET PARTIDAS_GANADAS=PARTIDAS_GANADAS+1 WHERE NOMBRE_USUARIO='"+Usuario_2+"'";
+		}
+		try {
+			s.executeUpdate(query);
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		}
+	}
+	
 	public static void main(String[] args) throws SQLException {
 		iniciarConexion();
 
 
 				try{
-					String a=Pos_Usuario_Ranking(5);
-					System.out.println(a);
+					Anyadir_registro_partida("12345678", "123456789", "victoria");
 				}catch(Exception a){
 					a.printStackTrace();
 				}

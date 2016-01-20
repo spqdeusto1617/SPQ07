@@ -7,9 +7,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -21,6 +24,8 @@ import java.util.Optional;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.junit.internal.runners.model.EachTestNotifier;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -53,7 +58,7 @@ public class Servidor extends Application{
 	static ArrayList<String>Clientes_conectados=new ArrayList<>();//Los clientes conectados
 	static String[]Datos_Enviar_Usuario;//Los datos a enviar al usuario (si son varios)
 	static TreeMap<String, ArrayList<Tipo_Amigo>>Amigos_usuarios=new TreeMap<>();
-	static TreeMap<String, ArrayList<Socket>>MatchMaking=new TreeMap<String, ArrayList<Socket>>();
+	static ArrayList<Socket> Clientes=new ArrayList<Socket>();
 	public static void addMensaje(String s) {
 		Servidor.s2 = s2 + s;
 		if(s2.length()>300){
@@ -87,7 +92,9 @@ public class Servidor extends Application{
 					}
 			}
 		}).start();
+
 	}
+
 	/**
 	 * Proceso para cerrar el servidor
 	 */
@@ -114,21 +121,26 @@ public class Servidor extends Application{
 
 			String accion="";
 			String dato="";
-			try {
 
+			try {
 				BufferedReader in = new BufferedReader( new InputStreamReader(socket.getInputStream()) );
 				ObjectOutputStream out = new ObjectOutputStream( socket.getOutputStream() ); 
+
+
+
 				// Envía mensaje de comunicación establecida
 				out.writeObject( "ACK" );
 				// Recibe la acción que va a hacer el cliente
 				accion = in.readLine();
-
 				addMensaje("Quiere: "+accion+"\n");
+
+
+
 				out.writeObject( "ACK" );
+
 				switch (accion) {
 				case "Comprobar":
 					//TODO: terminar esto(faltan noticias)
-
 
 					addMensaje("Comprobación realizada\n");
 					break;
@@ -227,23 +239,28 @@ public class Servidor extends Application{
 					ArrayList<Preguntas>Preguntas_Jugador2=new ArrayList<>();
 
 					dato=in.readLine();
-					if(!MatchMaking.containsKey(dato)){
-						MatchMaking.put(dato, new ArrayList<Socket>());
-					}
-					if(MatchMaking.get(dato).size()==0){
-						MatchMaking.get(dato).add(socket);
-						System.out.println("Lo añado a espera y me voy");
+					if(Clientes.size()==0){
+						Clientes.add(socket);
+						out.writeObject("Nadie");
 						return;
 					}
+
 					else{
-						Socket socket2=MatchMaking.get(dato).get(0);
-						MatchMaking.get(dato).remove(0);
+
+						System.out.println("Soy el segundo cliente");
+
+						Socket socket2 =  new Socket("127.0.0.1", 9899);
+						OutputStream os  = socket2.getOutputStream();
+						PrintWriter out2  = new PrintWriter(os, true);
+						System.out.println("Conexion establecida");
+						//						Socket socket2=MatchMaking.get(dato).get(0);
+						Clientes.remove(0);
+						//BufferedReader in2 = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 						BufferedReader in2 = new BufferedReader( new InputStreamReader(socket2.getInputStream()) );
-						ObjectOutputStream out2 = new ObjectOutputStream( socket2.getOutputStream() ); 
+						//ObjectOutputStream out2 = new ObjectOutputStream( socket2.getOutputStream() ); 
 						out.writeObject("Encontrado");
-						out2.writeObject("Encontrado");
-						int Preguntas_bien=0;
-						int Preguntas_mal=0;
+						out2.println("Encontrado");
+						System.out.println("Encontrado, se procede a empezar");
 						if(dato.equals("Todos")||dato.equals("Geografía")||dato.equals("Entretenimiento")||dato.equals("Ciencia")||dato.equals("Historia")||dato.equals("Arte")||dato.equals("Deportes")){
 							boolean ya_hay_n=false;
 							for(char alphabet = 'a'; alphabet <= 'z';alphabet++) {
@@ -261,104 +278,224 @@ public class Servidor extends Application{
 							}
 							System.out.println("Encontrado emparejamiento");
 							out.writeObject("Ok");
-							out2.writeObject("Ok");
+							out2.println("Ok");
 							out.writeObject("Turno");
-							out2.writeObject("No turno");
+							out2.println("No turno");
+							System.out.println("Termino con los turnos");
 							boolean Rendirse_jugador_1=false;
 							boolean Todas_respondidas_jugador_1=false;
 							boolean Rendirse_jugador_2=false;
 							boolean Todas_respondidas_jugador_2=false;
-							boolean Tiene_Turno_j1=true;
+
 							int Preguntas_bien_jugador_1=0;
 							int Preguntas_mal_jugador1=0;
 							String Nombre_j1=in.readLine();
 
 							int Preguntas_bien_jugador_2=0;
 							String Nombre_j2=in2.readLine();
-							out.writeObject(Nombre_j1);
 
-							out2.writeObject(Nombre_j2);
+
+							out.writeObject(Nombre_j2);
+
+							out2.println(Nombre_j1);
 							int Preguntas_mal_jugador2=0;
-							while((Todas_respondidas_jugador_1==false&&Rendirse_jugador_1==false)||(Todas_respondidas_jugador_2==false&&Rendirse_jugador_2==false)){
+							System.out.println("Al while");
+							char Letra_Actual_J1='a';
+							char Letra_Actual_J2='a';
+							int Pregunta_j1=0;
+							int Pregunta_j2=0;
+							while((Todas_respondidas_jugador_1==false&&Rendirse_jugador_1==false)){
+								System.out.println("Entro al for");
 
-								for(int i=0;i<Preguntas_Jugador1.size();i++) {
+
+
+								for(int i=Pregunta_j1;i<Preguntas_Jugador1.size();i++) {
+
+									System.out.println("Entro en el for de j1");
 									if(!Preguntas_Jugador1.get(i).respondida==true){
+										Letra_Actual_J1=Preguntas_Jugador1.get(i).letra;
 										dato=in.readLine();
-										if (!"OK".equals(dato)) throw new IOException( "Conexión errónea: " + dato );
+										if(!dato.equals("OK")){	System.out.println(dato+" dato recivido");}
+
 
 										out.writeObject(Preguntas_Jugador1.get(i).Pregunta);
 
 										out.writeObject(Preguntas_Jugador1.get(i).letra);
-										dato=in.readLine();
+										try{
+											dato=in.readLine();
+										}catch(SocketException a){
+											dato="Rendirse";
+										}
 										System.out.println(dato+" respuesta del usuario");
 										if(dato.equals("Pasapalabra")){
+
 											out.writeObject("Ok");
+											out2.println("Pasa");
+											in2.readLine();
+
+
+
 										}
 										else if(dato.equals("Rendirse")){
-											if(Tiene_Turno_j1){
-												Rendirse_jugador_1=true;
 
-												i=Preguntas_Jugador1.size();
-												for(int j=0;j<Preguntas_Jugador1.size();j++){
-													if(Preguntas_Jugador1.get(j).respondida==false){
-														Preguntas_mal_jugador1++;
-													}
-												}
-											}else{
-												Rendirse_jugador_2=true;
-
-												i=Preguntas_Jugador2.size();
-												for(int j=0;j<Preguntas_Jugador2.size();j++){
-													if(Preguntas_Jugador2.get(j).respondida==false){
-														Preguntas_mal_jugador2++;
-													}
-												}	
-											}
+											Preguntas_bien_jugador_1=-1;
+											Rendirse_jugador_1=true;
+											Rendirse_jugador_2=true;
+											i=Preguntas_Jugador1.size();
 										}
 										else if(dato.equalsIgnoreCase(Preguntas_Jugador1.get(i).Respuesta)){
-											if(Tiene_Turno_j1){
-												Preguntas_bien_jugador_1++;
-												Preguntas_Jugador1.get(i).respondida=true;
-												out.writeObject("Bien");
-											}else{
+
+											Preguntas_bien_jugador_1++;
+											Preguntas_Jugador1.get(i).respondida=true;
+											out.writeObject("Bien");
+
+											out2.println("J1-Bien");
+											System.out.println("Espero respuesta de j2");
+											in2.readLine();
+											out2.println(Letra_Actual_J1);
+										}
+
+										else{
+
+											Preguntas_mal_jugador1++;
+											Preguntas_Jugador1.get(i).respondida=true;
+											out.writeObject("Mal");
+
+											out2.println("J1-Mal");
+											System.out.println("Espero respuesta de j2");
+											in2.readLine();
+											System.out.println("Respondido");
+											out2.println(Letra_Actual_J1);
+
+
+
+
+
+
+										}
+
+										Todas_respondidas_jugador_1=TodasRespondidas(Preguntas_Jugador1);
+
+
+
+									}
+								}
+							}
+							System.out.println("Salgo del while");
+							if(!dato.equals("Rendirse")){
+								dato=in.readLine();
+								if(!dato.equals("OK")){	System.out.println(dato+" dato recivido");}
+								System.out.println("Fin j1, turno j2");
+								out.writeObject("Fin_J1");
+								out2.println("Fin_J1");
+							}
+							try{
+								System.out.println("A dormir");
+								Thread.sleep(5000);
+								System.out.println("Fin de dormir");
+								@SuppressWarnings("resource")
+								Socket socket3 =  new Socket("127.0.0.1", 25565);
+
+								OutputStream os2  = socket3.getOutputStream();
+								PrintWriter out3  = new PrintWriter(os2, true);
+								System.out.println("Conexion establecida");
+
+
+								BufferedReader in3 = new BufferedReader( new InputStreamReader(socket3.getInputStream()) );
+								while (Todas_respondidas_jugador_2==false&&Rendirse_jugador_2==false){
+
+
+
+									for(int i=Pregunta_j2;i<Preguntas_Jugador2.size();i++) {
+										System.out.println("Soy el segundo cliente");
+
+
+										System.out.println("Entro en el for de j2");
+										if(!Preguntas_Jugador2.get(i).respondida==true){
+											System.out.println("Al rollo");
+
+
+
+											out3.println(Preguntas_Jugador2.get(i).Pregunta);
+
+											out3.println(Preguntas_Jugador2.get(i).letra);
+
+
+											dato=in3.readLine();
+
+											System.out.println(dato+" respuesta del usuario");
+											if(dato.equals("Pasapalabra")){
+
+												out3.println("Ok");
+
+
+												out.writeObject("Pasa");
+
+												//TODO: ¿letra?
+
+											}
+											else if(dato.equals("Rendirse")){
+												Preguntas_bien_jugador_2=-1;
+												Rendirse_jugador_2=true;
+												Rendirse_jugador_1=true;
+												i=Preguntas_Jugador2.size();
+											}
+											else if(dato.equalsIgnoreCase(Preguntas_Jugador1.get(i).Respuesta)){
+
 												Preguntas_bien_jugador_2++;
 												Preguntas_Jugador2.get(i).respondida=true;
-												out.writeObject("Bien");
+												out3.println("Bien");
+												out.writeObject("J2-Bien");
+												out.writeObject(Letra_Actual_J2);
+
 											}
-										}
-										else{
-											if(Tiene_Turno_j1){
-												Preguntas_mal_jugador1++;
-												Preguntas_Jugador1.get(i).respondida=true;
-												out.writeObject("Mal");
-												i=Preguntas_Jugador1.size();
-												Tiene_Turno_j1=false;
-											}
+
 											else{
+
+
 												Preguntas_mal_jugador2++;
 												Preguntas_Jugador2.get(i).respondida=true;
-												out.writeObject("Mal");
-												i=Preguntas_Jugador2.size();
+												out3.println("Mal");
+												out.writeObject("J2-Mal");
+												out.writeObject(Letra_Actual_J2);
 
-												Tiene_Turno_j1=true;
+
+
 											}
-										}
-										Todas_respondidas_jugador_1=TodasRespondidas(Preguntas_Jugador1);
-										Todas_respondidas_jugador_2=TodasRespondidas(Preguntas_Jugador2);
-										System.out.println("Todas respondidas: "+Todas_respondidas_jugador_1);
 
+											Todas_respondidas_jugador_2=TodasRespondidas(Preguntas_Jugador2);
+
+
+
+										}
 									}
 
 								}
+
+								out.reset();
+								out.writeObject("Fin");
+								out3.println("Fin");
+								System.out.println("Despues de enviar fin, envío las preguntas");
+								out.writeObject(Preguntas_bien_jugador_1);
+								out3.println(Preguntas_bien_jugador_2);
+								System.out.println("Preguntas bien enviadas");
+								out.writeObject(Preguntas_mal_jugador1);
+								out3.println(Preguntas_mal_jugador2);
+								System.out.println("Preguntas mal enviadas");
+							}catch(Exception a){
+
 							}
-							out.reset();
-							out.writeObject("Fin");
-							System.out.println("Despues de enviar fin, envío las preguntas");
-							out.writeObject(Preguntas_bien_jugador_1);
-							System.out.println("Preguntas bien enviadas");
-							out.writeObject(Preguntas_mal_jugador1);
-							System.out.println("Preguntas mal enviadas");
+							if(Preguntas_bien_jugador_1>Preguntas_bien_jugador_2){
+								BaseDeDatosUsuarios.Anyadir_registro_partida(Nombre_j1, Nombre_j2, "victoria");
+							}
+							else if(Preguntas_bien_jugador_1<Preguntas_bien_jugador_2){
+								BaseDeDatosUsuarios.Anyadir_registro_partida(Nombre_j1, Nombre_j2, "derrota");
+							}
+							else{
+								BaseDeDatosUsuarios.Anyadir_registro_partida(Nombre_j1, Nombre_j2, "empate");
+							}
 							addMensaje("Juego acabado");
+							socket2.close();
 
 							return;
 							//in.readLine();
@@ -595,8 +732,8 @@ public class Servidor extends Application{
 				case "DeJuego":
 					dato=in.readLine();
 					System.out.println(dato);
-					if(MatchMaking.containsKey(dato)){
-						MatchMaking.get(dato).remove(0);
+					if(Clientes.contains(dato)){
+						Clientes.remove(0);
 					}
 					else{
 
@@ -676,6 +813,7 @@ public class Servidor extends Application{
 		BaseDeDatosUsuarios.iniciarConexion();
 		Servidor s = new Servidor();
 		s.inicio_servidor();
+
 		addMensaje("Esperando conexión con algún cliente...\n");
 		launch(args);
 		try { Thread.sleep(10); } catch (InterruptedException e) {}

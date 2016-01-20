@@ -1,10 +1,14 @@
 package utilidades;
 
+import java.awt.Desktop;
+import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.sql.SQLException;
@@ -25,7 +29,6 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
 /**Clase de utilidad para realizar la conexión del cliente con el servidor
  * @author Iván
  *Tiene un solo método(lanzaConexión) que sirve para realizar la conexión con el servidor, y hacerle consultas sobre lo que el cliente necesite. 
@@ -40,12 +43,26 @@ public class Conexion_cliente {
 	public static String Pregunta="";
 	public static String Respuesta="";
 	public static boolean Acierto=false;
+	public static boolean Acierto_rival=false;
 	public static int Correctas=0;
 	public static int Incorrectas=0;
 	public static char Letra_Actual;
+	public static char Letra_Actual_Rival='a';
 	public static boolean Mi_Turno;
+	public static boolean Ha_Respondido;
 	public static String Nombre_j2;
+	public static ServerSocket serverSocket;
+	static PrintWriter out2 ;
+	static	BufferedReader in2 ;
+	static PrintWriter out3 ;
+	static	BufferedReader in3 ;
+	public static boolean Primera_vez=true;
 	
+static int Contestadas_rival=0;
+
+	public static boolean Soy_Servidor;
+
+
 	/**Método de utilidad para poder lanzar la conexión con el servidor
 	 * @param ip :la ip del servidor
 	 * @param accion :la acción que se quiere realizar (es un ENUM, mirar la clase: Acciones_servidor para más info)
@@ -64,7 +81,7 @@ public class Conexion_cliente {
 					// Realiza la conexión e inicializa los flujos de comunicación
 					System.out.println();
 					socket = new Socket(ip, 9898);
-					socket.setSoTimeout(6000);
+					socket.setSoTimeout(100000);
 					in = new ObjectInputStream( socket.getInputStream() );
 
 					out = new PrintWriter(socket.getOutputStream(), true);
@@ -82,7 +99,7 @@ public class Conexion_cliente {
 				switch (accion) {
 				case "Comprobar":
 					//TODO: terminar esto(faltan noticias)
-					
+
 					break;
 				case "Crear_Usuario":
 
@@ -161,17 +178,79 @@ public class Conexion_cliente {
 					}
 					break;
 				case "Jugar":
+
 					System.out.println("A jugar");
 					out.println(datos_cliente[1]);
-					try{
+
+
 					respuesta=in.readObject();
-					}catch (EOFException e) {
-						e.printStackTrace();
-						lanzaConexion(Ip_Local, "DeJuego", datos_cliente);
-						
-						throw new SocketException("Partida no encontrada");
+					if(respuesta.equals("Nadie")){
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Parece que no hay nadie");
+						alert.setHeaderText("Actualmente no hay nadie conectado");
+						alert.setContentText("Parece que actualmente no hay nadie conectado, por favor, espere a que reciba alguna respuesta");
+
+						alert.initModality(Modality.APPLICATION_MODAL);
+
+						alert.showAndWait();
+						int portNumber = 9899;
+						System.out.println("Al try");
+
+
+
+
+
+						Soy_Servidor=true;
+						System.out.println("Vamos a ver qué pasa");
+						socket.close();
+						@SuppressWarnings("resource")
+						ServerSocket serverSocket = new ServerSocket(portNumber);
+						serverSocket.setSoTimeout(30000);
+						Socket clientSocket = serverSocket.accept();
+
+
+
+
+						out2 =new PrintWriter(clientSocket.getOutputStream(), true);
+						in2 = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+						respuesta=in2.readLine();
+						if(respuesta.equals("Encontrado")){
+
+							System.out.println("Encontrado");
+						}
+						else{
+							throw new SecurityException("Error al buscar");
+						}
+						respuesta=in2.readLine();
+						System.out.println("Respuesta del servidor "+respuesta);
+						if(respuesta.equals("Ok")){
+
+
+						}
+						else if(respuesta.equals("Error")){
+							throw new SecurityException("Error al leer el tipo de pregunta");
+						}
+						respuesta=in2.readLine();
+						if(respuesta.equals("Turno")){
+							Mi_Turno=true;
+							System.out.println("Tengo turno");
+						}
+						else if(respuesta.equals("No turno")){
+							Mi_Turno=false;
+							System.out.println("No Tengo turno");
+						}
+						else{
+							throw new SecurityException("Error en el turno");
+						}
+						out2.println(Datos_Usuario.get(0));
+
+						Nombre_j2= in2.readLine();
+						System.out.println("Nombre del 2º jugador"+Nombre_j2);
+						System.out.println("Y a jugar");
+						return;
 					}
-					System.out.println(respuesta);
+
 					if(respuesta.equals("Encontrado")){
 
 						System.out.println("Encontrado");
@@ -199,76 +278,236 @@ public class Conexion_cliente {
 						throw new SecurityException("Error en el turno");
 					}
 					out.println(Datos_Usuario.get(0));
+					System.out.println(Datos_Usuario.get(0)+" nombre j1");
 					Nombre_j2=(String) in.readObject();
+					System.out.println(Nombre_j2+" nombre j2");
 					System.out.println("Y a jugar");
+
 					return;
+
+
 				case "Obtener_Pregunta":
+					if(Soy_Servidor){
 
-					try{
-						out.println("OK");//FIXME: ¿por qué da Socket exception?
+						if(Mi_Turno){
+						
+							if(Primera_vez){
+								try{
+								@SuppressWarnings("resource")
+								
+								ServerSocket serverSocket2 = new ServerSocket(25565);
+								serverSocket2.setSoTimeout(30000);
+								System.out.println("Esperando conexión");
+								Socket clientSocket2 = serverSocket.accept();
+								System.out.println("Conexión encontraada");
+								out3 =new PrintWriter(clientSocket2.getOutputStream(), true);
+								in3 = new BufferedReader(new InputStreamReader(clientSocket2.getInputStream()));
+								
+								}catch(Exception a){
+									a.printStackTrace();
+								}
+							}
+								try{
+								respuesta= in3.readLine();
+								System.out.println(respuesta+" respuesta servidor");
+								if(!respuesta.equals("Fin")){
+									
+									Pregunta=(String) respuesta;
 
-						respuesta= in.readObject();
+									Letra_Actual=(char) respuesta;
+									System.out.println("Letra: "+Letra_Actual);
+									Letra_Actual= respuesta.toString().charAt(0);
 
-						if(!respuesta.equals("Fin")){
+									return;
+								}
 
-							Pregunta=(String) respuesta;
+
+								System.out.println("A acabar en pregunta");
+								Correctas=(int) in.readObject();
+
+
+								Incorrectas=(int) in.readObject();
+
+								EventosJuego.juegoEnCurso=false;
+							}catch (SocketException e) {
+								System.out.println("Al catch");
+								e.printStackTrace();
+								EventosJuego.juegoEnCurso=false;
+							}
+							
+						}else{
+
+							System.out.println("Soy el servidor y espero respuesta del servidor de verdad");
+							respuesta=in2.readLine();
+							System.out.println("Respuesta del servidor de verdad: "+respuesta);
+							out2.println("OK");Contestadas_rival++;
+							if(("J1-Mal").equals(respuesta)){
+								
+								Ha_Respondido=true;
+								Acierto_rival=false;
+								out2.println("Ok");
+								respuesta=in2.readLine();
+								Letra_Actual_Rival=respuesta.toString().charAt(0);
+
+							}
+							else if(("Fin").equals(respuesta)){
+								EventosJuego.juegoEnCurso=false;
+								System.out.println("El juego ya no está en curso");
+							}
+							else if(("Fin_j1").equals(respuesta)){
+								Mi_Turno=true;
+								System.out.println("Mi turno");
+							}
+							else if(("J1-Bien").equals(respuesta)){
+								Acierto_rival=true;
+								Ha_Respondido=true;
+								out2.println("Ok");
+								respuesta=in2.readLine();
+								System.out.println("Respuesta de la letra:"+respuesta);
+								Letra_Actual_Rival= respuesta.toString().charAt(0);
+
+							}
+
+							else if(("Pasa").equals(respuesta)){
+								Acierto_rival=true;
+								Ha_Respondido=false;
+								out2.println("OK");
+								respuesta=in2.readLine();
+								System.out.println("Respuesta de la letra:"+respuesta);
+								Letra_Actual_Rival= respuesta.toString().charAt(0);
+								Contestadas_rival--;
+
+							}
+						}if(Contestadas_rival==27){Mi_Turno=true;
+						System.out.println("Ha respondido 27 y por tanto me toca");}
+					}
+					else{
+						if(Mi_Turno){
+							
+							try{
+								out.println("OK");//FIXME: ¿por qué da Socket exception?
+								Primera_vez=false;
+								respuesta= in.readObject();
+								System.out.println(respuesta);
+								if(!respuesta.equals("Fin")){
+									if(respuesta.equals("Fin_J1")){
+										Mi_Turno=false;
+										
+									}
+									else{
+									Pregunta=(String) respuesta;
+									respuesta=in.readObject();
+									Letra_Actual=(char) respuesta;
+									}
+									return;
+								}
+
+
+								System.out.println("A acabar en pregunta");
+								Correctas=(int) in.readObject();
+
+
+								Incorrectas=(int) in.readObject();
+
+								EventosJuego.juegoEnCurso=false;
+							}catch (SocketException e) {
+								System.out.println("Al catch");
+								e.printStackTrace();
+								EventosJuego.juegoEnCurso=false;
+							}
+						}else{
+
+							Respuesta=(String) in.readObject();
+							if(("Pasa").equals(respuesta)){
+								Ha_Respondido=false;
+								Acierto_rival=true;
+							}
+							else if(("Fin").equals(respuesta)){
+								EventosJuego.juegoEnCurso=false;
+							}
+							else if(("J2-Bien").equals(respuesta)){
+								Acierto_rival=true;
+								Letra_Actual=(char) in.readObject();
+							}
+							else if(("J2-Mal").equals(respuesta)){
+
+								Acierto_rival=false;
+								Letra_Actual=(char) in.readObject();
+								
+							}
+
+						}
+						//out.println("Ok");
+						//FIXME: Software caused connection abort ¿por qué da esto?
+						
+					}return;
+					
+				
+				case "Responder_Pregunta":
+					if(!Mi_Turno){
+						System.out.println("No es mi turno");
+						return;
+					}
+					else{
+						if(Soy_Servidor){
+							out2.println(Respuesta);
+
+							respuesta=in2.readLine();
+
+							if(!respuesta.equals("Fin")){
+								if(respuesta.equals("Bien")){
+									Acierto=true;
+									Correctas++;
+								}
+								else if("Mal".equals(respuesta)){
+									Acierto=false;
+									Incorrectas++;
+								}
+								else if("Ok".equals(respuesta)){
+
+								}
+
+								return;
+							}
+						}
+						else{
+							out.println(Respuesta);
+
 							respuesta=in.readObject();
-							Letra_Actual=(char) respuesta;
 
+							if(!respuesta.equals("Fin")){
+								if(respuesta.equals("Bien")){
+									Acierto=true;
+									Correctas++;
+								}
+								else if("Mal".equals(respuesta)){
+									Acierto=false;
+									Incorrectas++;
+									
+								}
+								else if("Ok".equals(respuesta)){
+									System.out.println("Pasapalabra");
+								}
+
+								return;
+							}
+							System.out.println("A acabar en respuesta");
+							Correctas=(int) in.readObject();
+							Incorrectas=(int) in.readObject();
+							EventosJuego.juegoEnCurso=false;
+
+							//					System.out.println("Fin");
+							//					EventosJuego.juegoEnCurso=false;
+							//					respuesta=in.readObject();
+							//					if (!"Ok".equals(respuesta)) throw new IOException( "Conexión errónea: " + Respuesta );
+							//					Correctas=(int) in.readObject();
+							//					Incorrectas=(int) in.readObject();
+							//					System.out.println(Correctas+" Correctas "+Incorrectas +" Incorrectas");
+							//					out.println("Ok");
 							return;
 						}
 
-
-						System.out.println("A acabar en pregunta");
-						Correctas=(int) in.readObject();
-
-
-						Incorrectas=(int) in.readObject();
-
-						EventosJuego.juegoEnCurso=false;
-					}catch (SocketException e) {
-						System.out.println("Al catch");
-
-						EventosJuego.juegoEnCurso=false;
 					}
-					//out.println("Ok");
-					//FIXME: Software caused connection abort ¿por qué da esto?
-					return;
-				case "Responder_Pregunta":
-
-					out.println(Respuesta);
-
-					respuesta=in.readObject();
-
-					if(!respuesta.equals("Fin")){
-						if(respuesta.equals("Bien")){
-							Acierto=true;
-							Correctas++;
-						}
-						else if("Mal".equals(respuesta)){
-							Acierto=false;
-							Incorrectas++;
-						}
-						else if("Ok".equals(respuesta)){
-
-						}
-
-						return;
-					}
-					System.out.println("A acabar en respuesta");
-					Correctas=(int) in.readObject();
-					Incorrectas=(int) in.readObject();
-					EventosJuego.juegoEnCurso=false;
-
-					//					System.out.println("Fin");
-					//					EventosJuego.juegoEnCurso=false;
-					//					respuesta=in.readObject();
-					//					if (!"Ok".equals(respuesta)) throw new IOException( "Conexión errónea: " + Respuesta );
-					//					Correctas=(int) in.readObject();
-					//					Incorrectas=(int) in.readObject();
-					//					System.out.println(Correctas+" Correctas "+Incorrectas +" Incorrectas");
-					//					out.println("Ok");
-					return;
 				case "Imagen":
 
 
