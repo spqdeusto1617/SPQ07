@@ -1,39 +1,23 @@
 package application;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.PrintWriter;
 import java.io.RandomAccessFile;
-import java.net.Socket;
 import java.nio.channels.FileLock;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.text.Utilities;
-
 import controllers.EventosJuego;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import principal.Servidor;
 import utilidades.Acciones_servidor;
 import utilidades.Conexion_cliente;
 
@@ -52,7 +36,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		try {
-			
 			utilidades.AppLogger.crearLogHandler(log, Main.class.getName());
 			//Cargar página con el FXML elegido  
 			Pane page =  FXMLLoader.load(getClass().getResource("/windows/LogIn.fxml")); //Lo he dejado así porque sino, a la hora de exportarlo a un jar, no funciona el propio jar
@@ -156,7 +139,6 @@ public class Main extends Application {
 					//Aquí se carga toda la aplicación
 					launch(args);
 					log.log(Level.FINEST, "Ventana cargada. FIN HILO MAIN.JAVA");
-					
 //					//Hilo main muerto.
 				}else{
 					log.log(Level.INFO, "Ventana NO cargada. Ya hay una instancia de la clase. Se ejecuta hilo de advertencia soporte único a monoinstancia");
@@ -193,11 +175,6 @@ public class Main extends Application {
 							log.log(Level.WARNING, "El bloqueo del archivo ha sufrido un problema al cerrar el programa", e);
 						}
 						log.log(Level.FINEST, "Toca cerrar conexión con servidor.");
-						try{
-							if(conexion.Servidor.s != null) conexion.Servidor.s.close();
-						}catch(Exception a){
-							log.log(Level.WARNING, "Error en el cierre de conexión en el socket: " + conexion.Servidor.s,a);
-						}
 					}
 				});
 				log.log(Level.FINEST, "Archivo creado y bloqueado satisfactoriamente: true.");
@@ -210,8 +187,4 @@ public class Main extends Application {
 		log.log(Level.FINEST, "El archivo ya está creado. Devuelve false.");
 		return false;
 	}
-
-
-
-
 }

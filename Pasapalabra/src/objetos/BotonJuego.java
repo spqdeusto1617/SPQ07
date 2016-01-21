@@ -15,7 +15,7 @@ public class BotonJuego implements Comparable<Event> {
 	//Atributos
 	Rectangle r;
 	Text t;
-	
+
 	/**Crea un nuevo Botón de juego
 	 * @param r Rectángulo que forma parte del botón
 	 * @param t Texto que forma parte del botón
@@ -24,7 +24,7 @@ public class BotonJuego implements Comparable<Event> {
 		this.r = r;
 		this.t = t;
 	}
-	
+
 	/**Dado un booleano, un ArrayList de Botones de Juego y un evento, el botón obtendrá en el rectángulo un ID (CSS)
 	 * depende de si está seleccionado/deseleccionado(depende del booleano) y entonces, dependiendo del CSS que se haya diseñado
 	 * cambiarán de color, forma...
@@ -43,7 +43,7 @@ public class BotonJuego implements Comparable<Event> {
 				//Se añade la ID al rectángulo
 				botonJuego.r.setId(id);
 				//Pero también se podría añadir al texto
-//				botonJuego.t.setId(id);
+				//				botonJuego.t.setId(id);
 				//Termina el método porque sólo hay uno que pueda ser seleccionado en un mismo instante.
 				//Mejora de eficiencia
 				return;
@@ -65,7 +65,4 @@ public class BotonJuego implements Comparable<Event> {
 		if(t.equals(o.getSource())) return 0;
 		return 1;
 	}
-	
-	
-	
 }

@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import application.Main;
 import javafx.animation.FadeTransition;
 import javafx.animation.ParallelTransition;
 import javafx.event.ActionEvent;
@@ -32,7 +31,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 	//Se define un logger.
 	public static Logger log = utilidades.AppLogger.getWindowLogger(EventosAcercaDe.class.getName());
 	public boolean animacionEnProceso;
-	
+
 	@FXML
 	private Text txtEdadIvan;
 
@@ -111,7 +110,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 
 	/*Método para copiar al clipboard (o portapapeles) 
 	 *el elemento seleccionado (en este caso, el correo).
-	*/
+	 */
 	public void copiarCorreo(MouseEvent event){
 		//Getea el portapapeles del sistema
 		final Clipboard clipboard = Clipboard.getSystemClipboard();
@@ -119,7 +118,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 		final ClipboardContent content = new ClipboardContent();
 		//Añade al contenido un string dependiendo si era el correo de Asier o de Iván
 		if(event.getSource().equals(lblCorreoDeAsier))
-		content.putString(lblCorreoDeAsier.getText());
+			content.putString(lblCorreoDeAsier.getText());
 		else content.putString(lblCorreoDeIvan.getText());
 		//Setea el contenido al portapapeles
 		clipboard.setContent(content);
@@ -211,7 +210,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 		}
 		@Override
 		public void run() {
-		//Transición
+			//Transición
 			//Nueva transición de opacidad de 1000 milisegundos de duración y con la imagen de la 'x'
 			FadeTransition ft = new FadeTransition(Duration.millis(1000), equis);
 			//Desde el valor 1 (opaco)
@@ -253,9 +252,5 @@ public class EventosAcercaDe extends Control implements Initializable {
 			//Empieza la animación
 			pt.play();
 		}
-
 	}
-
-
-
 }

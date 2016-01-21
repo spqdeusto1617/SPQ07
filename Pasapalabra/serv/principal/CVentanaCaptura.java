@@ -1,7 +1,5 @@
 package principal;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBuffer;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -21,7 +19,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javax.imageio.ImageIO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.animation.TranslateTransition;
 import javafx.animation.TranslateTransitionBuilder;
@@ -41,7 +40,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -53,11 +51,30 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**Clase controladora de la ventana del servidor.
+ * @author asierguti
+ *
+ */
 @SuppressWarnings("deprecation")
 public class CVentanaCaptura extends Control implements Initializable{
 
+	public static Logger log = utilidades.AppLogger.getWindowLogger(CVentanaCaptura.class.getName());
+
+	//ArrayList interno del programa.
 	public static ArrayList<Image> aLNoticias;
 
+	//ArrayList externo del programa.
+	public static ArrayList<File> aLNoticiasFicheros;
+
+	/*
+	Esta separación es debida a que Image no es serializable y, por tanto,
+	no se puede enviar por ningún tipo de conexión.
+	 */
+
+	/*
+	Representa la selección de la imagen que se ha hecho en la ventana.
+	Sirve para recordar lo pulsado la pulsación antes
+	 */
 	ImageView seleccionAnterior;
 
 	@FXML
@@ -105,39 +122,28 @@ public class CVentanaCaptura extends Control implements Initializable{
 	@FXML
 	private Text txtIpServidor;
 
+	/**
+	 * @param event Evento que hace 
+	 */
 	@FXML
 	void anyadir(MouseEvent event) {
-
+		//El usuario elige el fichero
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Seleccionar imagen para noticia");
 		fileChooser.getExtensionFilters().addAll(
 				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg"));
 		File selectedFile = fileChooser.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
+
+		//Si el fichero es nulo, entonces, no se continua.
 		if(selectedFile == null) return;
 
-		BufferedImage img = null;
-
-		try 
-		{
-			img = ImageIO.read(selectedFile); // eventually C:\\ImageTest\\pic2.jpg
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-
-		if(img.getHeight()>300 || img.getWidth()>300){
-			//Alerta mal
-
-			return;
-		}
-
+		//Se añade a la ventana y se guarda (true)
 		anyadirAVentana(selectedFile, true);
-
 	}
 
 	@FXML
 	void eliminar(MouseEvent event) {
+		//Solo se eliminará si la selección existe y el usuario lo confirma.
 		if(seleccionAnterior != null){
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Borrar noticia");
@@ -156,7 +162,8 @@ public class CVentanaCaptura extends Control implements Initializable{
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
-				
+
+				//Elige la imagen en el sistema de archivos porque no somos capaces de saber cual era.
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.setTitle("Seleccionar imagen para eliminar");
 				fileChooser.setInitialDirectory(getSystemDefaultPath(null).toFile());
@@ -168,25 +175,28 @@ public class CVentanaCaptura extends Control implements Initializable{
 					if(System.getProperty("os.name").startsWith("Windows")){
 						s = s.substring(0,s.lastIndexOf("\\"));
 					}else{
-					s = s.substring(0,s.lastIndexOf('/'));
+						s = s.substring(0,s.lastIndexOf('/'));
 					}
 					if(s.equals(getSystemDefaultPath(null).toString())){
 						try {
+							//Se elimina el archivo 'físico'.
 							Files.delete(selectedFile.toPath());
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
+							log.log(Level.WARNING, "No se ha eliminado el archivo con ruta: " + selectedFile.getAbsolutePath(), e);
 							e.printStackTrace();
 						}
+						//Se elimina el archivo de la ventana.
 						fNoticias.getChildren().remove(seleccionAnterior);
+						//Se deselecciona el archivo.
 						seleccionAnterior = null;
 					}
 				}
 			}
-				
-			}
-		}
 
-	
+		}
+	}
+
+
 
 	@FXML
 	void volver(MouseEvent event) {
@@ -274,6 +284,9 @@ public class CVentanaCaptura extends Control implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//Se crea el log handler
+		utilidades.AppLogger.crearLogHandler(log, CVentanaCaptura.class.getName());
+		//Se cargan las imágenes de los botones.
 		try {
 			Image img;
 			img = new Image(this.getClass().getResource("res/back.png").toURI().toURL().toString());
@@ -296,33 +309,36 @@ public class CVentanaCaptura extends Control implements Initializable{
 			btnAnyadir.setGraphic(ivV);
 
 		} catch (MalformedURLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			log.log(Level.WARNING, "Error al cargar la parte gráfica de los botones de la ventana", e2);
 		} catch (URISyntaxException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			log.log(Level.WARNING, "Error al cargar la parte gráfica de los botones de la ventana", e2);
 		}
+
+		//Se crea el arraylist
 		aLNoticias = new ArrayList<>();
 		Image iGuardar;
+		//Se cargan todos los ficheros gráficos que hayan en esa carpeta.
 		if (cargarFicheros() != null) {
 			for (File fImage : cargarFicheros()) {
 				try {
 					if(Files.isRegularFile(fImage.toPath())){
-					
-					System.out.println(fImage.toPath());
-					iGuardar = new Image(fImage.toURI().toURL().toString());
-					aLNoticias.add(iGuardar);
-					anyadirAVentana(fImage, false);
+
+						System.out.println(fImage.toPath());
+						iGuardar = new Image(fImage.toURI().toURL().toString());
+						aLNoticiasFicheros.add(fImage);
+						aLNoticias.add(iGuardar);
+						anyadirAVentana(fImage, false);
 					}
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					log.log(Level.WARNING, "Error al cargar los ficheros a la ventana", e);
 				}
 			}
 		}
-
+		//Saca la fecha en la que el servidor se encendió.
 		Date fComienzo = new Date();
+		//Coge el puerto del servidor
 		txtPuertoServidor.setText(String.valueOf(Servidor.PUERTO_DEL_SERVIDOR));
+		//Se carga la ip externa del servidor
 		try {
 			URL whatismyip = new URL("http://checkip.amazonaws.com");
 			BufferedReader in;
@@ -332,10 +348,10 @@ public class CVentanaCaptura extends Control implements Initializable{
 			String ip = in.readLine();
 			txtIpServidor.setText(ip);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			log.log(Level.WARNING, "Error al cargar la IP del servidor", e1);
 		}
 
+		//Setea el texto
 		txtEstadoServidor.setText("en línea");
 
 
@@ -347,15 +363,16 @@ public class CVentanaCaptura extends Control implements Initializable{
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						log.log(Level.WARNING, "Error al dormir el hilo", e);
 					}
 					Platform.runLater(new Runnable() {
 
 						@Override
 						public void run() {
+							//Actualiza los mensajes
 							listaMensajes.setText(Servidor.s2);
 
+							//Carga el tiempo transcurrido.
 							long diff = new Date().getTime() - fComienzo.getTime();
 
 							long diffSeconds = diff / 1000 % 60;
@@ -382,76 +399,85 @@ public class CVentanaCaptura extends Control implements Initializable{
 
 	}
 
+	/**Método para guardar fichero en la carpeta del servidor
+	 * @param f Fichero a guardar.
+	 */
 	public static void guardarFichero(File f){
-//		if(existeRaw(f)){
-//			//Ya existe
-//
-//		}else{
-			String extension = "";
+		//		if(existeRaw(f)){
+		//			//Ya existe
+		//
+		//		}else{
+		String extension = "";
 
-			int i = f.getAbsolutePath().lastIndexOf('.');
-			if (i > 0) {
-			    extension = f.getAbsolutePath().substring(i);
-			}
-			
-			CopyOption[] options = new CopyOption[]{
-				      StandardCopyOption.REPLACE_EXISTING,
-				      StandardCopyOption.COPY_ATTRIBUTES
-				    }; 
-			Path p = null;
-			try {
-				p = getSystemDefaultPath(extension);
-				Files.copy(f.toPath(),p,options);
-				System.out.println(p);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				File file = new File(p.toUri());
-				aLNoticias.add(new Image(file.toURI().toURL().toString()));
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		int i = f.getAbsolutePath().lastIndexOf('.');
+		if (i > 0) {
+			extension = f.getAbsolutePath().substring(i);
+		}
 
-//		}
+		//Opciones de copia
+		CopyOption[] options = new CopyOption[]{
+				StandardCopyOption.REPLACE_EXISTING,
+				StandardCopyOption.COPY_ATTRIBUTES
+		}; 
+		Path p = null;
+		try {
+			p = getSystemDefaultPath(extension);
+			//Copia el fichero
+			Files.copy(f.toPath(),p,options);
+			System.out.println(p);
+		} catch (IOException e) {
+			log.log(Level.WARNING, "Error al copiar el archivo " + f.getAbsolutePath() + " a " + p  , e);
+		}
+		try {
+			File file = new File(p.toUri());
+			aLNoticiasFicheros.add(file);
+			aLNoticias.add(new Image(file.toURI().toURL().toString()));
+		} catch (MalformedURLException e) {
+			log.log(Level.WARNING, "Error al añadir la imagen al array. " + p.toUri().toString(), e);
+		}
+		//		}
 	}
 
+	/**Método para añadir a ventana y guardar (depende del parámetro booleano) un fichero gráfico
+	 * @param selectedFile Fichero para añadir a la ventana
+	 * @param guardar True: guardar - False: no guardar.
+	 */
 	public void anyadirAVentana(File selectedFile, boolean guardar){
-//		if(existeRaw(selectedFile)){}
-//		else{
-			try {
-				ImageView iv = new ImageView(selectedFile.toURI().toURL().toString());
-				iv.setFitWidth(100); iv.setFitHeight(100); iv.setSmooth(true);
-				iv.setOnMouseClicked(new EventHandler<Event>() {
+		//		if(existeRaw(selectedFile)){}
+		//		else{
+		try {
+			ImageView iv = new ImageView(selectedFile.toURI().toURL().toString());
+			iv.setFitWidth(100); iv.setFitHeight(100); iv.setSmooth(true);
+			iv.setOnMouseClicked(new EventHandler<Event>() {
 
-					@Override
-					public void handle(Event event) {
-						if(seleccionAnterior != null){
-							seleccionAnterior.setEffect(null);
-						}
-						seleccionAnterior = (ImageView) event.getSource();
-
-						DropShadow borderGlow = new DropShadow();
-						borderGlow.setOffsetY(0f);
-						borderGlow.setOffsetX(0f);
-						borderGlow.setColor(Color.AQUA);
-						borderGlow.setWidth(20);
-						borderGlow.setHeight(20);
-
-						seleccionAnterior.setEffect(borderGlow);
+				@Override
+				public void handle(Event event) {
+					if(seleccionAnterior != null){
+						seleccionAnterior.setEffect(null);
 					}
-				});
-				fNoticias.getChildren().add(iv);
-				if(guardar) guardarFichero(selectedFile);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-//		}
+					seleccionAnterior = (ImageView) event.getSource();
+					//Se le añade un efecto glow
+					DropShadow borderGlow = new DropShadow();
+					borderGlow.setOffsetY(0f);
+					borderGlow.setOffsetX(0f);
+					borderGlow.setColor(Color.AQUA);
+					borderGlow.setWidth(20);
+					borderGlow.setHeight(20);
+
+					seleccionAnterior.setEffect(borderGlow);
+				}
+			});
+			fNoticias.getChildren().add(iv);
+			if(guardar) guardarFichero(selectedFile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//		}
 	}
 
+	/**Consigue todos los ficheros pero en vez de en un array, lo pasa a ArrayList.
+	 * @return Todos los ficheros gráficos de la carpeta de imágenes del servidor.
+	 */
 	public static ArrayList<File> cargarFicheros(){
 		ArrayList<File> aLDevolucion = new ArrayList<File>();
 		for (File file : getAllFiles()) {
@@ -461,6 +487,12 @@ public class CVentanaCaptura extends Control implements Initializable{
 	}
 
 
+	/**Método para conseguir la Ruta que se utilizará para guardar las imágenes o
+	 * para saber donde están guardadas.
+	 * @param extension null si queremos obtener la ruta donde estan guardados los archivos
+	 * un string con la extensión si queremos obtener una ruta en la cual guardar un archivo.
+	 * @return devuelve la Ruta del archivo a guardar o de la carpeta en la que se encuentra todo.
+	 */
 	public static Path getSystemDefaultPath(String extension){
 		String s = "";
 		int i = 0;
@@ -468,39 +500,47 @@ public class CVentanaCaptura extends Control implements Initializable{
 		File f;
 		if(System.getProperty("os.name").startsWith("Windows")){
 			//WINDOWS
-			
-				f = new File("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\ServerImgs\\" + s);
-			
+
+			f = new File("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\ServerImgs\\" + s);
+
 			f.mkdirs();
+			log.log(Level.FINEST, "El archivo creado estará en: " + f.getAbsolutePath());
 			return f.toPath();
 
 		}else if(System.getProperty("os.name").startsWith("Mac")){
 			//MAC
-			
-				f = new File("/Users/"+System.getProperty("user.name")+"/Pasapalabra/ServerImgs/" + s);
-	
+
+			f = new File("/Users/"+System.getProperty("user.name")+"/Pasapalabra/ServerImgs/" + s);
+
 			f.mkdirs();
+			log.log(Level.FINEST, "El archivo creado estará en: " + f.getAbsolutePath());
 			return f.toPath();
 
 		}else{
 			//LINUX y si no pues se hará mal y saltará una excepción...
-				f = new File("/home/"+System.getProperty("user.name")+"/Pasapalabra/ServerImgs/" + s);
+			f = new File("/home/"+System.getProperty("user.name")+"/Pasapalabra/ServerImgs/" + s);
 
 			f.mkdirs();
+			log.log(Level.FINEST, "El archivo creado estará en: " + f.getAbsolutePath());
 			return f.toPath();
-
 		}
 	}
 
+	/**Método para conseguir todos los ficheros de una carpeta.
+	 * @return Array de File que contiene todos los ficheros de la carpeta.
+	 */
 	public static File[] getAllFiles(){
 		return getSystemDefaultPath(null).toFile().listFiles(new FilenameFilter() {
-	        @Override
-	        public boolean accept(File dir, String name) {
-	            return !name.equals(".DS_Store");
-	        }
-	    });
+			@Override
+			public boolean accept(File dir, String name) {
+				return !name.equals(".DS_Store");
+			}
+		});
 	}
 
+	/**Calcula el número de ficheros que existen en la carpeta.
+	 * @return Numero de archivos en la carpeta.
+	 */
 	public static int getNumberOfFiles(){
 		if(cargarFicheros() != null) return cargarFicheros().size();
 		else return 0;

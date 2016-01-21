@@ -13,44 +13,44 @@ import javafx.scene.text.Text;
  *
  */
 public abstract class ClaseExtensora extends Control{
-//Declaración de todos los elementos del menú
-	   	@FXML public Text textoESPanel;
+	//Declaración de todos los elementos del menú
+	@FXML public Text textoESPanel;
 
-	    @FXML public Text textoMiPerfil;
+	@FXML public Text textoMiPerfil;
 
-	    @FXML public ImageView logopsp;
+	@FXML public ImageView logopsp;
 
-	    @FXML public Text textoCerrarSesion;
-	    
-	    @FXML public Text textoPlus;
+	@FXML public Text textoCerrarSesion;
 
-	    @FXML public Rectangle rectanguloPanel;
-	    
-	    @FXML public Circle circuloPlus;
+	@FXML public Text textoPlus;
 
-	    @FXML public Rectangle rectanguloCerrarSesion;
+	@FXML public Rectangle rectanguloPanel;
 
-	    @FXML public Rectangle rectanguloAmigos;
+	@FXML public Circle circuloPlus;
 
-	    @FXML public Text textoJugar;
-	    
-	    @FXML public Text textoLogeadoComo;
+	@FXML public Rectangle rectanguloCerrarSesion;
 
-	    @FXML public Rectangle rectanguloMiPerfil;
+	@FXML public Rectangle rectanguloAmigos;
 
-	    @FXML public Rectangle rectanguloJugar;
+	@FXML public Text textoJugar;
 
-	    @FXML public Text textoAmigos;
+	@FXML public Text textoLogeadoComo;
 
-	    @FXML public Circle circuloPanel;
+	@FXML public Rectangle rectanguloMiPerfil;
 
-	    @FXML public Text textoNombreDeUsuario;
+	@FXML public Rectangle rectanguloJugar;
 
-	    @FXML public Text textoEstadisticas;
+	@FXML public Text textoAmigos;
 
-	    @FXML public ImageView imagenAvatar;
+	@FXML public Circle circuloPanel;
 
-	    @FXML public Rectangle rectanguloEstadisticas;
+	@FXML public Text textoNombreDeUsuario;
 
-	    @FXML public Pane panel;
+	@FXML public Text textoEstadisticas;
+
+	@FXML public ImageView imagenAvatar;
+
+	@FXML public Rectangle rectanguloEstadisticas;
+
+	@FXML public Pane panel;
 }

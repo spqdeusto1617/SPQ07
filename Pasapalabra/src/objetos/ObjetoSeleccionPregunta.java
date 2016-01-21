@@ -8,17 +8,17 @@ import javafx.scene.text.Text;
  *
  */
 public class ObjetoSeleccionPregunta {
-//Atributos
+	//Atributos
 	//Puede ser un texto + rectángulo + otros datos
 	Text texto;
 	Rectangle rectangulo;
 	boolean elegido;
 	boolean modoDeJuego_notTipoPregunta;
 	boolean seccion_notSeleccionable;
-	
+
 	//O puede ser sólo texto, en cuyo caso lo llamaremos título. No es seleccionable.
 	Text tituloSeccion;
-	
+
 	/**Crea un ObjetoSeleccionPregunta (botón) de texto + rectángulo + ¿Es modo de juego o tipo de pregunta?
 	 * @see ObjetoSeleccionPregunta
 	 * @param texto Texto que forma el botón
@@ -32,8 +32,8 @@ public class ObjetoSeleccionPregunta {
 		this.modoDeJuego_notTipoPregunta = modoDeJuego_notTipoPregunta;
 		this.seccion_notSeleccionable = false; //Si se usa este constructor, está claro que no es seleccionable.
 	}
-	
-	
+
+
 	/**Crea un ObjetoSeleccionPregunta Este constructor es solo de la cabecera.
 	 * Se pone como objeto porque si queremos eliminar toda la parte de selección porque se tiene
 	 * que cambiar
@@ -44,9 +44,9 @@ public class ObjetoSeleccionPregunta {
 		this.tituloSeccion = tituloSeccion;
 		this.seccion_notSeleccionable = true;
 	}
-	
-	
-/*-------------------Geters y Seters-------------------*/
+
+
+	/*-------------------Geters y Seters-------------------*/
 	public boolean isElegido() {
 		return elegido;
 	}
@@ -78,5 +78,5 @@ public class ObjetoSeleccionPregunta {
 	public boolean isSeccion_notSeleccionable() {
 		return seccion_notSeleccionable;
 	}
-/*----------------Fin de Geters y Seters----------------*/
+	/*----------------Fin de Geters y Seters----------------*/
 }

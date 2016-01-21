@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -181,7 +180,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
 			}
-			
+
 			if(datos_Correctos==true){
 				try{
 					String[]Datos=new String[4];
@@ -302,7 +301,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 					alert2.showAndWait();
 					utilidades.deVentana.transicionVentana("Perfil", event);
 				}catch(Exception a){
-					
+
 					Alert alert2 = new Alert(AlertType.ERROR);
 					alert2.setTitle("Se produjo un error al tramitar sus datos");
 					alert2.setHeaderText("Parece que se ha producido un error al cambiar los datos");
@@ -375,8 +374,6 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 	public void btnCerrarSesion(MouseEvent event){
 		utilidades.deVentana.cerrarSesion(event);
 	}
-
-
 
 	//Elimina nivel de transparencia
 	@FXML

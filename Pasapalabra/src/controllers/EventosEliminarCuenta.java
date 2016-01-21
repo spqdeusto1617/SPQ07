@@ -5,9 +5,6 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,68 +26,68 @@ import javafx.stage.Stage;
 
 public class EventosEliminarCuenta extends ClaseExtensora implements Initializable {
 	@FXML public Pane panel;
-	
+
 	public static Logger log = utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
-		//Declaración del panel
-	    @FXML public Text textoESPanel;
+	//Declaración del panel
+	@FXML public Text textoESPanel;
 
-	    @FXML public Text textoMiPerfil;
+	@FXML public Text textoMiPerfil;
 
-	    @FXML public ImageView logopsp;
+	@FXML public ImageView logopsp;
 
-	    @FXML public Text textoCerrarSesion;
-	    
-	    @FXML public Text textoPlus;
+	@FXML public Text textoCerrarSesion;
 
-	    @FXML public Rectangle rectanguloPanel;
-	    
-	    @FXML public Circle circuloPlus;
+	@FXML public Text textoPlus;
 
-	    @FXML public Rectangle rectanguloCerrarSesion;
+	@FXML public Rectangle rectanguloPanel;
 
-	    @FXML public Rectangle rectanguloAmigos;
+	@FXML public Circle circuloPlus;
 
-	    @FXML public Text textoJugar;
-	    
-	    @FXML public Text textoLogeadoComo;
+	@FXML public Rectangle rectanguloCerrarSesion;
 
-	    @FXML public Rectangle rectanguloMiPerfil;
+	@FXML public Rectangle rectanguloAmigos;
 
-	    @FXML public Rectangle rectanguloJugar;
+	@FXML public Text textoJugar;
 
-	    @FXML public Text textoAmigos;
+	@FXML public Text textoLogeadoComo;
 
-	    @FXML public Circle circuloPanel;
+	@FXML public Rectangle rectanguloMiPerfil;
 
-	    @FXML public Text textoNombreDeUsuario;
+	@FXML public Rectangle rectanguloJugar;
 
-	    @FXML public Text textoEstadisticas;
+	@FXML public Text textoAmigos;
 
-	    @FXML public ImageView imagenAvatar;
+	@FXML public Circle circuloPanel;
 
-	    @FXML public Rectangle rectanguloEstadisticas;
+	@FXML public Text textoNombreDeUsuario;
 
-	    @FXML public Rectangle rectanguloDescartar;
-	    
-	    @FXML public Rectangle rectanguloCambiarCorreo;
-	    
-	    @FXML public Rectangle rectanguloCambiarContrasenya;
-	    
-	    @FXML public Text txtDescartar;
-	    
-	    @FXML public Text txtEliminar;
-	    	    
-	    @FXML public TextField tfdCorreo;
-	    
-	    @FXML public PasswordField pfdContrasenya;
-	    
-	    @FXML public PasswordField pfdRepetirContrasenya;
-	    
-	  
-	    
+	@FXML public Text textoEstadisticas;
+
+	@FXML public ImageView imagenAvatar;
+
+	@FXML public Rectangle rectanguloEstadisticas;
+
+	@FXML public Rectangle rectanguloDescartar;
+
+	@FXML public Rectangle rectanguloCambiarCorreo;
+
+	@FXML public Rectangle rectanguloCambiarContrasenya;
+
+	@FXML public Text txtDescartar;
+
+	@FXML public Text txtEliminar;
+
+	@FXML public TextField tfdCorreo;
+
+	@FXML public PasswordField pfdContrasenya;
+
+	@FXML public PasswordField pfdRepetirContrasenya;
+
+
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		panel.getStylesheets().add("application/application.css");
 		textoNombreDeUsuario.setText(utilidades.Conexion_cliente.Datos_Usuario.get(0));
 		if(EventosLogIn.iAvatar!=null){
@@ -102,7 +99,7 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 			if(randomNum == 666){
 				imagen = "fPerfilPirata";
 			}
-			
+
 			Image i = new Image("images/"+ imagen +".png",imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 			imagenAvatar.setImage(i);
 		}
@@ -111,7 +108,7 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 		imagenAvatar.setSmooth(true); 
 		imagenAvatar.setCache(true); 
 	}
-	
+
 	/**Accionlistener para eliminar la cuenta, si se quiere (tras validar datos), se eliminará la cuenta de la base de datos 
 	 * @param event el evento de ventana
 	 */
@@ -121,7 +118,7 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 		alert.setHeaderText("¿Está seguro de que quiere eliminar su cuenta?");
 		alert.setContentText("Si elige sí, se perderán todos sus datos, ¿está seguro?");
 		alert.initModality(Modality.APPLICATION_MODAL);
-		
+
 		//Elijo el dueño de la alerta (o la base) de la misma.
 		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 		Optional<ButtonType> result = alert.showAndWait();
@@ -132,7 +129,7 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 			alert2.setHeaderText("¿Realmente está seguro?");
 			alert2.setContentText("Lamento ser pesado, pero si elimina su cuenta se perderán todos sus datos, partidas, amigos..., ¿está completamente seguro?");
 			alert2.initModality(Modality.APPLICATION_MODAL);
-			
+
 			//Elijo el dueño de la alerta (o la base) de la misma.
 			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			Optional<ButtonType> result2 = alert2.showAndWait();
@@ -168,8 +165,8 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert3.showAndWait();
 				}
-				
-				
+
+
 				if(datos_Correctos==true){
 					try{
 						String[]Datos=new String[4];
@@ -179,7 +176,7 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 						Datos[2]=utilidades.Conexion_cliente.Datos_Usuario.get(3);	
 						Datos[3]=utilidades.Conexion_cliente.Datos_Usuario.get(5);
 						utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Eliminar.toString(), Datos);
-						
+
 						Alert alert3 = new Alert(AlertType.INFORMATION);
 						alert3.setTitle("Éxito al eliminar su cuenta");
 						alert3.setHeaderText("Se ha eliminado su cuenta con éxito");
@@ -210,15 +207,15 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 				}
 			}
 			else{
-				
+
 			}
 		}
 		else{
 			//Nada
-			
+
 		}
 	}
-	
+
 	/**Botón para descartar los cambios realizados. Si se acepta rechazarlos, se vuelve a la ventana anterior
 	 * @param event el evneto de ventana
 	 */
@@ -228,7 +225,7 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 		alert.setHeaderText("¿Está seguro de que quiere descartar los cambios?");
 		alert.setContentText("Si sale se perderán todos los cambios que quiera hacer en su cuenta, ¿Está seguro de querer desacer los cambios");
 		alert.initModality(Modality.APPLICATION_MODAL);
-		
+
 		//Elijo el dueño de la alerta (o la base) de la misma.
 		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 		Optional<ButtonType> result = alert.showAndWait();
@@ -240,47 +237,47 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 			//Nada
 		}
 	}
-	
-	
-	
-	
+
+
+
+
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
 		utilidades.deVentana.transicionVentana("Juego", event);
 	}
-	
+
 	public void btnAmigos(MouseEvent event){
 		utilidades.deVentana.transicionVentana("Amigos", event);
 	}
-	
+
 	public void btnMiPerfil(MouseEvent event){
 
 		utilidades.deVentana.transicionVentana("Perfil", event);
 	}
-	
-	
+
+
 	public void btnEstadisticas(MouseEvent event){
 		utilidades.deVentana.transicionVentana("Estadisticas", event);
 	}
-	
+
 	public void btnCerrarSesion(MouseEvent event){
 		utilidades.deVentana.cerrarSesion(event);
 	}
-	
-	
-	
-	  //Elimina nivel de transparencia
-    @FXML
-    void entrado(MouseEvent event) {
-    	utilidades.deVentana.efectoTransparenciaOnHover(event, this);
-    }
-    
-    //Añade nivel de transparencia
-    @FXML
-    void salido(MouseEvent event) {
-    	utilidades.deVentana.efectoTransparenciaOnHover(event, this);
-    }
+
+
+
+	//Elimina nivel de transparencia
+	@FXML
+	void entrado(MouseEvent event) {
+		utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+	}
+
+	//Añade nivel de transparencia
+	@FXML
+	void salido(MouseEvent event) {
+		utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+	}
 	public void esPanel(MouseEvent event){
-	//TODO: cerrar panel	
+		//TODO: cerrar panel	
 	}
 }

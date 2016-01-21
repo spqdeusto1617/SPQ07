@@ -3,8 +3,8 @@ package utilidades;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import application.Main;
@@ -120,7 +120,7 @@ public class deVentana {
 			//Ha pulsado ok?
 			if (result2.get() == ButtonType.OK){
 				//Si
-				
+
 				//En la clase del servidor habrá una rutina para cerrar sesión.
 				String[] Datos=new String[1];
 				Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
@@ -128,10 +128,10 @@ public class deVentana {
 					Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
 					utilidades.deVentana.transicionVentana("LogIn", event);
 				} catch (Exception e) {
-					//TODO: gestionar la excepción(¿mensaje de error?)
+					log.log(Level.WARNING, "Error al cerrar sesion", e);
 				} 
 				//
-				
+
 			} else {
 				//No
 				//NADA
@@ -160,37 +160,34 @@ public class deVentana {
 		if(event.getEventType().toString().equals("MOUSE_ENTERED")) op = 0.8;
 
 		if(event.getSource().getClass().getName()=="javafx.scene.shape.Rectangle"){
-			
+
 			if(((Rectangle) event.getSource()).getId().equals("rectanguloAmigos") && !(eventosMenu instanceof EventosAmigos)){
-//				eventosMenu.textoAmigos.setOpacity(1);
+				//				eventosMenu.textoAmigos.setOpacity(1);
 				eventosMenu.rectanguloAmigos.setOpacity(op);
 			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloMiPerfil") && !(eventosMenu instanceof EventosPerfil)){
-//				eventosMenu.textoMiPerfil.setOpacity(1);
+				//				eventosMenu.textoMiPerfil.setOpacity(1);
 				eventosMenu.rectanguloMiPerfil.setOpacity(op);
 			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloEstadisticas") && !(eventosMenu instanceof EventosEstadisticas)){
-//				eventosMenu.textoEstadisticas.setOpacity(1);
+				//				eventosMenu.textoEstadisticas.setOpacity(1);
 				eventosMenu.rectanguloEstadisticas.setOpacity(op);
 			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloJugar") && !(eventosMenu instanceof EventosJuego)){
-//				eventosMenu.textoJugar.setOpacity(1);
+				//				eventosMenu.textoJugar.setOpacity(1);
 				eventosMenu.rectanguloJugar.setOpacity(op);
 			}
 		}else{
 			if(((Text) event.getSource()).getText().equals("Amigos") && !(eventosMenu instanceof EventosAmigos)){
-//				eventosMenu.textoAmigos.setOpacity(1);
+				//				eventosMenu.textoAmigos.setOpacity(1);
 				eventosMenu.rectanguloAmigos.setOpacity(op);
 			}else if(((Text) event.getSource()).getText().equals("Mi perfil") && !(eventosMenu instanceof EventosPerfil)){
-//				eventosMenu.textoMiPerfil.setOpacity(1);
+				//				eventosMenu.textoMiPerfil.setOpacity(1);
 				eventosMenu.rectanguloMiPerfil.setOpacity(op);
 			}else if(((Text) event.getSource()).getText().equals("Estadísticas") && !(eventosMenu instanceof EventosEstadisticas)){
-//				eventosMenu.textoEstadisticas.setOpacity(1);
+				//				eventosMenu.textoEstadisticas.setOpacity(1);
 				eventosMenu.rectanguloEstadisticas.setOpacity(op);
 			}else if(((Text) event.getSource()).getText().equals("Jugar") && !(eventosMenu instanceof EventosJuego)){
-//				eventosMenu.textoJugar.setOpacity(1);
+				//				eventosMenu.textoJugar.setOpacity(1);
 				eventosMenu.rectanguloJugar.setOpacity(op);
 			}
 		}
 	}
-
-
-
 }

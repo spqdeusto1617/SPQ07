@@ -83,5 +83,4 @@ public class RutinaMonoInstancia extends Application {
 		launch();
 		//Programa terminado por fin del main y por Platform.exit(); del método launch.
 	}
-
 }

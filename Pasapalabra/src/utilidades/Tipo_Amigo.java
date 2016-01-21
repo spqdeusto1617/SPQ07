@@ -5,8 +5,6 @@ import java.io.Serializable;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-
-
 public class Tipo_Amigo implements Serializable{
 	/**
 	 * 
@@ -40,7 +38,4 @@ public class Tipo_Amigo implements Serializable{
 				+ ", Solicitud_enviada=" + Solicitud_enviada + ", Solicitud_pendiente=" + Solicitud_pendiente
 				+ ", Estado_amigo=" + Estado_amigo + "]";
 	}
-
-
-
 }

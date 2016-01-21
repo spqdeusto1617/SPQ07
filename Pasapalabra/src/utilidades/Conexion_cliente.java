@@ -1,34 +1,26 @@
 package utilidades;
 
-import java.awt.Desktop;
 import java.io.BufferedReader;
-import java.io.EOFException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.TreeMap;
 
 import controllers.EventosAmigos;
 import controllers.EventosJuego;
 import controllers.EventosLogIn;
 import controllers.EventosRegistro;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 /**Clase de utilidad para realizar la conexión del cliente con el servidor
  * @author Iván
@@ -58,8 +50,8 @@ public class Conexion_cliente {
 	static PrintWriter out3 ;
 	static	BufferedReader in3 ;
 	public static boolean Primera_vez=true;
-	
-static int Contestadas_rival=0;
+
+	static int Contestadas_rival=0;
 
 	public static boolean Soy_Servidor;
 
@@ -80,7 +72,7 @@ static int Contestadas_rival=0;
 
 				if(!accion.equals("Obtener_Pregunta")&&!accion.equals("Responder_Pregunta")){
 					// Realiza la conexión e inicializa los flujos de comunicación
-				
+
 					socket = new Socket(ip, 9898);
 					socket.setSoTimeout(100000);
 					in = new ObjectInputStream( socket.getInputStream() );
@@ -99,13 +91,13 @@ static int Contestadas_rival=0;
 
 				switch (accion) {
 				case "Comprobar":
-				
+
 					do{
 
 						respuesta=in.readObject();
-						
+
 						if(!"FIN".equals(respuesta)){
-							EventosLogIn.aLNoticias.add((Image) respuesta);
+							EventosLogIn.aLNoticiasFicheros.add((File) respuesta);
 						}
 						out.println("ACK");
 
@@ -301,28 +293,28 @@ static int Contestadas_rival=0;
 					if(Soy_Servidor){
 
 						if(Mi_Turno){
-						
+
 							if(Primera_vez){
 								try{
-								@SuppressWarnings("resource")
-								
-								ServerSocket serverSocket2 = new ServerSocket(80);
-								serverSocket2.setSoTimeout(10000);
-								System.out.println("Esperando conexión");
-								Socket clientSocket2 = serverSocket2.accept();
-								System.out.println("Conexión encontraada");
-								out3 =new PrintWriter(clientSocket2.getOutputStream(), true);
-								in3 = new BufferedReader(new InputStreamReader(clientSocket2.getInputStream()));
-								Primera_vez=false;
+									@SuppressWarnings("resource")
+
+									ServerSocket serverSocket2 = new ServerSocket(80);
+									serverSocket2.setSoTimeout(10000);
+									System.out.println("Esperando conexión");
+									Socket clientSocket2 = serverSocket2.accept();
+									System.out.println("Conexión encontraada");
+									out3 =new PrintWriter(clientSocket2.getOutputStream(), true);
+									in3 = new BufferedReader(new InputStreamReader(clientSocket2.getInputStream()));
+									Primera_vez=false;
 								}catch(Exception a){
 									a.printStackTrace();
 								}
 							}
-								try{
+							try{
 								respuesta= in3.readLine();
 								System.out.println(respuesta+" respuesta servidor");
 								if(!respuesta.equals("Fin")){
-									
+
 									Pregunta=(String) respuesta;
 									respuesta=in3.readLine();
 									Letra_Actual= respuesta.toString().charAt(0);
@@ -345,7 +337,7 @@ static int Contestadas_rival=0;
 								e.printStackTrace();
 								EventosJuego.juegoEnCurso=false;
 							}
-							
+
 						}else{
 
 							System.out.println("Soy el servidor y espero respuesta del servidor de verdad");
@@ -353,7 +345,7 @@ static int Contestadas_rival=0;
 							System.out.println("Respuesta del servidor de verdad: "+respuesta);
 							out2.println("OK");Contestadas_rival++;
 							if(("J1-Mal").equals(respuesta)){
-								
+
 								Ha_Respondido=true;
 								Acierto_rival=false;
 								out2.println("Ok");
@@ -394,7 +386,7 @@ static int Contestadas_rival=0;
 					}
 					else{
 						if(Mi_Turno){
-							
+
 							try{
 								out.println("OK");//FIXME: ¿por qué da Socket exception?
 								Primera_vez=false;
@@ -403,12 +395,12 @@ static int Contestadas_rival=0;
 								if(!respuesta.equals("Fin")){
 									if(respuesta.equals("Fin_J1")){
 										Mi_Turno=false;
-										
+
 									}
 									else{
-									Pregunta=(String) respuesta;
-									respuesta=in.readObject();
-									Letra_Actual=(char) respuesta;
+										Pregunta=(String) respuesta;
+										respuesta=in.readObject();
+										Letra_Actual=(char) respuesta;
 									}
 									return;
 								}
@@ -433,7 +425,7 @@ static int Contestadas_rival=0;
 							System.out.println("Respuesta del servidor de verdad: "+respuesta);
 							out.println("OK");Contestadas_rival++;
 							if(("J2-Mal").equals(respuesta)){
-								
+
 								Ha_Respondido=true;
 								Acierto_rival=false;
 								out.println("Ok");
@@ -445,7 +437,7 @@ static int Contestadas_rival=0;
 								EventosJuego.juegoEnCurso=false;
 								System.out.println("El juego ya no está en curso");
 							}
-							
+
 							else if(("J2-Bien").equals(respuesta)){
 								Acierto_rival=true;
 								Ha_Respondido=true;
@@ -459,7 +451,7 @@ static int Contestadas_rival=0;
 							else if(("Pasa").equals(respuesta)){
 								Acierto_rival=true;
 								Ha_Respondido=false;
-								
+
 								//respuesta=in.readObject();
 								System.out.println("Respuesta de la letra:"+respuesta);
 								Letra_Actual_Rival= respuesta.toString().charAt(0);
@@ -469,10 +461,10 @@ static int Contestadas_rival=0;
 						}
 						//out.println("Ok");
 						//FIXME: Software caused connection abort ¿por qué da esto?
-						
+
 					}return;
-					
-				
+
+
 				case "Responder_Pregunta":
 					if(!Mi_Turno){
 						System.out.println("No es mi turno");
@@ -513,7 +505,7 @@ static int Contestadas_rival=0;
 								else if("Mal".equals(respuesta)){
 									Acierto=false;
 									Incorrectas++;
-									
+
 								}
 								else if("Ok".equals(respuesta)){
 									System.out.println("Pasapalabra");
@@ -765,7 +757,4 @@ static int Contestadas_rival=0;
 			throw new IOException("Ip no válida");
 		}
 	}
-
 }
-
-

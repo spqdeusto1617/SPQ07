@@ -19,24 +19,19 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.junit.internal.runners.model.EachTestNotifier;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -140,11 +135,9 @@ public class Servidor extends Application{
 
 				switch (accion) {
 				case "Comprobar":
-					
-					
-					for (int i=0;i<CVentanaCaptura.aLNoticias.size();i++) {
+					for (int i=0;i<CVentanaCaptura.aLNoticiasFicheros.size();i++) {
 
-						out.writeObject(CVentanaCaptura.aLNoticias.get(i));
+						out.writeObject(CVentanaCaptura.aLNoticiasFicheros.get(i));
 						accion = in.readLine();
 
 						if (!"ACK".equals(accion)) throw new IOException( "Conexión errónea: " + accion );

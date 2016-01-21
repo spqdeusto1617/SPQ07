@@ -1,6 +1,5 @@
 package controllers;
 
-import java.awt.Desktop;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.URL;
@@ -10,7 +9,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
-import java.util.logging.Logger;import org.junit.internal.runners.model.EachTestNotifier;
+import java.util.logging.Logger;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -18,8 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
@@ -43,8 +42,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import objetos.BotonJuego;
 import objetos.ObjetoSeleccionPregunta;
-import principal.BaseDeDatosPreguntas;
-import principal.Tipo_pregunta;
 import utilidades.Conexion_cliente;
 import utilidades.RCarga;
 import utilidades.RPanel;
@@ -246,11 +243,18 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	@FXML
 	void btnAmigos(MouseEvent event) {
 		if(juegoEnCurso){
-			//TODO warning juego en curso
-
-
-
+			//Alerta
+			Alert alert2 = new Alert(AlertType.INFORMATION);
+			alert2.setTitle("Juego en curso");
+			alert2.setHeaderText(null);
+			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
+					+ " Termina la partida para poder avanzar a esa ventana");
+			alert2.initModality(Modality.APPLICATION_MODAL);
+			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert2.showAndWait();
+			log.log(Level.FINE, "El juego está en curso.");
 		}else{
+			log.log(Level.FINEST, "Transicion de ventana a Amigos");
 			utilidades.deVentana.transicionVentana("Amigos", event);
 		}
 	}
@@ -258,8 +262,18 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	@FXML
 	void btnMiPerfil(MouseEvent event) {
 		if(juegoEnCurso){
-
+			//Alerta
+			Alert alert2 = new Alert(AlertType.INFORMATION);
+			alert2.setTitle("Juego en curso");
+			alert2.setHeaderText(null);
+			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
+					+ " Termina la partida para poder avanzar a esa ventana");
+			alert2.initModality(Modality.APPLICATION_MODAL);
+			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert2.showAndWait();
+			log.log(Level.FINE, "El juego está en curso.");
 		}else{
+			log.log(Level.FINEST, "Transicion de ventana a Perfil");
 			utilidades.deVentana.transicionVentana("Perfil", event);
 		}
 	}
@@ -267,8 +281,18 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	@FXML
 	void btnEstadisticas(MouseEvent event) {
 		if(juegoEnCurso){
-
+			//Alerta
+			Alert alert2 = new Alert(AlertType.INFORMATION);
+			alert2.setTitle("Juego en curso");
+			alert2.setHeaderText(null);
+			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
+					+ " Termina la partida para poder avanzar a esa ventana");
+			alert2.initModality(Modality.APPLICATION_MODAL);
+			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert2.showAndWait();
+			log.log(Level.FINE, "El juego está en curso.");
 		}else{
+			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
 			utilidades.deVentana.transicionVentana("Estadisticas", event);
 		}
 	}
@@ -288,11 +312,9 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 	@FXML
 	void btnCerrarSesion(MouseEvent event) {
+		log.log(Level.FINEST, "Cierre de sesión");
 		utilidades.deVentana.cerrarSesion(event);
 	}
-
-
-
 
 	@FXML
 	void aJugar(MouseEvent event){
@@ -316,9 +338,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 					Tipo[1]=obsp.getTexto().getText();
 				}
 			}
-
 		}
-
 
 		//
 		//Hasta encontrar partida, aquí.
@@ -326,30 +346,29 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		//Lanzamos la partida
 		try {
 			utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Jugar.toString(), Tipo);
-
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Error al iniciar la partida");
-
 			alert.setContentText("El tipo de pregunta no encaja, por favor, indique correctamente la próxima vez");
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			juegoEnCurso=false;
-			deVentana.transicionVentana("Juego", event);
+			utilidades.deVentana.transicionVentana("Juego", event);
+			log.log(Level.WARNING, "Error en la partida", e);
 			e.printStackTrace();
 
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Partida no encontrada");
-
 			alert.setContentText("Ha ocurrido un error al encontrar alguna partida, por favor, intenteló de nuevo más tarde");
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			juegoEnCurso=false;
 			deVentana.transicionVentana("Juego", event);
+			log.log(Level.WARNING, "No se ha encontrado partida.", e);
 			e.printStackTrace();
 		} 
 		textoUsernameRival.setText(Conexion_cliente.Nombre_j2);
@@ -359,6 +378,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			try{
 				utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
 			}catch(Exception a){
+				log.log(Level.WARNING, "Error al lanzar conexion", a);
 				a.printStackTrace();
 			}
 		}
@@ -369,14 +389,11 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			taPreguntas.setText("Espere a que su rival termine");
 		}
 
-
-
 		//Cerrar panel
 		//    	new Thread(new RPanel( ventanaMenuDentro, menuDesplegable )).start();
 		Platform.runLater(new RPanel(ventanaMenuDentro, menuDesplegable));
 		//Eliminar selección de modo de juego y preguntas
 		eliminarOpcionesPartida(true);
-
 
 		//Dibujar letras
 		Platform.runLater(new Runnable() {
@@ -390,15 +407,12 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		});
 		if(Conexion_cliente.Mi_Turno){
 			taPreguntas.setText(utilidades.Conexion_cliente.Pregunta);
-			
-
 
 		}else{
 			taPreguntas.setText("Espere a que su rival termine");
 		}
 		System.out.println("Al hilo");
 		if(!Conexion_cliente.Mi_Turno){
-
 
 
 			System.out.println("Entro al bucle bucle en el hilo");
@@ -418,24 +432,24 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 							}	
 							System.out.println("A comprobar si el rival ha hacertado");
 							if(Conexion_cliente.Ha_Respondido){
-							if(!Conexion_cliente.Mi_Turno&&Conexion_cliente.Acierto_rival){
-								System.out.println("Ha acertado");
-								int foo =Integer.parseInt(textoPuntuacionR.getText().substring(11));
-								foo++;
-								textoPuntuacionR.setText("Acertadas: "+Integer.toString(foo));
-								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
-								try{
-									panelLetrasContrincante.get(Num_Letra).setImage(new Image("images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png"));
-								}catch(Exception a){
-									a.printStackTrace();
+								if(!Conexion_cliente.Mi_Turno&&Conexion_cliente.Acierto_rival){
+									System.out.println("Ha acertado");
+									int foo =Integer.parseInt(textoPuntuacionR.getText().substring(11));
+									foo++;
+									textoPuntuacionR.setText("Acertadas: "+Integer.toString(foo));
+									int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
+									try{
+										panelLetrasContrincante.get(Num_Letra).setImage(new Image("images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png"));
+									}catch(Exception a){
+										a.printStackTrace();
+									}
+								}else if(!Conexion_cliente.Acierto_rival){
+									System.out.println("No acierta el rival");
+									System.out.println("Letra actual:"+Conexion_cliente.Letra_Actual);
+									int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
+									panelLetrasContrincante.get(Num_Letra).setImage(new Image("images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png"));
 								}
-							}else if(!Conexion_cliente.Acierto_rival){
-								System.out.println("No acierta el rival");
-								System.out.println("Letra actual:"+Conexion_cliente.Letra_Actual);
-								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
-								panelLetrasContrincante.get(Num_Letra).setImage(new Image("images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png"));
 							}
-						}
 						}
 
 
@@ -446,21 +460,21 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 					System.out.println("Hola");
 					int i=23-22;
 					System.out.println("A obtener pregunta en el servidor");
-//					if(juegoEnCurso){
-//						try{
-//							System.out.println("Lanzo la conexión");
-//							utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
-//
-//							taPreguntas.setText(Conexion_cliente.Pregunta);
-//
-//						}catch(Exception a){
-//							a.printStackTrace();
-//						}
-//					} 
+					//					if(juegoEnCurso){
+					//						try{
+					//							System.out.println("Lanzo la conexión");
+					//							utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
+					//
+					//							taPreguntas.setText(Conexion_cliente.Pregunta);
+					//
+					//						}catch(Exception a){
+					//							a.printStackTrace();
+					//						}
+					//					} 
 				}
 			}).start(); 
-			
-			
+
+
 
 
 		} 
@@ -469,9 +483,9 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 
 
-
-
-
+	/**Evento de ratón. Cuando se ha producido una elección.
+	 * @param event
+	 */
 	@FXML
 	void eleccionHecha(MouseEvent event){
 		for (ObjetoSeleccionPregunta objetoSeleccionPregunta : aLEleccion) {
@@ -564,74 +578,95 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 			}
 			else{
-		if(tfRespuesta.getText().length()==0){
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Respuesta en blanco");
-				alert.setHeaderText("No puedes responder en blanco");
-				alert.setContentText("No se puede responder vacío,si no se te ocurre la respuesta, dale a pasar");
-				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				alert.showAndWait();
-			}
-			else{
-				if(Conexion_cliente.Mi_Turno){
-					if(juegoEnCurso==true){
-
-
-						utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
-
-
-						try{
-							utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
-
-						}catch(Exception a){
-							a.printStackTrace();
-						} 
-
-
-
-
-						if(Conexion_cliente.Acierto==true){
-							//				Alert alert = new Alert(AlertType.INFORMATION);
-							//				alert.setTitle("Respuesta acertada");
-							//				alert.setHeaderText("Ha acertado la respuesta a la pregunta con la letra: "+Conexion_cliente.Letra_Actual);
-							//alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-							//				alert.show();
-							try{
-								int foo =Integer.parseInt(textoPuntuacionU.getText().substring(11));
-								foo++;
-								textoPuntuacionU.setText("Acertadas: "+Integer.toString(foo));
-							
-							int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra+" la posicion de la letra");
-							panelLetrasJugador.get(Num_Letra).setImage(new Image("images/letras/verde/"+Conexion_cliente.Letra_Actual+"-green.png"));
-							}catch(Exception a){
-								a.printStackTrace();
-							}
-						}
-						else{
-							//				Alert alert = new Alert(AlertType.INFORMATION);
-							//				alert.setTitle("Respuesta fallada");
-							//				alert.setHeaderText("Ha fallado la respuesta a la pregunta con la letra: "+Conexion_cliente.Letra_Actual);
-							//alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-							//				alert.show();
-							
-							int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
-							panelLetrasJugador.get(Num_Letra).setImage(new Image("images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png"));
-						}
+				if(tfRespuesta.getText().length()==0){
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Respuesta en blanco");
+					alert.setHeaderText("No puedes responder en blanco");
+					alert.setContentText("No se puede responder vacío,si no se te ocurre la respuesta, dale a pasar");
+					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert.showAndWait();
+				}
+				else{
+					if(Conexion_cliente.Mi_Turno){
 						if(juegoEnCurso==true){
 
 
 							utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
-							try{
 
-								utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
-								taPreguntas.setText(utilidades.Conexion_cliente.Pregunta);
-								tfRespuesta.setText("");
+
+							try{
+								utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+
 							}catch(Exception a){
 								a.printStackTrace();
+							} 
+
+
+
+
+							if(Conexion_cliente.Acierto==true){
+								//				Alert alert = new Alert(AlertType.INFORMATION);
+								//				alert.setTitle("Respuesta acertada");
+								//				alert.setHeaderText("Ha acertado la respuesta a la pregunta con la letra: "+Conexion_cliente.Letra_Actual);
+								//alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+								//				alert.show();
+								try{
+									int foo =Integer.parseInt(textoPuntuacionU.getText().substring(11));
+									foo++;
+									textoPuntuacionU.setText("Acertadas: "+Integer.toString(foo));
+
+									int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra+" la posicion de la letra");
+									panelLetrasJugador.get(Num_Letra).setImage(new Image("images/letras/verde/"+Conexion_cliente.Letra_Actual+"-green.png"));
+								}catch(Exception a){
+									a.printStackTrace();
+								}
+							}
+							else{
+								//				Alert alert = new Alert(AlertType.INFORMATION);
+								//				alert.setTitle("Respuesta fallada");
+								//				alert.setHeaderText("Ha fallado la respuesta a la pregunta con la letra: "+Conexion_cliente.Letra_Actual);
+								//alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+								//				alert.show();
+
+								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
+								panelLetrasJugador.get(Num_Letra).setImage(new Image("images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png"));
+							}
+							if(juegoEnCurso==true){
+
+
+								utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
+								try{
+
+									utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
+									taPreguntas.setText(utilidades.Conexion_cliente.Pregunta);
+									tfRespuesta.setText("");
+								}catch(Exception a){
+									a.printStackTrace();
+								}
+
+
+							}  
+							else{
+								//TODO: terminar
+								Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Partida acabada");
+								alert.setHeaderText("Ha completado la partida");
+								alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
+								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+								alert.showAndWait();
+								deVentana.transicionVentana("Juego", event);
+							}
+							if(!juegoEnCurso){
+								Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Partida acabada");
+								alert.setHeaderText("Ha completado la partida");
+								alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
+								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+								alert.showAndWait();
+								deVentana.transicionVentana("Juego", event);
 							}
 
-
-						}  
+						}
 						else{
 							//TODO: terminar
 							Alert alert = new Alert(AlertType.INFORMATION);
@@ -642,108 +677,87 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 							alert.showAndWait();
 							deVentana.transicionVentana("Juego", event);
 						}
-						if(!juegoEnCurso){
-							Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Partida acabada");
-							alert.setHeaderText("Ha completado la partida");
-							alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
-							alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-							alert.showAndWait();
-							deVentana.transicionVentana("Juego", event);
-						}
+						//			utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
+						//			try{
+						//				utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+						//
+						//			}catch(Exception a){
+						//				a.printStackTrace();
+						//			}
+						//TODO: indicar si el usuario ha acertado o no
 
-					}
-					else{
-						//TODO: terminar
-						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Partida acabada");
-						alert.setHeaderText("Ha completado la partida");
-						alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
-						alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-						alert.showAndWait();
-						deVentana.transicionVentana("Juego", event);
-					}
-					//			utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
-					//			try{
-					//				utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
-					//
-					//			}catch(Exception a){
-					//				a.printStackTrace();
-					//			}
-					//TODO: indicar si el usuario ha acertado o no
+					}else{
+						taPreguntas.setText("Espere a que el otro usuario acabe");
+						new Thread(new Runnable() {  
+							@Override  
+							public void run() {  
+								while(!Conexion_cliente.Mi_Turno&&juegoEnCurso){
+									System.out.println("Dentro del while");
+									if(juegoEnCurso){
+										try{
+											utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
+										}catch(Exception a){
+											a.printStackTrace();
+											juegoEnCurso=false;
+										}	
+										System.out.println("A comprobar si el rival ha hacertado");
+										if(Conexion_cliente.Ha_Respondido){
+											if(!Conexion_cliente.Mi_Turno&&Conexion_cliente.Acierto_rival){
+												System.out.println("Ha acertado");
+												int foo =Integer.parseInt(textoPuntuacionR.getText().substring(11));
+												foo++;
+												textoPuntuacionR.setText("Acertadas: "+Integer.toString(foo));
+												int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
+												try{
+													panelLetrasContrincante.get(Num_Letra).setImage(new Image("images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png"));
+												}catch(Exception a){
+													a.printStackTrace();
+												}
+											}else if(!Conexion_cliente.Acierto_rival){
+												System.out.println("No acierta el rival");
+												System.out.println("Letra actual:"+Conexion_cliente.Letra_Actual);
+												int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
+												panelLetrasContrincante.get(Num_Letra).setImage(new Image("images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png"));
+											}
+										}
+									}
 
-				}else{
-					taPreguntas.setText("Espere a que el otro usuario acabe");
-					new Thread(new Runnable() {  
-						@Override  
-						public void run() {  
-							while(!Conexion_cliente.Mi_Turno&&juegoEnCurso){
-								System.out.println("Dentro del while");
+
+								}
+								System.out.println("Salgo del while");
+
+
+								System.out.println("Hola");
+								int i=23-22;
+								System.out.println("A obtener pregunta en el servidor");
 								if(juegoEnCurso){
 									try{
 										utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
+
+										taPreguntas.setText(Conexion_cliente.Pregunta);
+
 									}catch(Exception a){
 										a.printStackTrace();
-										juegoEnCurso=false;
-									}	
-									System.out.println("A comprobar si el rival ha hacertado");
-									if(Conexion_cliente.Ha_Respondido){
-									if(!Conexion_cliente.Mi_Turno&&Conexion_cliente.Acierto_rival){
-										System.out.println("Ha acertado");
-										int foo =Integer.parseInt(textoPuntuacionR.getText().substring(11));
-										foo++;
-										textoPuntuacionR.setText("Acertadas: "+Integer.toString(foo));
-										int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
-										try{
-											panelLetrasContrincante.get(Num_Letra).setImage(new Image("images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png"));
-										}catch(Exception a){
-											a.printStackTrace();
-										}
-									}else if(!Conexion_cliente.Acierto_rival){
-										System.out.println("No acierta el rival");
-										System.out.println("Letra actual:"+Conexion_cliente.Letra_Actual);
-										int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
-										panelLetrasContrincante.get(Num_Letra).setImage(new Image("images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png"));
 									}
 								}
-								}
-
-
-							}
-							System.out.println("Salgo del while");
-
-
-							System.out.println("Hola");
-							int i=23-22;
-							System.out.println("A obtener pregunta en el servidor");
-							if(juegoEnCurso){
-								try{
-									utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
-
-									taPreguntas.setText(Conexion_cliente.Pregunta);
-
-								}catch(Exception a){
-									a.printStackTrace();
+								else{
+									//								Alert alert = new Alert(AlertType.INFORMATION);
+									//								alert.setTitle("Partida acabada");
+									//								alert.setHeaderText("Ha completado la partida");
+									//								alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
+									//								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+									//								alert.showAndWait();
+									//								deVentana.transicionVentana("Juego", event);
 								}
 							}
-							else{
-//								Alert alert = new Alert(AlertType.INFORMATION);
-//								alert.setTitle("Partida acabada");
-//								alert.setHeaderText("Ha completado la partida");
-//								alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
-//								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-//								alert.showAndWait();
-//								deVentana.transicionVentana("Juego", event);
-							}
-						}
-					}).start(); 
+						}).start(); 
 
-					
+
+					}
 				}
 			}
 		}
-	}
-		
+
 	}
 
 
@@ -777,13 +791,13 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 					deVentana.transicionVentana("Juego", event);
 				}
 			}else{
-				Alert alert = new Alert(AlertType.INFORMATION);
-//				alert.setTitle("Partida acabada");
-//				alert.setHeaderText("Ha completado la partida");
-//				alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
-//				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-//				alert.showAndWait();
-//				deVentana.transicionVentana("Juego", event);
+//				Alert alert = new Alert(AlertType.INFORMATION);
+				//				alert.setTitle("Partida acabada");
+				//				alert.setHeaderText("Ha completado la partida");
+				//				alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
+				//				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				//				alert.showAndWait();
+				//				deVentana.transicionVentana("Juego", event);
 			}
 		}else{
 			//TODO: No puedes pasar si no es tu turno
@@ -800,31 +814,31 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			alert.showAndWait();
 		}
 		else{
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("¿Está seguro?");
-		alert.setHeaderText("¿Está seguro de que quiere rendirse");
-		alert.setContentText("Si se rinde, perderá la partida, ¿está completamente seguro?");
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("¿Está seguro?");
+			alert.setHeaderText("¿Está seguro de que quiere rendirse");
+			alert.setContentText("Si se rinde, perderá la partida, ¿está completamente seguro?");
 
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
-			if(juegoEnCurso==true){
-				try{	
-					utilidades.Conexion_cliente.Respuesta="Rendirse";
-					utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
-					tfRespuesta.setText("");
-				}catch(Exception a){
-					a.printStackTrace();
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK){
+				if(juegoEnCurso==true){
+					try{	
+						utilidades.Conexion_cliente.Respuesta="Rendirse";
+						utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+						tfRespuesta.setText("");
+					}catch(Exception a){
+						a.printStackTrace();
+					}
 				}
-			}
 
-			Alert alert2 = new Alert(AlertType.INFORMATION);
-			alert2.setTitle("Partida acabada");
-			alert2.setHeaderText("Ha completado la partida");
-			alert2.setContentText("Se ha terminado la partida con su rendición, por tanto, se concidera la partida acabada");
-			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-			alert2.showAndWait();
-			deVentana.transicionVentana("Juego", event);
-		}
+				Alert alert2 = new Alert(AlertType.INFORMATION);
+				alert2.setTitle("Partida acabada");
+				alert2.setHeaderText("Ha completado la partida");
+				alert2.setContentText("Se ha terminado la partida con su rendición, por tanto, se concidera la partida acabada");
+				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				alert2.showAndWait();
+				deVentana.transicionVentana("Juego", event);
+			}
 		}
 
 	}
@@ -1168,25 +1182,9 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		}else{
 			Platform.runLater(new RPanel( ventanaMenuDentro, menuDesplegable ));
 			ventanaMenuDentro = !ventanaMenuDentro;
-			//    		new Thread(new RPanel( ventanaMenuDentro, menuDesplegable )).start();
-
-
-			//    	     Path path = new Path();
-			//    	     path.getElements().add (new MoveTo (-200, 0));
-			//    	 
-			//    	     PathTransition pt = new PathTransition(new Duration(1000),path);
-			//    	     pt.setNode(logopsp);
-			//    	     pt.setOrientation(OrientationType.ORTHOGONAL_TO_TANGENT);
-			//    	     pt.setCycleCount(1);
-			//    	     pt.setAutoReverse(false);
-			//    	 
-			//    	     pt.play();
 		}
 	}
 
-	/* (non-Javadoc) Clase de la interfaz para que al cargarse el FXML ejecute tareas.
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Conexion_cliente.Correctas=0;
@@ -1262,8 +1260,5 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		aLEleccion.add(new ObjetoSeleccionPregunta(tDep, rDep, false));
 
 		panel.getStylesheets().add("application/application.css");
-
-
 	}
-
 }
