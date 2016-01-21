@@ -104,10 +104,12 @@ public class EventosLogIn extends Control implements Initializable {
 				pagNoticias.setPageCount(aLNoticias.size());
 				pagNoticias.setPageFactory(new Callback<Integer, Node>() {
 					@Override
+					
 					public Node call(Integer pageIndex) {
 						return createPage(pageIndex, aLNoticias);
 					}
 				});
+				
 			}
 		}catch(ConnectException a){
 			log.log(Level.WARNING, "No se ha podido establecer conexión con el servidor", a);
@@ -135,6 +137,7 @@ public class EventosLogIn extends Control implements Initializable {
 			alert.initModality(Modality.APPLICATION_MODAL);			
 			alert.showAndWait();
 		}catch (Exception e) {
+			
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Parece que algo ha salido mal");
 
@@ -271,10 +274,14 @@ public class EventosLogIn extends Control implements Initializable {
 
 	public Pane createPage(int pageIndex, ArrayList<Image> aLNoticias) {
 		Pane pageBox = new Pane();
+		try{
 		ImageView iv = new ImageView(aLNoticias.get(pageIndex));
 		iv.setX(0); iv.setY(0);
 		iv.setFitHeight(300); iv.setFitWidth(300);
 		pageBox.getChildren().add(iv);
 		return pageBox;
+		}catch(Exception a){
+			return null;
+		}
 	}
 }
