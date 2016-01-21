@@ -862,7 +862,6 @@ public class Servidor extends Application{
 
 					alert.initModality(Modality.APPLICATION_MODAL);
 					alert.initOwner((Stage)event.getSource());
-					alert.showAndWait();
 					Optional<ButtonType> result = alert.showAndWait();
 					if (result.get() == ButtonType.OK){
 						Servidor.cierre_servidor();

@@ -152,7 +152,6 @@ public class Main extends Application {
 	 * @param args Argumentos de consola (no se utilizan)
 	 */
 	public static void main(String[] args) {
-		launch(args);
 				if (lockInstance("block.dat")){
 					//Aquí se carga toda la aplicación
 					launch(args);
