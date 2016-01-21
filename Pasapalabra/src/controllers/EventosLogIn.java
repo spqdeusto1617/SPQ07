@@ -43,7 +43,7 @@ public class EventosLogIn extends Control implements Initializable {
 
 	public static ArrayList<Image> aLNoticias;
 
-	public static ArrayList<File> aLNoticiasFicheros;
+	public static ArrayList<File> aLNoticiasFicheros = new ArrayList<File>();
 
 	public static Logger log = utilidades.AppLogger.getWindowLogger(EventosLogIn.class.getName());
 

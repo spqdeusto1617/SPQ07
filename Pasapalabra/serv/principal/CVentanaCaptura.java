@@ -64,7 +64,7 @@ public class CVentanaCaptura extends Control implements Initializable{
 	public static ArrayList<Image> aLNoticias;
 
 	//ArrayList externo del programa.
-	public static ArrayList<File> aLNoticiasFicheros;
+	public static ArrayList<File> aLNoticiasFicheros = new ArrayList<File>();
 
 	/*
 	Esta separación es debida a que Image no es serializable y, por tanto,
