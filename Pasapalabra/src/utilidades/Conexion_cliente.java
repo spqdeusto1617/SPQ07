@@ -319,6 +319,13 @@ public class Conexion_cliente {
 									respuesta=in3.readLine();
 									Letra_Actual= respuesta.toString().charAt(0);
 									System.out.println("Letra: "+Letra_Actual);
+									try {
+										Thread.sleep(1000);
+									} catch (InterruptedException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									Respuesta="...........................";
 									//Letra_Actual= respuesta.toString().charAt(0);
 
 									return;
@@ -401,6 +408,13 @@ public class Conexion_cliente {
 										Pregunta=(String) respuesta;
 										respuesta=in.readObject();
 										Letra_Actual=(char) respuesta;
+										try {
+											Thread.sleep(1000);
+										} catch (InterruptedException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										Respuesta="...........................";
 									}
 									return;
 								}
@@ -488,7 +502,13 @@ public class Conexion_cliente {
 								else if("Ok".equals(respuesta)){
 
 								}
-
+								try {
+									Thread.sleep(1000);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								Respuesta="";
 								return;
 							}
 						}
@@ -510,7 +530,7 @@ public class Conexion_cliente {
 								else if("Ok".equals(respuesta)){
 									System.out.println("Pasapalabra");
 								}
-
+								
 								return;
 							}
 							System.out.println("A acabar en respuesta");

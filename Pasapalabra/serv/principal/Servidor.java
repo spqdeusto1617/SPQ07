@@ -252,7 +252,7 @@ public class Servidor extends Application{
 					else{
 
 						System.out.println("Soy el segundo cliente");
-
+						//TODO: mirar ip
 						Socket socket2 =  new Socket("127.0.0.1", 9899);
 						OutputStream os  = socket2.getOutputStream();
 						PrintWriter out2  = new PrintWriter(os, true);
@@ -395,9 +395,10 @@ public class Servidor extends Application{
 							}
 							try{
 								System.out.println("A dormir");
-								Thread.sleep(10000);
+								Thread.sleep(1000);
 								System.out.println("Fin de dormir");
 								@SuppressWarnings("resource")
+								//TODO: mirar ip
 								Socket socket3 =  new Socket("127.0.0.1", 80);
 
 								OutputStream os2  = socket3.getOutputStream();
@@ -793,7 +794,7 @@ public class Servidor extends Application{
 			Amigos_usuarios = ( TreeMap<String, ArrayList<Tipo_Amigo>> ) ois.readObject();//La extructura a cargar
 			ois.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 
 		}
 	}
