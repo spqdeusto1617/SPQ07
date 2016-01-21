@@ -17,7 +17,7 @@
 <Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EventosEstadisticas">
    <children>
       <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
-      <Rectangle fx:id="rectanguloJugar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="100.0" onMouseClicked="#btnJugar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rectanguloJugar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="100.0" onMouseClicked="#btnJugar" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
@@ -25,7 +25,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectanguloEstadisticas" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="340.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rectanguloEstadisticas" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="340.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
@@ -96,13 +96,78 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Text>
-      <BarChart barGap="40.0" categoryGap="5.0" layoutX="70.0" layoutY="98.0" legendSide="TOP" opacity="0.0" prefHeight="452.0" prefWidth="648.0" title="Reparto V/D">
-        <xAxis>
-          <CategoryAxis side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </BarChart>
+      <Pane layoutX="199.0" prefHeight="600.0" prefWidth="603.0">
+         <children>
+            <FlowPane layoutX="90.0" layoutY="50.0" prefHeight="370.0" prefWidth="420.0">
+               <children>
+                  <BorderPane prefHeight="50.0" prefWidth="420.0">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Victorias" BorderPane.alignment="CENTER" />
+                     </left>
+                     <right>
+                        <Text fx:id="txtVictorias" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <center>
+                        <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="50.0" prefWidth="420.0">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Derrotas" BorderPane.alignment="CENTER" />
+                     </left>
+                     <right>
+                        <Text fx:id="txtDerrotas" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <center>
+                        <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="50.0" prefWidth="420.0">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Empates" BorderPane.alignment="CENTER" />
+                     </left>
+                     <right>
+                        <Text fx:id="txtEmpates" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <center>
+                        <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="50.0" prefWidth="420.0">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Partidas jugadas" wrappingWidth="52.78466796875" BorderPane.alignment="CENTER" />
+                     </left>
+                     <center>
+                        <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <right>
+                        <Text fx:id="txtPartidasJugadas" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                     </right></BorderPane>
+                  <BorderPane prefHeight="50.0" prefWidth="420.0">
+                     <bottom>
+                        <Text fx:id="txtRatio" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <center>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Proporción Victorias/Derrotas" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <Region prefHeight="100.0" prefWidth="420.0" />
+                  <BorderPane prefHeight="70.0" prefWidth="420.0">
+                     <top>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Posicion en el ranking" BorderPane.alignment="CENTER" />
+                     </top>
+                     <center>
+                        <Text fx:id="txtPosicion" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </children>
+            </FlowPane>
+            <Text layoutX="248.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estadísticas">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </Pane>
