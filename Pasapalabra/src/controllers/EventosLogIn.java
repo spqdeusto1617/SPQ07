@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,10 +24,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import utilidades.Conexion_cliente;
 
 /**Clase que gestiona los eventos de la clase LogIn.fxml
@@ -35,6 +38,9 @@ import utilidades.Conexion_cliente;
  */
 public class EventosLogIn extends Control implements Initializable {
 	//Se define un logger
+	
+	public static ArrayList<Image> aLNoticias;
+	
 	public static Logger log = utilidades.AppLogger.getWindowLogger(EventosLogIn.class.getName());
 	
 	public static Image iAvatar;
@@ -85,8 +91,17 @@ public class EventosLogIn extends Control implements Initializable {
 			//Empieza conexión
 			utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local, utilidades.Acciones_servidor.Comprobar.toString(),null);
 			log.log(Level.INFO, "Conexión iniciada.");
+			if((aLNoticias != null) || (!aLNoticias.isEmpty())){
+			pagNoticias.setMaxPageIndicatorCount(4);
+			pagNoticias.setPageCount(aLNoticias.size());
+	        pagNoticias.setPageFactory(new Callback<Integer, Node>() {
+	            @Override
+	            public Node call(Integer pageIndex) {
+	                return createPage(pageIndex, aLNoticias);
+	            }
+	        });
+			}
 		}catch(Exception a){
-			a.printStackTrace();
 			log.log(Level.WARNING, "No se ha podido establecer conexión con el servidor", a);
 			//Alertamos al usuario de que no hay conexión con servidor
 			Alert alert = new Alert(AlertType.ERROR);
@@ -226,4 +241,13 @@ public class EventosLogIn extends Control implements Initializable {
 	        e.printStackTrace();
 	    }
 	}
+	
+	public Pane createPage(int pageIndex, ArrayList<Image> aLNoticias) {
+        Pane pageBox = new Pane();
+        ImageView iv = new ImageView(aLNoticias.get(pageIndex));
+        iv.setX(0); iv.setY(0);
+        iv.setFitHeight(300); iv.setFitWidth(300);
+        pageBox.getChildren().add(iv);
+        return pageBox;
+    }
 }
