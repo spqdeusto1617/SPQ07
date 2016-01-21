@@ -2,6 +2,8 @@
 package controllers;
 
 import java.awt.Desktop;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,6 +24,7 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.imageio.ImageIO;
 import javax.swing.text.Utilities;
 
 import org.omg.CORBA.UserException;
@@ -55,6 +58,7 @@ import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 /**Clase que gestiona los eventos de la clase Registro.fxml
  * @author asier.gutierrez
@@ -127,8 +131,8 @@ public class EventosRegistro extends Control implements Initializable {
 	public static String[]Datos_usuario=new String[5];
 
 	public static boolean MailExiste=false;
-	
-	
+
+
 
 	public static boolean UsuarioExiste=false;
 
@@ -138,7 +142,7 @@ public class EventosRegistro extends Control implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		
+
 		//panel.getStylesheets().add("application/application.css");
 		userNameValidator.getItems().add(
 				new MenuItem("El nombre de usuario tiene que tener entre 8-16 caracteres"));
@@ -183,8 +187,8 @@ public class EventosRegistro extends Control implements Initializable {
 			}
 		} );
 		chkTerminos.setDisable(true);
-		
-			
+
+
 	}
 
 	/**Método para comprobar que el usuario ha introducido un nombre que tiene entre 8 y 16 caracteres
@@ -276,7 +280,7 @@ public class EventosRegistro extends Control implements Initializable {
 	 * @param event el evento de ratón
 	 */
 	public void crearUsuario(MouseEvent event){
-		if(txtNombreUsuario.getText().length()==0||txtCorreoUsuario.getText().length()==0||pflContrasenya.getText().length()==0||pfdRepetirContrasenya.getText().length()==0)
+		if(txtNombreUsuario.getText().length()<8||txtCorreoUsuario.getText().length()==0||pflContrasenya.getText().length()<8||pfdRepetirContrasenya.getText().length()<8||!pflContrasenya.getText().equals(pfdRepetirContrasenya.getText()))
 		{
 			datosCorrectos=false;
 			btnCrear.setDisable(true);
@@ -334,7 +338,7 @@ public class EventosRegistro extends Control implements Initializable {
 
 					alert2.showAndWait();
 
-					
+
 					utilidades.deVentana.transicionVentana("LogIn", event);
 				}
 			}catch(Exception a){
@@ -407,7 +411,7 @@ public class EventosRegistro extends Control implements Initializable {
 
 		//Ha pulsado ok?
 		if (result.get() == ButtonType.OK){
-			
+
 			utilidades.deVentana.transicionVentana("LogIn", event);
 		}
 
@@ -421,11 +425,8 @@ public class EventosRegistro extends Control implements Initializable {
 		Stage stageFilechooser = new Stage();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-				new FileChooser.ExtensionFilter("GIF", "*.gif"),
-				new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-				new FileChooser.ExtensionFilter("PNG", "*.png")
-				);
+				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg"));
+
 		try{
 			//AnotherStage2: para que lance el filechooser
 			file = fileChooser.showOpenDialog(stageFilechooser);
@@ -443,6 +444,13 @@ public class EventosRegistro extends Control implements Initializable {
 			}
 			else{
 				String path="file:///"+file.getAbsolutePath();
+				BufferedImage originalImage = ImageIO.read(file);
+
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				ImageIO.write( originalImage, "jpg", baos );
+				baos.flush();
+				byte[] imageInByte = baos.toByteArray();
+				baos.close();
 				Datos_usuario[4]=file.getAbsolutePath();
 				ImgImagenUsuario.setImage(new Image(path));
 			}

@@ -140,18 +140,19 @@ public class Servidor extends Application{
 
 				switch (accion) {
 				case "Comprobar":
-					//TODO: terminar esto(faltan noticias)
-//					for (int i=0;i<CVentanaCaptura.aLNoticias.size();i++) {
-//
-//						out.println(CVentanaCaptura.aLNoticias.get(i));
-//						accion = in.readLine();
-//
-//						if (!"ACK".equals(accion)) throw new IOException( "Conexión errónea: " + accion );
-//					}
-//					out.writeObject("Fin");
-//					accion = in.readLine();
-//
-//					if (!"ACK".equals(accion)) throw new IOException( "Conexión errónea: " + accion );
+					
+					
+					for (int i=0;i<CVentanaCaptura.aLNoticias.size();i++) {
+
+						out.writeObject(CVentanaCaptura.aLNoticias.get(i));
+						accion = in.readLine();
+
+						if (!"ACK".equals(accion)) throw new IOException( "Conexión errónea: " + accion );
+					}
+					out.writeObject("FIN");
+					accion = in.readLine();
+
+					if (!"ACK".equals(accion)) throw new IOException( "Conexión errónea: " + accion );
 					addMensaje("Comprobación realizada\n");
 					break;
 				case "Crear_Usuario":

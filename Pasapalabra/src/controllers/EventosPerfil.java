@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class EventosPerfil extends ClaseExtensora implements Initializable {
 	//Se define un logger
@@ -129,11 +130,8 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 			Stage stageFilechooser = new Stage();
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.getExtensionFilters().addAll(
-					new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-					new FileChooser.ExtensionFilter("GIF", "*.gif"),
-					new FileChooser.ExtensionFilter("BMP", "*.bmp"),
-					new FileChooser.ExtensionFilter("PNG", "*.png")
-					);
+					new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg"));
+				
 			try{
 				//AnotherStage2: para que lance el filechooser
 				file = fileChooser.showOpenDialog(stageFilechooser);

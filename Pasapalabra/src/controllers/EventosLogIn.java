@@ -2,6 +2,7 @@ package controllers;
 
 import java.awt.Desktop;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -101,7 +102,7 @@ public class EventosLogIn extends Control implements Initializable {
 	            }
 	        });
 			}
-		}catch(Exception a){
+		}catch(ConnectException a){
 			log.log(Level.WARNING, "No se ha podido establecer conexión con el servidor", a);
 			//Alertamos al usuario de que no hay conexión con servidor
 			Alert alert = new Alert(AlertType.ERROR);
@@ -117,6 +118,25 @@ public class EventosLogIn extends Control implements Initializable {
 			btnLogin.setDisable(true);
 			//El estado del servidor se define gráficamente con una imagen.
 			estadoServidor.setImage(new Image("images/desconectado.png"));
+			a.printStackTrace();
+		}catch(NullPointerException a){
+			a.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Parece que algo ha salido mal");
+
+			alert.setContentText("Parece que las noticias no están disponibles");
+			alert.initModality(Modality.APPLICATION_MODAL);			
+			alert.showAndWait();
+		}catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Parece que algo ha salido mal");
+
+			alert.setContentText("Parece que ha habido un error insesperado, podrá jugar de todos modos");
+			alert.initModality(Modality.APPLICATION_MODAL);			
+			alert.showAndWait();
+			log.log(Level.SEVERE,"Error al iniciar:"+e.getMessage());
+			e.printStackTrace();
+
 		}
 	}
 	

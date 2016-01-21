@@ -26,6 +26,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -63,7 +64,7 @@ static int Contestadas_rival=0;
 	public static boolean Soy_Servidor;
 
 
-	/**Método de utilidad para poder lanzar la conexión con el servidor
+	/**Método de utilidad para poder lanzar la conexión con el servidor (réplica de la de Andoni Eguíluz del examen final)
 	 * @param ip :la ip del servidor
 	 * @param accion :la acción que se quiere realizar (es un ENUM, mirar la clase: Acciones_servidor para más info)
 	 * @param datos_cliente : los datos que ell cliente quiere validar, cambiar...
@@ -79,7 +80,7 @@ static int Contestadas_rival=0;
 
 				if(!accion.equals("Obtener_Pregunta")&&!accion.equals("Responder_Pregunta")){
 					// Realiza la conexión e inicializa los flujos de comunicación
-					System.out.println();
+				
 					socket = new Socket(ip, 9898);
 					socket.setSoTimeout(100000);
 					in = new ObjectInputStream( socket.getInputStream() );
@@ -98,17 +99,17 @@ static int Contestadas_rival=0;
 
 				switch (accion) {
 				case "Comprobar":
-					//TODO: terminar esto(faltan noticias)
-//					do{
-//
-//						respuesta=in.readObject();
-//						
-//						if(!"FIN".equals(respuesta)){
-//							EventosLogIn.aLNoticias.add(respuesta);
-//						}
-//						out.println("ACK");
-//
-//					}while(!"FIN".equals(respuesta));
+				
+					do{
+
+						respuesta=in.readObject();
+						
+						if(!"FIN".equals(respuesta)){
+							EventosLogIn.aLNoticias.add((Image) respuesta);
+						}
+						out.println("ACK");
+
+					}while(!"FIN".equals(respuesta));
 
 					break;
 				case "Crear_Usuario":
