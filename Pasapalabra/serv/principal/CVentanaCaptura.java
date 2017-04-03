@@ -272,9 +272,9 @@ public class CVentanaCaptura extends Control implements Initializable{
 		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
-			Servidor.cierre_servidor();
+			/*Servidor.cierre_servidor();
 			BaseDeDatosPreguntas.cerrarConexion();
-			BaseDeDatosUsuarios.cerrarConexion();
+			BaseDeDatosUsuarios.cerrarConexion();*/
 			Platform.exit();
 			System.exit(0);
 		} else {
@@ -337,7 +337,7 @@ public class CVentanaCaptura extends Control implements Initializable{
 		//Saca la fecha en la que el servidor se encendió.
 		Date fComienzo = new Date();
 		//Coge el puerto del servidor
-		txtPuertoServidor.setText(String.valueOf(Servidor.PUERTO_DEL_SERVIDOR));
+		//txtPuertoServidor.setText(String.valueOf(Servidor.PUERTO_DEL_SERVIDOR));
 		//Se carga la ip externa del servidor
 		try {
 			URL whatismyip = new URL("http://checkip.amazonaws.com");
@@ -370,7 +370,7 @@ public class CVentanaCaptura extends Control implements Initializable{
 						@Override
 						public void run() {
 							//Actualiza los mensajes
-							listaMensajes.setText(Servidor.s2);
+						//	listaMensajes.setText(Servidor.s2);
 
 							//Carga el tiempo transcurrido.
 							long diff = new Date().getTime() - fComienzo.getTime();
