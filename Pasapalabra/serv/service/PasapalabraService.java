@@ -26,7 +26,7 @@ public class PasapalabraService implements IPasapalabraService{
 	@SuppressWarnings("unused")
 	public Token login(String userName, String pass)
 	{
-		if(true){//FIXME: get userdata from DB(if user does not exist, return null
+		if(true){//FIXME: get userdata from DB(if user does not exist, return null)
 			User user = new User(userName, "", pass, null, new Date(), 0, 0, 0);
 			//UserDTO userDTO = UserAssembler.getInstance().assembleToDTO(user);
 			Token token = SessionManager.createSession(userName);
@@ -44,7 +44,9 @@ public class PasapalabraService implements IPasapalabraService{
 
 	public QuestionDTO play(Token session, QuestionType type){
 		if(SessionManager.isValidSession(session)){
-			ArrayList<Question> questions = null;//FIXME: get questions of that type in arraylist of question( 'ñ' letter must be inserted in the last position of the arraylist) 
+			ArrayList<Question> questions = new ArrayList<>();//FIXME: get questions of that type in arraylist of question( 'ñ' letter must be inserted in the last position of the arraylist) 
+			/*questions.add(new Question("works?", "we hope so", 'a', "Unknown"));
+			questions.add(new Question("works now?", "we hope so2", 'b', "known")); //for testing purposes*/
 			currentQuestions.put(session, questions);
 			currentResult.put(session, new UserScore());
 			return QuestionAssembler.getInstance().assembleToDTO(questions.get(0));//We get the first question
@@ -56,7 +58,7 @@ public class PasapalabraService implements IPasapalabraService{
 	
 	public QuestionDTO getQuestion(Token session){
 		if(SessionManager.isValidSession(session)){
-			if(allQuestionsAnsered(currentQuestions.get(session)))return null;//TODO: end game
+			
 			boolean answered = true;
 			Question question = null;
 			do{
@@ -66,14 +68,13 @@ public class PasapalabraService implements IPasapalabraService{
 					 question = currentQuestions.get(session).get(currentQuestions.get(session).size()-1);
 				}
 				else{
-					 question = currentQuestions.get(session).get((int)currentResult.get(session).getCurrentLetter());
+					 question = currentQuestions.get(session).get(((int)currentResult.get(session).getCurrentLetter())-97);
 				}
 				if(!question.isAnswered()){
 					answered = false;
 				}
 			}while(answered);
 			return QuestionAssembler.getInstance().assembleToDTO(question);
-			//We get the first question
 		}
 		else{
 			return null;
@@ -88,17 +89,19 @@ public class PasapalabraService implements IPasapalabraService{
 				 currentQuestions.get(session).get(currentQuestions.get(session).size()-1).setAnswered(true);
 			}
 			else{
-				 question = currentQuestions.get(session).get((int)currentResult.get(session).getCurrentLetter());
-				currentQuestions.get(session).get((int)currentResult.get(session).getCurrentLetter()).setAnswered(true);
+				 question = currentQuestions.get(session).get(((int)currentResult.get(session).getCurrentLetter())-97);
+				currentQuestions.get(session).get(((int)currentResult.get(session).getCurrentLetter())-97).setAnswered(true);
 			}
 			
 			if(answer.getAnswer().equals(question.getAnswer())){
 				currentResult.get(session).increaseRight();
+				if(allQuestionsAnsered(currentQuestions.get(session))){System.out.println("Finished");}//TODO: end game
 				return true;
 			}
 			else if(answer.getAnswer().equals("Pasapalabra"))return true;
 			else{
 				currentResult.get(session).increaseWrong();
+				if(allQuestionsAnsered(currentQuestions.get(session))){System.out.println("Finished");}//TODO: end game
 				return false;
 			}
 		}
@@ -118,15 +121,22 @@ public class PasapalabraService implements IPasapalabraService{
 		return true;
 	}
 
-	/*private static int positionOfChar(char leter){
-		if(leter == 'ñ'){
-			return 14;
-		}
-		else{
-			if(leter >14) return leter + 1;
-			else return leter;
-		}
+	/*public static void main(String[] args) {
+		PasapalabraService service = new PasapalabraService();
+		Token token = service.login("Me", "Test");
+		System.out.println(token.getToken());
+		UserDTO test = service.getData(token);
+		System.out.println(test);
+		QuestionDTO test2 = service.play(token, QuestionType.All);
+		System.out.println(test2);
+		test2.setAnswer("No");
+		boolean right = service.answerQuestion(token, test2);
+		System.out.println(right);
+		test2 = service.getQuestion(token);
+		System.out.println("New question: "+test2);
+		test2.setAnswer("we hope so");
+		right = service.answerQuestion(token, test2);
+		System.out.println("Final right: "+right);
 	}*/
-	
 	
 }
