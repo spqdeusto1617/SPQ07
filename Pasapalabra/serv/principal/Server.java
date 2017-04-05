@@ -7,31 +7,27 @@ import java.rmi.RemoteException;
 import service.IPasapalabraService;
 import service.PasapalabraService;
 
-public class Servidor {
+public class Server {
 	
-	static String ip = "127.0.0.1";
 	
-	static String port = "1099";
-	
-	static String name = "pasapalabra";
 	
 	public static void main(String[] args) {
 
 	    	System.out.println("Starting server...");
-	    	/*
+	    	
 	    	if (args.length != 3) {
 	    		System.out.println("args error, server won't startup.");
 	    		System.out.println("usage: java [policy] [codebase] server.Server [host] [port] [server]");
 				System.exit(0);
 			}
-			*/
+			
 			
 	    	if (System.getSecurityManager() == null) {
 				System.setSecurityManager(new SecurityManager());
 			}
-		
-			String serverAddress = "//" + ip + ":" +port + "/" + name;
-			System.out.println(serverAddress);
+
+			String serverAddress = "//" + args[0] + ":" + args[1] + "/" + args[2];
+			System.out.println(" * Server name: " + serverAddress);
 			IPasapalabraService pasapalabraService = new PasapalabraService();
 			
 			try {
