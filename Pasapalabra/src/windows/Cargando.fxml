@@ -7,6 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ProgressBar fx:id="barraCarga" layoutX="183.0" layoutY="292.0" prefHeight="30.0" prefWidth="435.0" progress="0.28">

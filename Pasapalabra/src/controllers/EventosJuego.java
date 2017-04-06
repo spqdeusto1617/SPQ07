@@ -1357,6 +1357,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			//		panel.getStylesheets().remove("application/application.css");
 		}
 
+		//se quitaría y añadir en otro controller
 		void pqGuiCargando(boolean poner_notQuitar){
 			if(poner_notQuitar){
 				fondoCarga.setX(0.0);
