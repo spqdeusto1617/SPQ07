@@ -33,10 +33,10 @@ import javafx.stage.Stage;
  * @author asier.gutierrez
  */
 public class deVentana {
-
+	
 	//Loger de la clase deVentana
 	public static Logger log = utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
-
+	 
 	/**Método para la transición de una ventana a otra.
 	 * @param nombreFichero Nombre sin extensión por la cual se
 	 * conoce el fichero en el classpath. Sólo se pide el nombre porque
@@ -123,9 +123,9 @@ public class deVentana {
 
 				//En la clase del servidor habrá una rutina para cerrar sesión.
 				String[] Datos=new String[1];
-				Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
+				//FIXME:Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
 				try {
-					Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
+					//FIXME:Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
 					utilidades.deVentana.transicionVentana("LogIn", event);
 				} catch (Exception e) {
 					log.log(Level.WARNING, "Error al cerrar sesion", e);
