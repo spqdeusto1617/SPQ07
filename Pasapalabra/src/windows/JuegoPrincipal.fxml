@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fx:id="rPreguntas" arcHeight="5.0" arcWidth="5.0" fill="#9536ff8f" height="103.0" layoutX="209.0" layoutY="197.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="552.0" />
+      <TextArea fx:id="taPreguntas" editable="false" layoutX="214.0" layoutY="202.0" prefHeight="93.0" prefWidth="542.0" wrapText="true" />
+      <Rectangle fx:id="rPasar" arcHeight="5.0" arcWidth="5.0" fill="#ff2121a3" height="35.0" layoutX="21.0" layoutY="185.0" onMouseClicked="#btnPasar" onMouseEntered="#entradoCSS" onMouseExited="#salidoCSS" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="mdjSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#ff21bca3" height="35.0" layoutX="21.0" layoutY="185.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="tdpSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#00ff95a3" height="35.0" layoutX="21.0" layoutY="328.0" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="rRendirse" arcHeight="5.0" arcWidth="5.0" height="35.0" layoutX="21.0" layoutY="328.0" onMouseClicked="#btnRendirse" onMouseEntered="#entradoCSS" onMouseExited="#salidoCSS" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <fill>
+            <LinearGradient endX="0.5" endY="1.0" startX="0.5576923076923077">
+               <stops>
+                  <Stop color="#ff1212a3" />
+                  <Stop color="#eeda22" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle fx:id="rContestar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="21.0" layoutY="83.0" onMouseClicked="#btnContestar" onMouseEntered="#entradoCSS" onMouseExited="#salidoCSS" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Text id="information" fx:id="textoTiempoUsuario" layoutX="302.0" layoutY="408.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="?????????" />
+      <Text id="information" fx:id="textoPuntuacionU" layoutX="412.0" layoutY="386.0" stroke="#b9b9b9" strokeType="OUTSIDE" strokeWidth="0.1" text="Acertadas: 0" textAlignment="CENTER" wrappingWidth="105.61328125" />
+      <Text id="information" fx:id="textoTiempoRival" layoutX="372.0" layoutY="417.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="?????????" textAlignment="CENTER" />
+      <Text id="information" fx:id="textoPuntuacionR" layoutX="386.0" layoutY="448.0" stroke="#b9b9b9" strokeType="OUTSIDE" strokeWidth="0.1" text="Acertadas: 0" textAlignment="CENTER" wrappingWidth="105.61328125" />
+      <Text id="username" fx:id="textoUsernameUser" layoutX="470.0" layoutY="412.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="???usr???" textAlignment="CENTER" wrappingWidth="133.07421875" />
+      <Text id="username" fx:id="textoUsernameRival" layoutX="470.0" layoutY="470.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="???usR???" textAlignment="CENTER" wrappingWidth="136.24899291992188" />
+      <Text fx:id="textoContestar" fill="WHITE" layoutX="56.0" layoutY="107.0" onMouseClicked="#btnContestar" onMouseEntered="#entradoCSS" onMouseExited="#salidoCSS" strokeType="OUTSIDE" strokeWidth="0.0" text="Contestar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+      </Text>
+      <Text fx:id="textoPasar" fill="WHITE" layoutX="81.0" layoutY="208.0" onMouseClicked="#btnPasar" onMouseEntered="#entradoCSS" onMouseExited="#salidoCSS" strokeType="OUTSIDE" strokeWidth="0.0" text="Pasar">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+      </Text>
+      <Text fx:id="textoRendirse" fill="WHITE" layoutX="59.0" layoutY="351.0" onMouseClicked="#btnRendirse" onMouseEntered="#entradoCSS" onMouseExited="#salidoCSS" strokeType="OUTSIDE" strokeWidth="0.0" text="Rendirse">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -152,7 +153,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 
 	//Elementos de la gui de juego no inicializados [Salvo algunos para copiar el StyleSheet ya que en javafx no se pueden clonar los nodos].
-	public TextField tfRespuesta;
+	/*public TextField tfRespuesta;
 	@FXML public Rectangle rContestar;
 	@FXML public Rectangle rPreguntas;
 	@FXML public TextArea taPreguntas;
@@ -172,14 +173,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 	@FXML public Text textoUsernameUser;
 	@FXML public Text textoUsernameRival;
-
-
-
-	//Pantalla de carga
-	@FXML public Rectangle fondoCarga;
-	@FXML public ProgressBar barraCarga;
-	@FXML public Text textoCargaTranquil;
-	@FXML public Text textoCargaBuscandoPartida;
+	*/
 
 
 	public Thread hiloDeCarga = new Thread(new RCarga(this));
