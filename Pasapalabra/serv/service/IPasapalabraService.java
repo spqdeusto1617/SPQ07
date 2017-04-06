@@ -18,7 +18,7 @@ public interface IPasapalabraService extends Remote {
 	
 	public QuestionDTO getQuestion(Token session);
 	
-	public boolean answerQuestion(Token session, QuestionDTO answer);
+	public boolean answerQuestion(Token session, String answer);
 	
 	public boolean allQuestionAnswered(Token session);
 

@@ -47,9 +47,9 @@ public class PasapalabraService implements IPasapalabraService{
 	public QuestionDTO play(Token session, QuestionType type){
 		if(SessionManager.isValidSession(session)){
 			ArrayList<Question> questions = new ArrayList<>();//FIXME: get questions of that type in arraylist of question( 'ñ' letter must be inserted in the last position of the arraylist) 
-			questions.add(new Question("works?", "we hope so", 'a', "Unknown"));
+			questions.add(new Question("Test", "Answer", 'a', "Unknown"));
 			/*for(int i = (int)'a'; i<(int)'z'; i++){
-			questions.add(new Question("works?", "we hope so", (char)(i + 1), "Unknown"));
+			questions.add(new Question("Test", "Answer", (char)(i + 1), "Unknown"));
 			} 
 			System.out.println("Last question introduced: "+questions.get(questions.size()-1).getLeter());
 			questions.add(new Question("works?", "we hope so", 'ñ', "Unknown")); //for testing purposes*/
@@ -86,7 +86,7 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 	}
 	
-	public boolean answerQuestion(Token session, QuestionDTO answer){
+	public boolean answerQuestion(Token session, String answer){
 		if(SessionManager.isValidSession(session)){
 			Question question = null;
 			if(currentResult.get(session).getCurrentLetter() == 'ñ'){
@@ -96,7 +96,7 @@ public class PasapalabraService implements IPasapalabraService{
 				 question = currentQuestions.get(session).get(((int)currentResult.get(session).getCurrentLetter())-97);
 			}
 			
-			if(answer.getAnswer().equals(question.getAnswer())){
+			if(answer.equals(question.getAnswer())){
 				currentResult.get(session).increaseRight();
 				if(currentResult.get(session).getCurrentLetter() == 'ñ'){
 					currentQuestions.get(session).get(currentQuestions.get(session).size()-1).setAnswered(true);
@@ -105,7 +105,7 @@ public class PasapalabraService implements IPasapalabraService{
 					}
 				return true;
 			}
-			else if(answer.getAnswer().equals("Pasapalabra")){ System.out.println("Server - Pasamos palabra");return true;}
+			else if(answer.equals("Pasapalabra")){ System.out.println("Server - Pasamos palabra");return true;}
 			else{
 				currentResult.get(session).increaseWrong();
 				if(currentResult.get(session).getCurrentLetter() == 'ñ'){
