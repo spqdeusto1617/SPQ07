@@ -1,7 +1,0 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
-Pane {
-    -fx-background-color: #ffffff;
-}
-.text-area, .text-area .viewport, .text-area .content {
-    -fx-background-color: transparent ;
-}

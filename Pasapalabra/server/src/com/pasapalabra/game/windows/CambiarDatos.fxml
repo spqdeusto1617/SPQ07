@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Esta versión ha sido creada para que utilidades.deVentana.java generalice eventos de todas las ventanas basadas en esta plantilla -->
+
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.EventosCambiarDatos">
+   <children>
+      <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
+      <Rectangle fx:id="rectanguloJugar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="100.0" onMouseClicked="#btnJugar" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.3" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Rectangle>
+      <Rectangle fx:id="rectanguloMiPerfil" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="260.0" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Rectangle>
+      <Rectangle fx:id="rectanguloEstadisticas" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="340.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Rectangle>
+      <Rectangle fx:id="rectanguloAmigos" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="180.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Rectangle>
+      <Text fx:id="textoJugar" fill="WHITE" layoutX="80.0" layoutY="125.0" onMouseClicked="#btnJugar" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Jugar" wrappingWidth="44.10186767578125">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="textoAmigos" fill="WHITE" layoutX="73.0" layoutY="205.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Amigos" wrappingWidth="53.024166107177734">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="textoMiPerfil" fill="WHITE" layoutX="70.0" layoutY="285.0" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Mi perfil" wrappingWidth="59.024169921875">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="textoEstadisticas" fill="WHITE" layoutX="55.0" layoutY="365.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Estadísticas" wrappingWidth="86.33687973022461">
+         <font>
+            <Font size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <ImageView fx:id="logopsp" fitHeight="88.0" fitWidth="151.0" layoutX="24.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/LogoPasapalabra.png" />
+         </image></ImageView>
+      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="34.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logead@ como:" />
+      <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
+      <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="15.0" layoutY="565.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Rectangle>
+      <Text fx:id="textoCerrarSesion" fill="WHITE" layoutX="35.0" layoutY="585.0" onMouseClicked="#btnCerrarSesion" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Cerrar sesión" textAlignment="CENTER" wrappingWidth="136.24898529052734">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Text>
+      <Circle fx:id="circuloPanel" fill="#21cbffa3" layoutX="215.0" layoutY="584.0" onMouseClicked="#esPanel" radius="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Circle>
+      <Text fx:id="textoESPanel" fill="WHITE" layoutX="199.0" layoutY="588.0" onMouseClicked="#esPanel" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="&lt;&lt;" textAlignment="CENTER" wrappingWidth="32.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Circle fx:id="circuloPlus" fill="#38ffd4c0" layoutX="185.0" layoutY="15.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Text fx:id="textoPlus" fill="WHITE" layoutX="180.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <TabPane layoutX="199.0" prefHeight="594.0" prefWidth="603.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Cambiar correo">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle fx:id="rectanguloCambiarCorreo" arcHeight="5.0" arcWidth="5.0" fill="#fbff21a3" height="35.0" layoutX="385.0" layoutY="497.0" onMouseClicked="#btnCambiarCorreo" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Rectangle>
+                        <Text fx:id="txtCambiarCorreo" layoutX="447.0" layoutY="520.0" onMouseClicked="#btnCambiarCorreo" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <Rectangle fx:id="rectanguloDescartar" arcHeight="5.0" arcWidth="5.0" fill="#f81500a3" height="35.0" layoutX="52.0" layoutY="497.0" onMouseClicked="#btnDescartar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Rectangle>
+                        <Text fx:id="txtDescartar" layoutX="108.0" layoutY="519.0" onMouseClicked="#btnDescartar" strokeType="OUTSIDE" strokeWidth="0.0" text="Descartar" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <TextField fx:id="tflViejoMail" layoutX="200.0" layoutY="121.0" prefHeight="25.0" prefWidth="195.0" />
+                        <Text layoutX="200.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce tu antiguo mail" textAlignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <Text layoutX="200.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce tu nuevo mail" textAlignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <TextField fx:id="tflNuevoMail" layoutX="200.0" layoutY="204.0" prefHeight="25.0" prefWidth="195.0" />
+                        <TextField fx:id="tflNuevoMail2" layoutX="200.0" layoutY="287.0" prefHeight="25.0" prefWidth="195.0" />
+                        <Text layoutX="200.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repite tu nuevo mail" textAlignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <PasswordField fx:id="pflContrasenyaUsuario" layoutX="200.0" layoutY="370.0" prefHeight="25.0" prefWidth="195.0" />
+                        <Text layoutX="200.0" layoutY="366.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca su contraseña" textAlignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Cambiar contraseña">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Rectangle fx:id="rectanguloDescartar" arcHeight="5.0" arcWidth="5.0" fill="#ff2121a3" height="35.0" layoutX="52.0" layoutY="497.0" onMouseClicked="#btnDescartar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Rectangle>
+                        <Text fx:id="txtDescartar" layoutX="108.0" layoutY="519.0" onMouseClicked="#btnDescartar" strokeType="OUTSIDE" strokeWidth="0.0" text="Descartar" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <Rectangle fx:id="rectanguloCambiarContrasenya" arcHeight="5.0" arcWidth="5.0" fill="#5c21ffa3" height="35.0" layoutX="385.0" layoutY="497.0" onMouseClicked="#btnCambiarContrasenya" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Rectangle>
+                        <Text fx:id="txtCambiarContrasenya" layoutX="447.0" layoutY="520.0" onMouseClicked="#btnCambiarContrasenya" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Text>
+                        <PasswordField fx:id="pfdAntiguaContrasenya" layoutX="200.0" layoutY="121.0" prefHeight="25.0" prefWidth="195.0" />
+                        <Text layoutX="200.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca su antigua contraseña" />
+                        <PasswordField fx:id="pfdNuevaContrasenya" layoutX="200.0" layoutY="240.0" prefHeight="25.0" prefWidth="195.0" />
+                        <Text layoutX="200.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca su nueva contraseña" />
+                        <PasswordField fx:id="pfdNuevaContrasenya1" layoutX="200.0" layoutY="360.0" prefHeight="25.0" prefWidth="195.0" />
+                        <Text layoutX="200.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repita su nueva contraseña" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
