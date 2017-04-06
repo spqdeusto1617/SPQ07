@@ -16,6 +16,8 @@ public class Question implements Serializable{
 	
 	String answer;
 	
+	String questionType;
+	
 	char leter;
 	
 	String creator;
@@ -49,6 +51,14 @@ public class Question implements Serializable{
 	public void setLeter(char leter) {
 		this.leter = leter;
 	}
+	
+	public String getQuestionType() {
+		return questionType;
+	}
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
+
 	public String getCreator() {
 		return creator;
 	}

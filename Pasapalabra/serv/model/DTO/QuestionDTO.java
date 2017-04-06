@@ -13,15 +13,6 @@ public class QuestionDTO implements Serializable{
 
 	char leter;
 	
-	String answer;
-	
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
 	boolean answered;
 
 	String creator;
