@@ -13,12 +13,10 @@ import java.util.logging.Logger;
 
 import com.pasapalabra.game.objetos.BotonJuego;
 import com.pasapalabra.game.objetos.ObjetoSeleccionPregunta;
-import com.pasapalabra.game.utilidades.Conexion_cliente;
 import com.pasapalabra.game.utilidades.RCarga;
 import com.pasapalabra.game.utilidades.RPanel;
 import com.pasapalabra.game.utilidades.deVentana;
 
-import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,9 +25,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;

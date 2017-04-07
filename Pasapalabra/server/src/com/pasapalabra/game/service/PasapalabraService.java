@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.pasapalabra.game.model.Question;
-import com.pasapalabra.game.model.QuestionType;
 import com.pasapalabra.game.model.User;
 import com.pasapalabra.game.model.UserScore;
 import com.pasapalabra.game.model.DTO.QuestionDTO;
