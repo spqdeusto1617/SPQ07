@@ -1,16 +1,13 @@
 package com.pasapalabra.game.application;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.net.MalformedURLException;
 import java.nio.channels.FileLock;
-import java.sql.SQLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.pasapalabra.game.controllers.EventosJuego;
-import com.pasapalabra.game.utilidades.Acciones_servidor;
-import com.pasapalabra.game.utilidades.Conexion_cliente;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -55,7 +52,7 @@ public class Main extends Application {
 			//Añadir un escuchador para cuando se cierre la ventana 
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override public void handle(WindowEvent t) {
-					if(!com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.isEmpty()){
+					/*TODO: when delog, check thisif(!com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.isEmpty()){
 						String[] Datos=new String[1];
 						if(EventosJuego.juegoEnCurso==false){
 							
@@ -89,7 +86,7 @@ public class Main extends Application {
 							
 						}
 						
-					}
+					}*/
 				}
 			});
 
@@ -138,6 +135,20 @@ public class Main extends Application {
 	public static void main(String[] args) {
 				if (lockInstance("block.dat")){
 					//Aquí se carga toda la aplicación
+					try {
+						com.pasapalabra.game.utilidades.ClientConnexion.startConnection(args);
+					} catch (MalformedURLException | NotBoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						
+					}
+					catch(RemoteException r){
+						r.printStackTrace();
+					}
+					catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
 					launch(args);
 					log.log(Level.FINEST, "Ventana cargada. FIN HILO MAIN.JAVA");
 //					//Hilo main muerto.

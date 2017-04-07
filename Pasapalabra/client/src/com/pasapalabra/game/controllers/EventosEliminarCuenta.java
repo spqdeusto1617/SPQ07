@@ -89,7 +89,7 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 	public void initialize(URL location, ResourceBundle resources) {
 
 		panel.getStylesheets().add("application/application.css");
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0));
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
 		if(EventosLogIn.iAvatar!=null){
 			imagenAvatar.setImage(EventosLogIn.iAvatar);
 		}else{
@@ -135,7 +135,7 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 			Optional<ButtonType> result2 = alert2.showAndWait();
 			if (result2.get() == ButtonType.OK){
 				boolean datos_Correctos=true;
-				if(!tfdCorreo.getText().equals(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(2))){
+				if(!tfdCorreo.getText().equals(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getMail())){
 					datos_Correctos=false;
 					Alert alert3 = new Alert(AlertType.ERROR);
 					alert3.setTitle("Mail no coincide");
@@ -155,7 +155,7 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert3.showAndWait();
 				}
-				if(!pfdContrasenya.getText().equals(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(3))){
+				/*if(!pfdContrasenya.getText().equals(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(3))){
 					datos_Correctos=false;
 					Alert alert3 = new Alert(AlertType.ERROR);
 					alert3.setTitle("Contraseña incorrecta");
@@ -164,19 +164,12 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 					alert3.initModality(Modality.APPLICATION_MODAL);
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert3.showAndWait();
-				}
+				}*/
 
 
 				if(datos_Correctos==true){
 					try{
-						String[]Datos=new String[4];
-
-						Datos[0]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0);
-						Datos[1]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(2);
-						Datos[2]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(3);	
-						Datos[3]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(5);
-						com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Eliminar.toString(), Datos);
-
+						//TODO: Delete account
 						Alert alert3 = new Alert(AlertType.INFORMATION);
 						alert3.setTitle("Éxito al eliminar su cuenta");
 						alert3.setHeaderText("Se ha eliminado su cuenta con éxito");
@@ -184,7 +177,6 @@ public class EventosEliminarCuenta extends ClaseExtensora implements Initializab
 						alert3.initModality(Modality.APPLICATION_MODAL);
 						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert3.showAndWait();
-						com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.removeAll(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario);
 						com.pasapalabra.game.utilidades.deVentana.transicionVentana("LogIn", event);
 					}catch(Exception a){
 						Alert alert3 = new Alert(AlertType.INFORMATION);

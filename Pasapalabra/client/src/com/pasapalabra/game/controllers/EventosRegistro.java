@@ -309,7 +309,7 @@ public class EventosRegistro extends Control implements Initializable {
 
 				if (result.get() == ButtonType.OK){
 
-					com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilidades.Acciones_servidor.Crear_Usuario.toString(), Datos_usuario);
+					//TODO: create usercom.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilidades.Acciones_servidor.Crear_Usuario.toString(), Datos_usuario);
 
 					Alert alert2 = new Alert(AlertType.INFORMATION);
 

@@ -94,8 +94,6 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		String[]Datos=new String[1];
-		Datos[0]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0);
 		TableColumn firstNameCol = new TableColumn("Nombre amigo");
 		firstNameCol.setMinWidth(100);
 		firstNameCol.setCellValueFactory(
@@ -113,12 +111,7 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 		//Intenta obtener los amigos que tiene (si no hay, se indicaría que no tiene)
 
 		try {
-			com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilidades.Acciones_servidor.Amigos.toString(), Datos);
-
-
-			for(int i=0;i<com.pasapalabra.game.utilidades.Conexion_cliente.Amigos_usuarios.size();i++){
-
-			}
+				//TODO: get firends
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,7 +135,7 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 		else{
 			//TODO: meter los amigos
 		}
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0));
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
 		if(EventosLogIn.iAvatar!=null){
 			imagenAvatar.setImage(EventosLogIn.iAvatar);
 		}else{
@@ -172,7 +165,7 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 
 		String[]Dato=new String[1];
 
-		if(txtTextoAmigos.getText().equals(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0))){
+		if(txtTextoAmigos.getText().equals(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName())){
 			Alert alert3 = new Alert(AlertType.ERROR);
 			alert3.setTitle("Error");
 			alert3.setHeaderText("Te estás enviando una solicitud de amistad a ti mismo");
@@ -182,49 +175,14 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 			alert3.showAndWait();
 		}else{
 			Dato[0]=txtTextoAmigos.getText();
-			try {
-				com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilidades.Acciones_servidor.Add_Amigo.toString(), Dato);
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Éxito al enviar la solicitud");
+			//TODO: set invitation
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Éxito al enviar la solicitud");
 
-				alert.setContentText("La solicitud se envió con éxito a su amigo");
-				alert.initModality(Modality.APPLICATION_MODAL);	
-				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				alert.showAndWait();
-			} 
-			catch (IOException e) {
-				//Aviso
-
-				if(e.getMessage().contains("Solicitud ya enviada")){
-
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setTitle("Error al enviar la solicitud");
-
-					alert.setContentText("Usted ya envió una solicitud a ese usuario. Por favor, espere a la respuesta");
-					alert.initModality(Modality.APPLICATION_MODAL);	
-					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-					alert.showAndWait();
-				}
-				else{
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setTitle("Error al conectarse con el servidor");
-
-					alert.setContentText("Parece que ha habido un problema a la hora de extablecer conexión con el servidor, por favor inténtelo de nuevo más tarde");
-					alert.initModality(Modality.APPLICATION_MODAL);	
-					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-					alert.showAndWait();
-				}
-			}
-			catch (SQLException e) {
-				//Aviso
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Ese usuario no existe");
-
-				alert.setContentText("Parece que el usuario que ha introducido no existe. Asegurese de que lo ha introducido correctamente");
-				alert.initModality(Modality.APPLICATION_MODAL);	
-				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				alert.showAndWait();
-			}
+			alert.setContentText("La solicitud se envió con éxito a su amigo");
+			alert.initModality(Modality.APPLICATION_MODAL);	
+			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert.showAndWait();
 
 		}
 	}

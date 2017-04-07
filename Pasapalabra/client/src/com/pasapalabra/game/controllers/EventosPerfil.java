@@ -87,7 +87,7 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		//		
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0));
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
 
 		rectanguloAmigos.setOpacity(0.3f);
 		rectanguloEstadisticas.setOpacity(0.3f);
@@ -149,15 +149,7 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 					String path="file:///"+file.getAbsolutePath();
 
 					EventosLogIn.iAvatar=new Image(path);
-					String[]Datos=new String[4];
-
-					Datos[0]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0);
-					Datos[1]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(2);
-					Datos[2]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(3);	
-					Datos[3]=file.getAbsolutePath();
-
-					com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilidades.Acciones_servidor.Imagen.toString(), Datos);
-					com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.add(5, path);
+					//TODO: change userInfo
 					//TODO: cambiar la imagen en la BBDD
 					imgCambioFotoPerfil.setImage(new Image(path));
 					imagenAvatar.setImage(new Image(path));

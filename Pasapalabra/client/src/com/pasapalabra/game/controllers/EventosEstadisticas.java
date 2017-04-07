@@ -101,8 +101,7 @@ public class EventosEstadisticas extends ClaseExtensora implements Initializable
 
 	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosEstadisticas.class.getName());
 	
-	public static ArrayList<String> Datos_Usuario_Estadisticas=new ArrayList<String>();;
-	/*Posiciones:
+	/*Posiciones:TODO: implement this
 	 * 0: partidas ganadas
 	 * 1: partidas perdidas
 	 * 2:partidas empatadas
@@ -187,16 +186,17 @@ public class EventosEstadisticas extends ClaseExtensora implements Initializable
 		 imagenAvatar.setSmooth(true); 
 		 imagenAvatar.setCache(true); 
 		 //Se pone el nombre de usuario
-		 textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0));
+		 textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
 
 		 //Se ponen los datos relacionados con esta ventana. Es decir, estadísticas.
-		 txtDerrotas.setText(Datos_Usuario_Estadisticas.get(1));
+		
+		 /*txtDerrotas.setText(Datos_Usuario_Estadisticas.get(1));
 		 txtEmpates.setText(Datos_Usuario_Estadisticas.get(2));
 		 txtVictorias.setText(Datos_Usuario_Estadisticas.get(0));
 		 double d = (Integer.parseInt(Datos_Usuario_Estadisticas.get(0))/Integer.parseInt(Datos_Usuario_Estadisticas.get(1)));
 		 txtRatio.setText(String.valueOf(d));
 		 txtPosicion.setText(Datos_Usuario_Estadisticas.get(4));
-		 txtPartidasJugadas.setText(Datos_Usuario_Estadisticas.get(3));
+		 txtPartidasJugadas.setText(Datos_Usuario_Estadisticas.get(3));*/
 		 log.log(Level.FINEST, "Todos los campos añadidos");
 	 }
 }

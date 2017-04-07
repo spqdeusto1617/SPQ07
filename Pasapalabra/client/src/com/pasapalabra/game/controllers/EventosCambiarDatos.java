@@ -100,7 +100,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 	public void initialize(URL location, ResourceBundle resources) {
 
 		panel.getStylesheets().add("application/application.css");
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0));
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
 		if(EventosLogIn.iAvatar!=null){
 			imagenAvatar.setImage(EventosLogIn.iAvatar);
 		}else{
@@ -136,7 +136,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 
 		if (result.get() == ButtonType.OK){
 			boolean datos_Correctos=true;
-			if(!tflViejoMail.getText().equals(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(2))){
+			if(!tflViejoMail.getText().equals(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getMail())){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
 				alert2.setTitle("Mail no coincide");
@@ -152,16 +152,6 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 				alert2.setTitle("Mail no coincide");
 				alert2.setHeaderText("Los nuevos Mails no coinciden");
 				alert2.setContentText("Los mails no coinciden, por favor, reviselos y vuelva a intentarlo");
-				alert2.initModality(Modality.APPLICATION_MODAL);
-				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				alert2.showAndWait();
-			}
-			if(!pflContrasenyaUsuario.getText().equals(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(3))){
-				datos_Correctos=false;
-				Alert alert2 = new Alert(AlertType.ERROR);
-				alert2.setTitle("Contraseña incorrecta");
-				alert2.setHeaderText("Su contraseña es incorrecta");
-				alert2.setContentText("Su contraseña no es correcta, revísela de nuevo");
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
@@ -183,14 +173,8 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 
 			if(datos_Correctos==true){
 				try{
-					String[]Datos=new String[4];
-
-					Datos[0]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0);
-					Datos[1]=tflNuevoMail.getText();
-					Datos[2]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(3);	
-					Datos[3]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(5);
-					com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Mail.toString(), Datos);
-					com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.add(2, tflNuevoMail.getText());
+					//TODO: change mail (validate pass)tflNuevoMail.getText()
+	
 					Alert alert2 = new Alert(AlertType.INFORMATION);
 					alert2.setTitle("Éxito al cambiar sus datos");
 					alert2.setHeaderText("Se han cambiado los datos con éxito");
@@ -198,6 +182,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
+					com.pasapalabra.game.utilidades.ClientConnexion.userInfo.setMail(tflNuevoMail.getText());
 					com.pasapalabra.game.utilidades.deVentana.transicionVentana("Perfil", event);
 				}catch(Exception a){
 					Alert alert2 = new Alert(AlertType.INFORMATION);
@@ -241,17 +226,6 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 		if (result.get() == ButtonType.OK){
 
 			boolean datos_Correctos=true;
-			if(!pfdAntiguaContrasenya.getText().equals(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(3))){
-				datos_Correctos=false;
-				//System.out.println("Contraseña vieja: "+utilidades.Conexion_cliente.Datos_Usuario.get(3)+" nueva contraseña: "+pfdAntiguaContrasenya.getText());
-				Alert alert2 = new Alert(AlertType.ERROR);
-				alert2.setTitle("Contraseña incorrecta");
-				alert2.setHeaderText("La contraseña no coincide");
-				alert2.setContentText("Su contraseña no coincide con su antigua contraseña, por favor, revíseló de nuevo");
-				alert2.initModality(Modality.APPLICATION_MODAL);
-				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				alert2.showAndWait();
-			}
 			if(!pfdNuevaContrasenya.getText().equals(pfdNuevaContrasenya1.getText())){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
@@ -262,16 +236,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
 			}
-			if(pfdNuevaContrasenya.getText().equals(pfdAntiguaContrasenya.getText())){
-				datos_Correctos=false;
-				Alert alert2 = new Alert(AlertType.ERROR);
-				alert2.setTitle("Las contraseñas son iguales");
-				alert2.setHeaderText("La nueva contraseña es igual");
-				alert2.setContentText("La nuevas contraseña es igual que la anterior, por favor, intente introducir una contraseña nueva");
-				alert2.initModality(Modality.APPLICATION_MODAL);
-				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				alert2.showAndWait();
-			}
+
 			if(pfdNuevaContrasenya.getText().length()<7){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
@@ -284,14 +249,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 			}
 			if(datos_Correctos==true){
 				try{
-					String[]Datos=new String[4];
-
-					Datos[0]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0);
-					Datos[1]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(2);
-					Datos[2]=pfdNuevaContrasenya.getText();
-					Datos[3]=com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(5);
-					com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Pass.toString(), Datos);
-					com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.add(3, pfdNuevaContrasenya.getText());
+					//TODO: change pass (validate)
 					Alert alert2 = new Alert(AlertType.INFORMATION);
 					alert2.setTitle("Éxito al cambiar sus datos");
 					alert2.setHeaderText("Se han cambiado los datos con éxito");
