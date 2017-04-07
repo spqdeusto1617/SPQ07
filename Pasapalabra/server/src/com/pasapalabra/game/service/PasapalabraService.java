@@ -44,7 +44,7 @@ public class PasapalabraService implements IPasapalabraService{
 		else return null;
 	}
 
-	public QuestionDTO play(Token session, QuestionType type){
+	public QuestionDTO play(Token session, String type){
 		if(SessionManager.isValidSession(session)){
 			ArrayList<Question> questions = new ArrayList<>();//FIXME: get questions of that type in arraylist of question( 'ñ' letter must be inserted in the last position of the arraylist) 
 			questions.add(new Question("Test", "Answer", 'a', "Unknown"));

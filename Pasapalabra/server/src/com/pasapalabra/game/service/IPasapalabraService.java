@@ -6,6 +6,7 @@ import java.rmi.Remote;
 import com.pasapalabra.game.model.QuestionType;
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.UserDTO;
+import com.pasapalabra.game.model.DTO.UserScoreDTO;
 import com.pasapalabra.game.service.auth.Token;
 
 public interface IPasapalabraService extends Remote {
@@ -14,12 +15,14 @@ public interface IPasapalabraService extends Remote {
 	
 	public UserDTO getData(Token token);
 	
-	public QuestionDTO play(Token session, QuestionType type);
+	public QuestionDTO play(Token session, String type);
 	
 	public QuestionDTO getQuestion(Token session);
 	
 	public boolean answerQuestion(Token session, String answer);
 	
 	public boolean allQuestionAnswered(Token session);
+	
+	public UserScoreDTO getResults(Token session);
 
 }
