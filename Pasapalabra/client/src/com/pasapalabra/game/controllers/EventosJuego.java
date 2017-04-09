@@ -1210,6 +1210,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			//then you set to your node
 			panel.setBackground(new Background(myBII));
 
+			
 			//Cuadro de texto
 			tfRespuesta = new TextField();
 			tfRespuesta.setLayoutX(250);

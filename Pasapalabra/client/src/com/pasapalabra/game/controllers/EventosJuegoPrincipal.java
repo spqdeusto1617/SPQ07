@@ -70,6 +70,7 @@ public class EventosJuegoPrincipal implements Initializable{
 	@FXML public Button btnRendirse;
 	
 	
+	
 	@FXML
 	void entradoCSS(MouseEvent event){
 		BotonJuego.seleccionar_notDeseleccionar(true,aLBotonesJuego,event);
