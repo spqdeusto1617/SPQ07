@@ -1222,18 +1222,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 					+ "-fx-border-width: 0 0 1 0;\n"
 					+ "-fx-background-color: transparent ;");
 
-			//Botón contestar
-			//Parte rectángulo
-			rContestar.setLayoutX(205);
-			rContestar.setLayoutY(540);
-			rContestar.setOpacity(0.3);
-			rPasar.setLayoutX(420);
-			rPasar.setLayoutY(540);
-			rPasar.setOpacity(0.3);
-			textoContestar.setLayoutX(245);
-			textoContestar.setLayoutY(565);
-			textoPasar.setLayoutX(478);
-			textoPasar.setLayoutY(565);
+		
 
 			imgUsuario.setLayoutX(150);
 			imgUsuario.setLayoutY(100);
@@ -1352,26 +1341,6 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 			//		panel.getStylesheets().add("application/juego.css");
 			//		panel.getStylesheets().remove("application/application.css");
-		}
-
-		//se quitaría y añadir en otro controller
-		void pqGuiCargando(boolean poner_notQuitar){
-			if(poner_notQuitar){
-				fondoCarga.setX(0.0);
-				fondoCarga.setY(0.0);
-				fondoCarga.setTranslateZ(999);
-
-				barraCarga.setLayoutX(185.0);
-				barraCarga.setLayoutY(455.0);
-
-				textoCargaTranquil.setX(185.0);
-				textoCargaTranquil.setY(110.0);
-
-				textoCargaBuscandoPartida.setX(225.0);
-				textoCargaBuscandoPartida.setY(550.0);
-			}else{
-
-			}
 		}
 
 		boolean preguntasBienSeleccionadas(){
