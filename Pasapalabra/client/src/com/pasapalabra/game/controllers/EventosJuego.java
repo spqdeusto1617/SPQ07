@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.pasapalabra.game.model.DTO.QuestionType;
 import com.pasapalabra.game.objetos.BotonJuego;
 import com.pasapalabra.game.objetos.ObjetoSeleccionPregunta;
 import com.pasapalabra.game.utilidades.RCarga;
@@ -337,7 +338,8 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		//Lanzamos la partida
 
 		try {
-			com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Jugar.toString(), Tipo);
+			com.pasapalabra.game.controllers.EventosJuegoPrincipal.currentQuestion = com.pasapalabra.game.utilidades.ClientConnexion.play(QuestionType.valueOf(Tipo[1])); 
+			com.pasapalabra.game.utilidades.deVentana.transicionVentana("JuegoPrincipal", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -363,7 +365,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			log.log(Level.WARNING, "No se ha encontrado partida.", e);
 			e.printStackTrace();
 		} 
-		textoUsernameRival.setText(Conexion_cliente.Nombre_j2);
+		/*textoUsernameRival.setText(Conexion_cliente.Nombre_j2);
 		textoUsernameUser.setText(Conexion_cliente.Datos_Usuario.get(0));
 		if(Conexion_cliente.Mi_Turno){
 			Conexion_cliente.Primera_vez=false;
@@ -716,10 +718,10 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 				}).start(); 
 
 
-
+*/
 
 			} 
-		}
+		
 
 
 
@@ -783,7 +785,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
     @FXML public Text textoPuntuacionU;
     @FXML public Text textoPuntuacionR;
 		 */
-
+/*
 		@FXML
 		void btnContestar(MouseEvent event) {
 			//SERVIDOR
@@ -1083,6 +1085,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 				return letra_Actual-'a';
 			}
 		}
+		*/
 		@FXML
 		void masInfo(MouseEvent event){
 			if(!juegoEnCurso){
@@ -1208,8 +1211,8 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			panel.getStylesheets().remove("application/application.css");
 			BackgroundImage myBII= new BackgroundImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/pspgamebg.png"),panel.getWidth(),panel.getHeight(),false,true),BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 			//then you set to your node
-			panel.setBackground(new Background(myBII));
-
+			panel.setBackground(new Background(myBII));}
+			/*
 			//Cuadro de texto
 			tfRespuesta = new TextField();
 			tfRespuesta.setLayoutX(250);
@@ -1222,7 +1225,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 					+ "-fx-border-width: 0 0 1 0;\n"
 					+ "-fx-background-color: transparent ;");
 
-		
+			
 
 			imgUsuario.setLayoutX(150);
 			imgUsuario.setLayoutY(100);
@@ -1258,6 +1261,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			//Servidor
 			//Imagen del usuario y del rival
 			//Usuario
+			
 			if(EventosLogIn.iAvatar!=null){
 				imgUsuario.setImage(EventosLogIn.iAvatar);
 			}else{
@@ -1301,9 +1305,9 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	    @FXML public Text textoUsernameUser;
 	    @FXML public Text textoUsernameRival;
 			 */
-
+			
 			//Efectos
-			DropShadow dropShadow = new DropShadow();
+			/*DropShadow dropShadow = new DropShadow();
 			dropShadow.setColor(Color.DODGERBLUE);
 			dropShadow.setRadius(25);
 			dropShadow.setSpread(0.5);
@@ -1343,7 +1347,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			//		panel.getStylesheets().remove("application/application.css");
 		}
 
-		boolean preguntasBienSeleccionadas(){
+		*/boolean preguntasBienSeleccionadas(){
 			int count = 0;
 			for (ObjetoSeleccionPregunta objetoSeleccionPregunta : aLEleccion) {
 				if(objetoSeleccionPregunta.isElegido()) count++;
@@ -1383,13 +1387,13 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-			Conexion_cliente.Correctas=0;
+			/*TODO: revise thisConexion_cliente.Correctas=0;
 			Conexion_cliente.Incorrectas=0;
 			panel.getChildren().remove(fondoCarga);
 			panel.getChildren().remove(barraCarga);
 			panel.getChildren().remove(textoCargaTranquil);
 			panel.getChildren().remove(textoCargaBuscandoPartida);
-			panel.applyCss();
+			panel.applyCss();*/
 			//SERVIDOR
 			//TODO Cargar imagen personal
 			if(EventosLogIn.iAvatar!=null){
@@ -1435,7 +1439,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 			//Variables de usuario
 			menuDesplegable.add(textoNombreDeUsuario);
-			textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(0));
+			textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
 			menuDesplegable.add(imagenAvatar);
 
 			//Rellenar elementos.

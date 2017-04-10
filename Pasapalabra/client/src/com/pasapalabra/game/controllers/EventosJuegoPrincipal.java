@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.pasapalabra.game.model.DTO.QuestionDTO;
+import com.pasapalabra.game.model.DTO.UserScoreDTO;
 import com.pasapalabra.game.objetos.BotonJuego;
 import com.pasapalabra.game.utilidades.deVentana;
 
@@ -47,10 +49,10 @@ public class EventosJuegoPrincipal implements Initializable{
 	public Image imagenDelRival;
 	public int vecesHechoX = 0;
 	public int vecesHechoY = 0;
-	public static boolean juegoEnCurso = false;
 	public boolean ventanaMenuDentro = false;
-
-
+	private static boolean rightAnswered;
+	public static QuestionDTO currentQuestion;
+	
 	@FXML public Rectangle rPreguntas; 
 	@FXML public TextArea taPreguntas;
 
@@ -70,36 +72,37 @@ public class EventosJuegoPrincipal implements Initializable{
 	@FXML public Button btnRendirse;
 	
 	
-	@FXML
+	/*TODO: check this@FXML
 	void entradoCSS(MouseEvent event){
 		BotonJuego.seleccionar_notDeseleccionar(true,aLBotonesJuego,event);
 	}
 	@FXML
 	void salidoCSS(MouseEvent event){
 		BotonJuego.seleccionar_notDeseleccionar(false,aLBotonesJuego,event);
-	}
+	}*/
 	
 	
 	@FXML
 	void btnContestar(MouseEvent event) {
 		//SERVIDOR
 		//Respuesta
-		if(!juegoEnCurso){
+		if(com.pasapalabra.game.utilidades.ClientConnexion.gameEnd){
+			UserScoreDTO score = null;
+			try {
+				score = com.pasapalabra.game.utilidades.ClientConnexion.getResults();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			Alert alert=new Alert(AlertType.INFORMATION);
 			alert.setTitle("Partida acabada");
 			alert.setHeaderText("Ha completado la partida");
-			alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
+			alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+score.getRightAnswered()+" respuestas correctas y: "+score.getWrongAnswered()+" respuestas incorrectas");
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			deVentana.transicionVentana("Juego", event);
 		}
 		else{	
-
-
-
-
-
-
 			if(tfRespuesta.getText().length()==0){
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Respuesta en blanco");
@@ -109,24 +112,29 @@ public class EventosJuegoPrincipal implements Initializable{
 				alert.showAndWait();
 			}
 			else{
-				if(Conexion_cliente.Mi_Turno){
-					if(juegoEnCurso==true){
-
-
-						com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
+				//if(Conexion_cliente.Mi_Turno){
+					if(!com.pasapalabra.game.utilidades.ClientConnexion.gameEnd){
+						
 
 
 						try{
-							com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+							rightAnswered = com.pasapalabra.game.utilidades.ClientConnexion.answerQuestion(tfRespuesta.getText());
 
 						}catch(Exception a){
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Hubo un error");
+							alert.setHeaderText("Parece que se ha producido un error");
+							alert.setContentText("No se ha podido contestar la pregunta, por favor, vuelva a intentarlo");
+							alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+							alert.showAndWait();
 							a.printStackTrace();
+							return;
 						} 
 
+						
 
 
-
-						if(Conexion_cliente.Acierto==true){
+						if(rightAnswered){
 							//				Alert alert = new Alert(AlertType.INFORMATION);
 							//				alert.setTitle("Respuesta acertada");
 							//				alert.setHeaderText("Ha acertado la respuesta a la pregunta con la letra: "+Conexion_cliente.Letra_Actual);
@@ -137,8 +145,8 @@ public class EventosJuegoPrincipal implements Initializable{
 								foo++;
 								textoPuntuacionU.setText("Acertadas: "+Integer.toString(foo));
 
-								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra+" la posicion de la letra");
-								panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/verde/"+Conexion_cliente.Letra_Actual+"-green.png")));
+								int Num_Letra=Pos_Letra(com.pasapalabra.game.utilidades.ClientConnexion.currentLetter);System.out.println(Num_Letra+" la posicion de la letra");
+								//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/verde/"+com.pasapalabra.game.utilidades.ClientConnexion.currentLetter+"-green.png")));
 							}catch(Exception a){
 								a.printStackTrace();
 							}
@@ -150,35 +158,48 @@ public class EventosJuegoPrincipal implements Initializable{
 							//alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 							//				alert.show();
 
-							int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
-							panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
+							int Num_Letra=Pos_Letra(com.pasapalabra.game.utilidades.ClientConnexion.currentLetter);System.out.println(Num_Letra);
+							//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/rojo/"+com.pasapalabra.game.utilidades.ClientConnexion.currentLetter+"-red.png")));
 						}
-						if(juegoEnCurso==true){
-
-
-							com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
-							try{
-
-								com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
-								taPreguntas.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Pregunta);
-								tfRespuesta.setText("");
-							}catch(Exception a){
-								a.printStackTrace();
+						
+						try {
+							com.pasapalabra.game.utilidades.ClientConnexion.endGame();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							Alert alert = new Alert(AlertType.ERROR);
+							alert.setTitle("Hubo un error");
+							alert.setHeaderText("Parece que se ha producido un error");
+							alert.setContentText("No se ha podido comprobar si todas las preguntas están respondidas");
+							alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+							alert.showAndWait();
+							e1.printStackTrace();
+							return;
+						}
+						if(com.pasapalabra.game.utilidades.ClientConnexion.gameEnd){
+							UserScoreDTO score = null;
+							try {
+								score = com.pasapalabra.game.utilidades.ClientConnexion.getResults();
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								Alert alert = new Alert(AlertType.ERROR);
+								alert.setTitle("Hubo un error");
+								alert.setHeaderText("Parece que se ha producido un error");
+								alert.setContentText("No se ha podido recuperar la puntuación");
+								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+								alert.showAndWait();
+								e.printStackTrace();
+								return;
 							}
-
-
-						}  
-						else{
 							//TODO: terminar
 							Alert alert = new Alert(AlertType.INFORMATION);
 							alert.setTitle("Partida acabada");
 							alert.setHeaderText("Ha completado la partida");
-							alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
+							alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+score.getRightAnswered()+" respuestas correctas y: "+score.getWrongAnswered()+" respuestas incorrectas");
 							alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 							alert.showAndWait();
 							deVentana.transicionVentana("Juego", event);
-						}
-						if(!juegoEnCurso){
+						/*
+						if(){
 							Alert alert = new Alert(AlertType.INFORMATION);
 							alert.setTitle("Partida acabada");
 							alert.setHeaderText("Ha completado la partida");
@@ -186,18 +207,24 @@ public class EventosJuegoPrincipal implements Initializable{
 							alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 							alert.showAndWait();
 							deVentana.transicionVentana("Juego", event);
-						}
+						}*/
 
 					}
 					else{
-						//TODO: terminar
-						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Partida acabada");
-						alert.setHeaderText("Ha completado la partida");
-						alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
+					try {
+						currentQuestion = com.pasapalabra.game.utilidades.ClientConnexion.getQuestion();
+						taPreguntas.setText(currentQuestion.getQuestion());
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Hubo un error");
+						alert.setHeaderText("Parece que se ha producido un error");
+						alert.setContentText("No se ha podido recuperar la siguiente pregunta");
 						alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert.showAndWait();
-						deVentana.transicionVentana("Juego", event);
+						e.printStackTrace();
+						return;
+					}
 					}
 					//			utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
 					//			try{
@@ -208,7 +235,7 @@ public class EventosJuegoPrincipal implements Initializable{
 					//			}
 					//TODO: indicar si el usuario ha acertado o no
 
-				}else{
+					}/*else{//TODO: make it multiplayer
 					taPreguntas.setText("Espere a que el otro usuario acabe");
 					new Thread(new Runnable() {  
 						@Override  
@@ -277,8 +304,9 @@ public class EventosJuegoPrincipal implements Initializable{
 
 
 				}
-			}
+			}*/
 
+			}
 		}
 
 	}
@@ -289,7 +317,7 @@ public class EventosJuegoPrincipal implements Initializable{
 	void btnPasar(MouseEvent event) {
 		//SERVIDOR
 		//Algo
-		if(Conexion_cliente.Mi_Turno){
+		/*if(Conexion_cliente.Mi_Turno){
 			if(juegoEnCurso==true){
 				com.pasapalabra.game.utilidades.ClientConnexion.pasapalabra=true; 
 				try{
@@ -305,7 +333,7 @@ public class EventosJuegoPrincipal implements Initializable{
 				}catch(Exception a){
 					a.printStackTrace();
 				}
-				if(!juegoEnCurso){
+				if(com.pasapalabra.game.utilidades.ClientConnexion.gameEnd){
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Partida acabada");
 					alert.setHeaderText("Ha completado la partida");
@@ -323,13 +351,44 @@ public class EventosJuegoPrincipal implements Initializable{
 				//				alert.showAndWait();
 				//				deVentana.transicionVentana("Juego", event);
 			}
-		}else{
-			//TODO: No puedes pasar si no es tu turno
+		}*/
+				
+		try{
+			rightAnswered = com.pasapalabra.game.utilidades.ClientConnexion.answerQuestion("Pasapalabra");
+			if(!rightAnswered)System.out.println("Ha habido un error al pasar de palabra");
+		}catch(Exception a){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Hubo un error");
+			alert.setHeaderText("Parece que se ha producido un error");
+			alert.setContentText("No se ha podido contestar la pregunta, por favor, vuelva a intentarlo");
+			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert.showAndWait();
+			a.printStackTrace();
+			return;
+		} 
+		try {
+			currentQuestion = com.pasapalabra.game.utilidades.ClientConnexion.getQuestion();
+			taPreguntas.setText(currentQuestion.getQuestion());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Hubo un error");
+			alert.setHeaderText("Parece que se ha producido un error");
+			alert.setContentText("No se ha podido recuperar la siguiente pregunta");
+			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert.showAndWait();
+			e.printStackTrace();
+			return;
 		}
+		/*else{
+			//TODO: No puedes pasar si no es tu turno
+		}*/
 
 	}
+	
 	@FXML
 	void btnRendirse(MouseEvent event){
+		/*
 		if(!Conexion_cliente.Mi_Turno){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
@@ -365,10 +424,28 @@ public class EventosJuegoPrincipal implements Initializable{
 			}
 		}
 
+	*/
 	}
+	
+	//Para usar el textBox 
+			private static int Pos_Letra(char letra_Actual) {
+
+
+
+				if(letra_Actual=='ñ'){
+					return 14;
+				}
+				else if(letra_Actual-'a'>13){
+					return letra_Actual-'a'+1;
+				}
+				else{
+					return letra_Actual-'a';
+				}
+			}
+			
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+		taPreguntas.setText(currentQuestion.getQuestion());
 	}
 }

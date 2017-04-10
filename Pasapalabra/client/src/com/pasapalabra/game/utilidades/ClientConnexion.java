@@ -20,6 +20,8 @@ import com.pasapalabra.game.service.auth.Token;
 public class ClientConnexion {
 
 	private static IPasapalabraService service;
+	
+	public static char currentLetter;
 
 	public static Token sessionAuth;
 
@@ -78,6 +80,8 @@ public class ClientConnexion {
 		try{
 			QuestionDTO question = service.play(sessionAuth, type.toString());
 			reachZ = false;
+			gameEnd = false;
+			currentLetter = 'a';
 			return question;
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -92,6 +96,7 @@ public class ClientConnexion {
 	public static QuestionDTO getQuestion() throws Exception{
 		try{
 			QuestionDTO question = service.getQuestion(sessionAuth);
+			currentLetter = question.getLeter();
 			if(question.getLeter() == 'z')reachZ = true;
 			return question;
 		}catch (Exception e) {
