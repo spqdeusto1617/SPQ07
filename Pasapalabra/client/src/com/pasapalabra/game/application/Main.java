@@ -36,7 +36,7 @@ public class Main extends Application {
 		try {
 			com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, Main.class.getName());
 			//Cargar página con el FXML elegido  
-			Pane page =  FXMLLoader.load(getClass().getResource("/com.pasapalabra/game/windows/LogIn.fxml")); //Lo he dejado así porque sino, a la hora de exportarlo a un jar, no funciona el propio jar
+			Pane page =  FXMLLoader.load(getClass().getResource("/fxml/LogIn.fxml")); //Lo he dejado así porque sino, a la hora de exportarlo a un jar, no funciona el propio jar
 			log.log(Level.FINEST, "Cargado fichero FXML de LogIn en el pane");
 
 			//Añadir la página a la escena
@@ -44,7 +44,7 @@ public class Main extends Application {
 			log.log(Level.FINEST, "Añadido pane a la escena");
 
 			//Añadir a la escena el CSS
-			scene.getStylesheets().add(getClass().getResource("/com.pasapalabra/game/application/application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			log.log(Level.FINEST, "Añadido css a la escena");
 
 			//Usarse para servidor.
@@ -93,7 +93,7 @@ public class Main extends Application {
 
 
 			//Icono
-			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/iconopsp.png")));
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/iconopsp.png")));
 			log.log(Level.FINEST, "Añadido icono a la ventana");
 			//Título de la ventana
 			primaryStage.setTitle("Pasapalabra");

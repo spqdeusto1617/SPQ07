@@ -20,7 +20,7 @@ public class RutinaMonoInstancia extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//Cargar página con el FXML elegido
-		Pane page =  FXMLLoader.load(Main.class.getResource("../windows/VVacia.fxml"));
+		Pane page =  FXMLLoader.load(Main.class.getResource("/fxml/VVacia.fxml"));
 		log.log(Level.FINEST, "Cargado FXML VVacia para rutina monoinstancia");
 		
 		//Añadir la página a la escena
@@ -28,7 +28,7 @@ public class RutinaMonoInstancia extends Application {
 		log.log(Level.FINEST, "Creada escena y añadido el pane");
 		
 		//Añadir a la escena el CSS
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 		log.log(Level.FINEST, "Cargado CSS y añadido a la escena");
 		
 		//Añadir un escuchador para cuando se cierre la ventana (Evita errores)
@@ -39,7 +39,7 @@ public class RutinaMonoInstancia extends Application {
 //		});
 		
 		//Icono
-		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/iconopsp.png")));
+		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/iconopsp.png")));
 		log.log(Level.FINEST, "Añadido icono a la ventana");
 		//Título de la ventana
 		log.log(Level.FINEST, "Añadido título a la ventana");

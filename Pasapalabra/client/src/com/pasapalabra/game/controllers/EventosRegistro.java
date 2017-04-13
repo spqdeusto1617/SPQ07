@@ -131,7 +131,7 @@ public class EventosRegistro extends Control implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 
-		//panel.getStylesheets().add("application/application.css");
+		//panel.getStylesheets().add("/css/application.css");
 		userNameValidator.getItems().add(
 				new MenuItem("El nombre de usuario tiene que tener entre 8-16 caracteres"));
 
@@ -544,7 +544,7 @@ public class EventosRegistro extends Control implements Initializable {
 			//				Stage anotherStage = new Stage();
 			//				Pane page ;
 			//				try {
-			//					page = FXMLLoader.load(Main.class.getResource("../windows/EULA.fxml"));
+			//					page = FXMLLoader.load(Main.class.getResource("/fxml/EULA.fxml"));
 			//					 Scene anotherScene = new Scene(page);
 			//			            anotherStage.setScene(anotherScene);
 			//			            anotherStage.show();

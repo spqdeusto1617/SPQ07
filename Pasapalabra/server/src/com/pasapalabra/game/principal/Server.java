@@ -3,13 +3,39 @@ package com.pasapalabra.game.principal;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
 import com.pasapalabra.game.service.IPasapalabraService;
 import com.pasapalabra.game.service.PasapalabraService;
+import com.pasapalabra.game.utilidades.AppLogger;
+import com.pasapalabra.game.utilidades.deVentana;
 
-public class Server {
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
+
+public class Server extends Application{
 	
-	
+	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(Server.class.getName());
 	
 	public static void main(String[] args) {
 
@@ -20,33 +46,47 @@ public class Server {
 	    		System.out.println("usage: java [policy] [codebase] server.Server [host] [port] [server]");
 				System.exit(0);
 			}
+	    	System.out.println(System.getProperty("java.security.policy"));
+	    	System.out.println(System.getProperty("java.rmi.server.codebase"));
 			
-			
-	    	if (System.getSecurityManager() == null) {
-				System.setSecurityManager(new SecurityManager());
-			}
+	    	
+	    	final Morphia morphia = new Morphia();
+
+	    	// tell Morphia where to find your classes
+	    	// can be called multiple times with different packages or classes
+	    	morphia.mapPackage("com.pasapalabra.game.model");
+
+	    	MongoClientOptions.Builder options = MongoClientOptions.builder();
+	    	options.socketKeepAlive(true);
+	    	MongoClient mongoClient = new MongoClient("127.0.0.1:27017", options.build());
+	    	
+	    	// create the Datastore connecting to the default port on the local host
+	    	final Datastore datastore = morphia.createDatastore(mongoClient, "pasapalabra");
+	    	datastore.ensureIndexes();
+	    	
 
 			String serverAddress = "//" + args[0] + ":" + args[1] + "/" + args[2];
 			System.out.println(" * Server name: " + serverAddress);
 			IPasapalabraService pasapalabraService = new PasapalabraService();
 			
 			try {
-				Naming.rebind(serverAddress, pasapalabraService);
+				Naming.rebind(serverAddress,  UnicastRemoteObject.exportObject(pasapalabraService, 0));
 				System.out.println("Server at '" + serverAddress + "' active and waiting connections...");
 			} catch (RemoteException | MalformedURLException e) {
 				System.out.println("Error while starting the server.");
 				e.printStackTrace();
 			}
 	    
+			launch(args);
 	
 	}
-	/*
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-			utilidades.AppLogger.crearLogHandler(log, Servidor.class.getName());
+			AppLogger.crearLogHandler(log, Server.class.getName());
 			//Cargar página con el FXML elegido
-			Pane page =  FXMLLoader.load(Servidor.class.getResource("Servidor.fxml"));
+			Pane page =  FXMLLoader.load(Server.class.getResource("/fxml/Servidor.fxml"));
 			log.log(Level.FINEST, "Cargado fichero FXML de LogIn en el pane");
 
 
@@ -55,7 +95,7 @@ public class Server {
 			log.log(Level.FINEST, "Añadido pane a la escena");
 
 			//Añadir a la escena el CSS
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			log.log(Level.FINEST, "Añadido css a la escena");
 
 			//Usarse para servidor.
@@ -73,9 +113,6 @@ public class Server {
 					alert.initOwner((Stage)event.getSource());
 					Optional<ButtonType> result = alert.showAndWait();
 					if (result.get() == ButtonType.OK){
-						Servidor.cierre_servidor();
-						BaseDeDatosPreguntas.cerrarConexion();
-						BaseDeDatosUsuarios.cerrarConexion();
 						Platform.exit();
 						System.exit(0);
 					} else {
@@ -87,7 +124,7 @@ public class Server {
 
 
 			//Icono
-			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/iconopsp.png"));
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/iconopsp.png")));
 			log.log(Level.FINEST, "Añadido icono a la ventana");
 			//Título de la ventana
 			primaryStage.setTitle("Pasapalabra - Servidor");
@@ -109,12 +146,8 @@ public class Server {
 			primaryStage.show();
 			log.log(Level.FINEST, "Ventana mostrada");
 			//Centrar ventana
-			utilidades.deVentana.centrarVentana(primaryStage);
+			deVentana.centrarVentana(primaryStage);
 			log.log(Level.FINEST, "Centrada la ventana");
-
-
-
-
 
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -122,7 +155,7 @@ public class Server {
 		}
 
 	}
-	*/
+	
 
 	
 }

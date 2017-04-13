@@ -42,9 +42,6 @@ public class ClientConnexion {
 			System.err.println("No arguments passed");
 			//System.exit(0);
 		}
-		if (System.getSecurityManager() == null) {
-			System.setSecurityManager(new SecurityManager());
-		}
 
 		try {
 			String URL = "//" + args[0] + ":" + args[1] + "/" + args[2];

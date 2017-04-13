@@ -1,5 +1,6 @@
 package com.pasapalabra.game.service;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,32 +19,32 @@ import com.pasapalabra.game.service.auth.SessionManager;
 import com.pasapalabra.game.service.auth.Token;
 
 public class PasapalabraService implements IPasapalabraService{
-	private static HashMap<Token, User> currentUsers = new HashMap<>();
+	private static HashMap<String, User> currentUsers = new HashMap<>();
 	
-	private static ConcurrentHashMap<Token, ArrayList<Question>> currentQuestions = new ConcurrentHashMap<Token, ArrayList<Question>>();
+	private static ConcurrentHashMap<String, ArrayList<Question>> currentQuestions = new ConcurrentHashMap<String, ArrayList<Question>>();
 	
-	private static ConcurrentHashMap<Token, UserScore> currentResult = new ConcurrentHashMap<Token, UserScore>();
+	private static ConcurrentHashMap<String, UserScore> currentResult = new ConcurrentHashMap<String, UserScore>();
 	
 	@SuppressWarnings("unused")
-	public Token login(String userName, String pass)
+	public Token login(String userName, String pass) throws RemoteException
 	{
 		if(true){//FIXME: get userdata from DB(if user does not exist, return null)
 			User user = new User(userName, "", pass, null, new Date(), 0, 0, 0);
 			//UserDTO userDTO = UserAssembler.getInstance().assembleToDTO(user);
 			Token token = SessionManager.createSession(userName);
-			currentUsers.put(token, user);
+			currentUsers.put(token.getToken(), user);
 			return token;
 		}
 		else return null;
 	}
 	
-	public UserDTO getData(Token token) {
+	public UserDTO getData(Token token) throws RemoteException{
 		// TODO Auto-generated method stub
-		if(currentUsers.containsKey(token)) return UserAssembler.getInstance().assembleToDTO(currentUsers.get(token));
+		if(currentUsers.containsKey(token.getToken())) return UserAssembler.getInstance().assembleToDTO(currentUsers.get(token.getToken()));
 		else return null;
 	}
 
-	public QuestionDTO play(Token session, String type){
+	public QuestionDTO play(Token session, String type) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
 			ArrayList<Question> questions = new ArrayList<>();//FIXME: get questions of that type in arraylist of question( 'ñ' letter must be inserted in the last position of the arraylist) 
 			questions.add(new Question("Test", "Answer", 'a', "Unknown"));
@@ -52,8 +53,8 @@ public class PasapalabraService implements IPasapalabraService{
 			} 
 			System.out.println("Last question introduced: "+questions.get(questions.size()-1).getLeter());
 			questions.add(new Question("works?", "we hope so", 'ñ', "Unknown")); //for testing purposes*/
-			currentQuestions.put(session, questions);
-			currentResult.put(session, new UserScore());
+			currentQuestions.put(session.getToken(), questions);
+			currentResult.put(session.getToken(), new UserScore());
 			return QuestionAssembler.getInstance().assembleToDTO(questions.get(0));//We get the first question
 		}
 		else{
@@ -61,18 +62,18 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 	}
 	
-	public QuestionDTO getQuestion(Token session){
+	public QuestionDTO getQuestion(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
 			
 			boolean answered = true;
 			Question question = null;
 			do{
-				currentResult.get(session).nextLetter();
-				if(currentResult.get(session).getCurrentLetter() == 'ñ'){
-					 question = currentQuestions.get(session).get(currentQuestions.get(session).size()-1);
+				currentResult.get(session.getToken()).nextLetter();
+				if(currentResult.get(session.getToken()).getCurrentLetter() == 'ñ'){
+					 question = currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1);
 				}
 				else{
-					 question = currentQuestions.get(session).get(((int)currentResult.get(session).getCurrentLetter())-97);
+					 question = currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97);
 				}
 				if(!question.isAnswered()){
 					answered = false;
@@ -85,32 +86,32 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 	}
 	
-	public boolean answerQuestion(Token session, String answer){
+	public boolean answerQuestion(Token session, String answer) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
 			Question question = null;
-			if(currentResult.get(session).getCurrentLetter() == 'ñ'){
-				 question = currentQuestions.get(session).get(currentQuestions.get(session).size()-1);
+			if(currentResult.get(session.getToken()).getCurrentLetter() == 'ñ'){
+				 question = currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1);
 			}
 			else{
-				 question = currentQuestions.get(session).get(((int)currentResult.get(session).getCurrentLetter())-97);
+				 question = currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97);
 			}
 			
 			if(answer.equals(question.getAnswer())){
-				currentResult.get(session).increaseRight();
-				if(currentResult.get(session).getCurrentLetter() == 'ñ'){
-					currentQuestions.get(session).get(currentQuestions.get(session).size()-1).setAnswered(true);
+				currentResult.get(session.getToken()).increaseRight();
+				if(currentResult.get(session.getToken()).getCurrentLetter() == 'ñ'){
+					currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1).setAnswered(true);
 					}else{
-					currentQuestions.get(session).get(((int)currentResult.get(session).getCurrentLetter())-97).setAnswered(true);
+					currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97).setAnswered(true);
 					}
 				return true;
 			}
 			else if(answer.equals("Pasapalabra")){ System.out.println("Server - Pasamos palabra");return true;}
 			else{
-				currentResult.get(session).increaseWrong();
-				if(currentResult.get(session).getCurrentLetter() == 'ñ'){
-				currentQuestions.get(session).get(currentQuestions.get(session).size()-1).setAnswered(true);
+				currentResult.get(session.getToken()).increaseWrong();
+				if(currentResult.get(session.getToken()).getCurrentLetter() == 'ñ'){
+				currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1).setAnswered(true);
 				}else{
-				currentQuestions.get(session).get(((int)currentResult.get(session).getCurrentLetter())-97).setAnswered(true);
+				currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97).setAnswered(true);
 				}
 				return false;
 			}
@@ -120,21 +121,21 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 	}
 	
-	public boolean allQuestionAnswered(Token session){
+	public boolean allQuestionAnswered(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
-			return questionsAnswered(currentQuestions.get(session));
+			return questionsAnswered(currentQuestions.get(session.getToken()));
 		}
 		else{
 			return false;
 		}
 	}
 	
-	public UserScoreDTO getResults(Token session){
+	public UserScoreDTO getResults(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
 			//FIXME: save UserScore to DB
-			UserScore finalScore = currentResult.get(session);
-			currentQuestions.remove(session);
-			currentResult.remove(session);//TODO: change this for 2 players(next sprint??)
+			UserScore finalScore = currentResult.get(session.getToken());
+			currentQuestions.remove(session.getToken());
+			currentResult.remove(session.getToken());//TODO: change this for 2 players(next sprint??)
 			return ScoreAssembler.getInstance().assembleToDTO(finalScore);
 		}
 		else{
@@ -142,7 +143,7 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 	}
 	
-	private static boolean questionsAnswered(ArrayList<Question> aQuestions){
+	private static boolean questionsAnswered(ArrayList<Question> aQuestions) throws RemoteException{
 		for (Question question : aQuestions) {
 
 			if(!question.isAnswered()){

@@ -124,7 +124,7 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 			alert3.showAndWait();
 
 		}
-		panel.getStylesheets().add("application/application.css");
+		panel.getStylesheets().add("/css/application.css");
 		rectanguloAmigos.setOpacity(1f);
 		rectanguloEstadisticas.setOpacity(0.3f);
 		rectanguloJugar.setOpacity(0.3f);
@@ -146,7 +146,7 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 				imagen = "fPerfilPirata";
 			}
 
-			Image i = new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+			Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 			imagenAvatar.setImage(i);
 		}
 		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);

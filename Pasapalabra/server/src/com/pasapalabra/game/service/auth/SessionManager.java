@@ -4,28 +4,28 @@ import java.util.HashMap;
 
 public class SessionManager {
 
-	public static HashMap<Token, String> hmSessions = new HashMap<Token, String>();
+	public static HashMap<String, String> hmSessions = new HashMap<String, String>();
 	
 	public static boolean isValidSession(Token token){
-		return hmSessions.get(token) != null;
+		return hmSessions.get(token.getToken()) != null;
 	}
 	
 	public static String getUser(Token token){
-		for(Token tkn : hmSessions.keySet())
-			if(tkn.getToken().equals(token.getToken()))
+		for(String tkn : hmSessions.keySet())
+			if(tkn.equals(token.getToken()))
 				return hmSessions.get(tkn);
 		return null;
 	}
 	
 	public static void addSession(String username, Token token){
-		if(hmSessions.get(token) != null)
-			hmSessions.remove(token);
-		hmSessions.put(token, username);
+		if(hmSessions.get(token.getToken()) != null)
+			hmSessions.remove(token.getToken());
+		hmSessions.put(token.getToken(), username);
 	}
 	
 	public static Token createSession(String username){
 		Token token = TokenGenerator.nextSessionId();
-		hmSessions.put(token, username);
+		hmSessions.put(token.getToken(), username);
 		return token;
 	}
 	

@@ -146,7 +146,7 @@ public class EventosJuegoPrincipal implements Initializable{
 								textoPuntuacionU.setText("Acertadas: "+Integer.toString(foo));
 
 								int Num_Letra=Pos_Letra(com.pasapalabra.game.utilidades.ClientConnexion.currentLetter);System.out.println(Num_Letra+" la posicion de la letra");
-								//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/verde/"+com.pasapalabra.game.utilidades.ClientConnexion.currentLetter+"-green.png")));
+								//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+com.pasapalabra.game.utilidades.ClientConnexion.currentLetter+"-green.png")));
 							}catch(Exception a){
 								a.printStackTrace();
 							}
@@ -159,7 +159,7 @@ public class EventosJuegoPrincipal implements Initializable{
 							//				alert.show();
 
 							int Num_Letra=Pos_Letra(com.pasapalabra.game.utilidades.ClientConnexion.currentLetter);System.out.println(Num_Letra);
-							//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/rojo/"+com.pasapalabra.game.utilidades.ClientConnexion.currentLetter+"-red.png")));
+							//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+com.pasapalabra.game.utilidades.ClientConnexion.currentLetter+"-red.png")));
 						}
 						
 						try {
@@ -258,7 +258,7 @@ public class EventosJuegoPrincipal implements Initializable{
 											textoPuntuacionR.setText("Acertadas: "+Integer.toString(foo));
 											int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
 											try{
-												panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png")));
+												panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png")));
 											}catch(Exception a){
 												a.printStackTrace();
 											}
@@ -266,7 +266,7 @@ public class EventosJuegoPrincipal implements Initializable{
 											System.out.println("No acierta el rival");
 											System.out.println("Letra actual:"+Conexion_cliente.Letra_Actual);
 											int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
-											panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png")));
+											panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png")));
 										}
 									}
 								}

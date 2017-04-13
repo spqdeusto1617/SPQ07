@@ -9,6 +9,19 @@
 	<name>Pasapalabra Game</name>
 	<version>1.0.0</version>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mongodb.morphia</groupId>
+			<artifactId>morphia</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<finalName>${project.artifactId}_${project.version}/${project.artifactId}</finalName>
 		<sourceDirectory>${project.basedir}/src</sourceDirectory>
@@ -16,10 +29,10 @@
 		<outputDirectory>${project.build.directory}/classes</outputDirectory>
 		<resources>
 			<resource>
-				<directory>src</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
+				<directory>resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
 				<filtering>false</filtering>
 			</resource>
 		</resources>
@@ -47,9 +60,9 @@
 					<archive>
 						<manifestEntries>
 							<JavaFX-Version>${javafx.version}+</JavaFX-Version>
-							<Main-Class>com.pasapalabra.game.application.Servidor</Main-Class>
+							<Main-Class>com.pasapalabra.game.principal.Server</Main-Class>
 							<implementation-version>1.0</implementation-version>
-							<JavaFX-Application-Class>com.pasapalabra.game.application.Servidor</JavaFX-Application-Class>
+							<JavaFX-Application-Class>com.pasapalabra.game.principal.Server</JavaFX-Application-Class>
 							<!-- The artifactId (name) of the jfxrt.jar ... see dependency system 
 								scope -->
 							<Class-Path>javafx-${java.version}.jar</Class-Path>
@@ -81,7 +94,7 @@
 									<!-- set the main class of your applcation; I had to create a Main.class 
 										(class Main extends MyMain) otherwise it will return an error on start -->
 									<application name="${project.name}"
-										mainClass="com.pasapalabra.game.application.Servidor" />
+										mainClass="com.pasapalabra.game.principal.Server" />
 									<resources>
 										<fileset dir="${project.build.directory}" includes="*.jar" />
 										<fileset dir="${project.build.directory}/dependency"
@@ -91,6 +104,9 @@
 									<platform javafx="${javafx.version}+">
 										<jvmarg value="-Xms512m" />
 										<jvmarg value="-Xmx1024m" />
+										<jvmarg
+											value="-Djava.rmi.server.codebase=${project.build.outputDirectory}/" />
+										<jvmarg value="-Djava.security.policy=security/java.policy" />
 									</platform>
 								</jfxdeploy>
 								<!-- you need to generate a key yourself -->
@@ -112,16 +128,6 @@
 						<version>${java.version}</version>
 						<scope>system</scope>
 						<systemPath>${java.home}/lib/ext/jfxrt.jar</systemPath>
-					</dependency>
-					<dependency>
-						<groupId>org.mongodb</groupId>
-						<artifactId>mongodb-driver</artifactId>
-						<version>3.4.2</version>
-					</dependency>
-					<dependency>
-						<groupId>org.mongodb.morphia</groupId>
-						<artifactId>morphia</artifactId>
-						<version>1.3.2</version>
 					</dependency>
 				</dependencies>
 			</plugin>

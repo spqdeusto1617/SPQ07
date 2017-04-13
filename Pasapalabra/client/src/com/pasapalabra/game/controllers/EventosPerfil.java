@@ -104,7 +104,7 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 				imagen = "fPerfilPirata";
 			}
 
-			Image i = new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+			Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 			imagenAvatar.setImage(i);
 			imgCambioFotoPerfil.setImage(i);
 		}

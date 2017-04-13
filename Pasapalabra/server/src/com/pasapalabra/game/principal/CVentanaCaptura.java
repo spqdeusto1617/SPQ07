@@ -291,20 +291,20 @@ public class CVentanaCaptura extends Control implements Initializable{
 		//Se cargan las imágenes de los botones.
 		try {
 			Image img;
-			img = new Image(this.getClass().getResource("res/back.png").toURI().toURL().toString());
+			img = new Image(this.getClass().getResource("/res/back.png").toURI().toURL().toString());
 			ImageView ivV = new ImageView(img);
 			ivV.setFitHeight(10); ivV.setFitWidth(10);
 			ivV.setSmooth(true);
 			btnVolver.setGraphic(ivV);
 
 
-			img = new Image(this.getClass().getResource("res/delete.png").toURI().toURL().toString());
+			img = new Image(this.getClass().getResource("/res/delete.png").toURI().toURL().toString());
 			ivV = new ImageView(img);
 			ivV.setFitHeight(10); ivV.setFitWidth(10);
 			ivV.setSmooth(true);
 			btnEliminar.setGraphic(ivV);
 
-			img = new Image(this.getClass().getResource("res/add.png").toURI().toURL().toString());
+			img = new Image(this.getClass().getResource("/res/add.png").toURI().toURL().toString());
 			ivV = new ImageView(img);
 			ivV.setFitHeight(10); ivV.setFitWidth(10);
 			ivV.setSmooth(true);

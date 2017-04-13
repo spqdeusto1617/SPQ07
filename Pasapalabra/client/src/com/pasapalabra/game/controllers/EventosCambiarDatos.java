@@ -99,7 +99,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		panel.getStylesheets().add("application/application.css");
+		panel.getStylesheets().add("/css/application.css");
 		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
 		if(EventosLogIn.iAvatar!=null){
 			imagenAvatar.setImage(EventosLogIn.iAvatar);
@@ -111,7 +111,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 				imagen = "fPerfilPirata";
 			}
 
-			Image i = new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+			Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 			imagenAvatar.setImage(i);
 		}
 		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);

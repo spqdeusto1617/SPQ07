@@ -36,7 +36,7 @@ public class deVentana {
 		Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent panel = null;
 		try {
-			panel = FXMLLoader.load(deVentana.class.getResource("../windows/"+nombreFichero+".fxml"));
+			panel = FXMLLoader.load(deVentana.class.getResource("/fxml/"+nombreFichero+".fxml"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

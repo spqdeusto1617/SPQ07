@@ -425,7 +425,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 									textoPuntuacionU.setText("Acertadas: "+Integer.toString(foo));
 
 									int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra+" la posicion de la letra");
-									panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/verde/"+Conexion_cliente.Letra_Actual+"-green.png")));
+									panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+Conexion_cliente.Letra_Actual+"-green.png")));
 								}catch(Exception a){
 									a.printStackTrace();
 								}
@@ -438,7 +438,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 								//				alert.show();
 
 								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
-								panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
+								panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
 							}
 							if(juegoEnCurso==true){
 
@@ -554,7 +554,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 										textoPuntuacionR.setText("Acertadas: "+Integer.toString(foo));
 										int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
 										try{
-											panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png")));
+											panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png")));
 										}catch(Exception a){
 											a.printStackTrace();
 										}
@@ -562,7 +562,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 										System.out.println("No acierta el rival");
 										System.out.println("Letra actual:"+Conexion_cliente.Letra_Actual);
 										int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
-										panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png")));
+										panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png")));
 									}
 								}
 							}
@@ -639,7 +639,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 												textoPuntuacionU.setText("Acertadas: "+Integer.toString(foo));
 
 												int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra+" la posicion de la letra");
-												panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/verde/"+Conexion_cliente.Letra_Actual+"-green.png")));
+												panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+Conexion_cliente.Letra_Actual+"-green.png")));
 											}catch(Exception a){
 												a.printStackTrace();
 											}
@@ -652,7 +652,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 											//				alert.show();
 
 											int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
-											panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
+											panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
 										}
 										if(juegoEnCurso==true){
 
@@ -844,7 +844,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 									textoPuntuacionU.setText("Acertadas: "+Integer.toString(foo));
 
 									int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra+" la posicion de la letra");
-									panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/verde/"+Conexion_cliente.Letra_Actual+"-green.png")));
+									panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+Conexion_cliente.Letra_Actual+"-green.png")));
 								}catch(Exception a){
 									a.printStackTrace();
 								}
@@ -857,7 +857,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 								//				alert.show();
 
 								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
-								panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
+								panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
 							}
 							if(juegoEnCurso==true){
 
@@ -937,7 +937,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 												textoPuntuacionR.setText("Acertadas: "+Integer.toString(foo));
 												int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
 												try{
-													panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png")));
+													panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+Conexion_cliente.Letra_Actual_Rival+"-green.png")));
 												}catch(Exception a){
 													a.printStackTrace();
 												}
@@ -945,7 +945,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 												System.out.println("No acierta el rival");
 												System.out.println("Letra actual:"+Conexion_cliente.Letra_Actual);
 												int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual_Rival);
-												panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png")));
+												panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual_Rival+"-red.png")));
 											}
 										}
 									}
@@ -1146,10 +1146,10 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 				//CARGAMOS LA IMAGEN
 				if(i == 14){
 					letraABC--;
-					iv.setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/azul/ñ-blue.png")));
+					iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/ñ-blue.png")));
 				}else{
 
-					iv.setImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/letras/azul/"+letraABC+"-blue.png")));
+					iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/"+letraABC+"-blue.png")));
 				} 
 
 				panel.getChildren().add(iv);
@@ -1207,9 +1207,9 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		}
 
 		public void anyadirGUI(){
-			panel.getStylesheets().add("application/juego.css");
-			panel.getStylesheets().remove("application/application.css");
-			BackgroundImage myBII= new BackgroundImage(new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/pspgamebg.png"),panel.getWidth(),panel.getHeight(),false,true),BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+			panel.getStylesheets().add("/css/juego.css");
+			panel.getStylesheets().remove("/css/application.css");
+			BackgroundImage myBII= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/pspgamebg.png"),panel.getWidth(),panel.getHeight(),false,true),BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 			//then you set to your node
 			panel.setBackground(new Background(myBII));}
 			/*
@@ -1272,7 +1272,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 					imagen = "fPerfilPirata";
 				}
 
-				Image i = new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/"+ imagen +".png"),imgUsuario.getBoundsInLocal().getWidth(),imgUsuario.getBoundsInLocal().getHeight(),false,true);
+				Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imgUsuario.getBoundsInLocal().getWidth(),imgUsuario.getBoundsInLocal().getHeight(),false,true);
 				imgUsuario.setImage(i);
 			}
 			Circle clip = new Circle((imgUsuario.getX()+imgUsuario.getBoundsInParent().getWidth())/2, (imgUsuario.getY()+imgUsuario.getBoundsInParent().getHeight())/2, imgUsuario.getBoundsInLocal().getHeight()/2);
@@ -1291,7 +1291,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 					imagen = "fPerfilPirata";
 				}
 
-				Image i = new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/"+ imagen +".png"),imgRival.getBoundsInLocal().getWidth(),imgRival.getBoundsInLocal().getHeight(),false,true);
+				Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imgRival.getBoundsInLocal().getWidth(),imgRival.getBoundsInLocal().getHeight(),false,true);
 				imgRival.setImage(i);
 			}
 			Circle clip2 = new Circle((imgRival.getX()+imgRival.getBoundsInParent().getWidth())/2, (imgRival.getY()+imgRival.getBoundsInParent().getHeight())/2, imgUsuario.getBoundsInLocal().getHeight()/2);
@@ -1343,8 +1343,8 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			//TODO gui cargando
 			pqGuiCargando(true);
 
-			//		panel.getStylesheets().add("application/juego.css");
-			//		panel.getStylesheets().remove("application/application.css");
+			//		panel.getStylesheets().add("/css/juego.css");
+			//		panel.getStylesheets().remove("/css/application.css");
 		}
 
 		*/boolean preguntasBienSeleccionadas(){
@@ -1406,7 +1406,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 					imagen = "fPerfilPirata";
 				}
 
-				Image i = new Image(getClass().getResourceAsStream("/com/pasapalabra/game/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+				Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 				imagenAvatar.setImage(i);
 			}
 			Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
@@ -1459,6 +1459,6 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			aLEleccion.add(new ObjetoSeleccionPregunta(tEntret, rEntret, false));
 			aLEleccion.add(new ObjetoSeleccionPregunta(tDep, rDep, false));
 
-			panel.getStylesheets().add("application/application.css");
+			panel.getStylesheets().add("/css/application.css");
 		}
 	}
