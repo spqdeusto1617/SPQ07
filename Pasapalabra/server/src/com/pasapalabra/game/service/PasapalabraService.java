@@ -26,7 +26,7 @@ public class PasapalabraService implements IPasapalabraService{
 	private static ConcurrentHashMap<String, UserScore> currentResult = new ConcurrentHashMap<String, UserScore>();
 
 	@Override
-	public String registry(UserDTO userData, String pass) {
+	public String registry(UserDTO userData, String pass) throws RemoteException{
 
 		if(true){//FIXME: validate if user exist
 
@@ -40,7 +40,7 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 		else return "Exist";
 	}
-	
+
 	@SuppressWarnings("unused")
 	public Token login(String userName, String pass) throws RemoteException
 	{
@@ -168,8 +168,8 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 		return true;
 	}
-	
-	
+
+
 
 	/*public static void main(String[] args) {//For testing purposes
 		PasapalabraService service = new PasapalabraService();

@@ -11,7 +11,7 @@ import com.pasapalabra.game.service.auth.Token;
 
 public interface IPasapalabraService extends Remote {
 
-	String registry(UserDTO userData, String pass);
+	String registry(UserDTO userData, String pass) throws RemoteException;
 
 	public Token login(String userName, String pass) throws RemoteException;
 
