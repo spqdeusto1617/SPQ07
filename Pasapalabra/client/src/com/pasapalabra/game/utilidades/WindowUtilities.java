@@ -33,7 +33,7 @@ import javafx.stage.Stage;
  * <p>.<i>centrarVentana</i> - Método para centrar ventanas.
  * @author asier.gutierrez
  */
-public class deVentana {
+public class WindowUtilities {
 	
 	//Loger de la clase deVentana
 	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
@@ -127,7 +127,7 @@ public class deVentana {
 				//FIXME:Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
 				try {
 					//FIXME:Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
-					com.pasapalabra.game.utilidades.deVentana.transicionVentana("LogIn", event);
+					com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("LogIn", event);
 				} catch (Exception e) {
 					log.log(Level.WARNING, "Error al cerrar sesion", e);
 				} 

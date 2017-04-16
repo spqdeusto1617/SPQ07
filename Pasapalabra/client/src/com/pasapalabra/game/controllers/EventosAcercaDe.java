@@ -131,7 +131,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 	public void volver(MouseEvent event){
 		String pantallaALaQueIr = "Juego";
 		log.log(Level.FINEST, "Se ha vuelto a la pantalla de " + pantallaALaQueIr);
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana(pantallaALaQueIr, event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana(pantallaALaQueIr, event);
 	}
 
 

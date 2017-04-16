@@ -321,7 +321,7 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnJuego" layoutX="18.0" layoutY="170.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
+      <Button fx:id="btnJuego" layoutX="18.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
@@ -350,7 +350,7 @@
          </font>
       </Button>
       <Button fx:id="btnCerrarSesion" layoutX="27.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <Button fx:id="btnJugar" layoutX="582.0" layoutY="556.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #0000FF;" text="¡Jugar!" textFill="WHITE">
+      <Button fx:id="btnJugar" layoutX="582.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#aJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #0000FF;" text="¡Jugar!" textFill="WHITE">
          <font>
             <Font name="Arial" size="18.0" />
          </font>

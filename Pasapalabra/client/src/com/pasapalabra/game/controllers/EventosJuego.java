@@ -15,8 +15,8 @@ import com.pasapalabra.game.model.DTO.QuestionType;
 import com.pasapalabra.game.objetos.BotonJuego;
 import com.pasapalabra.game.objetos.ObjetoSeleccionPregunta;
 import com.pasapalabra.game.utilidades.RCarga;
-import com.pasapalabra.game.utilidades.RPanel;
-import com.pasapalabra.game.utilidades.deVentana;
+import com.pasapalabra.game.utilidades.PanelThread;
+import com.pasapalabra.game.utilidades.WindowUtilities;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -247,7 +247,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Amigos");
-			com.pasapalabra.game.utilidades.deVentana.transicionVentana("Amigos", event);
+			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Amigos", event);
 		}
 	}
 
@@ -266,7 +266,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Perfil");
-			com.pasapalabra.game.utilidades.deVentana.transicionVentana("Perfil", event);
+			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
 		}
 	}
 
@@ -285,7 +285,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
-			com.pasapalabra.game.utilidades.deVentana.transicionVentana("Estadisticas", event);
+			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Estadisticas", event);
 		}
 	}
 
@@ -293,19 +293,19 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	@FXML
 	void btnCerrarSesion(MouseEvent event) {
 		log.log(Level.FINEST, "Cierre de sesión");
-		com.pasapalabra.game.utilidades.deVentana.cerrarSesion(event);
+		com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
 	}
 
 	@FXML
@@ -339,7 +339,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 		try {
 			com.pasapalabra.game.controllers.EventosJuegoPrincipal.currentQuestion = com.pasapalabra.game.utilidades.ClientConnexion.play(QuestionType.valueOf(Tipo[1])); 
-			com.pasapalabra.game.utilidades.deVentana.transicionVentana("JuegoPrincipal", event);
+			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("JuegoPrincipal", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -349,7 +349,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			juegoEnCurso=false;
-			com.pasapalabra.game.utilidades.deVentana.transicionVentana("Juego", event);
+			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
 			log.log(Level.WARNING, "Error en la partida", e);
 			e.printStackTrace();
 
@@ -361,7 +361,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			juegoEnCurso=false;
-			deVentana.transicionVentana("Juego", event);
+			WindowUtilities.transicionVentana("Juego", event);
 			log.log(Level.WARNING, "No se ha encontrado partida.", e);
 			e.printStackTrace();
 		} 
@@ -1089,7 +1089,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		@FXML
 		void masInfo(MouseEvent event){
 			if(!juegoEnCurso){
-				com.pasapalabra.game.utilidades.deVentana.transicionVentana("AcercaDe", event);
+				com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("AcercaDe", event);
 			}
 		}
 
@@ -1380,7 +1380,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 				a.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				a.showAndWait();
 			}else{
-				Platform.runLater(new RPanel( ventanaMenuDentro, menuDesplegable ));
+				Platform.runLater(new PanelThread( ventanaMenuDentro, menuDesplegable ));
 				ventanaMenuDentro = !ventanaMenuDentro;
 			}
 		}

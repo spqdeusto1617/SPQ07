@@ -150,7 +150,7 @@ public class EventosLogIn extends Control implements Initializable {
 			try {	log.log(Level.FINEST, "LogIn OK. Transición de ventana a Juego");
 				com.pasapalabra.game.utilidades.ClientConnexion.login(txtUsuario.getText(), txtContra.getText());
 				
-				com.pasapalabra.game.utilidades.deVentana.transicionVentana("Juego", event);
+				com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
 			} catch (Exception e) {
 				log.log(Level.INFO, "Error de LogIn", e);
 				//Aviso
