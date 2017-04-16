@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
 import com.pasapalabra.game.objetos.BotonJuego;
-import com.pasapalabra.game.utilidades.deVentana;
+import com.pasapalabra.game.utilidades.WindowUtilities;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,7 +35,7 @@ import java.util.logging.Logger;
 
 import com.pasapalabra.game.objetos.ObjetoSeleccionPregunta;
 import com.pasapalabra.game.utilidades.RCarga;
-import com.pasapalabra.game.utilidades.RPanel;
+import com.pasapalabra.game.utilidades.PanelThread;
 import com.pasapalabra.game.utilidades.ClientConnexion;
 
 public class EventosJuegoPrincipal implements Initializable{
@@ -100,7 +100,7 @@ public class EventosJuegoPrincipal implements Initializable{
 			alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+score.getRightAnswered()+" respuestas correctas y: "+score.getWrongAnswered()+" respuestas incorrectas");
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
-			deVentana.transicionVentana("Juego", event);
+			WindowUtilities.transicionVentana("Juego", event);
 		}
 		else{	
 			if(tfRespuesta.getText().length()==0){
@@ -197,7 +197,7 @@ public class EventosJuegoPrincipal implements Initializable{
 							alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+score.getRightAnswered()+" respuestas correctas y: "+score.getWrongAnswered()+" respuestas incorrectas");
 							alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 							alert.showAndWait();
-							deVentana.transicionVentana("Juego", event);
+							WindowUtilities.transicionVentana("Juego", event);
 						/*
 						if(){
 							Alert alert = new Alert(AlertType.INFORMATION);

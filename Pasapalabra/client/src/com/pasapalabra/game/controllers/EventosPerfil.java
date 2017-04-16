@@ -115,11 +115,11 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 	}
 
 	public void btnCambiar (MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana("CambiarDatos", event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("CambiarDatos", event);
 	}
 
 	public void btnEliminar (MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana("EliminarCuenta", event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("EliminarCuenta", event);
 	}
 
 	/**AccionListener para poder cambiar la imagen del usuario
@@ -183,11 +183,11 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana("Juego", event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana("Amigos", event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Amigos", event);
 	}
 
 	public void btnMiPerfil(MouseEvent event){
@@ -215,11 +215,11 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana("Estadisticas", event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Estadisticas", event);
 	}
 
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.cerrarSesion(event);
+		com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
 	}
 
 
@@ -227,13 +227,13 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel EDIT: ABRIR Y CERRAR	

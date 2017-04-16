@@ -115,7 +115,7 @@ public class Main extends Application {
 			primaryStage.show();
 			log.log(Level.FINEST, "Ventana mostrada");
 			//Centrar ventana
-			com.pasapalabra.game.utilidades.deVentana.centrarVentana(primaryStage);
+			com.pasapalabra.game.utilidades.WindowUtilities.centrarVentana(primaryStage);
 			log.log(Level.FINEST, "Centrada la ventana");
 
 

@@ -8,13 +8,13 @@ import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.text.Text;
 
-public class RPanel implements Runnable{
+public class PanelThread implements Runnable{
 	//Atributos
 	public boolean abrir_cerrar_panel; //TRUE = ABRIR - FALSE = CERRAR
 	public ArrayList<Node> cajaDeControl;
 
 	//Constructor
-	public RPanel(boolean acp, ArrayList<Node> menuDesplegable){
+	public PanelThread(boolean acp, ArrayList<Node> menuDesplegable){
 		this.abrir_cerrar_panel = acp;
 		this.cajaDeControl = menuDesplegable;
 

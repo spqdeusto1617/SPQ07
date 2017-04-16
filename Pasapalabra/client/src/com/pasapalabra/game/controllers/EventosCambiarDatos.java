@@ -183,7 +183,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
 					com.pasapalabra.game.utilidades.ClientConnexion.userInfo.setMail(tflNuevoMail.getText());
-					com.pasapalabra.game.utilidades.deVentana.transicionVentana("Perfil", event);
+					com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
 				}catch(Exception a){
 					Alert alert2 = new Alert(AlertType.INFORMATION);
 					alert2.setTitle("Se produjo un error al tramitar sus datos");
@@ -257,7 +257,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
-					com.pasapalabra.game.utilidades.deVentana.transicionVentana("Perfil", event);
+					com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
 				}catch(Exception a){
 
 					Alert alert2 = new Alert(AlertType.ERROR);
@@ -300,7 +300,7 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK){
-			com.pasapalabra.game.utilidades.deVentana.transicionVentana("Perfil", event);
+			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
 		}
 		else{
 			//Nada
@@ -312,37 +312,37 @@ public class EventosCambiarDatos extends ClaseExtensora implements Initializable
 
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana("Juego", event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana("Amigos", event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Amigos", event);
 	}
 
 	public void btnMiPerfil(MouseEvent event){
 
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana("Perfil", event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
 	}
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.transicionVentana("Estadisticas", event);
+		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Estadisticas", event);
 	}
 
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilidades.deVentana.cerrarSesion(event);
+		com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
 	}
 
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel	

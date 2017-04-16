@@ -327,7 +327,7 @@ public class EventosRegistro extends Control implements Initializable {
 					alert2.showAndWait();
 
 
-					com.pasapalabra.game.utilidades.deVentana.transicionVentana("LogIn", event);
+					com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("LogIn", event);
 				}
 			}catch(Exception a){
 				Alert alert2 = new Alert(AlertType.ERROR);
@@ -400,7 +400,7 @@ public class EventosRegistro extends Control implements Initializable {
 		//Ha pulsado ok?
 		if (result.get() == ButtonType.OK){
 
-			com.pasapalabra.game.utilidades.deVentana.transicionVentana("LogIn", event);
+			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("LogIn", event);
 		}
 
 	}

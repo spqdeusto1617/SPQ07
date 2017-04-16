@@ -111,24 +111,24 @@ public class EventosEstadisticas extends ClaseExtensora implements Initializable
 	 @FXML
 	 void btnJugar(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Juego");
-		 com.pasapalabra.game.utilidades.deVentana.transicionVentana("Juego", event);
+		 com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
 	 }
 
 	 @FXML
 	 void btnMiPerfil(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Perfil");
-		 com.pasapalabra.game.utilidades.deVentana.transicionVentana("Perfil", event);
+		 com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
 	 }
 
 	 @FXML
 	 void entrado(MouseEvent event) {
-		 com.pasapalabra.game.utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+		 com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	 }
 
 	 //Añade nivel de transparencia
 	 @FXML
 	 void salido(MouseEvent event) {
-		 com.pasapalabra.game.utilidades.deVentana.efectoTransparenciaOnHover(event, this);
+		 com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	 }
 
 	 @FXML
@@ -140,13 +140,13 @@ public class EventosEstadisticas extends ClaseExtensora implements Initializable
 	 @FXML
 	 void btnAmigos(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Amigos");
-		 com.pasapalabra.game.utilidades.deVentana.transicionVentana("Amigos", event);
+		 com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Amigos", event);
 	 }
 
 	 @FXML
 	 void btnCerrarSesion(MouseEvent event) {
 		 log.log(Level.FINEST, "Cerrar sesión");
-		 com.pasapalabra.game.utilidades.deVentana.cerrarSesion(event);
+		 com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
 	 }
 
 	 @FXML
