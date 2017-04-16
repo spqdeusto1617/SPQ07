@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -92,17 +93,17 @@
             <Font size="34.0" />
          </font>
       </Text>
-      <Rectangle fx:id="vsAleatorio" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="225.0" layoutY="110.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="vsAleatorio" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="192.0" layoutY="-110.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="vsAmigo" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="470.0" layoutY="110.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="vsAmigo" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#6b21ffa3" height="35.0" layoutX="461.0" layoutY="-103.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rTodos" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="227.0" layoutY="281.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rTodos" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="231.0" layoutY="627.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -112,22 +113,22 @@
             <Font size="34.0" />
          </font>
       </Text>
-      <Rectangle fx:id="rArte" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="311.0" layoutY="347.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rArte" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="315.0" layoutY="693.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rHist" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="586.0" layoutY="381.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rHist" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="590.0" layoutY="727.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rEntret" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="517.0" layoutY="468.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rEntret" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="521.0" layoutY="814.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rCien" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="266.0" layoutY="457.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rCien" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="270.0" layoutY="803.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -159,7 +160,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="tVSAleatorio" fill="WHITE" layoutX="260.0" layoutY="135.0" onMouseClicked="#eleccionHecha" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Aleatorio">
+      <Text fx:id="tVSAleatorio" fill="WHITE" layoutX="256.0" layoutY="-62.0" onMouseClicked="#eleccionHecha" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Aleatorio">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -167,7 +168,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="tVSAmigo" fill="WHITE" layoutX="515.0" layoutY="135.0" onMouseClicked="#eleccionHecha" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Amigo">
+      <Text fx:id="tVSAmigo" fill="WHITE" layoutX="497.0" layoutY="-87.0" onMouseClicked="#eleccionHecha" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Amigo">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -183,7 +184,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="tTodos" fill="#686767" layoutX="290.0" layoutY="305.0" onMouseClicked="#eleccionHecha" stroke="#c9c9c9" strokeType="OUTSIDE" strokeWidth="0.0" text="Todos">
+      <Text fx:id="tTodos" fill="#686767" layoutX="294.0" layoutY="651.0" onMouseClicked="#eleccionHecha" stroke="#c9c9c9" strokeType="OUTSIDE" strokeWidth="0.0" text="Todos">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -191,12 +192,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Rectangle fx:id="rGeo" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="533.0" layoutY="299.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rGeo" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="537.0" layoutY="645.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Text fx:id="tGeo" fill="#686767" layoutX="575.0" layoutY="323.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeType="OUTSIDE" strokeWidth="0.0" text="Geografía">
+      <Text fx:id="tGeo" fill="#686767" layoutX="579.0" layoutY="669.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeType="OUTSIDE" strokeWidth="0.0" text="Geografía">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -204,7 +205,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="tArte" fill="#686767" layoutX="380.0" layoutY="373.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Arte">
+      <Text fx:id="tArte" fill="#686767" layoutX="384.0" layoutY="719.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Arte">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -212,7 +213,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="tHist" fill="#686767" layoutX="640.0" layoutY="405.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Historia">
+      <Text fx:id="tHist" fill="#686767" layoutX="644.0" layoutY="751.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Historia">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -220,7 +221,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="tEntret" fill="#686767" layoutX="535.0" layoutY="493.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Entretenimiento">
+      <Text fx:id="tEntret" fill="#686767" layoutX="539.0" layoutY="839.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Entretenimiento">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -228,7 +229,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="tCien" fill="#686767" layoutX="320.0" layoutY="483.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Ciencia">
+      <Text fx:id="tCien" fill="#686767" layoutX="324.0" layoutY="829.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Ciencia">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -236,12 +237,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Rectangle fx:id="rDep" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="323.0" layoutY="520.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rDep" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="327.0" layoutY="866.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Text fx:id="tDep" fill="#686767" layoutX="370.0" layoutY="545.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Deportes">
+      <Text fx:id="tDep" fill="#686767" layoutX="374.0" layoutY="891.0" onMouseClicked="#eleccionHecha" stroke="#a1a0a0" strokeWidth="0.0" text="Deportes">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -275,5 +276,50 @@
       </Rectangle>
       <ImageView fx:id="imgUsuario" fitHeight="128.0" fitWidth="128.0" layoutX="51.0" layoutY="787.0" pickOnBounds="true" />
       <ImageView fx:id="imgRival" fitHeight="128.0" fitWidth="128.0" layoutX="141.0" layoutY="787.0" pickOnBounds="true" />
+      <Button fx:id="btnTodos" layoutX="260.0" layoutY="248.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Todos">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDeportes" layoutX="294.0" layoutY="455.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Deportes">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEntretenimiento" layoutX="497.0" layoutY="403.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Entretenimiento">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCiencia" layoutX="258.0" layoutY="391.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Ciencia">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnHistoria" layoutX="553.0" layoutY="336.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Historia">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnArte" layoutX="298.0" layoutY="315.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Arte">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnGeo" layoutX="523.0" layoutY="276.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Geografía">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAleatorio" layoutX="268.0" layoutY="116.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #e417d3;" text="VS Aleatorio" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAmigo" disable="true" layoutX="478.0" layoutY="118.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #e417d3;" text="VS Amigo" textFill="#fffdff">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
