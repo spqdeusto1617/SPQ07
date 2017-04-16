@@ -15,23 +15,23 @@
 <Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.EventosJuego">
    <children>
       <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
-      <Rectangle fx:id="rectanguloJugar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="100.0" onMouseClicked="#btnJugar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rectanguloJugar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="10.0" layoutY="618.0" onMouseClicked="#btnJugar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectanguloMiPerfil" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="260.0" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rectanguloMiPerfil" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="10.0" layoutY="778.0" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectanguloEstadisticas" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="340.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rectanguloEstadisticas" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="10.0" layoutY="858.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectanguloAmigos" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="180.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rectanguloAmigos" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="10.0" layoutY="457.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Text fx:id="textoJugar" fill="WHITE" layoutX="80.0" layoutY="125.0" onMouseClicked="#btnJugar" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Jugar" wrappingWidth="44.10186767578125">
+      <Text fx:id="textoJugar" fill="WHITE" layoutX="75.0" layoutY="643.0" onMouseClicked="#btnJugar" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Jugar" wrappingWidth="44.10186767578125">
          <font>
             <Font size="15.0" />
          </font>
@@ -39,7 +39,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="textoAmigos" fill="WHITE" layoutX="73.0" layoutY="205.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Amigos" wrappingWidth="53.024166107177734">
+      <Text fx:id="textoAmigos" fill="WHITE" layoutX="68.0" layoutY="723.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Amigos" wrappingWidth="53.024166107177734">
          <font>
             <Font size="15.0" />
          </font>
@@ -47,7 +47,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="textoMiPerfil" fill="WHITE" layoutX="70.0" layoutY="285.0" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Mi perfil" wrappingWidth="59.024169921875">
+      <Text fx:id="textoMiPerfil" fill="WHITE" layoutX="65.0" layoutY="803.0" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Mi perfil" wrappingWidth="59.024169921875">
          <font>
             <Font size="15.0" />
          </font>
@@ -55,7 +55,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="textoEstadisticas" fill="WHITE" layoutX="55.0" layoutY="365.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Estadísticas" wrappingWidth="86.33687973022461">
+      <Text fx:id="textoEstadisticas" fill="WHITE" layoutX="50.0" layoutY="883.0" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Estadísticas" wrappingWidth="86.33687973022461">
          <font>
             <Font size="15.0" />
          </font>
@@ -67,14 +67,14 @@
          <image>
             <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
-      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="34.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="18.0" layoutY="629.0" pickOnBounds="true" preserveRatio="true" />
       <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logead@ como:" />
       <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
-      <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="15.0" layoutY="565.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
+      <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="170.0" layoutY="759.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Text fx:id="textoCerrarSesion" fill="WHITE" layoutX="35.0" layoutY="585.0" onMouseClicked="#btnCerrarSesion" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Cerrar sesión" textAlignment="CENTER" wrappingWidth="136.24898529052734">
+      <Text fx:id="textoCerrarSesion" fill="WHITE" layoutX="190.0" layoutY="779.0" onMouseClicked="#btnCerrarSesion" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Cerrar sesión" textAlignment="CENTER" wrappingWidth="136.24898529052734">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Text>
@@ -133,7 +133,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="rJug" arcHeight="5.0" arcWidth="5.0" height="35.0" layoutX="584.0" layoutY="543.0" onMouseClicked="#aJugar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rJug" arcHeight="5.0" arcWidth="5.0" height="35.0" layoutX="752.0" layoutY="684.0" onMouseClicked="#aJugar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -176,7 +176,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Text fx:id="textoRJug" fill="WHITE" layoutX="640.0" layoutY="569.0" onMouseClicked="#aJugar" strokeType="OUTSIDE" strokeWidth="0.0" text="¡Jugar!">
+      <Text fx:id="textoRJug" fill="WHITE" layoutX="800.0" layoutY="708.0" onMouseClicked="#aJugar" strokeType="OUTSIDE" strokeWidth="0.0" text="¡Jugar!">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
@@ -317,6 +317,40 @@
          </font>
       </Button>
       <Button fx:id="btnAmigo" disable="true" layoutX="478.0" layoutY="118.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #e417d3;" text="VS Amigo" textFill="#fffdff">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnJuego" layoutX="18.0" layoutY="170.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAmigos" layoutX="18.0" layoutY="231.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="WHITE" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button fx:id="btnPerfil" layoutX="18.0" layoutY="301.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEstadisticas" layoutX="18.0" layoutY="374.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCerrarSesion" layoutX="27.0" layoutY="571.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
+      <Button fx:id="btnJugar" layoutX="582.0" layoutY="556.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #0000FF;" text="¡Jugar!" textFill="WHITE">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
