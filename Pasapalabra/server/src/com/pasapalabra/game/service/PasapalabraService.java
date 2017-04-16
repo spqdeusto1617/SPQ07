@@ -20,11 +20,11 @@ import com.pasapalabra.game.service.auth.Token;
 
 public class PasapalabraService implements IPasapalabraService{
 	private static HashMap<String, User> currentUsers = new HashMap<>();
-	
+
 	private static ConcurrentHashMap<String, ArrayList<Question>> currentQuestions = new ConcurrentHashMap<String, ArrayList<Question>>();
-	
+
 	private static ConcurrentHashMap<String, UserScore> currentResult = new ConcurrentHashMap<String, UserScore>();
-	
+
 	@SuppressWarnings("unused")
 	public Token login(String userName, String pass) throws RemoteException
 	{
@@ -37,7 +37,7 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 		else return null;
 	}
-	
+
 	public UserDTO getData(Token token) throws RemoteException{
 		// TODO Auto-generated method stub
 		if(currentUsers.containsKey(token.getToken())) return UserAssembler.getInstance().assembleToDTO(currentUsers.get(token.getToken()));
@@ -61,19 +61,19 @@ public class PasapalabraService implements IPasapalabraService{
 			return null;
 		}
 	}
-	
+
 	public QuestionDTO getQuestion(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
-			
+
 			boolean answered = true;
 			Question question = null;
 			do{
 				currentResult.get(session.getToken()).nextLetter();
 				if(currentResult.get(session.getToken()).getCurrentLetter() == 'ñ'){
-					 question = currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1);
+					question = currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1);
 				}
 				else{
-					 question = currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97);
+					question = currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97);
 				}
 				if(!question.isAnswered()){
 					answered = false;
@@ -85,33 +85,33 @@ public class PasapalabraService implements IPasapalabraService{
 			return null;
 		}
 	}
-	
+
 	public boolean answerQuestion(Token session, String answer) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
 			Question question = null;
 			if(currentResult.get(session.getToken()).getCurrentLetter() == 'ñ'){
-				 question = currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1);
+				question = currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1);
 			}
 			else{
-				 question = currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97);
+				question = currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97);
 			}
-			
+
 			if(answer.equals(question.getAnswer())){
 				currentResult.get(session.getToken()).increaseRight();
 				if(currentResult.get(session.getToken()).getCurrentLetter() == 'ñ'){
 					currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1).setAnswered(true);
-					}else{
+				}else{
 					currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97).setAnswered(true);
-					}
+				}
 				return true;
 			}
 			else if(answer.equals("Pasapalabra")){ System.out.println("Server - Pasamos palabra");return true;}
 			else{
 				currentResult.get(session.getToken()).increaseWrong();
 				if(currentResult.get(session.getToken()).getCurrentLetter() == 'ñ'){
-				currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1).setAnswered(true);
+					currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1).setAnswered(true);
 				}else{
-				currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97).setAnswered(true);
+					currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97).setAnswered(true);
 				}
 				return false;
 			}
@@ -120,7 +120,7 @@ public class PasapalabraService implements IPasapalabraService{
 			return false;
 		}
 	}
-	
+
 	public boolean allQuestionAnswered(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
 			return questionsAnswered(currentQuestions.get(session.getToken()));
@@ -129,7 +129,7 @@ public class PasapalabraService implements IPasapalabraService{
 			return false;
 		}
 	}
-	
+
 	public UserScoreDTO getResults(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
 			//FIXME: save UserScore to DB
@@ -142,7 +142,7 @@ public class PasapalabraService implements IPasapalabraService{
 			return null;
 		}
 	}
-	
+
 	private static boolean questionsAnswered(ArrayList<Question> aQuestions) throws RemoteException{
 		for (Question question : aQuestions) {
 
@@ -151,6 +151,22 @@ public class PasapalabraService implements IPasapalabraService{
 			}
 		}
 		return true;
+	}
+	
+	@Override
+	public String registry(UserDTO userData, String pass) {
+
+		if(true){//FIXME: validate if user exist
+
+			try{
+				//FIXME: introduce the user into the database
+				return "Ok";
+			}catch (Exception e) {
+				e.printStackTrace();
+				return "Error";
+			}
+		}
+		else return "Exist";
 	}
 
 	/*public static void main(String[] args) {//For testing purposes
@@ -165,7 +181,7 @@ public class PasapalabraService implements IPasapalabraService{
 		for(int i = 'a'; i<'z'+1;i++){
 			test2 = service.getQuestion(token);
 			System.out.println("Question number: "+(i-96)+" Question: "+test2.getQuestion() +"\n letter: "+test2.getLeter());
-			
+
 			test2.setAnswer("No");
 			System.out.println("result: "+service.answerQuestion(token, test2));
 			System.out.println("\n");
@@ -186,5 +202,5 @@ public class PasapalabraService implements IPasapalabraService{
 			}
 		}
 	}*/
-	
+
 }

@@ -25,4 +25,6 @@ public interface IPasapalabraService extends Remote {
 	
 	public UserScoreDTO getResults(Token session) throws RemoteException;
 
+	String registry(UserDTO userData, String pass);
+
 }
