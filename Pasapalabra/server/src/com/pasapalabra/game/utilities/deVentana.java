@@ -1,4 +1,4 @@
-package com.pasapalabra.game.utilidades;
+package com.pasapalabra.game.utilities;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 public class deVentana {
 	
 	//Loger de la clase deVentana
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger("Server");
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger("Server");
 	 
 	/**Método para la transición de una ventana a otra.
 	 * @param nombreFichero Nombre sin extensión por la cual se

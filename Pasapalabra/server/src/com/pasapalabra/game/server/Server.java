@@ -1,4 +1,4 @@
-package com.pasapalabra.game.principal;
+package com.pasapalabra.game.server;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -15,8 +15,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.pasapalabra.game.service.IPasapalabraService;
 import com.pasapalabra.game.service.PasapalabraService;
-import com.pasapalabra.game.utilidades.AppLogger;
-import com.pasapalabra.game.utilidades.deVentana;
+import com.pasapalabra.game.utilities.AppLogger;
+import com.pasapalabra.game.utilities.deVentana;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -35,7 +35,7 @@ import javafx.stage.WindowEvent;
 
 public class Server extends Application{
 	
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(Server.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(Server.class.getName());
 	
 	public static void main(String[] args) {
 

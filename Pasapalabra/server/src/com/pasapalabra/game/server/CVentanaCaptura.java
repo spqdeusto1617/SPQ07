@@ -1,4 +1,4 @@
-package com.pasapalabra.game.principal;
+package com.pasapalabra.game.server;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.pasapalabra.game.utilidades.AppLogger;
+import com.pasapalabra.game.utilities.AppLogger;
 
 import javafx.animation.TranslateTransition;
 import javafx.animation.TranslateTransitionBuilder;
