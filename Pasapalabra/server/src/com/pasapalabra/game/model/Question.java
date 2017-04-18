@@ -1,7 +1,5 @@
 package com.pasapalabra.game.model;
 
-import java.io.Serializable;
-
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
@@ -18,7 +16,7 @@ import org.mongodb.morphia.annotations.Indexes;
 @Indexes(
     @Index(fields = @Field("letter"), options = @IndexOptions(name="letter"))
 )
-public class Question implements Serializable{
+public class Question{
 	/**
 	 * 
 	 */

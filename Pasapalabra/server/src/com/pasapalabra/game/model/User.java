@@ -1,7 +1,6 @@
 package com.pasapalabra.game.model;
 
 import java.awt.image.BufferedImage;
-import java.io.Serializable;
 import java.util.Date;
 
 import org.bson.types.ObjectId;
@@ -17,12 +16,7 @@ import org.mongodb.morphia.annotations.Indexes;
 	@Index(fields = @Field("userName"), options = @IndexOptions(name="uname", unique=true)),
 	@Index(fields = @Field("userName"), options = @IndexOptions(name="uname", unique=true))
 })
-public class User implements Serializable{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class User{
 
 	@Id
 	private ObjectId id;
@@ -37,22 +31,30 @@ public class User implements Serializable{
 
 	private Date DOB;
 
-	private int GamesWon;
+	private int gamesWon;
 
-	private int GamesLost;
+	private int gamesLost;
 
-
-	@Override
-	public String toString() {
-		return "User [userName=" + userName + ", mail=" + mail + ", pass=" + pass + ", "
-				+ "DOB=" + DOB + ", GamesWon=" + GamesWon + ", GamesLost=" + 
-				GamesLost + ", Games=" + Games + "]";
-	}
+	private  int gamesPerticipated;
+	
 
 	private User(){super();}
 	
+	public User(String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
+			int gamesLost, int gamesPerticipated) {
+		super();
+		this.userName = userName;
+		this.mail = mail;
+		this.pass = pass;
+		this.profileImage = profileImage;
+		DOB = dOB;
+		this.gamesWon = gamesWon;
+		this.gamesLost = gamesLost;
+		this.gamesPerticipated = gamesPerticipated;
+	}
+	
 	public User(ObjectId oid, String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
-			int gamesLost, int games) {
+			int gamesLost, int gamesPerticipated) {
 		super();
 		this.id = oid;
 		this.userName = userName;
@@ -60,23 +62,9 @@ public class User implements Serializable{
 		this.pass = pass;
 		this.profileImage = profileImage;
 		DOB = dOB;
-		GamesWon = gamesWon;
-		GamesLost = gamesLost;
-		Games = games;
-	}
-
-
-	public User(String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
-			int gamesLost, int games) {
-		super();
-		this.userName = userName;
-		this.mail = mail;
-		this.pass = pass;
-		this.profileImage = profileImage;
-		DOB = dOB;
-		GamesWon = gamesWon;
-		GamesLost = gamesLost;
-		Games = games;
+		this.gamesWon = gamesWon;
+		this.gamesLost = gamesLost;
+		this.gamesPerticipated = gamesPerticipated;
 	}
 
 
@@ -142,42 +130,45 @@ public class User implements Serializable{
 
 
 	public int getGamesWon() {
-		return GamesWon;
+		return gamesWon;
 	}
 
 
 
 	public void setGamesWon(int gamesWon) {
-		GamesWon = gamesWon;
+		this.gamesWon = gamesWon;
 	}
 
 
 
 	public int getGamesLost() {
-		return GamesLost;
+		return gamesLost;
 	}
 
 
 
 	public void setGamesLost(int gamesLost) {
-		GamesLost = gamesLost;
+		this.gamesLost = gamesLost;
 	}
 
 
 
 	public int getGames() {
-		return Games;
+		return gamesPerticipated;
 	}
 
 
 
 	public void setGames(int games) {
-		Games = games;
+		gamesPerticipated = games;
 	}
 
-
-
-	private  int Games;
+	@Override
+	public String toString() {
+		return "User [userName=" + userName + ", mail=" + mail + ", pass=" + pass + ", "
+				+ "DOB=" + DOB + ", GamesWon=" + gamesWon + ", GamesLost=" + 
+				gamesLost + ", Games=" + gamesPerticipated + "]";
+	}
 
 
 }
