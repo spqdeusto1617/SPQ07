@@ -4,7 +4,19 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Field;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Index;
+import org.mongodb.morphia.annotations.IndexOptions;
+import org.mongodb.morphia.annotations.Indexes;
 
+@Entity("user")
+@Indexes({
+	@Index(fields = @Field("userName"), options = @IndexOptions(name="uname", unique=true)),
+	@Index(fields = @Field("userName"), options = @IndexOptions(name="uname", unique=true))
+})
 public class User implements Serializable{
 
 	/**
@@ -12,22 +24,24 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	private ObjectId id;
+
 	private String userName;
-	
+
 	private String mail;
-	
+
 	private String pass;
-	
+
 	private BufferedImage profileImage;
-	
+
 	private Date DOB;
-	
+
 	private int GamesWon;
-	
+
 	private int GamesLost;
-	
-	
-	
+
+
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", mail=" + mail + ", pass=" + pass + ", "
@@ -35,6 +49,21 @@ public class User implements Serializable{
 				GamesLost + ", Games=" + Games + "]";
 	}
 
+	private User(){super();}
+	
+	public User(ObjectId oid, String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
+			int gamesLost, int games) {
+		super();
+		this.id = oid;
+		this.userName = userName;
+		this.mail = mail;
+		this.pass = pass;
+		this.profileImage = profileImage;
+		DOB = dOB;
+		GamesWon = gamesWon;
+		GamesLost = gamesLost;
+		Games = games;
+	}
 
 
 	public User(String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
@@ -149,6 +178,6 @@ public class User implements Serializable{
 
 
 	private  int Games;
-	
-	
+
+
 }

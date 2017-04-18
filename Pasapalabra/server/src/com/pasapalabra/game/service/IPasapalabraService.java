@@ -1,6 +1,5 @@
 package com.pasapalabra.game.service;
 
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

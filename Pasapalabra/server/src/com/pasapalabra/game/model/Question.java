@@ -7,6 +7,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Field;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Index;
+import org.mongodb.morphia.annotations.IndexOptions;
 import org.mongodb.morphia.annotations.Indexes;
 
 /**Clase de utilidad para poder gestionar las preguntas de los jugadores
@@ -15,7 +16,7 @@ import org.mongodb.morphia.annotations.Indexes;
  */
 @Entity("question")
 @Indexes(
-    @Index(value = "leter", fields = @Field("leter"))
+    @Index(fields = @Field("letter"), options = @IndexOptions(name="letter"))
 )
 public class Question implements Serializable{
 	/**
@@ -31,23 +32,34 @@ public class Question implements Serializable{
 	
 	String answer;
 	
-	
 	String questionType;
 	
-	char leter;
+	char letter;
 	
 	String creator;
 	
 	boolean answered = false;
 	
-
+	private Question(){super();}
+	
+	public Question(ObjectId oid, String question, String answer, char leter, String creator) {
+		super();
+		this.id = oid;
+		this.question = question;
+		this.answer = answer;
+		this.letter = leter;
+		this.creator = creator;
+	}
 	
 	public Question(String question, String answer, char leter, String creator) {
 		super();
 		this.question = question;
 		this.answer = answer;
-		this.leter = leter;
+		this.letter = leter;
 		this.creator = creator;
+	}
+	public ObjectId getId() {
+		return id;
 	}
 	public String getQuestion() {
 		return question;
@@ -62,10 +74,10 @@ public class Question implements Serializable{
 		this.answer = answer;
 	}
 	public char getLeter() {
-		return leter;
+		return letter;
 	}
 	public void setLeter(char leter) {
-		this.leter = leter;
+		this.letter = leter;
 	}
 	
 	public String getQuestionType() {
@@ -90,7 +102,7 @@ public class Question implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Questions [question=" + question + ", answer=" + answer + ", leter=" + leter + ", creator=" + creator
+		return "Questions [question=" + question + ", answer=" + answer + ", leter=" + letter + ", creator=" + creator
 				+ ", answered=" + answered + "]";
 	}
 	

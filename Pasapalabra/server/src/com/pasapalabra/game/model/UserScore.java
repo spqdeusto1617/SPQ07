@@ -3,12 +3,11 @@ package com.pasapalabra.game.model;
 public class UserScore {
 
 	int rightAnswered;
-	
+
 	int wrongAnswered;
-	
+
 	char currentLetter;
-	
-	
+
 
 	public UserScore() {
 		super();
@@ -46,7 +45,7 @@ public class UserScore {
 		return "UserScore [rightAnswered=" + rightAnswered + ", wrongAnswered=" + wrongAnswered + ", currentLetter="
 				+ currentLetter + "]";
 	}
-	
+
 	public void nextLetter(){
 		if(this.currentLetter == 'n'){
 			this.currentLetter = 'ñ';
@@ -55,18 +54,18 @@ public class UserScore {
 			this.currentLetter = 'o';
 		}
 		else if(this.currentLetter == 'z'){
-		this.currentLetter = 'a';	
+			this.currentLetter = 'a';	
 		}
 		else{
 			this.currentLetter++;
 		}
 	}
-	
+
 	public void increaseRight(){
 		this.rightAnswered++;
 	}
 	public void increaseWrong(){
 		this.wrongAnswered++;
 	}
-	
+
 }

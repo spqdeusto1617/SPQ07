@@ -8,7 +8,7 @@ public abstract class UserDAO {
 	
 	public abstract boolean checkIfExists(String username);
 	
-	public abstract void updateScore(boolean won);
+	public abstract void updateScore(String username, boolean won);
 	
 	
 }

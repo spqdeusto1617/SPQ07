@@ -4,15 +4,20 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.Morphia;
-
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
+import com.pasapalabra.game.dao.QuestionDAO;
+import com.pasapalabra.game.dao.UserDAO;
+import com.pasapalabra.game.dao.mongodb.MongoConnection;
+import com.pasapalabra.game.dao.mongodb.QuestionMongoDAO;
+import com.pasapalabra.game.dao.mongodb.UserMongoDAO;
+import com.pasapalabra.game.model.Question;
+import com.pasapalabra.game.model.User;
 import com.pasapalabra.game.service.IPasapalabraService;
 import com.pasapalabra.game.service.PasapalabraService;
 import com.pasapalabra.game.utilities.AppLogger;
@@ -36,7 +41,7 @@ import javafx.stage.WindowEvent;
 public class Server extends Application{
 	
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(Server.class.getName());
-	
+	public static MongoConnection mongoConnection;
 	public static void main(String[] args) {
 
 	    	System.out.println("Starting server...");
@@ -50,21 +55,11 @@ public class Server extends Application{
 	    	System.out.println(System.getProperty("java.rmi.server.codebase"));
 			
 	    	
-	    	final Morphia morphia = new Morphia();
-
-	    	// tell Morphia where to find your classes
-	    	// can be called multiple times with different packages or classes
-	    	morphia.mapPackage("com.pasapalabra.game.model");
-
 	    	MongoClientOptions.Builder options = MongoClientOptions.builder();
 	    	options.socketKeepAlive(true);
 	    	MongoClient mongoClient = new MongoClient("127.0.0.1:27017", options.build());
+	    	mongoConnection = new MongoConnection("com.pasapalabra.game.model", mongoClient, "pasapalabra"); 	
 	    	
-	    	// create the Datastore connecting to the default port on the local host
-	    	final Datastore datastore = morphia.createDatastore(mongoClient, "pasapalabra");
-	    	datastore.ensureIndexes();
-	    	
-
 			String serverAddress = "//" + args[0] + ":" + args[1] + "/" + args[2];
 			System.out.println(" * Server name: " + serverAddress);
 			IPasapalabraService pasapalabraService = new PasapalabraService();
