@@ -24,12 +24,14 @@ public class UserMongoDAO extends UserDAO {
 			return lUser.get(0);
 	}
 
+	
 	@Override
 	public boolean checkIfExists(String username) {
 		return !Server.mongoConnection.datastore.createQuery(User.class)
 		        .field("userName").equal(username).asList().isEmpty();
 	}
 
+	
 	@Override
 	public void updateScore(String username, boolean won) {
 		Query<User> userToUpdate = Server.mongoConnection.datastore.createQuery(User.class)
