@@ -19,12 +19,14 @@ import com.pasapalabra.game.utilidades.PanelThread;
 import com.pasapalabra.game.utilidades.WindowUtilities;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextField;
@@ -66,7 +68,9 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
 	public ArrayList<Node> menuDesplegable; //Colección de todos los elementos del menu desplegable.
 	public ArrayList<ObjetoSeleccionPregunta> aLEleccion; //Elección del tipo de juego que se quiere llevar a cabo.
-	public ArrayList<BotonJuego> aLBotonesJuego;
+	//public ArrayList<BotonJuego> aLBotonesJuego;
+	
+	public ArrayList<Button> aLBotones; 
 
 
 	//Declaración del panel
@@ -87,29 +91,29 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 	@FXML public Circle circuloPlus;
 
-	@FXML public Rectangle rectanguloCerrarSesion;
+	//@FXML public Rectangle rectanguloCerrarSesion;
 
-	@FXML public Rectangle rectanguloAmigos;
+	//@FXML public Rectangle rectanguloAmigos;
 
-	@FXML public Text textoJugar;
+	//@FXML public Text textoJugar;
 
 	@FXML public Text textoLogeadoComo;
 
-	@FXML public Rectangle rectanguloMiPerfil;
+	//@FXML public Rectangle rectanguloMiPerfil;
 
-	@FXML public Rectangle rectanguloJugar;
+	//@FXML public Rectangle rectanguloJugar;
 
-	@FXML public Text textoAmigos;
+	//@FXML public Text textoAmigos;
 
 	@FXML public Circle circuloPanel;
 
 	@FXML public Text textoNombreDeUsuario;
 
-	@FXML public Text textoEstadisticas;
+	//@FXML public Text textoEstadisticas;
 
 	@FXML public ImageView imagenAvatar;
 
-	@FXML public Rectangle rectanguloEstadisticas;
+	//@FXML public Rectangle rectanguloEstadisticas;
 
 
 
@@ -119,6 +123,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	@FXML public Text selecMJ;
 	@FXML public Text selecTP;
 
+	/*
 	//Seleccionables
 	@FXML public Rectangle vsAleatorio;
 	@FXML public Rectangle vsAmigo;
@@ -130,7 +135,8 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	@FXML public Rectangle rEntret;
 	@FXML public Rectangle rDep;
 	@FXML public Rectangle rJug;
-
+	 
+	 
 	//Textos de los seleccionables
 	@FXML public Text tVSAleatorio;
 	@FXML public Text tVSAmigo;
@@ -142,12 +148,31 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	@FXML public Text tEntret;
 	@FXML public Text tDep;
 	@FXML public Text textoRJug;
+	
 
 	//Rectangulos de estilo
 	@FXML public Rectangle tdpSeleccionado;
 	@FXML public Rectangle tdpNSeleccionado;
 	@FXML public Rectangle mdjSeleccionado;
 	@FXML public Rectangle mdjNSeleccionado;
+	*/
+	
+	//Botones
+	@FXML public Button btnJugar;
+	@FXML public Button btnCerrarSesion;
+	@FXML public Button btnEstadisticas;
+	@FXML public Button btnPerfil;
+	@FXML public Button btnAmigos;
+	@FXML public Button btnJuego;
+	@FXML public Button btnAmigo;
+	@FXML public Button btnAleatorio;
+	@FXML public Button btnGeo;
+	@FXML public Button btnArte;
+	@FXML public Button btnHistoria;
+	@FXML public Button btnCiencia;
+	@FXML public Button btnEntretenimiento;
+	@FXML public Button btnDeportes;
+	@FXML public Button btnTodos;
 
 
 	//Elementos de la gui de juego no inicializados [Salvo algunos para copiar el StyleSheet ya que en javafx no se pueden clonar los nodos].
@@ -725,10 +750,11 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 
 
 
-
+		//TODO: Cambiar el método
 		/**Evento de ratón. Cuando se ha producido una elección.
 		 * @param event
 		 */
+		/*
 		@FXML
 		void eleccionHecha(MouseEvent event){
 			for (ObjetoSeleccionPregunta objetoSeleccionPregunta : aLEleccion) {
@@ -773,7 +799,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			}
 
 		}
-
+		*/
 		//Servidor - Así se han seteado los textos del tiempo y la puntuación.
 		//Se deben modificar con el paso del tiempo.
 		/*
@@ -800,12 +826,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 				deVentana.transicionVentana("Juego", event);
 			}
 			else{	
-
-
-
-
-
-
+			
 				if(tfRespuesta.getText().length()==0){
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Respuesta en blanco");
@@ -1093,18 +1114,53 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			}
 		}
 
+		/*
 		@FXML
 		void entradoCSS(MouseEvent event){
-			BotonJuego.seleccionar_notDeseleccionar(true,aLBotonesJuego,event);
+			BotonJuego.seleccionar_notDeseleccionar(true,aLBotones,event);
+			
 		}
+		*/
+		
+		@FXML 
+		void selected(MouseEvent event){
+			for(Button boton: aLBotones){
+				if(boton.isPressed()){
+					boton.setOnAction((ActionEvent e) ->{
+						boton.getStyleClass().add("addBobOk"); //Añadir por ejemplo AddBoOk y en el css poner .addBoOk 
+					});
+					}
+				else{
+					System.out.println("Boton no seleccionado");
+				}
+			}
+			
+		}
+		
+		@FXML 
+		void notSelected(MouseEvent event){
+			for(Button boton: aLBotones){
+				if(!boton.isPressed()){
+					boton.setOnAction((ActionEvent e) ->{
+						boton.getStyleClass().add("addBobOk"); //Añadir por ejemplo AddBoOk y en el css poner .addBoOk 
+					});
+					}
+				else{
+					System.out.println("Boton si está seleccionado");
+				}
+			}
+			
+		}
+		
+		/*
 		@FXML
 		void salidoCSS(MouseEvent event){
-			BotonJuego.seleccionar_notDeseleccionar(false,aLBotonesJuego,event);
+			BotonJuego.seleccionar_notDeseleccionar(false,aLBotones,event);
 		}
+		*/
 
 		public void eliminarOpcionesPartida(boolean eliminar_notAnyadir){
-			panel.getChildren().remove(textoRJug);
-			panel.getChildren().remove(rJug);
+			panel.getChildren().remove(btnJugar);
 			if(eliminar_notAnyadir){
 				for (ObjetoSeleccionPregunta osp : aLEleccion) {
 					if(osp.isSeccion_notSeleccionable()){
@@ -1442,6 +1498,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
 			menuDesplegable.add(imagenAvatar);
 
+			/* ya no hay rectangulos y textos. No se necesita objeto seleccion pregunta
 			//Rellenar elementos.
 			this.aLEleccion = new ArrayList<ObjetoSeleccionPregunta>();
 			//Elementos título
@@ -1449,7 +1506,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			aLEleccion.add(new ObjetoSeleccionPregunta(selecTP));
 
 			//Elementos elegibles (No hay interfaz, no confundirse).
-			aLEleccion.add(new ObjetoSeleccionPregunta(tVSAleatorio, vsAleatorio, true));
+			aLEleccion.add(new ObjetoSeleccionPregunta(btnAleatorio, btnAmigo, true));
 			aLEleccion.add(new ObjetoSeleccionPregunta(tVSAmigo, vsAmigo, true));
 			aLEleccion.add(new ObjetoSeleccionPregunta(tTodos, rTodos, false));
 			aLEleccion.add(new ObjetoSeleccionPregunta(tGeo, rGeo, false));
@@ -1458,7 +1515,8 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			aLEleccion.add(new ObjetoSeleccionPregunta(tCien, rCien, false));
 			aLEleccion.add(new ObjetoSeleccionPregunta(tEntret, rEntret, false));
 			aLEleccion.add(new ObjetoSeleccionPregunta(tDep, rDep, false));
-
+			*/
+			
 			panel.getStylesheets().add("/css/application.css");
 		}
 	}

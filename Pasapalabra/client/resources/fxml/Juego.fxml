@@ -67,7 +67,7 @@
          <image>
             <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
-      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="128.0" layoutX="18.0" layoutY="629.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imagenAvatar" fitHeight="73.0" fitWidth="128.0" layoutX="34.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
       <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logead@ como:" />
       <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
       <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="170.0" layoutY="759.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
@@ -250,12 +250,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <Rectangle fx:id="tdpNSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="635.0" layoutY="-58.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="tdpNSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="638.0" layoutY="-58.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Rectangle fx:id="mdjNSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="461.0" layoutY="-58.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="mdjNSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="436.0" layoutY="-68.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

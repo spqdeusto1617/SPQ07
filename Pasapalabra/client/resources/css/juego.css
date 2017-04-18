@@ -31,5 +31,12 @@
 .text-field{
 	-fx-accent: linear-gradient( from 0.0% 0.0% to 100.0% 100.0%, rgb(37,255,56) 0.0, rgb(39,232,247) 100.0) ;
 }
+/*Cuando el botón está seleccionado */
+.addBobOk{
+	-fx-background-color: #90EE90; 
+}
 
-
+/*Cuando el botón no está seleccionado */
+.addBobOk{
+	-fx-background-color: #FFFF00; 
+}
