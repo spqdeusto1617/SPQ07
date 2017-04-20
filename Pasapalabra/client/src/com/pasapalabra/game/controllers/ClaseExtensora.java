@@ -1,6 +1,7 @@
 package com.pasapalabra.game.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -16,11 +17,11 @@ public abstract class ClaseExtensora extends Control{
 	//Declaración de todos los elementos del menú
 	@FXML public Text textoESPanel;
 
-	@FXML public Text textoMiPerfil;
+	@FXML public Button btnPerfil;
 
 	@FXML public ImageView logopsp;
 
-	@FXML public Text textoCerrarSesion;
+	@FXML public Button btnCerrarSesion;
 
 	@FXML public Text textoPlus;
 
@@ -28,29 +29,19 @@ public abstract class ClaseExtensora extends Control{
 
 	@FXML public Circle circuloPlus;
 
-	@FXML public Rectangle rectanguloCerrarSesion;
+	@FXML public Button btnAmigos;
 
-	@FXML public Rectangle rectanguloAmigos;
-
-	@FXML public Text textoJugar;
+	@FXML public Button btnJuego;
 
 	@FXML public Text textoLogeadoComo;
-
-	@FXML public Rectangle rectanguloMiPerfil;
-
-	@FXML public Rectangle rectanguloJugar;
-
-	@FXML public Text textoAmigos;
 
 	@FXML public Circle circuloPanel;
 
 	@FXML public Text textoNombreDeUsuario;
 
-	@FXML public Text textoEstadisticas;
+	@FXML public Button btnEstadisticas;
 
 	@FXML public ImageView imagenAvatar;
-
-	@FXML public Rectangle rectanguloEstadisticas;
 
 	@FXML public Pane panel;
 }

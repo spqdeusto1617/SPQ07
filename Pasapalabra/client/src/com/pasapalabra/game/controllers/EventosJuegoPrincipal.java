@@ -34,7 +34,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.pasapalabra.game.objetos.ObjetoSeleccionPregunta;
-import com.pasapalabra.game.utilidades.RCarga;
+import com.pasapalabra.game.utilidades.ThreadCarga;
 import com.pasapalabra.game.utilidades.PanelThread;
 import com.pasapalabra.game.utilidades.ClientConnexion;
 

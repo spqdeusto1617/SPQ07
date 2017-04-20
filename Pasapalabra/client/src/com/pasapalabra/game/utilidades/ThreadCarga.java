@@ -2,11 +2,11 @@ package com.pasapalabra.game.utilidades;
 
 import com.pasapalabra.game.controllers.EventosJuego;
 
-public class RCarga implements Runnable {
+public class ThreadCarga implements Runnable {
 
 	EventosJuego eventosJuego;
 
-	public RCarga(EventosJuego eventosJuego) {
+	public ThreadCarga(EventosJuego eventosJuego) {
 		this.eventosJuego = eventosJuego;
 	}
 

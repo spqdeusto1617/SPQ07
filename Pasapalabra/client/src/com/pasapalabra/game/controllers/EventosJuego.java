@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import com.pasapalabra.game.model.DTO.QuestionType;
 import com.pasapalabra.game.objetos.BotonJuego;
 import com.pasapalabra.game.objetos.ObjetoSeleccionPregunta;
-import com.pasapalabra.game.utilidades.RCarga;
+import com.pasapalabra.game.utilidades.ThreadCarga;
 import com.pasapalabra.game.utilidades.PanelThread;
 import com.pasapalabra.game.utilidades.WindowUtilities;
 
@@ -199,7 +199,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 	*/
 
 
-	public Thread hiloDeCarga = new Thread(new RCarga(this));
+	public Thread hiloDeCarga = new Thread(new ThreadCarga(this));
 	//_________________________________________
 	//*FIN DE DECLARACIÓN DE ATRIBUTOS
 
@@ -1474,22 +1474,16 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			this.menuDesplegable = new ArrayList<Node>();
 			//Rectángulos y círculos
 			menuDesplegable.add(rectanguloPanel);
-			menuDesplegable.add(rectanguloAmigos);
-			menuDesplegable.add(rectanguloCerrarSesion);
-			menuDesplegable.add(rectanguloEstadisticas);
-			menuDesplegable.add(rectanguloJugar);
-			menuDesplegable.add(rectanguloMiPerfil);
+			menuDesplegable.add(btnAmigos);
+			menuDesplegable.add(btnCerrarSesion);
+			menuDesplegable.add(btnEstadisticas);
+			menuDesplegable.add(btnJuego);
+			menuDesplegable.add(btnPerfil);
 			menuDesplegable.add(circuloPanel);
 			menuDesplegable.add(circuloPlus);
 			menuDesplegable.add(logopsp);
-
-			//Textos
-			menuDesplegable.add(textoAmigos);
-			menuDesplegable.add(textoCerrarSesion);
+			menuDesplegable.add(textoLogeadoComo);
 			menuDesplegable.add(textoESPanel);
-			menuDesplegable.add(textoEstadisticas);
-			menuDesplegable.add(textoJugar);
-			menuDesplegable.add(textoMiPerfil);
 			menuDesplegable.add(textoLogeadoComo);
 			menuDesplegable.add(textoPlus);
 

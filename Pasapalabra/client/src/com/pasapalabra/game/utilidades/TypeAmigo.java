@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Tipo_Amigo implements Serializable{
+public class TypeAmigo implements Serializable{
 	/**
 	 * 
 	 */
@@ -15,7 +15,7 @@ public class Tipo_Amigo implements Serializable{
 	public SimpleBooleanProperty Solicitud_enviada;
 	public SimpleBooleanProperty Solicitud_pendiente;
 	public SimpleBooleanProperty Estado_amigo;
-	public Tipo_Amigo(String nombre,boolean solicitud_aceptada,boolean solicitud_enviada,boolean Solicitud_pendiente,boolean estado){
+	public TypeAmigo(String nombre,boolean solicitud_aceptada,boolean solicitud_enviada,boolean Solicitud_pendiente,boolean estado){
 		this.Nombre_usuario=new SimpleStringProperty(nombre);
 		this.Solicitud_aceptada=new SimpleBooleanProperty(solicitud_aceptada);
 		this.Solicitud_enviada=new SimpleBooleanProperty(solicitud_aceptada);;
@@ -25,8 +25,8 @@ public class Tipo_Amigo implements Serializable{
 
 	@Override
 	public boolean equals(Object arg0) {
-		if(arg0 instanceof Tipo_Amigo){
-			return this.Nombre_usuario.equals(((Tipo_Amigo) arg0).Nombre_usuario);
+		if(arg0 instanceof TypeAmigo){
+			return this.Nombre_usuario.equals(((TypeAmigo) arg0).Nombre_usuario);
 		}
 		else{
 			return false;

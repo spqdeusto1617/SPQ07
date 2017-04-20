@@ -164,30 +164,30 @@ public class WindowUtilities {
 
 			if(((Rectangle) event.getSource()).getId().equals("rectanguloAmigos") && !(eventosMenu instanceof EventosAmigos)){
 				//				eventosMenu.textoAmigos.setOpacity(1);
-				eventosMenu.rectanguloAmigos.setOpacity(op);
+				eventosMenu.btnAmigos.setOpacity(op);
 			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloMiPerfil") && !(eventosMenu instanceof EventosPerfil)){
 				//				eventosMenu.textoMiPerfil.setOpacity(1);
-				eventosMenu.rectanguloMiPerfil.setOpacity(op);
+				eventosMenu.btnPerfil.setOpacity(op);
 			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloEstadisticas") && !(eventosMenu instanceof EventosEstadisticas)){
 				//				eventosMenu.textoEstadisticas.setOpacity(1);
-				eventosMenu.rectanguloEstadisticas.setOpacity(op);
+				eventosMenu.btnEstadisticas.setOpacity(op);
 			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloJugar") && !(eventosMenu instanceof EventosJuego)){
 				//				eventosMenu.textoJugar.setOpacity(1);
-				eventosMenu.rectanguloJugar.setOpacity(op);
+				eventosMenu.btnJuego.setOpacity(op);
 			}
 		}else{
 			if(((Text) event.getSource()).getText().equals("Amigos") && !(eventosMenu instanceof EventosAmigos)){
 				//				eventosMenu.textoAmigos.setOpacity(1);
-				eventosMenu.rectanguloAmigos.setOpacity(op);
+				eventosMenu.btnAmigos.setOpacity(op);
 			}else if(((Text) event.getSource()).getText().equals("Mi perfil") && !(eventosMenu instanceof EventosPerfil)){
 				//				eventosMenu.textoMiPerfil.setOpacity(1);
-				eventosMenu.rectanguloMiPerfil.setOpacity(op);
+				eventosMenu.btnPerfil.setOpacity(op);
 			}else if(((Text) event.getSource()).getText().equals("Estadísticas") && !(eventosMenu instanceof EventosEstadisticas)){
 				//				eventosMenu.textoEstadisticas.setOpacity(1);
-				eventosMenu.rectanguloEstadisticas.setOpacity(op);
+				eventosMenu.btnEstadisticas.setOpacity(op);
 			}else if(((Text) event.getSource()).getText().equals("Jugar") && !(eventosMenu instanceof EventosJuego)){
 				//				eventosMenu.textoJugar.setOpacity(1);
-				eventosMenu.rectanguloJugar.setOpacity(op);
+				eventosMenu.btnJuego.setOpacity(op);
 			}
 		}
 	}
