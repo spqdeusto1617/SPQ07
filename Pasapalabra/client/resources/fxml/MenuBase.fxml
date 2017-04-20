@@ -72,11 +72,11 @@
       <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="170.0" layoutX="18.0" layoutY="909.0" pickOnBounds="true" preserveRatio="true" />
       <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logeado como:" />
       <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
-      <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="15.0" layoutY="565.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
+      <Rectangle fx:id="rectanguloCerrarSesion" arcHeight="5.0" arcWidth="5.0" fill="#ff0000a3" height="28.0" layoutX="231.0" layoutY="703.0" onMouseClicked="#btnCerrarSesion" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Text fx:id="textoCerrarSesion" fill="WHITE" layoutX="35.0" layoutY="585.0" onMouseClicked="#btnCerrarSesion" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Cerrar sesión" textAlignment="CENTER" wrappingWidth="136.24898529052734">
+      <Text fx:id="textoCerrarSesion" fill="WHITE" layoutX="251.0" layoutY="723.0" onMouseClicked="#btnCerrarSesion" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Cerrar sesión" textAlignment="CENTER" wrappingWidth="136.24898529052734">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Text>
@@ -125,5 +125,6 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <Button fx:id="btnCerrarSesion" layoutX="38.0" layoutY="563.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
    </children>
 </Pane>
