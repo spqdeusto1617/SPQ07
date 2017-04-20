@@ -4,7 +4,7 @@ package com.pasapalabra.game.utilidades;
  * @author Iván
  *
  */
-public enum Acciones_servidor {
+public enum ServerActions {
 	Comprobar,Log,Crear_Usuario,Jugar,Estadisticas,Eliminar,Imagen,Pass,Mail,Delog,Amigos,Add_Amigo,Acept_Amigo,Delete_Amigo,Obtener_Pregunta,Responder_Pregunta
 
 }

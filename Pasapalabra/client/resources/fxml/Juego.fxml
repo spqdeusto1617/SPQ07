@@ -27,7 +27,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
-      <Rectangle fx:id="rectanguloAmigos" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="10.0" layoutY="457.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+      <Rectangle fx:id="rectanguloAmigos" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="10.0" layoutY="695.0" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Rectangle>
