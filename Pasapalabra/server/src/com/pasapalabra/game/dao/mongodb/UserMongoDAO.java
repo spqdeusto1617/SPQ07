@@ -1,58 +1,70 @@
 package com.pasapalabra.game.dao.mongodb;
 
+import java.util.Date;
 import java.util.List;
 
-import org.mongodb.morphia.query.Query;
-import org.mongodb.morphia.query.UpdateOperations;
-
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
 import com.pasapalabra.game.dao.UserDAO;
 import com.pasapalabra.game.model.User;
-import com.pasapalabra.game.server.Server;
+import com.pasapalabra.game.service.auth.TokenGenerator;
 
 public class UserMongoDAO extends UserDAO {
 
 	private MongoConnection connection;
-	
+
 	public UserMongoDAO(MongoConnection mongoConnection) {
 		this.connection = mongoConnection;
 	}
-	
-	
+
+
 	@Override
 	public User getUserByLogin(String username, String password) {
 		@SuppressWarnings("deprecation")
 		List<User> lUser = this.connection.datastore.createQuery(User.class)
-        .field("userName").equal(username)
-        .field("pass").equal(password)
-        .limit(1).asList();
+		.field("userName").equal(username)
+		.field("pass").equal(password)
+		.limit(1).asList();
 		if(lUser.isEmpty())
 			return null;
 		else
 			return lUser.get(0);
 	}
 
-	
+
 	@Override
 	public boolean checkIfExists(String username) {
 		return !this.connection.datastore.createQuery(User.class)
-		        .field("userName").equal(username).asList().isEmpty();
+				.field("userName").equal(username).asList().isEmpty();
 	}
 
-	
+
 	@Override
-	public void updateScore(String username, boolean won) {
-		Query<User> userToUpdate = this.connection.datastore.createQuery(User.class)
-                .field("userName").equal(username);
-		
-		
-		UpdateOperations<User> updateOperations;
+	public void updateScore(User user, boolean won) {
 		if(won)
-			updateOperations = this.connection.datastore.createUpdateOperations(User.class)
-                .inc("GamesWon", 1);
+			user.setGamesWon(user.getGamesWon()+1);
 		else
-			updateOperations = this.connection.datastore.createUpdateOperations(User.class)
-                .inc("GamesLost", 1);
-		Server.mongoConnection.datastore.update(userToUpdate, updateOperations);
+			user.setGamesLost(user.getGamesLost()+1);
+		this.connection.datastore.save(user);
+	}
+
+	public static void main(String[] args) {
+		User userToTest = new User(TokenGenerator.nextUniqueID().getToken(), "aaaa@aaa.com", "1234", null, new Date(), 0, 0, 0);
+		MongoClientOptions.Builder options = MongoClientOptions.builder();
+		options.socketKeepAlive(true);
+		MongoClient mongoClient = new MongoClient("127.0.0.1:27017", options.build());
+		MongoConnection mongoConnection = new MongoConnection("com.pasapalabra.game.model", mongoClient, "pasapalabra");
+
+
+		// Instanciates DAO
+		UserDAO userDAO = new UserMongoDAO(mongoConnection);
+
+
+		// Inserts needed data.
+		mongoConnection.datastore.save(userToTest);
+		System.out.println(userToTest);
+		userDAO.updateScore(userToTest, true);
+		
 	}
 
 }

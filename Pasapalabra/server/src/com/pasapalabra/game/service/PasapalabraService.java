@@ -155,7 +155,7 @@ public class PasapalabraService implements IPasapalabraService{
 		if(SessionManager.isValidSession(session)){
 			UserScore finalScore = currentResult.get(session.getToken());
 			UserDAO uDAO = new UserMongoDAO(Server.mongoConnection);
-			uDAO.updateScore(currentUsers.get(session).getUserName(), true);
+			uDAO.updateScore(currentUsers.get(session), true);
 			currentQuestions.remove(session.getToken());
 			currentResult.remove(session.getToken());//TODO: change this for 2 players(next sprint??)
 			return ScoreAssembler.getInstance().assembleToDTO(finalScore);

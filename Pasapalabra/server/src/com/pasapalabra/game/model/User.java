@@ -68,6 +68,15 @@ public class User{
 	}
 
 
+	public ObjectId getId() {
+		return id;
+	}
+	
+	
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+	
 
 	public String getUserName() {
 		return userName;
@@ -165,7 +174,7 @@ public class User{
 
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", mail=" + mail + ", pass=" + pass + ", "
+		return "User [id="+ id +", userName=" + userName + ", mail=" + mail + ", pass=" + pass + ", "
 				+ "DOB=" + DOB + ", GamesWon=" + gamesWon + ", GamesLost=" + 
 				gamesLost + ", Games=" + gamesPerticipated + "]";
 	}

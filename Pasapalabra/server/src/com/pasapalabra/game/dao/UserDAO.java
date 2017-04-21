@@ -27,7 +27,7 @@ public abstract class UserDAO {
 	 * @param username User who's score must be updated.
 	 * @param won true if won, false if not.
 	 */
-	public abstract void updateScore(String username, boolean won);
+	public abstract void updateScore(User user, boolean won);
 	
 	
 }
