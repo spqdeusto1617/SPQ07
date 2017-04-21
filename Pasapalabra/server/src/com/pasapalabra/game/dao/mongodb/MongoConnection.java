@@ -11,7 +11,7 @@ import com.mongodb.MongoClient;
  */
 public class MongoConnection {
 
-	public final Morphia morphia = new Morphia();
+	private static final Morphia morphia = new Morphia();
 	public Datastore datastore;
 	
 	
@@ -21,9 +21,8 @@ public class MongoConnection {
 	 * @param dbName Name of the database.
 	 */
 	public MongoConnection(String packageMap, MongoClient mongoClient, String dbName) {
-		this.morphia.mapPackage(packageMap);
+		morphia.mapPackage(packageMap);
 		this.datastore = morphia.createDatastore(mongoClient, dbName);
-		
 	}
 	
 	
@@ -32,8 +31,17 @@ public class MongoConnection {
 	 */
 	public void mapNewPackage(String packageMap) {
 		if(this.datastore == null) return;
-		this.morphia.mapPackage(packageMap);
+		morphia.mapPackage(packageMap);
 		this.datastore.ensureIndexes();
+	}
+	
+	
+	/** Closes connection between server and database.
+	 *  Morphia and Datastore receive null value.
+	 */
+	public void close() {
+		this.datastore.getMongo().close();
+		this.datastore = null;
 	}
 	
 }

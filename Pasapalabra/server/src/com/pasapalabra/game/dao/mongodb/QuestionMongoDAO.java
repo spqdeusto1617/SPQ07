@@ -5,18 +5,24 @@ import java.util.Random;
 
 import com.pasapalabra.game.dao.QuestionDAO;
 import com.pasapalabra.game.model.Question;
-import com.pasapalabra.game.server.Server;
 
 public class QuestionMongoDAO extends QuestionDAO {
 
+	private MongoConnection connection;
+
+	public QuestionMongoDAO(MongoConnection mongoConnection) {
+		this.connection = mongoConnection;
+	}
+
+
 	@Override
 	public Question getRandomQuestionByLeter(char letter) {
-		List<Question> lQuestion = Server.mongoConnection.datastore.createQuery(Question.class)
+		List<Question> lQuestion = this.connection.datastore.createQuery(Question.class)
 				.field("letter").equal(letter).asList();
-		
+
 		int size = lQuestion.size();
 		Random rand = new Random();
-		
+
 		return lQuestion.get(rand.nextInt(size));
 	}
 
