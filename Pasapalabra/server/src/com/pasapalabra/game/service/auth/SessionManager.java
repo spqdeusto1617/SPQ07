@@ -24,7 +24,7 @@ public class SessionManager {
 	}
 	
 	public static Token createSession(String username){
-		Token token = TokenGenerator.nextSessionId();
+		Token token = TokenGenerator.nextUniqueID();
 		hmSessions.put(token.getToken(), username);
 		return token;
 	}

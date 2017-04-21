@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class TokenGenerator {
 
-	public static Token nextSessionId() {
+	public static Token nextUniqueID() {
 		return new Token(UUID.randomUUID().toString());
 	}
 	  
