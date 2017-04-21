@@ -18,6 +18,7 @@ import com.pasapalabra.game.model.DTO.UserScoreDTO;
 import com.pasapalabra.game.model.assembler.QuestionAssembler;
 import com.pasapalabra.game.model.assembler.ScoreAssembler;
 import com.pasapalabra.game.model.assembler.UserAssembler;
+import com.pasapalabra.game.server.Server;
 import com.pasapalabra.game.service.auth.SessionManager;
 import com.pasapalabra.game.service.auth.Token;
 
@@ -29,25 +30,25 @@ public class PasapalabraService implements IPasapalabraService{
 	private static ConcurrentHashMap<String, UserScore> currentResult = new ConcurrentHashMap<String, UserScore>();
 
 	@Override
-	public String registry(UserDTO userData, String pass) throws RemoteException{
-		UserDAO uDao = new UserMongoDAO();
+	public boolean registry(UserDTO userData, String pass) throws RemoteException{
+		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
 		if(!uDao.checkIfExists(userData.getUserName())){//FIXME: validate if user exist
 
 			try{
 				//FIXME: introduce the user into the database
 				com.pasapalabra.game.server.Server.mongoConnection.datastore.save(new User(userData.getUserName(), userData.getMail(), pass, userData.getProfileImage(), userData.getDOB(), 0, 0, 0));
-				return "Ok";
+				return true;
 			}catch (Exception e) {
 				e.printStackTrace();
-				return "Error";
+				return false;
 			}
 		}
-		else return "Exist";
+		else return false;
 	}
 
 	public Token login(String userName, String pass) throws RemoteException
 	{
-		UserDAO uDao = new UserMongoDAO();
+		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
 		if(uDao.checkIfExists(userName)){
 			User user = uDao.getUserByLogin(userName, pass);
 			//UserDTO userDTO = UserAssembler.getInstance().assembleToDTO(user);
@@ -65,7 +66,7 @@ public class PasapalabraService implements IPasapalabraService{
 	}
 
 	public QuestionDTO play(Token session, String type) throws RemoteException{
-		QuestionDAO qDAO = new QuestionMongoDAO();
+		QuestionDAO qDAO = new QuestionMongoDAO(Server.mongoConnection);
 		if(SessionManager.isValidSession(session)){
 			ArrayList<Question> questions = new ArrayList<>();//FIXME: get questions of that type in arraylist of question( 'ñ' letter must be inserted in the last position of the arraylist) 
 			
@@ -153,7 +154,7 @@ public class PasapalabraService implements IPasapalabraService{
 	public UserScoreDTO getResults(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
 			UserScore finalScore = currentResult.get(session.getToken());
-			UserDAO uDAO = new UserMongoDAO();
+			UserDAO uDAO = new UserMongoDAO(Server.mongoConnection);
 			uDAO.updateScore(currentUsers.get(session).getUserName(), true);
 			currentQuestions.remove(session.getToken());
 			currentResult.remove(session.getToken());//TODO: change this for 2 players(next sprint??)
