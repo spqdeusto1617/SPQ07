@@ -8,12 +8,14 @@ public class UserScore {
 
 	char currentLetter;
 
+	boolean victory;
 
 	public UserScore() {
 		super();
 		this.rightAnswered = 0;
 		this.wrongAnswered = 0;
 		this.currentLetter = 'a';
+		victory = false;
 	}
 
 	public void setRightAnswered(int rightAnswered) {
@@ -68,4 +70,19 @@ public class UserScore {
 		this.wrongAnswered++;
 	}
 
+	public boolean isVictory() {
+		return victory;
+	}
+
+	public void won(){
+		this.victory = true;
+	}
+
+	public void lost(){
+		this.victory = false;
+	}
+	
+	public int getTotalAnswered(){
+		return this.rightAnswered + this.wrongAnswered;
+	}
 }

@@ -16,8 +16,8 @@ public class UserAssembler{
 		return new UserDTO(nonDTO.getUserName(), 
 				nonDTO.getMail(), 
 				nonDTO.getProfileImage(), 
-				nonDTO.getDOB(), 
-				nonDTO.getGames(), nonDTO.getGamesWon(), nonDTO.getGamesLost());
+				nonDTO.getDOB()
+				, nonDTO.getGamesWon(), nonDTO.getGamesLost());
 	}
 
 	/*@Override

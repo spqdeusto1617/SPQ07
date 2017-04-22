@@ -73,6 +73,10 @@ public class UserDTO implements Serializable{
 		this.gamesWon = gamesWon;
 	}
 
+	public void updateGames() {
+		this.games = this.gamesWon + this.gamesLost;
+	}
+
 	public int getGamesLost() {
 		return gamesLost;
 	}
@@ -91,17 +95,26 @@ public class UserDTO implements Serializable{
 				+ ", GamesWon=" + gamesWon + ", GamesLost=" + gamesLost + "]";
 	}
 
-	public UserDTO(String userName, String mail, BufferedImage profileImage, Date dOB, int games,int gamesWon, int gamesLost) {
+	public UserDTO(String userName, String mail, BufferedImage profileImage, Date dOB,int gamesWon, int gamesLost) {
 		super();
 		this.userName = userName;
 		this.mail = mail;
 		this.profileImage = profileImage;
 		DOB = dOB;
-		this.games = games;
+		this.games = gamesWon + gamesLost;
 		this.gamesWon = gamesWon;
 		this.gamesLost = gamesLost;
 	}
 
-	
+	public UserDTO(String userName) {
+		super();
+		this.userName = userName;
+		this.mail = "";
+		this.profileImage = null;
+		DOB = new Date();
+		this.gamesWon = 0;
+		this.gamesLost = 0;
+		this.games = this.gamesWon + this.gamesLost;	
+	}
 
 }

@@ -34,8 +34,6 @@ public class User{
 	private int gamesWon;
 
 	private int gamesLost;
-
-	private  int gamesPerticipated;
 	
 
 	private User(){super();}
@@ -50,11 +48,11 @@ public class User{
 		DOB = dOB;
 		this.gamesWon = gamesWon;
 		this.gamesLost = gamesLost;
-		this.gamesPerticipated = gamesPerticipated;
+		
 	}
 	
 	public User(ObjectId oid, String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
-			int gamesLost, int gamesPerticipated) {
+			int gamesLost) {
 		super();
 		this.id = oid;
 		this.userName = userName;
@@ -64,19 +62,10 @@ public class User{
 		DOB = dOB;
 		this.gamesWon = gamesWon;
 		this.gamesLost = gamesLost;
-		this.gamesPerticipated = gamesPerticipated;
+		
 	}
 
 
-	public ObjectId getId() {
-		return id;
-	}
-	
-	
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
-	
 
 	public String getUserName() {
 		return userName;
@@ -154,6 +143,9 @@ public class User{
 		return gamesLost;
 	}
 
+	public int getGamesParticipated() {
+		return this.gamesLost + this.gamesWon;
+	}
 
 
 	public void setGamesLost(int gamesLost) {
@@ -161,22 +153,11 @@ public class User{
 	}
 
 
-
-	public int getGames() {
-		return gamesPerticipated;
-	}
-
-
-
-	public void setGames(int games) {
-		gamesPerticipated = games;
-	}
-
 	@Override
 	public String toString() {
-		return "User [id="+ id +", userName=" + userName + ", mail=" + mail + ", pass=" + pass + ", "
+		return "User [userName=" + userName + ", mail=" + mail + ", pass=" + pass + ", "
 				+ "DOB=" + DOB + ", GamesWon=" + gamesWon + ", GamesLost=" + 
-				gamesLost + ", Games=" + gamesPerticipated + "]";
+				gamesLost + "]";
 	}
 
 
