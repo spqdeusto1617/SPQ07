@@ -37,7 +37,6 @@ public class ServiceBasicTest {
 			null,
 			new Date(),
 			0,
-			0,
 			0
 			);
 	private static String userPassword = TokenGenerator.nextUniqueID().getToken();

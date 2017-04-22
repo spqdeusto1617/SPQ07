@@ -14,7 +14,7 @@ public class ScoreAssembler {
 	
 	
 	public UserScoreDTO assembleToDTO(UserScore nonDTO) {
-		return new UserScoreDTO(nonDTO.getRightAnswered(), nonDTO.getWrongAnswered());
+		return new UserScoreDTO(nonDTO.getRightAnswered(), nonDTO.getWrongAnswered(),nonDTO.isVictory());
 	}
 
 	/*@Override
