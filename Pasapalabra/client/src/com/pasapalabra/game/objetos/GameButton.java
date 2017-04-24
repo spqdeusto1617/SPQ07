@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
  * @author asierguti
  *
  */
-public class BotonJuego implements Comparable<Event> {
+public class GameButton implements Comparable<Event> {
 
 	//Atributos
 	Rectangle r;
@@ -20,7 +20,7 @@ public class BotonJuego implements Comparable<Event> {
 	 * @param r Rectángulo que forma parte del botón
 	 * @param t Texto que forma parte del botón
 	 */
-	public BotonJuego(Rectangle r, Text t){
+	public GameButton(Rectangle r, Text t){
 		this.r = r;
 		this.t = t;
 	}
@@ -32,9 +32,9 @@ public class BotonJuego implements Comparable<Event> {
 	 * @param aLBJ ArrayList de Botones de Juego
 	 * @param event Evento de click hecho sobre un botón (rectángulo o texto)
 	 */
-	public static void seleccionar_notDeseleccionar(boolean b, ArrayList<BotonJuego> aLBJ, Event event){
+	public static void seleccionar_notDeseleccionar(boolean b, ArrayList<GameButton> aLBJ, Event event){
 		//Recorre ArrayList
-		for (BotonJuego botonJuego : aLBJ) {
+		for (GameButton botonJuego : aLBJ) {
 			//Si el botón de juego es igual al pulsado en el evento
 			if(botonJuego.compareTo(event) == 0){
 				//Crear una ID de CSS

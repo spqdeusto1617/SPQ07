@@ -1,37 +1,27 @@
 package com.pasapalabra.game.controllers;
 
-import java.io.IOException;
-import java.net.SocketException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.pasapalabra.game.model.DTO.QuestionType;
-import com.pasapalabra.game.objetos.BotonJuego;
-import com.pasapalabra.game.objetos.ObjetoSeleccionPregunta;
-import com.pasapalabra.game.utilidades.ThreadCarga;
+import com.pasapalabra.game.objetos.GameButton;
+import com.pasapalabra.game.objetos.QuestionSelectedObject;
 import com.pasapalabra.game.utilidades.PanelThread;
+import com.pasapalabra.game.utilidades.ThreadCarga;
 import com.pasapalabra.game.utilidades.WindowUtilities;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -41,7 +31,6 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -67,8 +56,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	public ArrayList<ImageView> panelLetrasJugador = new ArrayList<>(); //Panel con todos los labels del jugador
 	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
 	public ArrayList<Node> menuDesplegable; //Colección de todos los elementos del menu desplegable.
-	public ArrayList<ObjetoSeleccionPregunta> aLEleccion; //Elección del tipo de juego que se quiere llevar a cabo.
-	//public ArrayList<BotonJuego> aLBotonesJuego;
+	public ArrayList<QuestionSelectedObject> aLEleccion; //Elección del tipo de juego que se quiere llevar a cabo.
+	//public ArrayList<GameButton> aLBotonesJuego;
 	
 	public ArrayList<Button> aLBotones; 
 
@@ -344,7 +333,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		//Servidor
 		//aLEleccion es el arrayList de la elección (Modalidad + Tema) y todos los elementos
 		String[]Tipo=new String[2];
-		for (ObjetoSeleccionPregunta obsp : aLEleccion) {
+		for (QuestionSelectedObject obsp : aLEleccion) {
 			if (obsp.isElegido()) {
 				if(obsp.isModoDeJuego_notTipoPregunta()){
 					//ESTE ES EL MODO DE JUEGO ELEGIDO
@@ -757,7 +746,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		/*
 		@FXML
 		void eleccionHecha(MouseEvent event){
-			for (ObjetoSeleccionPregunta objetoSeleccionPregunta : aLEleccion) {
+			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
 				if(event.getSource().equals(objetoSeleccionPregunta.getRectangulo()) 
 						|| event.getSource().equals(objetoSeleccionPregunta.getTexto()) 
 						|| event.getSource().equals(objetoSeleccionPregunta.getTituloSeccion())){
@@ -765,7 +754,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						//No se hace nada porque ya está elegido.
 					}else{
 						if(objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
-							for (ObjetoSeleccionPregunta objetoSeleccionPregunta1 : aLEleccion) {
+							for (QuestionSelectedObject objetoSeleccionPregunta1 : aLEleccion) {
 								if(objetoSeleccionPregunta1.isModoDeJuego_notTipoPregunta()){
 									if(objetoSeleccionPregunta == objetoSeleccionPregunta1){
 										objetoSeleccionPregunta1.setElegido(true);
@@ -779,7 +768,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								}
 							}
 						}else if (!objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
-							for (ObjetoSeleccionPregunta objetoSeleccionPregunta2 : aLEleccion) {
+							for (QuestionSelectedObject objetoSeleccionPregunta2 : aLEleccion) {
 								if(!objetoSeleccionPregunta2.isModoDeJuego_notTipoPregunta()){
 									if(objetoSeleccionPregunta == objetoSeleccionPregunta2){
 										objetoSeleccionPregunta2.setElegido(true);
@@ -1117,7 +1106,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		/*
 		@FXML
 		void entradoCSS(MouseEvent event){
-			BotonJuego.seleccionar_notDeseleccionar(true,aLBotones,event);
+			GameButton.seleccionar_notDeseleccionar(true,aLBotones,event);
 			
 		}
 		*/
@@ -1155,14 +1144,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		/*
 		@FXML
 		void salidoCSS(MouseEvent event){
-			BotonJuego.seleccionar_notDeseleccionar(false,aLBotones,event);
+			GameButton.seleccionar_notDeseleccionar(false,aLBotones,event);
 		}
 		*/
 
 		public void eliminarOpcionesPartida(boolean eliminar_notAnyadir){
 			panel.getChildren().remove(btnJugar);
 			if(eliminar_notAnyadir){
-				for (ObjetoSeleccionPregunta osp : aLEleccion) {
+				for (QuestionSelectedObject osp : aLEleccion) {
 					if(osp.isSeccion_notSeleccionable()){
 						panel.getChildren().remove(osp.getTituloSeccion());
 					}else{
@@ -1171,7 +1160,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					}
 				}
 			}else{
-				for (ObjetoSeleccionPregunta osp : aLEleccion) {
+				for (QuestionSelectedObject osp : aLEleccion) {
 					if(osp.isSeccion_notSeleccionable()){
 						panel.getChildren().add(osp.getTituloSeccion());
 					}else{
@@ -1311,9 +1300,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			textoUsernameUser.setLayoutY(300);
 
 			aLBotonesJuego = new ArrayList<>();
-			aLBotonesJuego.add(new BotonJuego(rRendirse, textoRendirse));
-			aLBotonesJuego.add(new BotonJuego(rPasar, textoPasar));
-			aLBotonesJuego.add(new BotonJuego(rContestar, textoContestar));
+			aLBotonesJuego.add(new GameButton(rRendirse, textoRendirse));
+			aLBotonesJuego.add(new GameButton(rPasar, textoPasar));
+			aLBotonesJuego.add(new GameButton(rContestar, textoContestar));
 			//Servidor
 			//Imagen del usuario y del rival
 			//Usuario
@@ -1405,7 +1394,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 		*/boolean preguntasBienSeleccionadas(){
 			int count = 0;
-			for (ObjetoSeleccionPregunta objetoSeleccionPregunta : aLEleccion) {
+			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
 				if(objetoSeleccionPregunta.isElegido()) count++;
 				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
 					if(objetoSeleccionPregunta.getTexto().getText().equals("VS Amigo")){
@@ -1494,21 +1483,21 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 			/* ya no hay rectangulos y textos. No se necesita objeto seleccion pregunta
 			//Rellenar elementos.
-			this.aLEleccion = new ArrayList<ObjetoSeleccionPregunta>();
+			this.aLEleccion = new ArrayList<QuestionSelectedObject>();
 			//Elementos título
-			aLEleccion.add(new ObjetoSeleccionPregunta(selecMJ));
-			aLEleccion.add(new ObjetoSeleccionPregunta(selecTP));
+			aLEleccion.add(new QuestionSelectedObject(selecMJ));
+			aLEleccion.add(new QuestionSelectedObject(selecTP));
 
 			//Elementos elegibles (No hay interfaz, no confundirse).
-			aLEleccion.add(new ObjetoSeleccionPregunta(btnAleatorio, btnAmigo, true));
-			aLEleccion.add(new ObjetoSeleccionPregunta(tVSAmigo, vsAmigo, true));
-			aLEleccion.add(new ObjetoSeleccionPregunta(tTodos, rTodos, false));
-			aLEleccion.add(new ObjetoSeleccionPregunta(tGeo, rGeo, false));
-			aLEleccion.add(new ObjetoSeleccionPregunta(tArte, rArte, false));
-			aLEleccion.add(new ObjetoSeleccionPregunta(tHist, rHist, false));
-			aLEleccion.add(new ObjetoSeleccionPregunta(tCien, rCien, false));
-			aLEleccion.add(new ObjetoSeleccionPregunta(tEntret, rEntret, false));
-			aLEleccion.add(new ObjetoSeleccionPregunta(tDep, rDep, false));
+			aLEleccion.add(new QuestionSelectedObject(btnAleatorio, btnAmigo, true));
+			aLEleccion.add(new QuestionSelectedObject(tVSAmigo, vsAmigo, true));
+			aLEleccion.add(new QuestionSelectedObject(tTodos, rTodos, false));
+			aLEleccion.add(new QuestionSelectedObject(tGeo, rGeo, false));
+			aLEleccion.add(new QuestionSelectedObject(tArte, rArte, false));
+			aLEleccion.add(new QuestionSelectedObject(tHist, rHist, false));
+			aLEleccion.add(new QuestionSelectedObject(tCien, rCien, false));
+			aLEleccion.add(new QuestionSelectedObject(tEntret, rEntret, false));
+			aLEleccion.add(new QuestionSelectedObject(tDep, rDep, false));
 			*/
 			
 			panel.getStylesheets().add("/css/application.css");

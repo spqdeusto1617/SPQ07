@@ -1,42 +1,26 @@
 package com.pasapalabra.game.controllers;
 
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
-import com.pasapalabra.game.objetos.BotonJuego;
+import com.pasapalabra.game.objetos.GameButton;
 import com.pasapalabra.game.utilidades.WindowUtilities;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.net.SocketException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.pasapalabra.game.objetos.ObjetoSeleccionPregunta;
-import com.pasapalabra.game.utilidades.ThreadCarga;
-import com.pasapalabra.game.utilidades.PanelThread;
-import com.pasapalabra.game.utilidades.ClientConnexion;
 
 public class GameController implements Initializable{
 	
@@ -67,18 +51,18 @@ public class GameController implements Initializable{
 	
 	@FXML public TextField tfRespuesta; 
 	
-	@FXML public Button btnContestar;
-	@FXML public Button btnPasar;
-	@FXML public Button btnRendirse;
+	@FXML public GameButton btnContestar;
+	@FXML public GameButton btnPasar;
+	@FXML public GameButton btnRendirse;
 	
 	
 	/*TODO: check this@FXML
 	void entradoCSS(MouseEvent event){
-		BotonJuego.seleccionar_notDeseleccionar(true,aLBotonesJuego,event);
+		GameButton.seleccionar_notDeseleccionar(true,aLBotonesJuego,event);
 	}
 	@FXML
 	void salidoCSS(MouseEvent event){
-		BotonJuego.seleccionar_notDeseleccionar(false,aLBotonesJuego,event);
+		GameButton.seleccionar_notDeseleccionar(false,aLBotonesJuego,event);
 	}*/
 	
 	
