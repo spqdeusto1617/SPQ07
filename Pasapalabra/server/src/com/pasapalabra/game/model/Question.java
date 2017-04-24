@@ -8,9 +8,16 @@ import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.IndexOptions;
 import org.mongodb.morphia.annotations.Indexes;
 
-/**Clase de utilidad para poder gestionar las preguntas de los jugadores
+import com.pasapalabra.game.model.DTO.UserDTO;
+
+/**Utility class for tracing the user´s questions 
  * @author Ivan
- *
+ * @param: question: the question
+ * @param: answer: the answer of the question
+ * @param: questionType: the question type
+ * @param: leter: the letter of the question
+ * @param: answered: if the question has been answered or not
+ * @param: creator: the creator of the question
  */
 @Entity("question")
 @Indexes(
@@ -102,6 +109,15 @@ public class Question{
 	public String toString() {
 		return "Questions [question=" + question + ", answer=" + answer + ", leter=" + letter + ", creator=" + creator
 				+ ", answered=" + answered + "]";
+	}
+	
+	public boolean equals(Question question) {
+		return this.getQuestion().equals(question.getQuestion());
+	}
+	
+	@Override
+	public int hashCode() {
+		return question.hashCode();
 	}
 	
 }

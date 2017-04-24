@@ -2,7 +2,6 @@ package com.pasapalabra.game.service;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.pasapalabra.game.dao.QuestionDAO;
@@ -22,8 +21,12 @@ import com.pasapalabra.game.server.Server;
 import com.pasapalabra.game.service.auth.SessionManager;
 import com.pasapalabra.game.service.auth.Token;
 
+/**
+ * Class that implements all the methods available to the server.
+ * @author Ivan
+ */
 public class PasapalabraService implements IPasapalabraService{
-	private static HashMap<String, User> currentUsers = new HashMap<>();
+	private static ConcurrentHashMap<String, User> currentUsers = new ConcurrentHashMap<>();
 
 	private static ConcurrentHashMap<String, ArrayList<Question>> currentQuestions = new ConcurrentHashMap<String, ArrayList<Question>>();
 
@@ -35,6 +38,7 @@ public class PasapalabraService implements IPasapalabraService{
 
 	private static ConcurrentHashMap<String, ArrayList<String>> waitingClients = new ConcurrentHashMap<String, ArrayList<String>>();
 
+	
 	@Override
 	public boolean registry(UserDTO userData, String pass) throws RemoteException{
 		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
@@ -44,31 +48,33 @@ public class PasapalabraService implements IPasapalabraService{
 				return true;
 			}catch (Exception e) {
 				e.printStackTrace();
-				return false;
+				throw new RemoteException();
 			}
 		}
 		else return false;
 	}
 
-	public Token login(String userName, String pass) throws RemoteException
+	public Token login(String userName, String pass) throws RemoteException, SecurityException
 	{
 		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
 		if(uDao.checkIfExists(userName)){
 			User user = uDao.getUserByLogin(userName, pass);
 			//UserDTO userDTO = UserAssembler.getInstance().assembleToDTO(user);
+			if(currentUsers.containsValue(user)) throw new SecurityException();
 			Token token = SessionManager.createSession(userName);
 			currentUsers.put(token.getToken(), user);
 			return token;
 		}
 		else return null;
 	}
-
+	
 	public UserDTO getData(Token token) throws RemoteException{
 		if(currentUsers.containsKey(token.getToken())) return UserAssembler.getInstance().assembleToDTO(currentUsers.get(token.getToken()));
 		else return null;
 	}
 
-	public UserDTO play(Token session, String type,IClientService service) throws RemoteException{
+	public UserDTO play(Token session, String type,IClientService service) throws RemoteException, SecurityException{
+		if(currentQuestions.containsKey(session.getToken())) throw new SecurityException();
 		QuestionDAO qDAO = new QuestionMongoDAO(Server.mongoConnection);
 		ArrayList<Question> questions = new ArrayList<>();
 		for(char alphabet = 'a'; alphabet <= 'z'; alphabet++){
@@ -111,7 +117,7 @@ public class PasapalabraService implements IPasapalabraService{
 
 	public QuestionDTO getQuestion(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
-			if(!currentMatches.contains(session.getToken()))return null;//If it´s not playing, noting is returned
+			if(!currentMatches.contains(session.getToken()))return null;//If it´s not playing, nothing is returned
 			boolean answered = false;
 			Question question = null;
 			do{
@@ -191,10 +197,8 @@ public class PasapalabraService implements IPasapalabraService{
 		return false;
 
 	}
-	/*
-	 * TODO: hay que hacer: 1º, comprobar si se ha acabado o no (si user 1 y user 2 tienen todas
-	 * las preguntas respondidas), si sí, ya está,si no, intercambiar roles 
-	 */
+
+
 	public UserScoreDTO getResults(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
 			if(!currentMatches.contains(session.getToken()))return null;
@@ -223,7 +227,7 @@ public class PasapalabraService implements IPasapalabraService{
 				finalScore2.won();
 			}
 			IClientService client= (IClientService)currentClients.get(currentMatches.get(SessionManager.getUser(session)));
-			client.result(ScoreAssembler.getInstance().assembleToDTO(finalScore2));
+			client.finalResult(ScoreAssembler.getInstance().assembleToDTO(finalScore2));
 			currentQuestions.remove(session.getToken());
 			currentResult.remove(session.getToken());
 			currentResult.remove(currentMatches.get(session.getToken()));
@@ -248,17 +252,17 @@ public class PasapalabraService implements IPasapalabraService{
 	}
 
 	@Override
-	public boolean exitMatchMaking(Token session, String type) throws RemoteException {
+	public void exitMatchMaking(Token session, String type) throws RemoteException {
 		if(SessionManager.isValidSession(session)){
 			if(waitingClients.containsKey(session.getToken())){
 				waitingClients.get(type).remove(session.getToken());
 				currentClients.remove(session.getToken());
 				currentResult.remove(session.getToken());
 				currentQuestions.remove(session.getToken());
-				return true;
+
 			}
 		}
-		return false;
+
 	}
 
 

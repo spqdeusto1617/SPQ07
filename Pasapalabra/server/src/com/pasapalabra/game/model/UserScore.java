@@ -1,5 +1,12 @@
 package com.pasapalabra.game.model;
-
+/**
+ * Class to track the user score during a game
+ * @author ivan
+ * @param: rightAnswered: the amount of questions right answered
+ * @param: wrongAnswered: the amount of questions wrong answered
+ * @param: currentLetter: the current letter of the user
+ * @param: victory: a boolean that indicates if the user has won or not 
+ */
 public class UserScore {
 
 	int rightAnswered;

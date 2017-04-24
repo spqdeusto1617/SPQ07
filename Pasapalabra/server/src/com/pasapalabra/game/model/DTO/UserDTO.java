@@ -4,6 +4,17 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Class for sending the userdata thought Internet
+ * @author ivan
+ * @param: userName: the username of the user
+ * @param: mail: the mail of the user
+ * @param: profileImage:the profile image of an user
+ * @param: DOB: the date of birth of an user
+ * @param: gamesWon: the amount of games won by the user
+ * @param: gamesLost: the amount of games lost by the user
+ * @param: games: the amount of games participated by the user (gamesWon + gamesLost)
+ */
 public class UserDTO implements Serializable{
 
 	/**
@@ -117,4 +128,12 @@ public class UserDTO implements Serializable{
 		this.games = this.gamesWon + this.gamesLost;	
 	}
 
+	public boolean equals(UserDTO user) {
+		return this.userName.equals(user.getUserName());
+	}
+	
+	@Override
+	public int hashCode() {
+		return userName.hashCode();
+	}
 }

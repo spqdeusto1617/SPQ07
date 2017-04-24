@@ -3,6 +3,10 @@ package com.pasapalabra.game.model.assembler;
 import com.pasapalabra.game.model.UserScore;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
 
+/**
+ * Utility class for assemble form a UserScore to a UserScoreDTO and vice versa 
+ * @author ivan
+ */
 public class ScoreAssembler {
 
 	

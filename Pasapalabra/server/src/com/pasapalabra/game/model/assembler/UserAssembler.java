@@ -2,7 +2,10 @@ package com.pasapalabra.game.model.assembler;
 
 import com.pasapalabra.game.model.User;
 import com.pasapalabra.game.model.DTO.UserDTO;
-
+/**
+ * Utility class for assemble form a User to a UserDTO and vice versa 
+ * @author ivan
+ */
 public class UserAssembler{
 	
 	private static UserAssembler instance = new UserAssembler();

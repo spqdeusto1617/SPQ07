@@ -11,6 +11,20 @@ import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.IndexOptions;
 import org.mongodb.morphia.annotations.Indexes;
 
+import com.pasapalabra.game.model.DTO.UserDTO;
+
+/**
+ * Class for managing the user´s information
+ * @author ivan
+ * @param: userName: the username of the user
+ * @param: mail: the mail of the user
+ * @param: password: the password of the user
+ * @param: profileImage:the profile image of an user
+ * @param: DOB: the date of birth of an user
+ * @param: gamesWon: the amount of games won by the user
+ * @param: gamesLost: the amount of games lost by the user
+ * @param: games: the amount of games participated by the user (gamesWon + gamesLost)
+ */
 @Entity("user")
 @Indexes({
 	@Index(fields = @Field("userName"), options = @IndexOptions(name="uname", unique=true)),
@@ -34,10 +48,10 @@ public class User{
 	private int gamesWon;
 
 	private int gamesLost;
-	
+
 
 	private User(){super();}
-	
+
 	public User(String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
 			int gamesLost, int gamesPerticipated) {
 		super();
@@ -48,9 +62,9 @@ public class User{
 		DOB = dOB;
 		this.gamesWon = gamesWon;
 		this.gamesLost = gamesLost;
-		
+
 	}
-	
+
 	public User(ObjectId oid, String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
 			int gamesLost) {
 		super();
@@ -62,7 +76,7 @@ public class User{
 		DOB = dOB;
 		this.gamesWon = gamesWon;
 		this.gamesLost = gamesLost;
-		
+
 	}
 
 
@@ -159,6 +173,13 @@ public class User{
 				+ "DOB=" + DOB + ", GamesWon=" + gamesWon + ", GamesLost=" + 
 				gamesLost + "]";
 	}
-
-
+	
+	public boolean equals(User user) {
+		return this.userName.equals(user.getUserName());
+	}
+	
+	@Override
+	public int hashCode() {
+		return userName.hashCode();
+	}
 }

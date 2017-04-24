@@ -14,7 +14,7 @@ import com.pasapalabra.game.dao.mongodb.MongoConnection;
 import com.pasapalabra.game.service.IPasapalabraService;
 import com.pasapalabra.game.service.PasapalabraService;
 import com.pasapalabra.game.utilities.AppLogger;
-import com.pasapalabra.game.utilities.deVentana;
+import com.pasapalabra.game.utilities.WindowUtilites;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -134,7 +134,7 @@ public class Server extends Application{
 			primaryStage.show();
 			log.log(Level.FINEST, "Ventana mostrada");
 			//Centrar ventana
-			deVentana.centrarVentana(primaryStage);
+			WindowUtilites.centerWindow(primaryStage);
 			log.log(Level.FINEST, "Centrada la ventana");
 
 		} catch(Exception e) {

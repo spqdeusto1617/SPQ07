@@ -2,6 +2,11 @@ package com.pasapalabra.game.service.auth;
 
 import java.io.Serializable;
 
+/**
+ * Class for generating unique tokens for the users of the application
+ * @author ivan
+ * @param token: the unique token generated for the user
+ */
 public class Token implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

@@ -3,6 +3,10 @@ package com.pasapalabra.game.model.assembler;
 import com.pasapalabra.game.model.Question;
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 
+/**
+ * Utility class for assemble form a Question to a QuestionDTO and vice versa 
+ * @author ivan
+ */
 public class QuestionAssembler{
 	
 	private static QuestionAssembler instance = new QuestionAssembler();
