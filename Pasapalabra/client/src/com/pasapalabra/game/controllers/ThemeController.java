@@ -48,12 +48,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class EventosJuego extends ClaseExtensora implements Initializable{
+public class ThemeController extends ExtenderClassController implements Initializable{
 
 
 	//Logger de la clase
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
+	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ThemeController.class.getName());
 
 
 	//*COMIENZO DE DECLARACIÓN DE ATRIBUTOS*
@@ -363,7 +363,7 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 		//Lanzamos la partida
 
 		try {
-			com.pasapalabra.game.controllers.EventosJuegoPrincipal.currentQuestion = com.pasapalabra.game.utilidades.ClientConnexion.play(QuestionType.valueOf(Tipo[1])); 
+			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.utilidades.ClientConnexion.play(QuestionType.valueOf(Tipo[1])); 
 			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("JuegoPrincipal", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
@@ -1452,8 +1452,8 @@ public class EventosJuego extends ClaseExtensora implements Initializable{
 			panel.applyCss();*/
 			//SERVIDOR
 			//TODO Cargar imagen personal
-			if(EventosLogIn.iAvatar!=null){
-				imagenAvatar.setImage(EventosLogIn.iAvatar);
+			if(LogInController.iAvatar!=null){
+				imagenAvatar.setImage(LogInController.iAvatar);
 			}else{
 				String imagen = "fPerfil";
 				Random rand = new Random();

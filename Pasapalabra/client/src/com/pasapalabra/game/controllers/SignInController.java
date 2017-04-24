@@ -52,7 +52,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
  * @author asier.gutierrez
  *
  */
-public class EventosRegistro extends Control implements Initializable {
+public class SignInController extends Control implements Initializable {
 	//Recuerda usar JavaDoc para cada método
 	//Recuerda que tienes que añadir los listener y todo eso
 	//Recuerda que tienes que enlazar esta clase con el código fxml
@@ -573,14 +573,14 @@ public class EventosRegistro extends Control implements Initializable {
 		OutputStream resStreamOut = null;
 		String jarFolder;
 		try {
-			stream = EventosRegistro.class.getResourceAsStream(resourceName);//note that each / is a directory down in the "jar tree" been the jar the root of the tree
+			stream = SignInController.class.getResourceAsStream(resourceName);//note that each / is a directory down in the "jar tree" been the jar the root of the tree
 			if(stream == null) {
 				throw new Exception("Cannot get resource \"" + resourceName + "\" from Jar file.");
 			}
 
 			int readBytes;
 			byte[] buffer = new byte[4096];
-			jarFolder = new File(EventosRegistro.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getPath().replace('\\', '/');
+			jarFolder = new File(SignInController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getPath().replace('\\', '/');
 			resStreamOut = new FileOutputStream(jarFolder + resourceName);
 			while ((readBytes = stream.read(buffer)) > 0) {
 				resStreamOut.write(buffer, 0, readBytes);

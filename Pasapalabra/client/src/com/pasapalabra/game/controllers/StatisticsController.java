@@ -19,7 +19,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-public class EventosEstadisticas extends ClaseExtensora implements Initializable {
+public class StatisticsController extends ExtenderClassController implements Initializable {
 
 	@FXML
 	private Text textoESPanel;
@@ -99,7 +99,7 @@ public class EventosEstadisticas extends ClaseExtensora implements Initializable
 	@FXML
 	private Text txtVictorias;
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosEstadisticas.class.getName());
+	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(StatisticsController.class.getName());
 	
 	/*Posiciones:TODO: implement this
 	 * 0: partidas ganadas
@@ -160,10 +160,10 @@ public class EventosEstadisticas extends ClaseExtensora implements Initializable
 		 com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, Main.class.getName());
 		 log.log(Level.FINEST, "Inicializando EventosEstadisticas");
 		 //Poner la imagen de avatar
-		 if(EventosLogIn.iAvatar!=null){
+		 if(LogInController.iAvatar!=null){
 			 //Si no es nula, pone la que hay
 			 log.log(Level.FINEST, "El avatar en EventosLogIn.iAvatar no es nulo");
-			 imagenAvatar.setImage(EventosLogIn.iAvatar);
+			 imagenAvatar.setImage(LogInController.iAvatar);
 		 }else{
 			 /*Si es nula significa que el usuario no tiene imagen puesta
 			 entonces se pone una por defecto*/

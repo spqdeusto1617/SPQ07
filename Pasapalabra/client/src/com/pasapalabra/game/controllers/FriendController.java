@@ -32,10 +32,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class EventosAmigos extends ClaseExtensora implements Initializable {
+public class FriendController extends ExtenderClassController implements Initializable {
 	@FXML public Pane panel;
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
+	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ThemeController.class.getName());
 	//Declaración del panel
 	@FXML public Text textoESPanel;
 
@@ -136,8 +136,8 @@ public class EventosAmigos extends ClaseExtensora implements Initializable {
 			//TODO: meter los amigos
 		}
 		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
-		if(EventosLogIn.iAvatar!=null){
-			imagenAvatar.setImage(EventosLogIn.iAvatar);
+		if(LogInController.iAvatar!=null){
+			imagenAvatar.setImage(LogInController.iAvatar);
 		}else{
 			String imagen = "fPerfil";
 			Random rand = new Random();

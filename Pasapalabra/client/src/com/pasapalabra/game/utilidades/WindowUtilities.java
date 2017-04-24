@@ -8,11 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.pasapalabra.game.application.Main;
-import com.pasapalabra.game.controllers.ClaseExtensora;
-import com.pasapalabra.game.controllers.EventosAmigos;
-import com.pasapalabra.game.controllers.EventosEstadisticas;
-import com.pasapalabra.game.controllers.EventosJuego;
-import com.pasapalabra.game.controllers.EventosPerfil;
+import com.pasapalabra.game.controllers.ExtenderClassController;
+import com.pasapalabra.game.controllers.FriendController;
+import com.pasapalabra.game.controllers.StatisticsController;
+import com.pasapalabra.game.controllers.ThemeController;
+import com.pasapalabra.game.controllers.ProfileController;
 
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +36,7 @@ import javafx.stage.Stage;
 public class WindowUtilities {
 	
 	//Loger de la clase deVentana
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
+	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ThemeController.class.getName());
 	 
 	/**Método para la transición de una ventana a otra.
 	 * @param nombreFichero Nombre sin extensión por la cual se
@@ -156,36 +156,36 @@ public class WindowUtilities {
 	 * @param event Evento de onMouseEntered/onMouseExited
 	 * @param eventosMenu Clase controladora de eventos (Ver texto en itálica) en la que se produce el evento y desde la cual se llama a este.
 	 */
-	public static void efectoTransparenciaOnHover(MouseEvent event, ClaseExtensora eventosMenu){
+	public static void efectoTransparenciaOnHover(MouseEvent event, ExtenderClassController eventosMenu){
 		double op = 0.3;
 		if(event.getEventType().toString().equals("MOUSE_ENTERED")) op = 0.8;
 
 		if(event.getSource().getClass().getName()=="javafx.scene.shape.Rectangle"){
 
-			if(((Rectangle) event.getSource()).getId().equals("rectanguloAmigos") && !(eventosMenu instanceof EventosAmigos)){
+			if(((Rectangle) event.getSource()).getId().equals("rectanguloAmigos") && !(eventosMenu instanceof FriendController)){
 				//				eventosMenu.textoAmigos.setOpacity(1);
 				eventosMenu.btnAmigos.setOpacity(op);
-			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloMiPerfil") && !(eventosMenu instanceof EventosPerfil)){
+			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloMiPerfil") && !(eventosMenu instanceof ProfileController)){
 				//				eventosMenu.textoMiPerfil.setOpacity(1);
 				eventosMenu.btnPerfil.setOpacity(op);
-			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloEstadisticas") && !(eventosMenu instanceof EventosEstadisticas)){
+			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloEstadisticas") && !(eventosMenu instanceof StatisticsController)){
 				//				eventosMenu.textoEstadisticas.setOpacity(1);
 				eventosMenu.btnEstadisticas.setOpacity(op);
-			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloJugar") && !(eventosMenu instanceof EventosJuego)){
+			}else if(((Rectangle) event.getSource()).getId().equals("rectanguloJugar") && !(eventosMenu instanceof ThemeController)){
 				//				eventosMenu.textoJugar.setOpacity(1);
 				eventosMenu.btnJuego.setOpacity(op);
 			}
 		}else{
-			if(((Text) event.getSource()).getText().equals("Amigos") && !(eventosMenu instanceof EventosAmigos)){
+			if(((Text) event.getSource()).getText().equals("Amigos") && !(eventosMenu instanceof FriendController)){
 				//				eventosMenu.textoAmigos.setOpacity(1);
 				eventosMenu.btnAmigos.setOpacity(op);
-			}else if(((Text) event.getSource()).getText().equals("Mi perfil") && !(eventosMenu instanceof EventosPerfil)){
+			}else if(((Text) event.getSource()).getText().equals("Mi perfil") && !(eventosMenu instanceof ProfileController)){
 				//				eventosMenu.textoMiPerfil.setOpacity(1);
 				eventosMenu.btnPerfil.setOpacity(op);
-			}else if(((Text) event.getSource()).getText().equals("Estadísticas") && !(eventosMenu instanceof EventosEstadisticas)){
+			}else if(((Text) event.getSource()).getText().equals("Estadísticas") && !(eventosMenu instanceof StatisticsController)){
 				//				eventosMenu.textoEstadisticas.setOpacity(1);
 				eventosMenu.btnEstadisticas.setOpacity(op);
-			}else if(((Text) event.getSource()).getText().equals("Jugar") && !(eventosMenu instanceof EventosJuego)){
+			}else if(((Text) event.getSource()).getText().equals("Jugar") && !(eventosMenu instanceof ThemeController)){
 				//				eventosMenu.textoJugar.setOpacity(1);
 				eventosMenu.btnJuego.setOpacity(op);
 			}

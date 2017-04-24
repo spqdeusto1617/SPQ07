@@ -34,7 +34,7 @@ import javafx.util.Callback;
  * @author asier.gutierrez
  *
  */
-public class EventosLogIn extends Control implements Initializable {
+public class LogInController extends Control implements Initializable {
 	//Se define un logger
 
 	public static ArrayList<Image> aLNoticias;
@@ -43,7 +43,7 @@ public class EventosLogIn extends Control implements Initializable {
 	
 	static boolean serverNotFound;
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosLogIn.class.getName());
+	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(LogInController.class.getName());
 
 	public static Image iAvatar;
 
@@ -84,7 +84,7 @@ public class EventosLogIn extends Control implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Se inicia el handler del logger
-		com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, EventosLogIn.class.getName());
+		com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, LogInController.class.getName());
 		if(!com.pasapalabra.game.utilidades.ClientConnexion.serverReady){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("No hay conexión con el servidor");

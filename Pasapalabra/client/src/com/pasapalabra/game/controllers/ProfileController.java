@@ -24,9 +24,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class EventosPerfil extends ClaseExtensora implements Initializable {
+public class ProfileController extends ExtenderClassController implements Initializable {
 	//Se define un logger
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosPerfil.class.getName());
+	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ProfileController.class.getName());
 
 	@FXML public Pane panel;
 
@@ -93,9 +93,9 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 		rectanguloEstadisticas.setOpacity(0.3f);
 		rectanguloJugar.setOpacity(0.3f);
 		rectanguloMiPerfil.setOpacity(1f);
-		if(EventosLogIn.iAvatar!=null){
-			imagenAvatar.setImage(EventosLogIn.iAvatar);
-			imgCambioFotoPerfil.setImage(EventosLogIn.iAvatar);
+		if(LogInController.iAvatar!=null){
+			imagenAvatar.setImage(LogInController.iAvatar);
+			imgCambioFotoPerfil.setImage(LogInController.iAvatar);
 		}else{
 			String imagen = "fPerfil";
 			Random rand = new Random();
@@ -148,7 +148,7 @@ public class EventosPerfil extends ClaseExtensora implements Initializable {
 				try{
 					String path="file:///"+file.getAbsolutePath();
 
-					EventosLogIn.iAvatar=new Image(path);
+					LogInController.iAvatar=new Image(path);
 					//TODO: change userInfo
 					//TODO: cambiar la imagen en la BBDD
 					imgCambioFotoPerfil.setImage(new Image(path));

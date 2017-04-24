@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
  * @author asier.gutierrez
  *
  */
-public abstract class ClaseExtensora extends Control{
+public abstract class ExtenderClassController extends Control{
 	//Declaración de todos los elementos del menú
 	@FXML public Text textoESPanel;
 

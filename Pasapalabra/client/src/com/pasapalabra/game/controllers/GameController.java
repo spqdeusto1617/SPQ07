@@ -38,9 +38,9 @@ import com.pasapalabra.game.utilidades.ThreadCarga;
 import com.pasapalabra.game.utilidades.PanelThread;
 import com.pasapalabra.game.utilidades.ClientConnexion;
 
-public class EventosJuegoPrincipal implements Initializable{
+public class GameController implements Initializable{
 	
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosJuego.class.getName());
+	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ThemeController.class.getName());
 
 
 	//*COMIENZO DE DECLARACIÓN DE ATRIBUTOS*

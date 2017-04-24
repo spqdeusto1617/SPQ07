@@ -1,12 +1,12 @@
 package com.pasapalabra.game.utilidades;
 
-import com.pasapalabra.game.controllers.EventosJuego;
+import com.pasapalabra.game.controllers.ThemeController;
 
 public class ThreadCarga implements Runnable {
 
-	EventosJuego eventosJuego;
+	ThemeController eventosJuego;
 
-	public ThreadCarga(EventosJuego eventosJuego) {
+	public ThreadCarga(ThemeController eventosJuego) {
 		this.eventosJuego = eventosJuego;
 	}
 

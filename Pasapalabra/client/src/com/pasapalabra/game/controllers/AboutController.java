@@ -27,9 +27,9 @@ import javafx.util.Duration;
  * @author asier.gutierrez
  *
  */
-public class EventosAcercaDe extends Control implements Initializable {
+public class AboutController extends Control implements Initializable {
 	//Se define un logger.
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(EventosAcercaDe.class.getName());
+	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(AboutController.class.getName());
 	public boolean animacionEnProceso;
 
 	@FXML
@@ -39,7 +39,7 @@ public class EventosAcercaDe extends Control implements Initializable {
 	private Text txtEdadAsier;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, EventosAcercaDe.class.getName());
+		com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, AboutController.class.getName());
 		log.log(Level.FINEST, "Inicializado de EventosAcercaDe");
 
 		//Comprueba edad de Iván

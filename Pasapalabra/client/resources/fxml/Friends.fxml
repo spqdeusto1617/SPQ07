@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.EventosAmigos">
+<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.FriendController">
    <children>
       <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
       <Rectangle fx:id="rectanguloJugar" arcHeight="5.0" arcWidth="5.0" fill="#21ff44a3" height="35.0" layoutX="15.0" layoutY="100.0" onMouseClicked="#btnJugar" onMouseEntered="#entrado" onMouseExited="#salido" opacity="0.2" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
