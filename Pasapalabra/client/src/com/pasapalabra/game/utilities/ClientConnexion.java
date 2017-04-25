@@ -101,6 +101,17 @@ public class ClientConnexion {
 			throw e;
 		}
 	}
+	
+	public static boolean delogging() throws Exception{
+		try{
+			return service.deLogin(sessionAuth);
+			
+			 
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
+	}
 	/*
 	 * Para Alvaro: este método es para responder a la pregunta. Simplemente pasas
 	 * la pregunta y te devuelve true si está bien, y false si está mal.

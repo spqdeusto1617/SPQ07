@@ -33,10 +33,10 @@ import javafx.stage.Stage;
  * @author asier.gutierrez
  */
 public class WindowUtilities {
-	
+
 	//Class´s logger
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger("Server");
-	 
+
 	/**Method for transist from one window to the other.
 	 * @param fileName: Name without extension by which
  	 * the file is Known in the classpath. Only the name is requested because 
@@ -121,12 +121,38 @@ public class WindowUtilities {
 				//Si
 
 				//En la clase del servidor habrá una rutina para cerrar sesión.
-				//FIXME:Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
 				try {
-					//FIXME:Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
-					windowTransition("LogIn", event);
+					if(ClientConnexion.delogging())windowTransition("LogIn", event);
+					else{
+						Alert alert3 = new Alert(AlertType.ERROR);
+						//Pone título
+						alert3.setTitle("Error");
+						//Pone cabecera
+						alert3.setHeaderText("No puedes salir ahora");
+						//Pone contenido
+						alert3.setContentText("No puedes delogearte ahora, pruebalo mas tarde.");
+						//Añade modalidad
+						alert3.initModality(Modality.APPLICATION_MODAL);
+						//Añade 'dueño'
+						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+
+						alert3.showAndWait();
+					}
 				} catch (Exception e) {
 					log.log(Level.WARNING, "Error al cerrar sesion", e);
+					Alert alert3 = new Alert(AlertType.ERROR);
+					//Pone título
+					alert3.setTitle("Error al delogearte");
+					//Pone cabecera
+					alert3.setHeaderText("Ha habido un error al delogearte");
+					//Pone contenido
+					alert3.setContentText("Ha habido un error insesperado a la hora de salir de la aplicación, por favor, intenteló de nuevo.");
+					//Añade modalidad
+					alert3.initModality(Modality.APPLICATION_MODAL);
+					//Añade 'dueño'
+					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+
+					alert3.showAndWait();
 				} 
 				//
 
