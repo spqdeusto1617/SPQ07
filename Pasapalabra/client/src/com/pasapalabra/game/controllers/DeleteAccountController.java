@@ -177,7 +177,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 						alert3.initModality(Modality.APPLICATION_MODAL);
 						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert3.showAndWait();
-						com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("LogIn", event);
+						com.pasapalabra.game.utilities.WindowUtilities.windowTransition("LogIn", event);
 					}catch(Exception a){
 						Alert alert3 = new Alert(AlertType.INFORMATION);
 						alert3.setTitle("Se produjo un error al tramitar sus datos");
@@ -223,7 +223,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK){
-			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 		}
 		else{
 			//Nada
@@ -235,21 +235,21 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
+		com.pasapalabra.game.utilities.WindowUtilites.windowTransition("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
 	}
 
 	public void btnMiPerfil(MouseEvent event){
 
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 	}
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
 	}
 
 	public void btnCerrarSesion(MouseEvent event){
