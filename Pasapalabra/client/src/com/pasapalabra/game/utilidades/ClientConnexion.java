@@ -75,11 +75,11 @@ public class ClientConnexion {
 	 * */
 	public static QuestionDTO play(QuestionType type) throws Exception{
 		try{
-			QuestionDTO question = service.play(sessionAuth, type.toString());
+			/*QuestionDTO question = service.play(sessionAuth, type.toString());
 			reachZ = false;
 			gameEnd = false;
-			currentLetter = 'a';
-			return question;
+			currentLetter = 'a';*/
+			return null;
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw e;
