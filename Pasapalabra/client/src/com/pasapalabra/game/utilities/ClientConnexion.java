@@ -105,7 +105,6 @@ public class ClientConnexion {
 	public static boolean delogging() throws Exception{
 		try{
 			return service.deLogin(sessionAuth);
-			
 			 
 		}catch (Exception e) {
 			// TODO: handle exception
