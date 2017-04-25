@@ -32,7 +32,7 @@ import javafx.stage.Stage;
  * <p>.<i>centerWindow</i> - method for center the windows.
  * @author asier.gutierrez
  */
-public class WindowUtilites {
+public class WindowUtilities {
 	
 	//Class´s logger
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger("Server");
@@ -51,7 +51,7 @@ public class WindowUtilites {
 		Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent panel = null;
 		try {
-			panel = FXMLLoader.load(WindowUtilites.class.getResource("/fxml/"+fileName+".fxml"));
+			panel = FXMLLoader.load(WindowUtilities.class.getResource("/fxml/"+fileName+".fxml"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +78,7 @@ public class WindowUtilites {
 	 * 
 	 * @param event Evento de ratón.
 	 */
-	public static void cerrarSesion(MouseEvent event){
+	public static void closeSession(MouseEvent event){
 		//Crea alerta de tipo confirmación
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		//Pone título

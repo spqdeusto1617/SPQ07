@@ -23,7 +23,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-import com.pasapalabra.game.utilities.*;
 
 /**Clase que gestiona los eventos de la clase AcercaDe.fxml
  * @author asier.gutierrez
@@ -133,7 +132,7 @@ public class AboutController extends Control implements Initializable {
 	public void volver(MouseEvent event){
 		String pantallaALaQueIr = "Juego";
 		log.log(Level.FINEST, "Se ha vuelto a la pantalla de " + pantallaALaQueIr);
-		com.pasapalabra.game.utilities.WindowUtilites.windowTransition(pantallaALaQueIr, event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition(pantallaALaQueIr, event);
 	}
 
 

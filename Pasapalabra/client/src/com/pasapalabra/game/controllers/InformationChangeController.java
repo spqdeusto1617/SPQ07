@@ -183,7 +183,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
 					com.pasapalabra.game.utilities.ClientConnexion.userInfo.setMail(tflNuevoMail.getText());
-					com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
+					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 				}catch(Exception a){
 					Alert alert2 = new Alert(AlertType.INFORMATION);
 					alert2.setTitle("Se produjo un error al tramitar sus datos");
@@ -257,7 +257,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
-					com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
+					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 				}catch(Exception a){
 
 					Alert alert2 = new Alert(AlertType.ERROR);
@@ -300,7 +300,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK){
-			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 		}
 		else{
 			//Nada
@@ -312,25 +312,25 @@ public class InformationChangeController extends ExtenderClassController impleme
 
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
 	}
 
 	public void btnMiPerfil(MouseEvent event){
 
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 	}
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
 	}
 
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
+		com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	}
 
 	//Elimina nivel de transparencia

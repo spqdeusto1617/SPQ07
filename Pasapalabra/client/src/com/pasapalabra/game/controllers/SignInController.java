@@ -327,7 +327,7 @@ public class SignInController extends Control implements Initializable {
 					alert2.showAndWait();
 
 
-					com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("LogIn", event);
+					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("LogIn", event);
 				}
 			}catch(Exception a){
 				Alert alert2 = new Alert(AlertType.ERROR);
@@ -400,7 +400,7 @@ public class SignInController extends Control implements Initializable {
 		//Ha pulsado ok?
 		if (result.get() == ButtonType.OK){
 
-			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("LogIn", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("LogIn", event);
 		}
 
 	}

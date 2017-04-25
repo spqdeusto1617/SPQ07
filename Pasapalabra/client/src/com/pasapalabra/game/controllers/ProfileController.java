@@ -115,11 +115,11 @@ public class ProfileController extends ExtenderClassController implements Initia
 	}
 
 	public void btnCambiar (MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("CambiarDatos", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("CambiarDatos", event);
 	}
 
 	public void btnEliminar (MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("EliminarCuenta", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("EliminarCuenta", event);
 	}
 
 	/**AccionListener para poder cambiar la imagen del usuario
@@ -183,11 +183,11 @@ public class ProfileController extends ExtenderClassController implements Initia
 
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
 	}
 
 	public void btnMiPerfil(MouseEvent event){
@@ -215,11 +215,11 @@ public class ProfileController extends ExtenderClassController implements Initia
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
 	}
 
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
+		com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	}
 
 

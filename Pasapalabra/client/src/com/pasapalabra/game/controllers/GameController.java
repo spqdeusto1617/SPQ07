@@ -84,7 +84,7 @@ public class GameController implements Initializable{
 			alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+score.getRightAnswered()+" respuestas correctas y: "+score.getWrongAnswered()+" respuestas incorrectas");
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
-			WindowUtilities.transicionVentana("Juego", event);
+			WindowUtilities.windowTransition("Juego", event);
 		}
 		else{	
 			if(tfRespuesta.getText().length()==0){
@@ -181,7 +181,7 @@ public class GameController implements Initializable{
 							alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+score.getRightAnswered()+" respuestas correctas y: "+score.getWrongAnswered()+" respuestas incorrectas");
 							alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 							alert.showAndWait();
-							WindowUtilities.transicionVentana("Juego", event);
+							WindowUtilities.windowTransition("Juego", event);
 						/*
 						if(){
 							Alert alert = new Alert(AlertType.INFORMATION);

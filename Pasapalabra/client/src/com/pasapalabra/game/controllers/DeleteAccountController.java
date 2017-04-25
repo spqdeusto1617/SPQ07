@@ -5,6 +5,9 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+
+import com.pasapalabra.game.utilities.WindowUtilities;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -177,7 +180,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 						alert3.initModality(Modality.APPLICATION_MODAL);
 						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert3.showAndWait();
-						com.pasapalabra.game.utilities.WindowUtilities.windowTransition("LogIn", event);
+						WindowUtilities.windowTransition("LogIn", event);
 					}catch(Exception a){
 						Alert alert3 = new Alert(AlertType.INFORMATION);
 						alert3.setTitle("Se produjo un error al tramitar sus datos");
@@ -235,25 +238,25 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilites.windowTransition("Juego", event);
+		WindowUtilities.windowTransition("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
+		WindowUtilities.windowTransition("Amigos", event);
 	}
 
 	public void btnMiPerfil(MouseEvent event){
 
-		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
+		WindowUtilities.windowTransition("Perfil", event);
 	}
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
+		WindowUtilities.windowTransition("Estadisticas", event);
 	}
 
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
+		WindowUtilities.closeSession(event);
 	}
 
 
@@ -261,13 +264,13 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel	

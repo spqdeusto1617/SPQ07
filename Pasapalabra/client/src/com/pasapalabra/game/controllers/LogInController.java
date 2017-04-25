@@ -150,7 +150,7 @@ public class LogInController extends Control implements Initializable {
 			try {	log.log(Level.FINEST, "LogIn OK. Transición de ventana a Juego");
 				com.pasapalabra.game.utilities.ClientConnexion.login(txtUsuario.getText(), txtContra.getText());
 				
-				com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
+				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
 			} catch (Exception e) {
 				log.log(Level.INFO, "Error de LogIn", e);
 				//Aviso
@@ -195,7 +195,7 @@ public class LogInController extends Control implements Initializable {
 		}
 		else{
 			log.log(Level.FINEST, "Transición a ventana registro porque el servidor está operativo.");
-			//TODO: com.pasapalabra.game.utilities.deVentana.transicionVentana("Registro", event);
+			//TODO: com.pasapalabra.game.utilities.deVentana.windowTransition("Registro", event);
 		}
 	}
 

@@ -8,10 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.pasapalabra.game.model.DTO.QuestionType;
-import com.pasapalabra.game.objetos.GameButton;
 import com.pasapalabra.game.objetos.QuestionSelectedObject;
 import com.pasapalabra.game.utilities.PanelThread;
-import com.pasapalabra.game.utilities.ThreadCarga;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.application.Platform;
@@ -187,8 +185,6 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML public Text textoUsernameRival;
 	*/
 
-
-	public Thread hiloDeCarga = new Thread(new ThreadCarga(this));
 	//_________________________________________
 	//*FIN DE DECLARACIÓN DE ATRIBUTOS
 
@@ -261,7 +257,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Amigos");
-			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
 		}
 	}
 
@@ -280,7 +276,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Perfil");
-			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 		}
 	}
 
@@ -299,7 +295,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
-			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
 		}
 	}
 
@@ -319,7 +315,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML
 	void btnCerrarSesion(MouseEvent event) {
 		log.log(Level.FINEST, "Cierre de sesión");
-		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
+		com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	}
 
 	@FXML
@@ -353,7 +349,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 		try {
 			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.utilities.ClientConnexion.play(QuestionType.valueOf(Tipo[1])); 
-			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("JuegoPrincipal", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("JuegoPrincipal", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -363,7 +359,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			juegoEnCurso=false;
-			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
 			log.log(Level.WARNING, "Error en la partida", e);
 			e.printStackTrace();
 
@@ -375,7 +371,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			juegoEnCurso=false;
-			WindowUtilities.transicionVentana("Juego", event);
+			WindowUtilities.windowTransition("Juego", event);
 			log.log(Level.WARNING, "No se ha encontrado partida.", e);
 			e.printStackTrace();
 		} 
@@ -477,7 +473,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 								alert.showAndWait();
-								deVentana.transicionVentana("Juego", event);
+								deVentana.windowTransition("Juego", event);
 							}
 							if(!juegoEnCurso){
 								Alert alert = new Alert(AlertType.INFORMATION);
@@ -486,7 +482,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 								alert.showAndWait();
-								deVentana.transicionVentana("Juego", event);
+								deVentana.windowTransition("Juego", event);
 							}
 
 						}
@@ -498,7 +494,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 							alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 							alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 							alert.showAndWait();
-							deVentana.transicionVentana("Juego", event);
+							deVentana.windowTransition("Juego", event);
 						}
 						//			utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
 						//			try{
@@ -691,7 +687,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 											alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 											alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 											alert.showAndWait();
-											deVentana.transicionVentana("Juego", event);
+											deVentana.windowTransition("Juego", event);
 										}
 										if(!juegoEnCurso){
 											Alert alert = new Alert(AlertType.INFORMATION);
@@ -700,7 +696,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 											alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 											alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 											alert.showAndWait();
-											deVentana.transicionVentana("Juego", event);
+											deVentana.windowTransition("Juego", event);
 										}
 
 									}
@@ -712,7 +708,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 										alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 										alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 										alert.showAndWait();
-										deVentana.transicionVentana("Juego", event);
+										deVentana.windowTransition("Juego", event);
 									}
 									//			utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
 									//			try{
@@ -812,7 +808,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert.showAndWait();
-				deVentana.transicionVentana("Juego", event);
+				deVentana.windowTransition("Juego", event);
 			}
 			else{	
 			
@@ -892,7 +888,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 								alert.showAndWait();
-								deVentana.transicionVentana("Juego", event);
+								deVentana.windowTransition("Juego", event);
 							}
 							if(!juegoEnCurso){
 								Alert alert = new Alert(AlertType.INFORMATION);
@@ -901,7 +897,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 								alert.showAndWait();
-								deVentana.transicionVentana("Juego", event);
+								deVentana.windowTransition("Juego", event);
 							}
 
 						}
@@ -913,7 +909,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 							alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 							alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 							alert.showAndWait();
-							deVentana.transicionVentana("Juego", event);
+							deVentana.windowTransition("Juego", event);
 						}
 						//			utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
 						//			try{
@@ -985,7 +981,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 									//								alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 									//								alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 									//								alert.showAndWait();
-									//								deVentana.transicionVentana("Juego", event);
+									//								deVentana.windowTransition("Juego", event);
 								}
 							}
 						}).start(); 
@@ -1026,7 +1022,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 						alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert.showAndWait();
-						deVentana.transicionVentana("Juego", event);
+						deVentana.windowTransition("Juego", event);
 					}
 				}else{
 					//				Alert alert = new Alert(AlertType.INFORMATION);
@@ -1035,7 +1031,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					//				alert.setContentText("Se ha terminado la partida, y su resultado ha sido: "+Conexion_cliente.Correctas+" respuestas correctas y: "+Conexion_cliente.Incorrectas+" respuestas incorrectas");
 					//				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					//				alert.showAndWait();
-					//				deVentana.transicionVentana("Juego", event);
+					//				deVentana.windowTransition("Juego", event);
 				}
 			}else{
 				//TODO: No puedes pasar si no es tu turno
@@ -1075,7 +1071,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					alert2.setContentText("Se ha terminado la partida con su rendición, por tanto, se concidera la partida acabada");
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
-					deVentana.transicionVentana("Juego", event);
+					deVentana.windowTransition("Juego", event);
 				}
 			}
 
@@ -1099,7 +1095,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		@FXML
 		void masInfo(MouseEvent event){
 			if(!juegoEnCurso){
-				com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("AcercaDe", event);
+				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("AcercaDe", event);
 			}
 		}
 

@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.pasapalabra.game.utilities.WindowUtilities;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -187,7 +189,7 @@ public class FriendController extends ExtenderClassController implements Initial
 		}
 	}
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
+		WindowUtilities.windowTransition("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
@@ -214,20 +216,20 @@ public class FriendController extends ExtenderClassController implements Initial
 	}
 
 	public void btnMiPerfil(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
+		WindowUtilities.windowTransition("Perfil", event);
 	}
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
+		WindowUtilities.windowTransition("Estadisticas", event);
 	}
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
+		WindowUtilities.closeSession(event);
 	}
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia

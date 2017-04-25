@@ -111,13 +111,13 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 @FXML
 	 void btnJugar(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Juego");
-		 com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
 	 }
 
 	 @FXML
 	 void btnMiPerfil(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Perfil");
-		 com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 	 }
 
 	 @FXML
@@ -140,13 +140,13 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 @FXML
 	 void btnAmigos(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Amigos");
-		 com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
 	 }
 
 	 @FXML
 	 void btnCerrarSesion(MouseEvent event) {
 		 log.log(Level.FINEST, "Cerrar sesión");
-		 com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
+		 com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	 }
 
 	 @FXML
