@@ -99,7 +99,7 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	@FXML
 	private Text txtVictorias;
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(StatisticsController.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(StatisticsController.class.getName());
 	
 	/*Posiciones:TODO: implement this
 	 * 0: partidas ganadas
@@ -111,24 +111,24 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 @FXML
 	 void btnJugar(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Juego");
-		 com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
 	 }
 
 	 @FXML
 	 void btnMiPerfil(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Perfil");
-		 com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
 	 }
 
 	 @FXML
 	 void entrado(MouseEvent event) {
-		 com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		 com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	 }
 
 	 //Añade nivel de transparencia
 	 @FXML
 	 void salido(MouseEvent event) {
-		 com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		 com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	 }
 
 	 @FXML
@@ -140,13 +140,13 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 @FXML
 	 void btnAmigos(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Amigos");
-		 com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Amigos", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
 	 }
 
 	 @FXML
 	 void btnCerrarSesion(MouseEvent event) {
 		 log.log(Level.FINEST, "Cerrar sesión");
-		 com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
+		 com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
 	 }
 
 	 @FXML
@@ -157,7 +157,7 @@ public class StatisticsController extends ExtenderClassController implements Ini
 
 	 @Override
 	 public void initialize(URL location, ResourceBundle resources) {
-		 com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, Main.class.getName());
+		 com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, Main.class.getName());
 		 log.log(Level.FINEST, "Inicializando EventosEstadisticas");
 		 //Poner la imagen de avatar
 		 if(LogInController.iAvatar!=null){
@@ -186,7 +186,7 @@ public class StatisticsController extends ExtenderClassController implements Ini
 		 imagenAvatar.setSmooth(true); 
 		 imagenAvatar.setCache(true); 
 		 //Se pone el nombre de usuario
-		 textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
+		 textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
 
 		 //Se ponen los datos relacionados con esta ventana. Es decir, estadísticas.
 		

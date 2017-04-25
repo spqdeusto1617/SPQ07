@@ -1,4 +1,4 @@
-package com.pasapalabra.game.utilidades;
+package com.pasapalabra.game.utilities;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

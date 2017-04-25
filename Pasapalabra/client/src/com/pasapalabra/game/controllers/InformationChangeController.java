@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 public class InformationChangeController extends ExtenderClassController implements Initializable {
 	@FXML public Pane panel;
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ThemeController.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ThemeController.class.getName());
 	//Declaración del panel
 	@FXML public Text textoESPanel;
 
@@ -100,7 +100,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 	public void initialize(URL location, ResourceBundle resources) {
 
 		panel.getStylesheets().add("/css/application.css");
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
 		if(LogInController.iAvatar!=null){
 			imagenAvatar.setImage(LogInController.iAvatar);
 		}else{
@@ -136,7 +136,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 
 		if (result.get() == ButtonType.OK){
 			boolean datos_Correctos=true;
-			if(!tflViejoMail.getText().equals(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getMail())){
+			if(!tflViejoMail.getText().equals(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getMail())){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
 				alert2.setTitle("Mail no coincide");
@@ -182,8 +182,8 @@ public class InformationChangeController extends ExtenderClassController impleme
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
-					com.pasapalabra.game.utilidades.ClientConnexion.userInfo.setMail(tflNuevoMail.getText());
-					com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
+					com.pasapalabra.game.utilities.ClientConnexion.userInfo.setMail(tflNuevoMail.getText());
+					com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
 				}catch(Exception a){
 					Alert alert2 = new Alert(AlertType.INFORMATION);
 					alert2.setTitle("Se produjo un error al tramitar sus datos");
@@ -257,7 +257,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
-					com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
+					com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
 				}catch(Exception a){
 
 					Alert alert2 = new Alert(AlertType.ERROR);
@@ -300,7 +300,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK){
-			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
+			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
 		}
 		else{
 			//Nada
@@ -312,37 +312,37 @@ public class InformationChangeController extends ExtenderClassController impleme
 
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Amigos", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
 	}
 
 	public void btnMiPerfil(MouseEvent event){
 
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
 	}
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Estadisticas", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
 	}
 
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
+		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
 	}
 
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel	

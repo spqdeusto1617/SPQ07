@@ -43,7 +43,7 @@ public class LogInController extends Control implements Initializable {
 	
 	static boolean serverNotFound;
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(LogInController.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(LogInController.class.getName());
 
 	public static Image iAvatar;
 
@@ -84,8 +84,8 @@ public class LogInController extends Control implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Se inicia el handler del logger
-		com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, LogInController.class.getName());
-		if(!com.pasapalabra.game.utilidades.ClientConnexion.serverReady){
+		com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, LogInController.class.getName());
+		if(!com.pasapalabra.game.utilities.ClientConnexion.serverReady){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("No hay conexión con el servidor");
 
@@ -98,7 +98,7 @@ public class LogInController extends Control implements Initializable {
 		try{
 			log.log(Level.FINE, "Se ha inicializado EventosLogIn.java. Intento de conexión con servidor...");
 			//Empieza conexión
-			//com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilidades.Acciones_servidor.Comprobar.toString(),null);
+			//com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilities.Acciones_servidor.Comprobar.toString(),null);
 			log.log(Level.INFO, "Conexión iniciada.");
 			aLNoticias = new ArrayList<>();
 			if((aLNoticiasFicheros != null) || (!aLNoticiasFicheros.isEmpty())){
@@ -148,9 +148,9 @@ public class LogInController extends Control implements Initializable {
 		if(txtUsuario.getText().length()>0&&txtContra.getText().length()>0){
 			//txtIncorrecto.setText("Usuario y/o contraseña incorrecto/s");
 			try {	log.log(Level.FINEST, "LogIn OK. Transición de ventana a Juego");
-				com.pasapalabra.game.utilidades.ClientConnexion.login(txtUsuario.getText(), txtContra.getText());
+				com.pasapalabra.game.utilities.ClientConnexion.login(txtUsuario.getText(), txtContra.getText());
 				
-				com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
+				com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
 			} catch (Exception e) {
 				log.log(Level.INFO, "Error de LogIn", e);
 				//Aviso
@@ -184,7 +184,7 @@ public class LogInController extends Control implements Initializable {
 	 */
 	public void registro(MouseEvent event){
 		log.log(Level.FINEST, "Método de registro iniciado");
-		if( com.pasapalabra.game.utilidades.ClientConnexion.serverReady == false ){
+		if( com.pasapalabra.game.utilities.ClientConnexion.serverReady == false ){
 			log.log(Level.INFO, "El servidor no está operativo para el registro");
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("El servidor no está operativo");
@@ -195,7 +195,7 @@ public class LogInController extends Control implements Initializable {
 		}
 		else{
 			log.log(Level.FINEST, "Transición a ventana registro porque el servidor está operativo.");
-			//TODO: com.pasapalabra.game.utilidades.deVentana.transicionVentana("Registro", event);
+			//TODO: com.pasapalabra.game.utilities.deVentana.transicionVentana("Registro", event);
 		}
 	}
 

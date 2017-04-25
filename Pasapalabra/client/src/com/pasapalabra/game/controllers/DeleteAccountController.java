@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 public class DeleteAccountController extends ExtenderClassController implements Initializable {
 	@FXML public Pane panel;
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ThemeController.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ThemeController.class.getName());
 	//Declaración del panel
 	@FXML public Text textoESPanel;
 
@@ -89,7 +89,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	public void initialize(URL location, ResourceBundle resources) {
 
 		panel.getStylesheets().add("/css/application.css");
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
 		if(LogInController.iAvatar!=null){
 			imagenAvatar.setImage(LogInController.iAvatar);
 		}else{
@@ -135,7 +135,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 			Optional<ButtonType> result2 = alert2.showAndWait();
 			if (result2.get() == ButtonType.OK){
 				boolean datos_Correctos=true;
-				if(!tfdCorreo.getText().equals(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getMail())){
+				if(!tfdCorreo.getText().equals(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getMail())){
 					datos_Correctos=false;
 					Alert alert3 = new Alert(AlertType.ERROR);
 					alert3.setTitle("Mail no coincide");
@@ -155,7 +155,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert3.showAndWait();
 				}
-				/*if(!pfdContrasenya.getText().equals(com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.get(3))){
+				/*if(!pfdContrasenya.getText().equals(com.pasapalabra.game.utilities.Conexion_cliente.Datos_Usuario.get(3))){
 					datos_Correctos=false;
 					Alert alert3 = new Alert(AlertType.ERROR);
 					alert3.setTitle("Contraseña incorrecta");
@@ -177,7 +177,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 						alert3.initModality(Modality.APPLICATION_MODAL);
 						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert3.showAndWait();
-						com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("LogIn", event);
+						com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("LogIn", event);
 					}catch(Exception a){
 						Alert alert3 = new Alert(AlertType.INFORMATION);
 						alert3.setTitle("Se produjo un error al tramitar sus datos");
@@ -223,7 +223,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK){
-			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
+			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
 		}
 		else{
 			//Nada
@@ -235,25 +235,25 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Amigos", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
 	}
 
 	public void btnMiPerfil(MouseEvent event){
 
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
 	}
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Estadisticas", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
 	}
 
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
+		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
 	}
 
 
@@ -261,13 +261,13 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel	

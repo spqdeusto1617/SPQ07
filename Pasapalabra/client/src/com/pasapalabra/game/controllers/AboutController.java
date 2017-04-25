@@ -29,7 +29,7 @@ import javafx.util.Duration;
  */
 public class AboutController extends Control implements Initializable {
 	//Se define un logger.
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(AboutController.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(AboutController.class.getName());
 	public boolean animacionEnProceso;
 
 	@FXML
@@ -39,7 +39,7 @@ public class AboutController extends Control implements Initializable {
 	private Text txtEdadAsier;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, AboutController.class.getName());
+		com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, AboutController.class.getName());
 		log.log(Level.FINEST, "Inicializado de EventosAcercaDe");
 
 		//Comprueba edad de Iván
@@ -131,7 +131,7 @@ public class AboutController extends Control implements Initializable {
 	public void volver(MouseEvent event){
 		String pantallaALaQueIr = "Juego";
 		log.log(Level.FINEST, "Se ha vuelto a la pantalla de " + pantallaALaQueIr);
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana(pantallaALaQueIr, event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana(pantallaALaQueIr, event);
 	}
 
 

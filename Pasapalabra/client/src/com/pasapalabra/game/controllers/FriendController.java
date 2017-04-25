@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 public class FriendController extends ExtenderClassController implements Initializable {
 	@FXML public Pane panel;
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ThemeController.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ThemeController.class.getName());
 	//Declaración del panel
 	@FXML public Text textoESPanel;
 
@@ -135,7 +135,7 @@ public class FriendController extends ExtenderClassController implements Initial
 		else{
 			//TODO: meter los amigos
 		}
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
 		if(LogInController.iAvatar!=null){
 			imagenAvatar.setImage(LogInController.iAvatar);
 		}else{
@@ -165,7 +165,7 @@ public class FriendController extends ExtenderClassController implements Initial
 
 		String[]Dato=new String[1];
 
-		if(txtTextoAmigos.getText().equals(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName())){
+		if(txtTextoAmigos.getText().equals(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName())){
 			Alert alert3 = new Alert(AlertType.ERROR);
 			alert3.setTitle("Error");
 			alert3.setHeaderText("Te estás enviando una solicitud de amistad a ti mismo");
@@ -187,7 +187,7 @@ public class FriendController extends ExtenderClassController implements Initial
 		}
 	}
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
@@ -214,26 +214,26 @@ public class FriendController extends ExtenderClassController implements Initial
 	}
 
 	public void btnMiPerfil(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
 	}
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Estadisticas", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
 	}
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
+		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
 	}
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel	
