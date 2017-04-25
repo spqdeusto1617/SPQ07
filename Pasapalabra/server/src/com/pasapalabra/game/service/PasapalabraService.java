@@ -38,7 +38,7 @@ public class PasapalabraService implements IPasapalabraService{
 
 	private static ConcurrentHashMap<String, ArrayList<String>> waitingClients = new ConcurrentHashMap<String, ArrayList<String>>();
 
-	
+
 	@Override
 	public boolean registry(UserDTO userData, String pass) throws RemoteException{
 		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
@@ -67,7 +67,7 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 		else return null;
 	}
-	
+
 	public UserDTO getData(Token token) throws RemoteException{
 		if(currentUsers.containsKey(token.getToken())) return UserAssembler.getInstance().assembleToDTO(currentUsers.get(token.getToken()));
 		else return null;
@@ -262,6 +262,16 @@ public class PasapalabraService implements IPasapalabraService{
 
 			}
 		}
+
+	}
+
+	@Override
+	public boolean deLogin(Token session) throws RemoteException {
+		if(currentUsers.containsKey(session.getToken())){ 
+			currentUsers.remove(session.getToken());
+			return true;
+		}
+		else return false;
 
 	}
 

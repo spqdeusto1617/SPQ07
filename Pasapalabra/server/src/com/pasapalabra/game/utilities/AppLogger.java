@@ -17,7 +17,7 @@ import java.util.logging.XMLFormatter;
 public class AppLogger {
 
 	//Por defecto en una clase sería algo así.
-	//public static Logger log = Logger.getLogger(AppLogger.class.getName());
+	public static Logger log = Logger.getLogger(AppLogger.class.getName());
 
 	//Para evitar que en cada clase se tenga que hacer esto desarrollamos este método.
 	/**Método para getear el Logger de la clase teniendo el nombre de la propia clase.
