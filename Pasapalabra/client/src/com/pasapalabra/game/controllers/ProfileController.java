@@ -26,7 +26,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 public class ProfileController extends ExtenderClassController implements Initializable {
 	//Se define un logger
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ProfileController.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ProfileController.class.getName());
 
 	@FXML public Pane panel;
 
@@ -87,7 +87,7 @@ public class ProfileController extends ExtenderClassController implements Initia
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		//		
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
 
 		rectanguloAmigos.setOpacity(0.3f);
 		rectanguloEstadisticas.setOpacity(0.3f);
@@ -115,11 +115,11 @@ public class ProfileController extends ExtenderClassController implements Initia
 	}
 
 	public void btnCambiar (MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("CambiarDatos", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("CambiarDatos", event);
 	}
 
 	public void btnEliminar (MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("EliminarCuenta", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("EliminarCuenta", event);
 	}
 
 	/**AccionListener para poder cambiar la imagen del usuario
@@ -183,11 +183,11 @@ public class ProfileController extends ExtenderClassController implements Initia
 
 	//Transiciones de ventana
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Amigos", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
 	}
 
 	public void btnMiPerfil(MouseEvent event){
@@ -215,11 +215,11 @@ public class ProfileController extends ExtenderClassController implements Initia
 
 
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Estadisticas", event);
+		com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
 	}
 
 	public void btnCerrarSesion(MouseEvent event){
-		com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
+		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
 	}
 
 
@@ -227,13 +227,13 @@ public class ProfileController extends ExtenderClassController implements Initia
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel EDIT: ABRIR Y CERRAR	

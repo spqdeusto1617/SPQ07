@@ -10,9 +10,9 @@ import java.util.logging.Logger;
 import com.pasapalabra.game.model.DTO.QuestionType;
 import com.pasapalabra.game.objetos.GameButton;
 import com.pasapalabra.game.objetos.QuestionSelectedObject;
-import com.pasapalabra.game.utilidades.PanelThread;
-import com.pasapalabra.game.utilidades.ThreadCarga;
-import com.pasapalabra.game.utilidades.WindowUtilities;
+import com.pasapalabra.game.utilities.PanelThread;
+import com.pasapalabra.game.utilities.ThreadCarga;
+import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -42,7 +42,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 	//Logger de la clase
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ThemeController.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ThemeController.class.getName());
 
 
 	//*COMIENZO DE DECLARACIÓN DE ATRIBUTOS*
@@ -261,7 +261,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Amigos");
-			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Amigos", event);
+			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Amigos", event);
 		}
 	}
 
@@ -280,7 +280,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Perfil");
-			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Perfil", event);
+			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Perfil", event);
 		}
 	}
 
@@ -299,7 +299,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
-			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Estadisticas", event);
+			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Estadisticas", event);
 		}
 	}
 
@@ -307,19 +307,19 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilidades.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	@FXML
 	void btnCerrarSesion(MouseEvent event) {
 		log.log(Level.FINEST, "Cierre de sesión");
-		com.pasapalabra.game.utilidades.WindowUtilities.cerrarSesion(event);
+		com.pasapalabra.game.utilities.WindowUtilities.cerrarSesion(event);
 	}
 
 	@FXML
@@ -352,8 +352,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		//Lanzamos la partida
 
 		try {
-			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.utilidades.ClientConnexion.play(QuestionType.valueOf(Tipo[1])); 
-			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("JuegoPrincipal", event);
+			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.utilities.ClientConnexion.play(QuestionType.valueOf(Tipo[1])); 
+			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("JuegoPrincipal", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -363,7 +363,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			juegoEnCurso=false;
-			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("Juego", event);
+			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("Juego", event);
 			log.log(Level.WARNING, "Error en la partida", e);
 			e.printStackTrace();
 
@@ -384,14 +384,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		if(Conexion_cliente.Mi_Turno){
 			Conexion_cliente.Primera_vez=false;
 			try{
-				com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
+				com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 			}catch(Exception a){
 				log.log(Level.WARNING, "Error al lanzar conexion", a);
 				a.printStackTrace();
 			}
 		}
 		if(Conexion_cliente.Mi_Turno){
-			taPreguntas.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Pregunta);
+			taPreguntas.setText(com.pasapalabra.game.utilities.Conexion_cliente.Pregunta);
 			Conexion_cliente.Respuesta="...........................";
 			new Thread(new Runnable() {  
 				@Override  
@@ -414,11 +414,11 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						if(juegoEnCurso==true){
 
 
-							com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta="...........................";
+							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="...........................";
 
 
 							try{
-								com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+								com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
 
 							}catch(Exception a){
 								a.printStackTrace();
@@ -457,11 +457,11 @@ public class ThemeController extends ExtenderClassController implements Initiali
 							if(juegoEnCurso==true){
 
 
-								com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
+								com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
 								try{
 
-									com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
-									taPreguntas.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Pregunta);
+									com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
+									taPreguntas.setText(com.pasapalabra.game.utilities.Conexion_cliente.Pregunta);
 									tfRespuesta.setText("");
 								}catch(Exception a){
 									a.printStackTrace();
@@ -535,7 +535,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				}
 			});
 			if(Conexion_cliente.Mi_Turno){
-				taPreguntas.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Pregunta);
+				taPreguntas.setText(com.pasapalabra.game.utilities.Conexion_cliente.Pregunta);
 
 			}else{
 				taPreguntas.setText("Espere a que su rival termine");
@@ -554,7 +554,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 							System.out.println("Dentro del while");
 							if(juegoEnCurso){
 								try{
-									com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
+									com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 								}catch(Exception a){
 									a.printStackTrace();
 									juegoEnCurso=false;
@@ -591,7 +591,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						System.out.println("A obtener pregunta en el servidor");
 						if(juegoEnCurso){
 							try {
-								com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
+								com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 								taPreguntas.setText(Conexion_cliente.Pregunta);
 							} catch (SecurityException e) {
 								// TODO Auto-generated catch block
@@ -628,11 +628,11 @@ public class ThemeController extends ExtenderClassController implements Initiali
 									if(juegoEnCurso==true){
 
 
-										com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta="...........................";
+										com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="...........................";
 
 
 										try{
-											com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+											com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
 
 										}catch(Exception a){
 											a.printStackTrace();
@@ -671,11 +671,11 @@ public class ThemeController extends ExtenderClassController implements Initiali
 										if(juegoEnCurso==true){
 
 
-											com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
+											com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
 											try{
 
-												com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
-												taPreguntas.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Pregunta);
+												com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
+												taPreguntas.setText(com.pasapalabra.game.utilities.Conexion_cliente.Pregunta);
 												tfRespuesta.setText("");
 											}catch(Exception a){
 												a.printStackTrace();
@@ -829,11 +829,11 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						if(juegoEnCurso==true){
 
 
-							com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
+							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
 
 
 							try{
-								com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+								com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
 
 							}catch(Exception a){
 								a.printStackTrace();
@@ -872,11 +872,11 @@ public class ThemeController extends ExtenderClassController implements Initiali
 							if(juegoEnCurso==true){
 
 
-								com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta=tfRespuesta.getText();
+								com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
 								try{
 
-									com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
-									taPreguntas.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Pregunta);
+									com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
+									taPreguntas.setText(com.pasapalabra.game.utilities.Conexion_cliente.Pregunta);
 									tfRespuesta.setText("");
 								}catch(Exception a){
 									a.printStackTrace();
@@ -933,7 +933,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 									System.out.println("Dentro del while");
 									if(juegoEnCurso){
 										try{
-											com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
+											com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 										}catch(Exception a){
 											a.printStackTrace();
 											juegoEnCurso=false;
@@ -970,7 +970,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								System.out.println("A obtener pregunta en el servidor");
 								if(juegoEnCurso){
 									try{
-										com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
+										com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 
 										taPreguntas.setText(Conexion_cliente.Pregunta);
 
@@ -1005,16 +1005,16 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//Algo
 			if(Conexion_cliente.Mi_Turno){
 				if(juegoEnCurso==true){
-					com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta="Pasapalabra";
+					com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="Pasapalabra";
 					try{
-						com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+						com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
 					}catch(Exception a){
 						a.printStackTrace();
 					}
 
 					try{
-						com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilidades.Acciones_servidor.Obtener_Pregunta.toString(), null);
-						taPreguntas.setText(com.pasapalabra.game.utilidades.Conexion_cliente.Pregunta);
+						com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
+						taPreguntas.setText(com.pasapalabra.game.utilities.Conexion_cliente.Pregunta);
 						tfRespuesta.setText("");
 					}catch(Exception a){
 						a.printStackTrace();
@@ -1061,8 +1061,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				if (result.get() == ButtonType.OK){
 					if(juegoEnCurso==true){
 						try{	
-							com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta="Rendirse";
-							com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="Rendirse";
+							com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
 							tfRespuesta.setText("");
 						}catch(Exception a){
 							a.printStackTrace();
@@ -1099,7 +1099,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		@FXML
 		void masInfo(MouseEvent event){
 			if(!juegoEnCurso){
-				com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("AcercaDe", event);
+				com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("AcercaDe", event);
 			}
 		}
 
@@ -1478,7 +1478,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 			//Variables de usuario
 			menuDesplegable.add(textoNombreDeUsuario);
-			textoNombreDeUsuario.setText(com.pasapalabra.game.utilidades.ClientConnexion.userInfo.getUserName());
+			textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
 			menuDesplegable.add(imagenAvatar);
 
 			/* ya no hay rectangulos y textos. No se necesita objeto seleccion pregunta

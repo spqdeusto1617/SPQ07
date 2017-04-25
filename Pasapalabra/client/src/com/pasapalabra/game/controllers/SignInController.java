@@ -309,7 +309,7 @@ public class SignInController extends Control implements Initializable {
 
 				if (result.get() == ButtonType.OK){
 
-					//TODO: create usercom.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilidades.Acciones_servidor.Crear_Usuario.toString(), Datos_usuario);
+					//TODO: create usercom.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilities.Acciones_servidor.Crear_Usuario.toString(), Datos_usuario);
 
 					Alert alert2 = new Alert(AlertType.INFORMATION);
 
@@ -327,7 +327,7 @@ public class SignInController extends Control implements Initializable {
 					alert2.showAndWait();
 
 
-					com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("LogIn", event);
+					com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("LogIn", event);
 				}
 			}catch(Exception a){
 				Alert alert2 = new Alert(AlertType.ERROR);
@@ -400,7 +400,7 @@ public class SignInController extends Control implements Initializable {
 		//Ha pulsado ok?
 		if (result.get() == ButtonType.OK){
 
-			com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("LogIn", event);
+			com.pasapalabra.game.utilities.WindowUtilities.transicionVentana("LogIn", event);
 		}
 
 	}

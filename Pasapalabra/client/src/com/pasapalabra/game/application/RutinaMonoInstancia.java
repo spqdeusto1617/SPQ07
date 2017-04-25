@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class RutinaMonoInstancia extends Application {
 	//Se define un logger
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(RutinaMonoInstancia.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(RutinaMonoInstancia.class.getName());
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {

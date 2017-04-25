@@ -1,4 +1,4 @@
-package com.pasapalabra.game.utilidades;
+package com.pasapalabra.game.utilities;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -27,52 +27,50 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-/**Clase de utilidad para ventanas.<br>
- * <p>.<i>trasicionVentana</i> - Método para transición de fxml usando FXMLLoader.
- * <p>.<i>centrarVentana</i> - Método para centrar ventanas.
+/**Utilities class for windows.<br>
+ * <p>.<i>windowTransition</i> - Transition method for the fxml using FXMLLoader.
+ * <p>.<i>centerWindow</i> - method for center the windows.
  * @author asier.gutierrez
  */
-public class WindowUtilities {
+public class WindowUtilites {
 	
-	//Loger de la clase deVentana
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(ThemeController.class.getName());
+	//Class´s logger
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger("Server");
 	 
-	/**Método para la transición de una ventana a otra.
-	 * @param nombreFichero Nombre sin extensión por la cual se
-	 * conoce el fichero en el classpath. Sólo se pide el nombre porque
-	 * todas las ventanas que se van a cargar están alojadas en el paquete windows.
-	 * Si está fuera del paquete windows se deberá redefinir el método aplicando un path
-	 * correcto.
-	 * @param event Evento que hace cambiar de una ventana a otra.
-	 * El evento debe haber ocurrido en la ventana en la que se quiere
-	 * hacer la transición
+	/**Method for transist from one window to the other.
+	 * @param fileName: Name without extension by which
+ 	 * the file is Known in the classpath. Only the name is requested because 
+	 * all the windows to be loaded are located in the windows package.
+ 	 * If it is outside the windows package, the method must be redefined 
+	 * by applying a correct path.
+	 * @param event: Event that makes the transition from one window to other.
+	 * The event must have occurred in the window in which you want
+	 * make the transition
 	 */
-	public static void transicionVentana(String nombreFichero, Event event) {
+	public static void windowTransition(String fileName, Event event) {
 		Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent panel = null;
 		try {
-			panel = FXMLLoader.load(Main.class.getResource("/fxml/"+nombreFichero+".fxml"));
+			panel = FXMLLoader.load(WindowUtilites.class.getResource("/fxml/"+fileName+".fxml"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		app_stage.setScene(new Scene((Parent) panel));
-		centrarVentana(app_stage);
+		centerWindow(app_stage);
 	}
 
-	/**Método para centrar una ventana. Para centrar la ventana es necesario
-	 * que la ventana esté mostrada, si no aparece en la esquina superior izquierda.
-	 * @param frame De la clase Stage. Es la ventana que quieres centrar.
+	/**Method for closing a window. To center the window is necessary
+	 * that the window is displayed, if not, it will appear in the upper left corner.
+	 * @param frame: form the Stage class. This is the window that you want to center.
 	 */
-	public static void centrarVentana(Stage frame) {
+	public static void centerWindow(Stage frame) {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
 		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
 		frame.setX(x);
 		frame.setY(y);
 	}
-
 
 	/**<h1>Clase para cerrar sesión en la aplicación.</h1>
 	 * </br>
@@ -123,11 +121,10 @@ public class WindowUtilities {
 				//Si
 
 				//En la clase del servidor habrá una rutina para cerrar sesión.
-				String[] Datos=new String[1];
 				//FIXME:Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
 				try {
 					//FIXME:Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
-					com.pasapalabra.game.utilidades.WindowUtilities.transicionVentana("LogIn", event);
+					windowTransition("LogIn", event);
 				} catch (Exception e) {
 					log.log(Level.WARNING, "Error al cerrar sesion", e);
 				} 

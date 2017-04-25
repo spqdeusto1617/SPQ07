@@ -9,6 +9,8 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.pasapalabra.game.utilities.WindowUtilites;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -28,13 +30,13 @@ public class Main extends Application {
 
 	//Se define un logger.
 
-	public static Logger log = com.pasapalabra.game.utilidades.AppLogger.getWindowLogger(Main.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(Main.class.getName());
 
 	@Override
 	public void start(Stage primaryStage) {
 
 		try {
-			com.pasapalabra.game.utilidades.AppLogger.crearLogHandler(log, Main.class.getName());
+			com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, Main.class.getName());
 			//Cargar página con el FXML elegido  
 			Pane page =  FXMLLoader.load(getClass().getResource("/fxml/LogIn.fxml")); //Lo he dejado así porque sino, a la hora de exportarlo a un jar, no funciona el propio jar
 			log.log(Level.FINEST, "Cargado fichero FXML de LogIn en el pane");
@@ -52,7 +54,7 @@ public class Main extends Application {
 			//Añadir un escuchador para cuando se cierre la ventana 
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override public void handle(WindowEvent t) {
-					/*TODO: when delog, check thisif(!com.pasapalabra.game.utilidades.Conexion_cliente.Datos_Usuario.isEmpty()){
+					/*TODO: when delog, check thisif(!com.pasapalabra.game.utilities.Conexion_cliente.Datos_Usuario.isEmpty()){
 						String[] Datos=new String[1];
 						if(EventosJuego.juegoEnCurso==false){
 							
@@ -66,9 +68,9 @@ public class Main extends Application {
 						}else{
 							Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
 							System.out.println("Nos rendimos, al cerrar la ventana");
-							com.pasapalabra.game.utilidades.Conexion_cliente.Respuesta="Rendirse";
+							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="Rendirse";
 							try {
-								com.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilidades.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilidades.Acciones_servidor.Responder_Pregunta.toString(), null);
+								com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
 								Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
 							} catch (SecurityException e) {
 								// TODO Auto-generated catch block
@@ -115,7 +117,7 @@ public class Main extends Application {
 			primaryStage.show();
 			log.log(Level.FINEST, "Ventana mostrada");
 			//Centrar ventana
-			com.pasapalabra.game.utilidades.WindowUtilities.centrarVentana(primaryStage);
+			WindowUtilites.centerWindow(primaryStage);
 			log.log(Level.FINEST, "Centrada la ventana");
 
 
@@ -136,7 +138,7 @@ public class Main extends Application {
 				if (lockInstance("block.dat")){
 					//Aquí se carga toda la aplicación
 					try {
-						com.pasapalabra.game.utilidades.ClientConnexion.startConnection(args);
+						com.pasapalabra.game.utilities.ClientConnexion.startConnection(args);
 					} catch (MalformedURLException | NotBoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
