@@ -22,6 +22,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**Class that manage events from Game.fxml
+ * @author alvaro
+ *
+ */
 public class GameController implements Initializable{
 	
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ThemeController.class.getName());
@@ -66,6 +70,10 @@ public class GameController implements Initializable{
 	}*/
 	
 	
+	/**Method called when Contestar button is pressed in the game. 
+	 * If the answer is in blank, error
+	 * @param event
+	 */
 	@FXML
 	void btnContestar(MouseEvent event) {
 		//SERVIDOR
@@ -297,6 +305,12 @@ public class GameController implements Initializable{
 
 
 	
+	/**Method called when Pasar button is pressed
+	 * It manages everything related to when a user goes to another question. 
+	 * It is the user turn and says pasapalabra the letter changes. 
+	 * To the contrary, the user can not go to another question. 
+	 * @param event
+	 */
 	@FXML
 	void btnPasar(MouseEvent event) {
 		//SERVIDOR
@@ -370,6 +384,11 @@ public class GameController implements Initializable{
 
 	}
 	
+	/**Method called when Rendirse button is called in the game. 
+	 * If the user can (when it is his/her turn) give up. To the contrary, the user
+	 * can not give up. 
+	 * @param event
+	 */
 	@FXML
 	void btnRendirse(MouseEvent event){
 		/*
@@ -412,7 +431,11 @@ public class GameController implements Initializable{
 	}
 	
 	//Para usar el textBox 
-			private static int Pos_Letra(char letra_Actual) {
+	/**Method that returns the position of the current letter
+	 * @param letra_Actual
+	 * @return
+	 */
+	private static int Pos_Letra(char letra_Actual) {
 
 
 
@@ -425,7 +448,7 @@ public class GameController implements Initializable{
 				else{
 					return letra_Actual-'a';
 				}
-			}
+	}
 			
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

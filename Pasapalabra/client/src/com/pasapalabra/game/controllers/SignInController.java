@@ -48,7 +48,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-/**Clase que gestiona los eventos de la clase Registro.fxml
+/**Class that manages events from Registro.fxml
  * @author asier.gutierrez
  *
  */
@@ -179,8 +179,8 @@ public class SignInController extends Control implements Initializable {
 
 	}
 
-	/**Método para comprobar que el usuario ha introducido un nombre que tiene entre 8 y 16 caracteres
-	 * @param event el evento de ratón
+	/**Method that check that the name introduced by the user has between 8 and 16 caracters
+	 * @param event of the mouse
 	 */
 	public void comprobarNombreUsuario(Event event){
 		if(userNameElegido.isShowing()){
@@ -201,8 +201,8 @@ public class SignInController extends Control implements Initializable {
 	}
 
 
-	/**Método para comprobar que el usuario ha introducido un email correcto
-	 * @param event el evento de ratón
+	/**Method that check that the email introduced is correct or no. 
+	 * @param event of the mouse
 	 */
 	public void comprobarMailUsuario(Event event){
 		if(userMailElegido.isShowing()){
@@ -227,9 +227,9 @@ public class SignInController extends Control implements Initializable {
 		}
 	}
 
-	/**Método para comprobar que la contraseña sea de longitud mínima de 8 caracteres. En caso contrario, no deja crear
-	 * el usuario
-	 * @param event el evento de ratón
+	/**Method that check that the password length is longer than 8 characters. To the contrary, the
+	 * user can not be created
+	 * @param event of the mouse
 	 */
 	public void comprobarContrasenya1(Event event){
 
@@ -245,27 +245,9 @@ public class SignInController extends Control implements Initializable {
 		}
 	}
 
-	/**(Método obsoleto) Método para comprobar si las contraseñas de los usuarios coinciden
-	 * @param event el evento de ratón
-	 */
-	public void comprobarContrasenya2(Event event){
-
-		//		if(pflContrasenya.getText().compareTo(pfdRepetirContrasenya.getText())!=0){
-		//			datoscorrectos=false;
-		//			texContrasenyaEncaja.setVisible(true);
-		//			
-		//		}
-		//		else{
-		//			
-		//			datoscorrectos=true;
-		//			texContrasenyaEncaja.setVisible(false);
-		//		}
-	}
-
-
-	/**Botón para crear el usuario. Antes de crearlo, comprueba que los datos estén completos. En caso negativo,
-	 * se bloquea el botón, y no avanza 
-	 * @param event el evento de ratón
+	/**Button in order to create a user. Before the creation, needs to check that the information is complete.
+	 * To the contrary, the button can not be pressed
+	 * @param event of the mouse
 	 */
 	public void crearUsuario(MouseEvent event){
 		if(txtNombreUsuario.getText().length()<8||txtCorreoUsuario.getText().length()==0||pflContrasenya.getText().length()<8||pfdRepetirContrasenya.getText().length()<8||!pflContrasenya.getText().equals(pfdRepetirContrasenya.getText()))
@@ -377,7 +359,7 @@ public class SignInController extends Control implements Initializable {
 	}
 
 
-	/**Método que cancela el usuario que se iba a crear, si así lo considera
+	/**Method that cancel the creation of the user
 	 * @param event
 	 */
 	public void cancelarUsuario(MouseEvent event){
@@ -405,8 +387,8 @@ public class SignInController extends Control implements Initializable {
 
 	}
 
-	/**FileChooser para la imagen de usuario. Solo acepta imágenes del tipo: jpg, gif, bmp o png
-	 * @param event el evento de ratón para activarlo
+	/**FileChooser for the user image of type jpg, gif, bmp o png
+	 * @param event of the mouse
 	 */
 	public void cambiarImagen(MouseEvent event){
 		//Otro stage para cargar el filechooser
@@ -456,9 +438,9 @@ public class SignInController extends Control implements Initializable {
 
 	}
 
-	/**Método que valida la fecha que mete el usuario, si la fecha de nacimiento que mete es mayor a la actual,
-	 * no le deja poner esa fecha.
-	 * @param event el evento de ratón
+	/**Method that check that the birth date is correct. If the birth day is higher that the actual date
+	 * it can no be introduced. 
+	 * @param event of the mouse
 	 */
 	@SuppressWarnings("deprecation")
 	public void comprobarDia(Event event){
@@ -491,8 +473,8 @@ public class SignInController extends Control implements Initializable {
 	}
 
 
-	/**Método para que el usuario lea los términos y condiciones (Eula)
-	 * @param event: el evento de ratón
+	/**Method in order to the user to read the conditions of the game
+	 * @param event of the mouse
 	 */
 
 	public void irATerminos(MouseEvent event){
@@ -597,8 +579,8 @@ public class SignInController extends Control implements Initializable {
 
 
 
-	/**Método para comprobar si el usuario ha aceptado el eula o no (en caso de que no los acepte, el botón de crear
-	 * no está aactivo)
+	/**Mehtod that chek if the user has accepted the conditions. If he/she doesn't accept, the button
+	 * to create the user will be disable. 
 	 * @param event: el evento del pulsador
 	 */
 	public void aceptaTerminos(Event event){
