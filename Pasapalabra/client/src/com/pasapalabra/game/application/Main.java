@@ -9,6 +9,8 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.pasapalabra.game.utilities.WindowUtilites;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -115,7 +117,7 @@ public class Main extends Application {
 			primaryStage.show();
 			log.log(Level.FINEST, "Ventana mostrada");
 			//Centrar ventana
-			com.pasapalabra.game.utilities.WindowUtilities.centrarVentana(primaryStage);
+			WindowUtilites.centerWindow(primaryStage);
 			log.log(Level.FINEST, "Centrada la ventana");
 
 
