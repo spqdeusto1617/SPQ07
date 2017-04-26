@@ -45,11 +45,11 @@ public class FriendController extends ExtenderClassController implements Initial
 	//Declaración del panel
 	@FXML public Text textoESPanel;
 
-	@FXML public Text textoMiPerfil;
+	//@FXML public Text textoMiPerfil;
 
 	@FXML public ImageView logopsp;
 
-	@FXML public Text textoCerrarSesion;
+	//@FXML public Text textoCerrarSesion;
 
 	@FXML public Text textoPlus;
 
@@ -57,29 +57,29 @@ public class FriendController extends ExtenderClassController implements Initial
 
 	@FXML public Circle circuloPlus;
 
-	@FXML public Rectangle rectanguloCerrarSesion;
+	//@FXML public Rectangle rectanguloCerrarSesion;
 
-	@FXML public Rectangle rectanguloAmigos;
+	//@FXML public Rectangle rectanguloAmigos;
 
-	@FXML public Text textoJugar;
+	//@FXML public Text textoJugar;
 
 	@FXML public Text textoLogeadoComo;
 
-	@FXML public Rectangle rectanguloMiPerfil;
+	//@FXML public Rectangle rectanguloMiPerfil;
 
-	@FXML public Rectangle rectanguloJugar;
+	//@FXML public Rectangle rectanguloJugar;
 
-	@FXML public Text textoAmigos;
+	//@FXML public Text textoAmigos;
 
 	@FXML public Circle circuloPanel;
 
 	@FXML public Text textoNombreDeUsuario;
 
-	@FXML public Text textoEstadisticas;
+	//@FXML public Text textoEstadisticas;
 
 	@FXML public ImageView imagenAvatar;
 
-	@FXML public Rectangle rectanguloEstadisticas;
+	//@FXML public Rectangle rectanguloEstadisticas;
 
 	@FXML public Rectangle rectanguloBuscarAmigos;
 
@@ -90,6 +90,15 @@ public class FriendController extends ExtenderClassController implements Initial
 	@FXML public Button boton;
 
 	@FXML public TextField txtTextoAmigos;
+	
+	//Buttons
+	@FXML public Button btnCerrarSesion;
+	@FXML public Button btnEstadisticas;
+	@FXML public Button btnPerfil;
+	@FXML public Button btnAmigos;
+	@FXML public Button btnJuego;
+
+
 	private final ObservableList<Person> data =
 			FXCollections.observableArrayList(new Person("A","K"));
 	public static boolean TieneAmigos; 
@@ -131,10 +140,10 @@ public class FriendController extends ExtenderClassController implements Initial
 
 		}
 		panel.getStylesheets().add("/css/application.css");
-		rectanguloAmigos.setOpacity(1f);
-		rectanguloEstadisticas.setOpacity(0.3f);
-		rectanguloJugar.setOpacity(0.3f);
-		rectanguloMiPerfil.setOpacity(0.3f);
+		btnAmigos.setOpacity(1f);
+		btnEstadisticas.setOpacity(0.3f);
+		btnJuego.setOpacity(0.3f);
+		btnPerfil.setOpacity(0.3f);
 		if(TieneAmigos==false){
 			tblTablaAmigos.setPlaceholder(new Label("No tienes amigos aun."));
 		}

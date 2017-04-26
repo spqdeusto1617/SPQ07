@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -38,11 +39,11 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	//Declaración del panel
 	@FXML public Text textoESPanel;
 
-	@FXML public Text textoMiPerfil;
+	//@FXML public Text textoMiPerfil;
 
 	@FXML public ImageView logopsp;
 
-	@FXML public Text textoCerrarSesion;
+	//@FXML public Text textoCerrarSesion;
 
 	@FXML public Text textoPlus;
 
@@ -50,37 +51,37 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 	@FXML public Circle circuloPlus;
 
-	@FXML public Rectangle rectanguloCerrarSesion;
+	//@FXML public Rectangle rectanguloCerrarSesion;
 
-	@FXML public Rectangle rectanguloAmigos;
+	//@FXML public Rectangle rectanguloAmigos;
 
-	@FXML public Text textoJugar;
+	//@FXML public Text textoJugar;
 
 	@FXML public Text textoLogeadoComo;
 
-	@FXML public Rectangle rectanguloMiPerfil;
+	//@FXML public Rectangle rectanguloMiPerfil;
 
-	@FXML public Rectangle rectanguloJugar;
+	//@FXML public Rectangle rectanguloJugar;
 
-	@FXML public Text textoAmigos;
+	//@FXML public Text textoAmigos;
 
 	@FXML public Circle circuloPanel;
 
 	@FXML public Text textoNombreDeUsuario;
 
-	@FXML public Text textoEstadisticas;
+	//@FXML public Text textoEstadisticas;
 
 	@FXML public ImageView imagenAvatar;
 
-	@FXML public Rectangle rectanguloEstadisticas;
+	//@FXML public Rectangle rectanguloEstadisticas;
 
-	@FXML public Rectangle rectanguloDescartar;
+	//@FXML public Rectangle rectanguloDescartar;
 
-	@FXML public Rectangle rectanguloCambiarCorreo;
+	//FXML public Rectangle rectanguloCambiarCorreo;
 
-	@FXML public Rectangle rectanguloCambiarContrasenya;
+	//@FXML public Rectangle rectanguloCambiarContrasenya;
 
-	@FXML public Text txtDescartar;
+	//@FXML public Text txtDescartar;
 
 	@FXML public Text txtEliminar;
 
@@ -89,6 +90,17 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	@FXML public PasswordField pfdContrasenya;
 
 	@FXML public PasswordField pfdRepetirContrasenya;
+	
+	//Buttons
+	@FXML public Button btnCerrarSesion;
+	@FXML public Button btnEstadisticas;
+	@FXML public Button btnPerfil;
+	@FXML public Button btnAmigos;
+	@FXML public Button btnJuego;
+	@FXML public Button btnDescartar;
+	@FXML public Button btnCambiar;
+	@FXML public Button btnCambiarContrasenia;
+
 
 
 
