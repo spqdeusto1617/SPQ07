@@ -124,13 +124,13 @@
       </Text>
       <TableView fx:id="tblTablaAmigos" layoutX="254.0" layoutY="60.0" prefHeight="413.0" prefWidth="459.0" />
       <Button fx:id="boton" layoutX="215.0" layoutY="487.0" mnemonicParsing="false" onMousePressed="#Anyadir" text="Boton" />
-      <ImageView fx:id="imagenAvatar1" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
+      <ImageView fx:id="imagenAvatar1" fitHeight="73.0" fitWidth="128.0" layoutX="34.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnJuego" layoutX="18.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnAmigos" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
+      <Button fx:id="btnAmigos" layoutX="18.0" layoutY="226.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
          <font>
             <Font size="18.0" />
          </font>
@@ -143,289 +143,16 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="btnPerfil" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
+      <Button fx:id="btnPerfil" layoutX="18.0" layoutY="296.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnEstadisticas" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
+      <Button fx:id="btnEstadisticas" layoutX="18.0" layoutY="369.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnCerrarSesion" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <ImageView fx:id="imagenAvatar2" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego1" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnAmigos1" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="btnPerfil1" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEstadisticas1" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCerrarSesion1" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <ImageView fx:id="imagenAvatar3" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego2" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnAmigos2" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="btnPerfil2" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEstadisticas2" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCerrarSesion2" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <ImageView fx:id="imagenAvatar4" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego3" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnAmigos3" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="btnPerfil3" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEstadisticas3" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCerrarSesion3" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <ImageView fx:id="imagenAvatar5" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego4" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnAmigos4" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="btnPerfil4" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEstadisticas4" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCerrarSesion4" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <ImageView fx:id="imagenAvatar6" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego5" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnAmigos5" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="btnPerfil5" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEstadisticas5" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCerrarSesion5" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <ImageView fx:id="imagenAvatar7" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego6" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnAmigos6" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="btnPerfil6" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEstadisticas6" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCerrarSesion6" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <ImageView fx:id="imagenAvatar8" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego7" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnAmigos7" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="btnPerfil7" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEstadisticas7" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCerrarSesion7" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <ImageView fx:id="imagenAvatar9" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego8" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnAmigos8" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="btnPerfil8" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEstadisticas8" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCerrarSesion8" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <ImageView fx:id="imagenAvatar10" fitHeight="73.0" fitWidth="128.0" layoutX="44.0" layoutY="92.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego9" layoutX="28.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
-         <font>
-            <Font name="Arial" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnAmigos9" layoutX="28.0" layoutY="241.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop color="WHITE" />
-                  <Stop color="WHITE" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Button>
-      <Button fx:id="btnPerfil9" layoutX="28.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnEstadisticas9" layoutX="28.0" layoutY="384.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnCerrarSesion9" layoutX="37.0" layoutY="581.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
-      <Rectangle fx:id="rectanguloPanel1" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="7.0" layoutY="9.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
-      <Rectangle fx:id="rectanguloPanel2" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="7.0" layoutY="9.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
-      <Rectangle fx:id="rectanguloPanel3" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="7.0" layoutY="9.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
+      <Button fx:id="btnCerrarSesion" layoutX="27.0" layoutY="566.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
    </children>
 </Pane>
