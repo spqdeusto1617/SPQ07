@@ -38,26 +38,6 @@ import javafx.stage.Stage;
  * @author alvaro
  *
  */
-/**
- * @author usuario
- *
- */
-/**
- * @author usuario
- *
- */
-/**
- * @author usuario
- *
- */
-/**
- * @author usuario
- *
- */
-/**
- * @author usuario
- *
- */
 public class FriendController extends ExtenderClassController implements Initializable {
 	@FXML public Pane panel;
 
