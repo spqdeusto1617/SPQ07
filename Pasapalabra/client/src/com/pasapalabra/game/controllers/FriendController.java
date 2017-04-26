@@ -34,6 +34,30 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**Class that manages events from Friends.fxml
+ * @author alvaro
+ *
+ */
+/**
+ * @author usuario
+ *
+ */
+/**
+ * @author usuario
+ *
+ */
+/**
+ * @author usuario
+ *
+ */
+/**
+ * @author usuario
+ *
+ */
+/**
+ * @author usuario
+ *
+ */
 public class FriendController extends ExtenderClassController implements Initializable {
 	@FXML public Pane panel;
 
@@ -156,11 +180,18 @@ public class FriendController extends ExtenderClassController implements Initial
 		imagenAvatar.setSmooth(true); 
 		imagenAvatar.setCache(true); 
 	}
+	
+	/**Method to add new person
+	 * @param event
+	 */
 	public void Anyadir(MouseEvent event){
 		data.add(new Person("Z","P"));
 	}
-	/**AccionListener para buscar amigos. Se envía el amigo a buscar al servidor (previamente evaluado que no esté en su lista) y se le da la obción de enviar la 
-	 * solicitud o no. Si contesta afirmativo, se añade una solicitud a ambos
+	
+	/**AccionListener to find friends. The friend is will be sent to look for the service
+	 * previously evaluated that the user is not in his/her list.
+	 * Then they are given the chance to receive a confirmation and if they accept it, 
+	 * a request will be added to both users.
 	 * @param event
 	 */
 	public void btnBuscarAmigos(MouseEvent event){
@@ -188,6 +219,10 @@ public class FriendController extends ExtenderClassController implements Initial
 
 		}
 	}
+	
+	/**Transition to game window
+	 * @param event
+	 */
 	public void btnJugar(MouseEvent event){
 		WindowUtilities.windowTransition("Juego", event);
 	}
@@ -215,14 +250,23 @@ public class FriendController extends ExtenderClassController implements Initial
 		log.log(Level.FINEST, "Alerta de información creada, mostrada y cerrada");
 	}
 
+	/**Transition to profile window
+	 * @param event
+	 */
 	public void btnMiPerfil(MouseEvent event){
 		WindowUtilities.windowTransition("Perfil", event);
 	}
 
-
+	/**Transition to statistics window
+	 * @param event
+	 */
 	public void btnEstadisticas(MouseEvent event){
 		WindowUtilities.windowTransition("Estadisticas", event);
 	}
+	
+	/**Method to close the current user session
+	 * @param event
+	 */
 	public void btnCerrarSesion(MouseEvent event){
 		WindowUtilities.closeSession(event);
 	}
@@ -242,31 +286,11 @@ public class FriendController extends ExtenderClassController implements Initial
 	}
 }
 
-/**Clase interna para gestionar los amigos (deprecated)
+/**Intern class to manage friends
  * @author Ivan
  *
  */
 class Person {
-
-	//    private final SimpleStringProperty nombreUsuario;
-	//    private final SimpleBooleanProperty estado;
-	//
-	//    Person(String fName, boolean lName) {
-	//        this.nombreUsuario = new SimpleStringProperty(fName);
-	//        this.estado = new SimpleBooleanProperty(lName);
-	//    }
-	//
-	//    public String getFirstName() {
-	//        return nombreUsuario.get();
-	//    }
-	//
-	//    public void setFirstName(String fName) {
-	//    	nombreUsuario.set(fName);
-	//    }
-	//
-	//	public SimpleBooleanProperty getEstado() {
-	//		return estado;
-	//	}
 
 	private final SimpleStringProperty firstName;
 	private final SimpleStringProperty lastName;
