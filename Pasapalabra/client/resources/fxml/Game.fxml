@@ -10,7 +10,8 @@
 
 
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fafdfe;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.GameController>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fafdfe;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.GameController">
+   <children>
       <Rectangle fx:id="rPreguntas" arcHeight="5.0" arcWidth="5.0" fill="#9536ff8f" height="103.0" layoutX="209.0" layoutY="197.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="552.0" />
       <TextArea fx:id="taPreguntas" editable="false" layoutX="214.0" layoutY="202.0" prefHeight="93.0" prefWidth="542.0" wrapText="true" />
       <Text id="information" fx:id="textoTiempoUsuario" layoutX="302.0" layoutY="408.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="?????????" />
