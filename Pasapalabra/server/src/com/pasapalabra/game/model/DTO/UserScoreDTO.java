@@ -53,4 +53,9 @@ public class UserScoreDTO implements Serializable{
 		this.victory = false;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserScoreDTO [rightAnswered=" + rightAnswered + ", wrongAnswered=" + wrongAnswered + ", victory="
+				+ victory + "]";
+	}
 }

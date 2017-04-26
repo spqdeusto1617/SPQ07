@@ -2,6 +2,7 @@ package com.pasapalabra.game.service;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.pasapalabra.game.dao.QuestionDAO;
@@ -9,6 +10,7 @@ import com.pasapalabra.game.dao.UserDAO;
 import com.pasapalabra.game.dao.mongodb.QuestionMongoDAO;
 import com.pasapalabra.game.dao.mongodb.UserMongoDAO;
 import com.pasapalabra.game.model.Question;
+import com.pasapalabra.game.model.QuestionType;
 import com.pasapalabra.game.model.User;
 import com.pasapalabra.game.model.UserScore;
 import com.pasapalabra.game.model.DTO.QuestionDTO;
@@ -59,6 +61,7 @@ public class PasapalabraService implements IPasapalabraService{
 		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
 		if(uDao.checkIfExists(userName)){
 			User user = uDao.getUserByLogin(userName, pass);
+			//User user = new User(userName, "a@a", pass, null, new Date(), 0, 0, 0);
 			//UserDTO userDTO = UserAssembler.getInstance().assembleToDTO(user);
 			if(currentUsers.containsValue(user)) throw new SecurityException();
 			Token token = SessionManager.createSession(userName);
@@ -81,35 +84,47 @@ public class PasapalabraService implements IPasapalabraService{
 			questions.add(qDAO.getRandomQuestionByLeter(alphabet));
 		} 
 		questions.add(qDAO.getRandomQuestionByLeter('ñ'));
+		/*ArrayList<Question> questions = new ArrayList<>();
+		questions.add(new Question("Test", "Answer", 'a', "Unknown"));
+		for(int i = (int)'a'; i<(int)'z'; i++){
+			questions.add(new Question("Test", "Answer", (char)(i + 1), "Unknown"));
+		} 
+		questions.add(new Question("works?", "we hope so", 'ñ', "Unknown")); //for testing purposes*/
 		currentQuestions.put(session.getToken(), questions);
+
 		if(SessionManager.isValidSession(session)){
-			if(!waitingClients.contains(type)){//If there is no waiting players for that categories, we add it
+			try{
+				waitingClients.get(type).get(0);
+			}catch (Exception e) {
+				
 				waitingClients.put(type, new ArrayList<String>());
-				waitingClients.get(type).add(SessionManager.getUser(session));
-				currentClients.put(SessionManager.getUser(session), service);
+				waitingClients.get(type).add(session.getToken());
+				currentClients.put(session.getToken(), service);
+				currentResult.put(session.getToken(), new UserScore());
+
+				return new UserDTO("Wait");//TODO: revise this
+			}
+			//If there is that category, but no players
+			if(waitingClients.get(type).isEmpty()){
+				System.out.println("Waiting clients esta vacio");
+				waitingClients.get(type).add(session.getToken());
 				currentResult.put(session.getToken(), new UserScore());
 				return new UserDTO("Wait");//TODO: revise this
 			}
-			else{//If there is that categories, but no players
-				if(waitingClients.get(type).isEmpty()){
-					waitingClients.get(type).add(SessionManager.getUser(session));
-					currentResult.put(session.getToken(), new UserScore());
-					return new UserDTO("Wait");
-				}
-				currentMatches.put(SessionManager.getUser(session),waitingClients.get(type).get(0));
-				waitingClients.get(type).remove(0);
-				/*for(char alphabet = 'a'; alphabet <= 'z'; alphabet++){
+			currentMatches.put(session.getToken(),waitingClients.get(type).get(0));
+			waitingClients.get(type).remove(0);
+			/*for(char alphabet = 'a'; alphabet <= 'z'; alphabet++){
 					questions.add(qDAO.getRandomQuestionByLeter(alphabet));
 				} 
 				questions.add(qDAO.getRandomQuestionByLeter('ñ'));
 				currentQuestions.put(session.getToken(), questions);*/
-				currentResult.put(session.getToken(), new UserScore());
-				currentClients.put(SessionManager.getUser(session), service);
-				IClientService client= (IClientService)currentClients.get(currentMatches.get(SessionManager.getUser(session)));
-				client.getUser(UserAssembler.getInstance().assembleToDTO(currentUsers.get(session.getToken())));
-				return UserAssembler.getInstance().assembleToDTO(currentUsers.get(currentMatches.get(session.getToken())));//We get the first question
-			}
+			currentResult.put(session.getToken(), new UserScore());
+			currentClients.put(session.getToken(), service);
+			IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
+			client.getUser(UserAssembler.getInstance().assembleToDTO(currentUsers.get(session.getToken())));
+			return UserAssembler.getInstance().assembleToDTO(currentUsers.get(currentMatches.get(session.getToken())));//We get the first question
 		}
+
 		else{
 			return null;
 		}
@@ -117,7 +132,8 @@ public class PasapalabraService implements IPasapalabraService{
 
 	public QuestionDTO getQuestion(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
-			if(!currentMatches.contains(session.getToken()))return null;//If it´s not playing, nothing is returned
+			if(!currentMatches.containsKey(session.getToken()))return null;//If it´s not playing, nothing is returned
+			if(allQuestionAnswered(session))return null;//If the player has finished playing, he can´t answer anymore questions
 			boolean answered = false;
 			Question question = null;
 			do{
@@ -142,9 +158,9 @@ public class PasapalabraService implements IPasapalabraService{
 
 	public boolean answerQuestion(Token session, String answer) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
-			if(!currentMatches.contains(session.getToken()))return false;
+			if(!currentMatches.containsKey(session.getToken()))return false;
 			Question question = null;
-			if(!currentQuestions.contains(session.getToken()))return false;
+			if(!currentQuestions.containsKey(session.getToken()))return false;
 			if(currentResult.get(session.getToken()).getCurrentLetter() == 'ñ'){
 				question = currentQuestions.get(session.getToken()).get(currentQuestions.get(session.getToken()).size()-1);
 			}
@@ -160,7 +176,7 @@ public class PasapalabraService implements IPasapalabraService{
 				}else{
 					currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97).setAnswered(true);
 				}
-				IClientService client= (IClientService)currentClients.get(currentMatches.get(SessionManager.getUser(session)));
+				IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
 				client.answered(currentResult.get(session.getToken()).getCurrentLetter(), true);
 				currentResult.get(session.getToken()).nextLetter();
 				return true;
@@ -178,7 +194,7 @@ public class PasapalabraService implements IPasapalabraService{
 				}else{
 					currentQuestions.get(session.getToken()).get(((int)currentResult.get(session.getToken()).getCurrentLetter())-97).setAnswered(true);
 				}
-				IClientService client= (IClientService)currentClients.get(currentMatches.get(SessionManager.getUser(session)));
+				IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
 				client.answered(currentResult.get(session.getToken()).getCurrentLetter(), false);
 				currentResult.get(session.getToken()).nextLetter();
 				return false;
@@ -201,15 +217,16 @@ public class PasapalabraService implements IPasapalabraService{
 
 	public UserScoreDTO getResults(Token session) throws RemoteException{
 		if(SessionManager.isValidSession(session)){
-			if(!currentMatches.contains(session.getToken()))return null;
+			if(!currentMatches.containsKey(session.getToken()))return null;
+			if(!allQuestionAnswered(session)) return null;
 			UserScore finalScore1 = currentResult.get(session.getToken());
 			UserScore finalScore2 = currentResult.get(currentMatches.get(session.getToken()));
 			if(finalScore2.getTotalAnswered() == 0){
 				String token1 = session.getToken();
 				String token2 = currentMatches.get(token1);
+				IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
 				currentMatches.remove(token1);
 				currentMatches.put(token2, token1);
-				IClientService client= (IClientService)currentClients.get(currentMatches.get(SessionManager.getUser(session)));
 				client.changeTurn(ScoreAssembler.getInstance().assembleToDTO(finalScore1));
 				return ScoreAssembler.getInstance().assembleToDTO(finalScore1);
 			}
@@ -226,7 +243,7 @@ public class PasapalabraService implements IPasapalabraService{
 				finalScore1.lost();
 				finalScore2.won();
 			}
-			IClientService client= (IClientService)currentClients.get(currentMatches.get(SessionManager.getUser(session)));
+			IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
 			client.finalResult(ScoreAssembler.getInstance().assembleToDTO(finalScore2));
 			currentQuestions.remove(session.getToken());
 			currentResult.remove(session.getToken());
@@ -253,14 +270,17 @@ public class PasapalabraService implements IPasapalabraService{
 
 	@Override
 	public void exitMatchMaking(Token session, String type) throws RemoteException {
+
 		if(SessionManager.isValidSession(session)){
-			if(waitingClients.containsKey(session.getToken())){
+
+			if(waitingClients.get(type).contains(session.getToken())){
 				waitingClients.get(type).remove(session.getToken());
 				currentClients.remove(session.getToken());
 				currentResult.remove(session.getToken());
 				currentQuestions.remove(session.getToken());
 
 			}
+
 		}
 
 	}
@@ -268,46 +288,81 @@ public class PasapalabraService implements IPasapalabraService{
 	@Override
 	public boolean deLogin(Token session) throws RemoteException {
 		if(currentUsers.containsKey(session.getToken())){ 
-			currentUsers.remove(session.getToken());
-			return true;
+			if(!currentQuestions.containsKey(session.getToken())){
+				currentUsers.remove(session.getToken());
+				return true;
+			}
 		}
-		else return false;
+		return false;
 
 	}
 
 
-	/*public static void main(String[] args) {//For testing purposes
-		PasapalabraService service = new PasapalabraService();
-		Token token = service.login("Me", "Test");
-		System.out.println(token.getToken());
-		QuestionDTO test2 = service.play(token, QuestionType.All);
-		test2.setAnswer("Pasapalabra");
-		System.out.println("First Question: "+test2.getQuestion() +"\n letter: "+test2.getLeter());
-		System.out.println("\n");
-		service.answerQuestion(token, test2);
-		for(int i = 'a'; i<'z'+1;i++){
-			test2 = service.getQuestion(token);
-			System.out.println("Question number: "+(i-96)+" Question: "+test2.getQuestion() +"\n letter: "+test2.getLeter());
+	public static void main(String[] args) {//For testing purposes
+		/*PasapalabraService service = new PasapalabraService();
+		Token token = null;
+		Token token2 = null;
+		//Token token3 = null;
+		try {
+			token = service.login("Me", "Test");
+			System.out.println("Token1: "+token.getToken());
 
-			test2.setAnswer("No");
-			System.out.println("result: "+service.answerQuestion(token, test2));
-			System.out.println("\n");
+			token2 = service.login("You", "Test2");
+			System.out.println("Token2: "+token2.getToken());
+
+			//token3 = service.login("He", "Test3");
+		} catch (RemoteException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		if(service.allQuestionAnswered(token)){
-			System.err.println("Finnished");
-		}
-		else{
-			System.err.println("No finised");
-			test2 = service.getQuestion(token);
-			System.out.println("Last question: "+test2.getLeter());
-			test2.setAnswer("we hope so");
-			System.out.println("result: "+service.answerQuestion(token, test2));
-			if(service.allQuestionAnswered(token)){
-				System.err.println("Finnished");
-				UserScoreDTO score = service.getResults(token);
-				System.err.println("Final results: right awnwered: "+score.getRightAnswered()+" wrong answered: "+score.getWrongAnswered());
+		//System.out.println(token.getToken());
+		ClientService clientservice1 = new ClientService();
+		ClientService clientservice2 = new ClientService();
+		//ClientService clientservice3 = new ClientService();
+		try {
+			UserDTO test = service.play(token, QuestionType.All.toString(),clientservice1);
+			//System.out.println("Respuesta del servidor: "+test.getUserName());
+
+			UserDTO test2 = service.play(token2, QuestionType.All.toString(), clientservice2);
+
+			//UserDTO test3 = service.play(token3, QuestionType.All.toString(), clientservice3);
+			System.out.println(test2.getUserName());
+
+			//System.out.println("Test:"+test3.getUserName());
+			//System.out.println(test.getUserName());
+			QuestionDTO question2 = service.getQuestion(token2);
+			System.out.println("question"+question2);
+			boolean result = service.answerQuestion(token2, "Answer");
+			System.out.println(result);
+			for(char alphabet = 'a'; alphabet <= 'z'; alphabet++ ){
+				question2 = service.getQuestion(token2);
+				System.out.println("question"+question2);
+				result = service.answerQuestion(token2, Character.toString(alphabet));
+				System.out.println("Respuesta servidor: "+result);
 			}
+			UserScoreDTO score1 = service.getResults(token2);
+			System.out.println(score1);
+
+			QuestionDTO question = service.getQuestion(token);
+			System.out.println("question"+question);
+			result = service.answerQuestion(token, "Answer");
+			System.out.println(result);
+			for(char alphabet = 'a'; alphabet <= 'z'; alphabet++ ){
+				
+				question = service.getQuestion(token);
+				System.out.println("question"+question);
+				result = service.answerQuestion(token, Character.toString(alphabet));
+				System.out.println("Respuesta servidor: "+result);
+			}
+			UserScoreDTO score2 = service.getResults(token);
+			System.out.println(score2);
+		} catch (RemoteException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	}*/
+*/
+	}
+
+
 
 }
