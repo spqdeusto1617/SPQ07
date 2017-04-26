@@ -22,7 +22,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 
-/**Clase principal que crea la aplicación y la muestra en pantalla.
+/**Main class that creates the application and shows it in the screen.
  * @author asier.gutierrez
  *
  */
@@ -131,8 +131,8 @@ public class Main extends Application {
 	}
 
 
-	/**Método main de la clase.
-	 * @param args Argumentos de consola (no se utilizan)
+	/**Main of the class
+	 * @param args console arguments
 	 */
 	public static void main(String[] args) {
 				if (lockInstance("block.dat")){

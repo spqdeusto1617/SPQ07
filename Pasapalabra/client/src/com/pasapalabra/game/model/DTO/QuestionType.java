@@ -1,6 +1,6 @@
 package com.pasapalabra.game.model.DTO;
 
-/**Enum de posibles elecciones sobre tipos de preguntas.
+/**Enum of the posibles themes of questions
  * @author asierguti
  *
  */

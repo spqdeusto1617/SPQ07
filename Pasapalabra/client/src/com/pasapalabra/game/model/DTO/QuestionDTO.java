@@ -2,6 +2,14 @@ package com.pasapalabra.game.model.DTO;
 
 import java.io.Serializable;
 
+/**
+ * Class for sending the question to the user
+ * @author alvaro
+ * @param: question: the question
+ * @param: leter: the letter of the question
+ * @param: answered: if the question has been answered or not
+ * @param: creator: the creator of the question
+ */
 public class QuestionDTO implements Serializable{
 
 	/**

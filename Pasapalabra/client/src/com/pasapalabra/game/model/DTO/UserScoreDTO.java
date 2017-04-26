@@ -2,6 +2,12 @@ package com.pasapalabra.game.model.DTO;
 
 import java.io.Serializable;
 
+/**
+ * Class to track the user score during a game
+ * @author alvaro
+ * @param: rightAnswered: the amount of questions right answered
+ * @param: wrongAnswered: the amount of questions wrong answered
+ */
 public class UserScoreDTO implements Serializable{
 
 	int rightAnswered;
