@@ -30,7 +30,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-/**Clase que gestiona los eventos de la clase LogIn.fxml
+/**Class that manages events from LogIn.fxml
  * @author asier.gutierrez
  *
  */
@@ -138,8 +138,8 @@ public class LogInController extends Control implements Initializable {
 		}
 	}
 
-	/**Método para hacer login
-	 * @param event Evento que hace ejecutar el método.
+	/**Método to log in to the game
+	 * @param event
 	 */
 	public void loginSession(MouseEvent event){
 		log.log(Level.FINEST, "Evento de LogIn");
@@ -179,8 +179,8 @@ public class LogInController extends Control implements Initializable {
 		}
 	}
 
-	/**Método para ir a la pantalla de registro siempre y cuando el servidor esté operativo.
-	 * @param event Evento de ratón que hace llamar al método
+	/**Method to go to the register window when the server is operative. 
+	 * @param event of the mouse
 	 */
 	public void registro(MouseEvent event){
 		log.log(Level.FINEST, "Método de registro iniciado");
@@ -199,8 +199,8 @@ public class LogInController extends Control implements Initializable {
 		}
 	}
 
-	/**Método para abrir el navegador en la dirección de GitHub del proyecto
-	 * @param event Evento de ratón que hace llamar al método.
+	/**Method to open the github page of the current project
+	 * @param event of the mouse
 	 */
 	public void irAGitHub(MouseEvent event){
 		log.log(Level.FINEST, "Ir a GitHub");

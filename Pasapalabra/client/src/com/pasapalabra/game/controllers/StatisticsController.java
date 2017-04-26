@@ -19,6 +19,10 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+/**Class that manages events from Statistics.fxml
+ * @author alvaro
+ *
+ */
 public class StatisticsController extends ExtenderClassController implements Initializable {
 
 	@FXML
@@ -108,12 +112,19 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 * 3:partidas totales jugadas
 	 * 4: posición en el ranking
 	 */
-	 @FXML
+	
+	 /**Transition to game window
+	 * @param event
+	 */
+	@FXML
 	 void btnJugar(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Juego");
 		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
 	 }
 
+	 /**Transition to profile window
+		 * @param event
+		 */
 	 @FXML
 	 void btnMiPerfil(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Perfil");
@@ -136,14 +147,19 @@ public class StatisticsController extends ExtenderClassController implements Ini
 
 	 }
 
-
+	 /**Transition to friends window
+	 * @param event
+	 */
 	 @FXML
 	 void btnAmigos(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Amigos");
 		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
 	 }
 
-	 @FXML
+	 /**Method to close current session
+	 * @param event
+	 */
+	@FXML
 	 void btnCerrarSesion(MouseEvent event) {
 		 log.log(Level.FINEST, "Cerrar sesión");
 		 com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);

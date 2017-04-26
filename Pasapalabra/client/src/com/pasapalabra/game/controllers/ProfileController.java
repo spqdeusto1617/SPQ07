@@ -24,6 +24,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+/**Class that manages events from Profile.fxml
+ * @author alvaro
+ *
+ */
 public class ProfileController extends ExtenderClassController implements Initializable {
 	//Se define un logger
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ProfileController.class.getName());
@@ -114,16 +118,22 @@ public class ProfileController extends ExtenderClassController implements Initia
 		imagenAvatar.setCache(true); 
 	}
 
+	/**Transition to changeInformation window
+	 * @param event
+	 */
 	public void btnCambiar (MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("CambiarDatos", event);
 	}
 
+	/**Transition to deleteAccount window
+	 * @param event
+	 */
 	public void btnEliminar (MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("EliminarCuenta", event);
 	}
 
-	/**AccionListener para poder cambiar la imagen del usuario
-	 * @param event el evento de ventana
+	/**AccionListener to change the user image 
+	 * @param event of the window
 	 */
 	public void cambioImagen (MouseEvent event){
 		//Otro stage para cargar el filechooser
@@ -181,11 +191,17 @@ public class ProfileController extends ExtenderClassController implements Initia
 		}
 	}
 
-	//Transiciones de ventana
+	
+	/**Transition to game window
+	 * @param event
+	 */
 	public void btnJugar(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
 	}
 
+	/**Transition to friends window
+	 * @param event
+	 */
 	public void btnAmigos(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
 	}
@@ -214,10 +230,16 @@ public class ProfileController extends ExtenderClassController implements Initia
 	}
 
 
+	/**Transition to statistics window
+	 * @param event
+	 */
 	public void btnEstadisticas(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
 	}
 
+	/**Method to close current session
+	 * @param event
+	 */
 	public void btnCerrarSesion(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	}

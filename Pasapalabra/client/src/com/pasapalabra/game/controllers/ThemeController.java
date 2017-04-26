@@ -35,6 +35,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**Class that manages events from ThemeElections.fxml
+ * @author alvaro
+ *
+ */
 public class ThemeController extends ExtenderClassController implements Initializable{
 
 
@@ -189,7 +193,10 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	//*FIN DE DECLARACIÓN DE ATRIBUTOS
 
 
-	@FXML //TERMINADO
+	/**Method to play the game
+	 * @param event
+	 */
+	@FXML 
 	void btnJugar(MouseEvent event) {
 		log.log(Level.FINEST, "Botón de jugar pulsado y JuegoEnCurso = " + juegoEnCurso);
 		//Compruebo si se está jugando
@@ -261,6 +268,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		}
 	}
 
+	/**Method to go to the profile window when the game is not in progress
+	 * @param event
+	 */
 	@FXML
 	void btnMiPerfil(MouseEvent event) {
 		if(juegoEnCurso){
@@ -280,6 +290,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		}
 	}
 
+	/**Method to go to the statistics window when the game is not in progress
+	 * @param event
+	 */
 	@FXML
 	void btnEstadisticas(MouseEvent event) {
 		if(juegoEnCurso){
@@ -312,6 +325,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
+	/**Method to close current session
+	 * @param event
+	 */
 	@FXML
 	void btnCerrarSesion(MouseEvent event) {
 		log.log(Level.FINEST, "Cierre de sesión");
@@ -1168,6 +1184,10 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 		}
 
+		/**Method to create the rosco of the game with all the letters. 
+		 * @param amigo_notEnemigo
+		 * @param aLImgV
+		 */
 		public void crearRosco(boolean amigo_notEnemigo, ArrayList<ImageView> aLImgV){
 			ImageView iv;
 			char letraABC = 'a';
@@ -1213,8 +1233,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		}
 
 		/**
-		 * @param amigo_notEnemigo Booleano que depende de 
-		 * @return Devuelve la coordenada X necesaria para dibujar el rosco
+		 * @param amigo_notEnemigo 
+		 * @return  the coordinate X to make the rosco
 		 */
 		public int coordX(boolean amigo_notEnemigo){
 			int resultado;
@@ -1231,7 +1251,10 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			return resultado;
 		}
 
-		//Método que calcula la coordenada de Y del rosco.
+		
+		/**
+		 * @return the coordinate Y to make the rosco
+		 */
 		public int coordY(){
 			int resultado;
 			//double divisionCircunferencia = 360/27;
@@ -1247,6 +1270,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			return resultado;
 		}
 
+		/**Method that adds the styles designed in the juego.css
+		 */
 		public void anyadirGUI(){
 			panel.getStylesheets().add("/css/juego.css");
 			panel.getStylesheets().remove("/css/application.css");
@@ -1408,8 +1433,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			}
 		}
 
-		/**Método que gestiona la E/S del panel
-		 * @param event Evento sucedido
+		/**Method that manages the E S of the panel
+		 * @param event 
 		 */
 		@FXML
 		void esPanel(MouseEvent event) {

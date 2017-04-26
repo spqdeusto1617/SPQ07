@@ -27,6 +27,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**Class to manage evets from ChangeInformation.fxml
+ * @author alvaro
+ *
+ */
 public class InformationChangeController extends ExtenderClassController implements Initializable {
 	@FXML public Pane panel;
 
@@ -120,8 +124,8 @@ public class InformationChangeController extends ExtenderClassController impleme
 		imagenAvatar.setCache(true); 
 	}
 
-	/**AccionListener para Cambiar tu correo, te pide validar datos, y si son correctos, intenta cambiarlo en el servidor 
-	 * @param event el evento de acción
+	/**AccionListener to change the email after validating that the information is correct.  
+	 * @param event of the action
 	 */
 	public void btnCambiarCorreo(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -209,8 +213,8 @@ public class InformationChangeController extends ExtenderClassController impleme
 		}
 	}
 
-	/**Idéntico que el correo, pero con la contraseña
-	 * @param event el evento
+	/**Method to change the password after validating that the information is correct. 
+	 * @param event of the action
 	 */
 	public void btnCambiarContrasenya(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -285,8 +289,8 @@ public class InformationChangeController extends ExtenderClassController impleme
 		}
 	}
 
-	/**Botón para descartar los cambios realizados. Si se acepta rechazarlos, se vuelve a la ventana anterior
-	 * @param event el evneto de ventana
+	/**Button to discard the changes done. If he/she accepts you will return to the previous window
+	 * @param event of the window
 	 */
 	public void btnDescartar(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -310,25 +314,39 @@ public class InformationChangeController extends ExtenderClassController impleme
 
 
 
-	//Transiciones de ventana
+
+	/**Transition to game window
+	 * @param event
+	 */
 	public void btnJugar(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
 	}
 
+	/**Transition to friends window
+	 * @param event
+	 */
 	public void btnAmigos(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
 	}
 
+	/**Transition to profile window
+	 * @param event
+	 */
 	public void btnMiPerfil(MouseEvent event){
 
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 	}
 
-
+	/**Transition to statistics window
+	 * @param event
+	 */
 	public void btnEstadisticas(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
 	}
 
+	/**Method to close current session
+	 * @param event
+	 */
 	public void btnCerrarSesion(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	}
