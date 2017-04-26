@@ -9,7 +9,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-/**Clase para generalizar el menú
+/**Class to generalize the menu
  * @author asier.gutierrez
  *
  */

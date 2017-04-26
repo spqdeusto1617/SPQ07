@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 
-/**Clase que gestiona los eventos de la clase AcercaDe.fxml
+/**Class that manages events from AcercaDe.fxml
  * @author asier.gutierrez
  *
  */
@@ -109,8 +109,8 @@ public class AboutController extends Control implements Initializable {
 	@FXML
 	private Label lblCorreoDeAsier;
 
-	/*Método para copiar al clipboard (o portapapeles) 
-	 *el elemento seleccionado (en este caso, el correo).
+	/**Method that copies to the clipboard selected element
+	 * @param event 
 	 */
 	public void copiarCorreo(MouseEvent event){
 		//Getea el portapapeles del sistema
@@ -127,7 +127,8 @@ public class AboutController extends Control implements Initializable {
 		new Thread(portapapeles).start();
 	}
 
-	/**Método para volver a la ventana anterior
+	/**Method to return to the previous window
+	 * @param event
 	 */
 	public void volver(MouseEvent event){
 		String pantallaALaQueIr = "Juego";
@@ -136,9 +137,8 @@ public class AboutController extends Control implements Initializable {
 	}
 
 
-	/**
-	 * Método para cerrar el diálogo de: copiado a portapapeles. Resetea ambos componentes a 0. No funciona
-	 * a menos que los dos componentes terminen de llegar a su posición.
+	/**Method that closes the dialog: copied to the clipboard. Reset the components to 0. 
+	 * @param event
 	 */
 	public void Cierrepresionado(MouseEvent event){
 		log.log(Level.FINEST, "Se ha presionado el botón para cerrar el diálogo: altura del mensaje = " + alturaDelMensaje + "/ animación está en proceso = " + animacionEnProceso);
@@ -157,12 +157,10 @@ public class AboutController extends Control implements Initializable {
 		}
 	}
 
-
-
-
-	/**Hilo para hacer la animación del portapapeles
-	 * Baja de 0 a -30 los dos elementos a la vez, para que vayan sincronizados
-	 *@author Iván
+	/**Thread to make the animation of the clipboard
+	 * Decreases both elements from 0 to -30 at the same time in order to sincronize them. 
+	 * @author Iván
+	 *
 	 */
 	class HiloPortapapeles implements Runnable {
 
@@ -186,10 +184,11 @@ public class AboutController extends Control implements Initializable {
 		}
 
 	}
-
-	/**Hilo para hacer la animación del portapapeles
-	 * Hace desaparecer los dos elementos de manera sincronizada
-	 *@author Iván
+	
+	 
+	/**Thread to delete both elements from the clipboard at the same time. Synchronized. 
+	 * @author Iván
+	 *
 	 */
 	class HiloEliminarPortapapeles implements Runnable {
 		//Declaración de atributos

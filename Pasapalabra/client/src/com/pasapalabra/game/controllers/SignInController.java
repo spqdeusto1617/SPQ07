@@ -579,7 +579,7 @@ public class SignInController extends Control implements Initializable {
 
 
 
-	/**Mehtod that chek if the user has accepted the conditions. If he/she doesn't accept, the button
+	/**Methood that check if the user has accepted the conditions. If he/she doesn't accept, the button
 	 * to create the user will be disable. 
 	 * @param event: el evento del pulsador
 	 */

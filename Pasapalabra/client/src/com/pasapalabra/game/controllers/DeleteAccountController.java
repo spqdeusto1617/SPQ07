@@ -27,6 +27,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**Class that manages events from DeleteAccount.fxml
+ * @author alvaro
+ *
+ */
 public class DeleteAccountController extends ExtenderClassController implements Initializable {
 	@FXML public Pane panel;
 
@@ -112,8 +116,9 @@ public class DeleteAccountController extends ExtenderClassController implements 
 		imagenAvatar.setCache(true); 
 	}
 
-	/**Accionlistener para eliminar la cuenta, si se quiere (tras validar datos), se eliminará la cuenta de la base de datos 
-	 * @param event el evento de ventana
+	/**After validating the information of the user, this method will
+	 * delete the user account from the database.
+	 * @param event of the window
 	 */
 	public void btnEliminarCuenta(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -211,8 +216,9 @@ public class DeleteAccountController extends ExtenderClassController implements 
 		}
 	}
 
-	/**Botón para descartar los cambios realizados. Si se acepta rechazarlos, se vuelve a la ventana anterior
-	 * @param event el evneto de ventana
+	/**Method to discard the changes made. If is accepted, you will return to the 
+	 * previous window. 
+	 * @param event event of the window
 	 */
 	public void btnDescartar(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -236,25 +242,40 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 
 
-	//Transiciones de ventana
+	
+	/**Transition to Game window
+	 * @param event
+	 */
 	public void btnJugar(MouseEvent event){
 		WindowUtilities.windowTransition("Juego", event);
 	}
-
+	
+	/**Transition to friends window
+	 * @param event
+	 */
 	public void btnAmigos(MouseEvent event){
 		WindowUtilities.windowTransition("Amigos", event);
 	}
 
+	/**Transition to profile window
+	 * @param event
+	 */
 	public void btnMiPerfil(MouseEvent event){
 
 		WindowUtilities.windowTransition("Perfil", event);
 	}
 
-
+	/**Transition to statistics window
+	 * @param event
+	 */
 	public void btnEstadisticas(MouseEvent event){
 		WindowUtilities.windowTransition("Estadisticas", event);
 	}
 
+	
+	/**Method that closes the current session
+	 * @param event
+	 */
 	public void btnCerrarSesion(MouseEvent event){
 		WindowUtilities.closeSession(event);
 	}
