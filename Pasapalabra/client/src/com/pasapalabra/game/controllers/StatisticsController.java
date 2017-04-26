@@ -11,6 +11,7 @@ import com.pasapalabra.game.application.Main;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -31,14 +32,14 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	@FXML
 	private Text txtPartidasJugadas;
 
-	@FXML
-	private Text textoMiPerfil;
+	//@FXML
+	//private Text textoMiPerfil;
 
 	@FXML
 	private Rectangle rectanguloPanel;
 
-	@FXML
-	private Rectangle rectanguloAmigos;
+	//@FXML
+	//private Rectangle rectanguloAmigos;
 
 	@FXML
 	private Text txtDerrotas;
@@ -46,16 +47,16 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	@FXML
 	private Text txtEmpates;
 
-	@FXML
-	private Rectangle rectanguloMiPerfil;
+	//@FXML
+	//private Rectangle rectanguloMiPerfil;
 
-	@FXML
-	private Rectangle rectanguloJugar;
+	//@FXML
+	//private Rectangle rectanguloJugar;
 
-	@FXML
-	private Text textoAmigos;
+	//@FXML
+	//private Text textoAmigos;
 
-	@FXML
+	//@FXML
 	private ImageView imagenAvatar;
 
 	@FXML
@@ -76,17 +77,17 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	@FXML
 	private Text textoLogeadoComo;
 
-	@FXML
-	private Text textoCerrarSesion;
+	//@FXML
+	//private Text textoCerrarSesion;
 
-	@FXML
+	//@FXML
 	private Text txtRatio;
 
-	@FXML
-	private Rectangle rectanguloCerrarSesion;
+	//@FXML
+	//private Rectangle rectanguloCerrarSesion;
 
-	@FXML
-	private Text textoJugar;
+	//@FXML
+	//private Text textoJugar;
 
 	@FXML
 	private Circle circuloPanel;
@@ -94,14 +95,20 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	@FXML
 	private Text textoNombreDeUsuario;
 
-	@FXML
-	private Text textoEstadisticas;
+	//@FXML
+	//private Text textoEstadisticas;
 
-	@FXML
-	private Rectangle rectanguloEstadisticas;
+	//@FXML
+	//private Rectangle rectanguloEstadisticas;
 
 	@FXML
 	private Text txtVictorias;
+	
+	@FXML public Button btnCerrarSesion;
+	@FXML public Button btnEstadisticas;
+	@FXML public Button btnPerfil;
+	@FXML public Button btnAmigos;
+	@FXML public Button btnJuego;
 
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(StatisticsController.class.getName());
 	
@@ -142,9 +149,13 @@ public class StatisticsController extends ExtenderClassController implements Ini
 		 com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	 }
 
-	 @FXML
+	 /**Transition to statistics window
+	 * @param event
+	 */
+	@FXML
 	 void btnEstadisticas(MouseEvent event) {
-
+		 log.log(Level.FINEST, "Transición a Estadisticas");
+		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
 	 }
 
 	 /**Transition to friends window

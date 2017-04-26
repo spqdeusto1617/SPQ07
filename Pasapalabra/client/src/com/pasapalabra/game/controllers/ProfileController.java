@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,11 +38,11 @@ public class ProfileController extends ExtenderClassController implements Initia
 	//Declaración del panel
 	@FXML public Text textoESPanel;
 
-	@FXML public Text textoMiPerfil;
+	//@FXML public Text textoMiPerfil;
 
 	@FXML public ImageView logopsp;
 
-	@FXML public Text textoCerrarSesion;
+	//@FXML public Text textoCerrarSesion;
 
 	@FXML public Text textoPlus;
 
@@ -49,29 +50,29 @@ public class ProfileController extends ExtenderClassController implements Initia
 
 	@FXML public Circle circuloPlus;
 
-	@FXML public Rectangle rectanguloCerrarSesion;
+	//@FXML public Rectangle rectanguloCerrarSesion;
 
-	@FXML public Rectangle rectanguloAmigos;
+	//@FXML public Rectangle rectanguloAmigos;
 
-	@FXML public Text textoJugar;
+	//@FXML public Text textoJugar;
 
 	@FXML public Text textoLogeadoComo;
 
-	@FXML public Rectangle rectanguloMiPerfil;
+	//@FXML public Rectangle rectanguloMiPerfil;
 
-	@FXML public Rectangle rectanguloJugar;
+	//@FXML public Rectangle rectanguloJugar;
 
-	@FXML public Text textoAmigos;
+	//@FXML public Text textoAmigos;
 
 	@FXML public Circle circuloPanel;
 
 	@FXML public Text textoNombreDeUsuario;
 
-	@FXML public Text textoEstadisticas;
+	//@FXML public Text textoEstadisticas;
 
 	@FXML public ImageView imagenAvatar;
 
-	@FXML public Rectangle rectanguloEstadisticas;
+	//@FXML public Rectangle rectanguloEstadisticas;
 
 	@FXML public Rectangle rectanguloCambiarDatos;
 
@@ -83,6 +84,13 @@ public class ProfileController extends ExtenderClassController implements Initia
 
 	@FXML public Text txtEliminarCuenta;
 
+	//Buttons
+	@FXML public Button btnCerrarSesion;
+	@FXML public Button btnEstadisticas;
+	@FXML public Button btnPerfil;
+	@FXML public Button btnAmigos;
+	@FXML public Button btnJuego;
+
 	// public static ArrayList<String> Datos_Necesarios_Cliente=new ArrayList<>();
 
 	private File file;
@@ -93,10 +101,10 @@ public class ProfileController extends ExtenderClassController implements Initia
 		//		
 		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
 
-		rectanguloAmigos.setOpacity(0.3f);
-		rectanguloEstadisticas.setOpacity(0.3f);
-		rectanguloJugar.setOpacity(0.3f);
-		rectanguloMiPerfil.setOpacity(1f);
+		btnAmigos.setOpacity(0.3f);
+		btnEstadisticas.setOpacity(0.3f);
+		btnJuego.setOpacity(0.3f);
+		btnPerfil.setOpacity(1f);
 		if(LogInController.iAvatar!=null){
 			imagenAvatar.setImage(LogInController.iAvatar);
 			imgCambioFotoPerfil.setImage(LogInController.iAvatar);

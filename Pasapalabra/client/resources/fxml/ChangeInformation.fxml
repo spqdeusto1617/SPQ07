@@ -107,32 +107,6 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Rectangle fx:id="rectanguloCambiarCorreo" arcHeight="5.0" arcWidth="5.0" fill="#fbff21a3" height="35.0" layoutX="385.0" layoutY="497.0" onMouseClicked="#btnCambiarCorreo" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Rectangle>
-                        <Text fx:id="txtCambiarCorreo" layoutX="447.0" layoutY="520.0" onMouseClicked="#btnCambiarCorreo" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Text>
-                        <Rectangle fx:id="rectanguloDescartar" arcHeight="5.0" arcWidth="5.0" fill="#f81500a3" height="35.0" layoutX="52.0" layoutY="497.0" onMouseClicked="#btnDescartar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Rectangle>
-                        <Text fx:id="txtDescartar" layoutX="108.0" layoutY="519.0" onMouseClicked="#btnDescartar" strokeType="OUTSIDE" strokeWidth="0.0" text="Descartar" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Text>
                         <TextField fx:id="tflViejoMail" layoutX="200.0" layoutY="121.0" prefHeight="25.0" prefWidth="195.0" />
                         <Text layoutX="200.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce tu antiguo mail" textAlignment="CENTER">
                            <cursor>
@@ -157,6 +131,16 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Text>
+                        <Button fx:id="btnDescartar" layoutX="54.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#btnDescartar" prefHeight="25.0" prefWidth="162.0" style="-fx-background-color: ff0000;" text="Descartar">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnCambiar" layoutX="381.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#btnCambiarCorreo" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: FFFF00;" text="Cambiar">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
             </content>
@@ -165,38 +149,22 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Rectangle fx:id="rectanguloDescartar" arcHeight="5.0" arcWidth="5.0" fill="#ff2121a3" height="35.0" layoutX="52.0" layoutY="497.0" onMouseClicked="#btnDescartar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Rectangle>
-                        <Text fx:id="txtDescartar" layoutX="108.0" layoutY="519.0" onMouseClicked="#btnDescartar" strokeType="OUTSIDE" strokeWidth="0.0" text="Descartar" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Text>
-                        <Rectangle fx:id="rectanguloCambiarContrasenya" arcHeight="5.0" arcWidth="5.0" fill="#5c21ffa3" height="35.0" layoutX="385.0" layoutY="497.0" onMouseClicked="#btnCambiarContrasenya" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Rectangle>
-                        <Text fx:id="txtCambiarContrasenya" layoutX="447.0" layoutY="520.0" onMouseClicked="#btnCambiarContrasenya" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Text>
                         <PasswordField fx:id="pfdAntiguaContrasenya" layoutX="200.0" layoutY="121.0" prefHeight="25.0" prefWidth="195.0" />
                         <Text layoutX="200.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca su antigua contraseña" />
                         <PasswordField fx:id="pfdNuevaContrasenya" layoutX="200.0" layoutY="240.0" prefHeight="25.0" prefWidth="195.0" />
                         <Text layoutX="200.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca su nueva contraseña" />
                         <PasswordField fx:id="pfdNuevaContrasenya1" layoutX="200.0" layoutY="360.0" prefHeight="25.0" prefWidth="195.0" />
                         <Text layoutX="200.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repita su nueva contraseña" />
+                        <Button fx:id="btnDescartar" layoutX="58.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#btnDescartar" prefHeight="25.0" prefWidth="162.0" style="-fx-background-color: ff0000;" text="Descartar">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnCambiarContrasenia" layoutX="385.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#btnCambiarContrasenya" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #5c21ff;" text="Cambiar">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
             </content>
@@ -233,5 +201,57 @@
          </font>
       </Button>
       <Button fx:id="btnCerrarSesion" layoutX="27.0" layoutY="569.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
+      <Rectangle fx:id="rectanguloCambiarCorreo" arcHeight="5.0" arcWidth="5.0" fill="#fbff21a3" height="35.0" layoutX="536.0" layoutY="656.0" onMouseClicked="#btnCambiarCorreo" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Text fx:id="txtCambiarCorreo" layoutX="598.0" layoutY="679.0" onMouseClicked="#btnCambiarCorreo" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Rectangle fx:id="rectanguloDescartar" arcHeight="5.0" arcWidth="5.0" fill="#f81500a3" height="35.0" layoutX="203.0" layoutY="656.0" onMouseClicked="#btnDescartar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Text fx:id="txtDescartar" layoutX="259.0" layoutY="678.0" onMouseClicked="#btnDescartar" strokeType="OUTSIDE" strokeWidth="0.0" text="Descartar" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Rectangle fx:id="rectanguloDescartar" arcHeight="5.0" arcWidth="5.0" fill="#ff2121a3" height="35.0" layoutX="254.0" layoutY="695.0" onMouseClicked="#btnDescartar" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Text fx:id="txtDescartar" layoutX="332.0" layoutY="716.0" onMouseClicked="#btnDescartar" strokeType="OUTSIDE" strokeWidth="0.0" text="Descartar" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Rectangle fx:id="rectanguloCambiarContrasenya" arcHeight="5.0" arcWidth="5.0" fill="#5c21ffa3" height="35.0" layoutX="593.0" layoutY="706.0" onMouseClicked="#btnCambiarContrasenya" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Text fx:id="txtCambiarContrasenya" layoutX="665.0" layoutY="734.0" onMouseClicked="#btnCambiarContrasenya" strokeType="OUTSIDE" strokeWidth="0.0" text="Cambiar" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
    </children>
 </Pane>

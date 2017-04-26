@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
@@ -35,14 +36,14 @@ public class InformationChangeController extends ExtenderClassController impleme
 	@FXML public Pane panel;
 
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ThemeController.class.getName());
-	//Declaración del panel
+	//Declaration of the panel
 	@FXML public Text textoESPanel;
 
-	@FXML public Text textoMiPerfil;
+	//@FXML public Text textoMiPerfil;
 
 	@FXML public ImageView logopsp;
 
-	@FXML public Text textoCerrarSesion;
+	//@FXML public Text textoCerrarSesion;
 
 	@FXML public Text textoPlus;
 
@@ -50,41 +51,41 @@ public class InformationChangeController extends ExtenderClassController impleme
 
 	@FXML public Circle circuloPlus;
 
-	@FXML public Rectangle rectanguloCerrarSesion;
+	//@FXML public Rectangle rectanguloCerrarSesion;
 
-	@FXML public Rectangle rectanguloAmigos;
+	//@FXML public Rectangle rectanguloAmigos;
 
-	@FXML public Text textoJugar;
+	//@FXML public Text textoJugar;
 
 	@FXML public Text textoLogeadoComo;
 
-	@FXML public Rectangle rectanguloMiPerfil;
+	//@FXML public Rectangle rectanguloMiPerfil;
 
-	@FXML public Rectangle rectanguloJugar;
+	//@FXML public Rectangle rectanguloJugar;
 
-	@FXML public Text textoAmigos;
+	//@FXML public Text textoAmigos;
 
 	@FXML public Circle circuloPanel;
 
 	@FXML public Text textoNombreDeUsuario;
 
-	@FXML public Text textoEstadisticas;
+	//@FXML public Text textoEstadisticas;
 
 	@FXML public ImageView imagenAvatar;
 
-	@FXML public Rectangle rectanguloEstadisticas;
+	//@FXML public Rectangle rectanguloEstadisticas;
 
-	@FXML public Rectangle rectanguloDescartar;
+	//@FXML public Rectangle rectanguloDescartar;
 
-	@FXML public Rectangle rectanguloCambiarCorreo;
+	//@FXML public Rectangle rectanguloCambiarCorreo;
 
-	@FXML public Rectangle rectanguloCambiarContrasenya;
+	//@FXML public Rectangle rectanguloCambiarContrasenya;
 
-	@FXML public Text txtDescartar;
+	//@FXML public Text txtDescartar;
 
-	@FXML public Text txtCambiarCorreo;
+	//@FXML public Text txtCambiarCorreo;
 
-	@FXML public Text txtCambiarContrasenya;
+	//@FXML public Text txtCambiarContrasenya;
 
 	@FXML public TextField tflViejoMail;
 
@@ -99,6 +100,17 @@ public class InformationChangeController extends ExtenderClassController impleme
 	@FXML public PasswordField pfdNuevaContrasenya;
 
 	@FXML public PasswordField pfdNuevaContrasenya1;
+	
+	//Buttons
+	@FXML public Button btnCerrarSesion;
+	@FXML public Button btnEstadisticas;
+	@FXML public Button btnPerfil;
+	@FXML public Button btnAmigos;
+	@FXML public Button btnJuego;
+	@FXML public Button btnDescartar;
+	@FXML public Button btnCambiar;
+	@FXML public Button btnCambiarContrasenia;
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
