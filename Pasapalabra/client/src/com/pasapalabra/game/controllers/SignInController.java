@@ -21,6 +21,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
+
+import com.pasapalabra.game.model.DTO.UserDTO;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
@@ -265,9 +268,10 @@ public class SignInController extends Control implements Initializable {
 		}
 		else{
 			try{
-				Datos_usuario[0]=txtNombreUsuario.getText();
+				UserDTO udto= new UserDTO(txtNombreUsuario.getText(), txtCorreoUsuario.getText(), ImgImagenUsuario, fcNacimiento, games , gamesWon, gamesLost)
+				//Datos_usuario[0]=txtNombreUsuario.getText();
 
-				Datos_usuario[1]=txtCorreoUsuario.getText();
+				//Datos_usuario[1]=txtCorreoUsuario.getText();
 
 				Datos_usuario[2]=pflContrasenya.getText();
 

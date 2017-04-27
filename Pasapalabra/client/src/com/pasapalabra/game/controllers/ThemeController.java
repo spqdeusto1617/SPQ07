@@ -8,7 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.pasapalabra.game.model.DTO.QuestionType;
-import com.pasapalabra.game.objetos.QuestionSelectedObject;
 import com.pasapalabra.game.utilities.PanelThread;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
@@ -58,13 +57,12 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	public ArrayList<ImageView> panelLetrasJugador = new ArrayList<>(); //Panel con todos los labels del jugador
 	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
 	public ArrayList<Node> menuDesplegable; //Colección de todos los elementos del menu desplegable.
-	public ArrayList<QuestionSelectedObject> aLEleccion; //Elección del tipo de juego que se quiere llevar a cabo.
 	//public ArrayList<GameButton> aLBotonesJuego;
 	
 	public ArrayList<Button> aLBotones; 
 
 
-	//Declaración del panel
+	//Declaration of the panel
 	@FXML public Pane panel;
 
 
@@ -1167,8 +1165,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					if(osp.isSeccion_notSeleccionable()){
 						panel.getChildren().remove(osp.getTituloSeccion());
 					}else{
-						panel.getChildren().remove(osp.getRectangulo());
-						panel.getChildren().remove(osp.getTexto());
+						//panel.getChildren().remove(osp.getRectangulo());
+						//panel.getChildren().remove(osp.getTexto());
+						//panel.getChildren().remove(Button); 
 					}
 				}
 			}else{
@@ -1413,12 +1412,36 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//		panel.getStylesheets().remove("/css/application.css");
 		}
 
-		*/boolean preguntasBienSeleccionadas(){
+		*/
+		/**Method that check that the theme is well selected
+		 * @return true if yes
+		 * @return false if the theme is not well selected
+		 */
+		boolean preguntasBienSeleccionadas(){
+			/*
 			int count = 0;
 			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
 				if(objetoSeleccionPregunta.isElegido()) count++;
 				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
 					if(objetoSeleccionPregunta.getTexto().getText().equals("VS Amigo")){
+						if(objetoSeleccionPregunta.isElegido()){
+							//Dialogo VS Amigo no disponible en versión 1.0;
+							return false;
+						}
+					}
+				}
+			}
+			if(count == 2) return true; 
+			else{
+				//Dialogo elige modo y el tema
+				return false;
+			}
+			*/
+			int count = 0;
+			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
+				if(objetoSeleccionPregunta.isElegido()) count++;
+				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
+					if(btnAmigo.isPressed()){
 						if(objetoSeleccionPregunta.isElegido()){
 							//Dialogo VS Amigo no disponible en versión 1.0;
 							return false;
