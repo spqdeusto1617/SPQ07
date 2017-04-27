@@ -195,7 +195,7 @@ public class LogInController extends Control implements Initializable {
 		}
 		else{
 			log.log(Level.FINEST, "Transición a ventana registro porque el servidor está operativo.");
-			//TODO: com.pasapalabra.game.utilities.deVentana.windowTransition("Registro", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("SignIn", event);
 		}
 	}
 
