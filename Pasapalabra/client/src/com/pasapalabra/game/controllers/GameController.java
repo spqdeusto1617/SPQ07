@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
-import com.pasapalabra.game.objetos.GameButton;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.fxml.FXML;
@@ -14,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -55,9 +55,9 @@ public class GameController implements Initializable{
 	
 	@FXML public TextField tfRespuesta; 
 	
-	@FXML public GameButton btnContestar;
-	@FXML public GameButton btnPasar;
-	@FXML public GameButton btnRendirse;
+	@FXML public Button btnContestar;
+	@FXML public Button btnPasar;
+	@FXML public Button btnRendirse;
 	
 	
 	/*TODO: check this@FXML
