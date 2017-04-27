@@ -157,7 +157,7 @@ public class Main extends Application {
 				}else{
 					log.log(Level.INFO, "Ventana NO cargada. Ya hay una instancia de la clase. Se ejecuta hilo de advertencia soporte único a monoinstancia");
 					//Cargamos el hilo de rutina monoinstancia. Nuestro hilo main muere después.
-					MonoInstance.main(args);
+					MonoInstanceRoutine.main(args);
 				}
 	}
 

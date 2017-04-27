@@ -13,9 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class MonoInstance extends Application {
+public class MonoInstanceRoutine extends Application {
 	//Se define un logger
-	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(MonoInstance.class.getName());
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(MonoInstanceRoutine.class.getName());
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
