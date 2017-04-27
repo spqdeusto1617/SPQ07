@@ -122,7 +122,7 @@ public class WindowUtilities {
 
 				//En la clase del servidor habrá una rutina para cerrar sesión.
 				try {
-					if(ClientConnexion.delogging())windowTransition("LogIn", event);
+					if(ServiceLocator.delogging())windowTransition("LogIn", event);
 					else{
 						Alert alert3 = new Alert(AlertType.ERROR);
 						//Pone título

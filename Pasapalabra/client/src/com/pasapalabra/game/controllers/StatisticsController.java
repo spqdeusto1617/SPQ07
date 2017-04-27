@@ -213,7 +213,7 @@ public class StatisticsController extends ExtenderClassController implements Ini
 		 imagenAvatar.setSmooth(true); 
 		 imagenAvatar.setCache(true); 
 		 //Se pone el nombre de usuario
-		 textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
+		 textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ServiceLocator.userInfo.getUserName());
 
 		 //Se ponen los datos relacionados con esta ventana. Es decir, estadísticas.
 		

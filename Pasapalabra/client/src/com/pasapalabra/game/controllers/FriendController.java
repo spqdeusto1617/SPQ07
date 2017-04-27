@@ -150,7 +150,7 @@ public class FriendController extends ExtenderClassController implements Initial
 		else{
 			//TODO: meter los amigos
 		}
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ServiceLocator.userInfo.getUserName());
 		if(LogInController.iAvatar!=null){
 			imagenAvatar.setImage(LogInController.iAvatar);
 		}else{
@@ -187,7 +187,7 @@ public class FriendController extends ExtenderClassController implements Initial
 
 		String[]Dato=new String[1];
 
-		if(txtTextoAmigos.getText().equals(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName())){
+		if(txtTextoAmigos.getText().equals(com.pasapalabra.game.utilities.ServiceLocator.userInfo.getUserName())){
 			Alert alert3 = new Alert(AlertType.ERROR);
 			alert3.setTitle("Error");
 			alert3.setHeaderText("Te estás enviando una solicitud de amistad a ti mismo");

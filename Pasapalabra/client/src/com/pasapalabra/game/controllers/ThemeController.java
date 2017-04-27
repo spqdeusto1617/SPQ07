@@ -364,7 +364,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		//Lanzamos la partida
 
 		try {
-			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.utilities.ClientConnexion.play(QuestionType.valueOf(Tipo[1])); 
+			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.utilities.ServiceLocator.play(QuestionType.valueOf(Tipo[1])); 
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("JuegoPrincipal", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
@@ -1499,7 +1499,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 			//Variables de usuario
 			menuDesplegable.add(textoNombreDeUsuario);
-			textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
+			textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ServiceLocator.userInfo.getUserName());
 			menuDesplegable.add(imagenAvatar);
 
 			/* ya no hay rectangulos y textos. No se necesita objeto seleccion pregunta

@@ -116,7 +116,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 	public void initialize(URL location, ResourceBundle resources) {
 
 		panel.getStylesheets().add("/css/application.css");
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ServiceLocator.userInfo.getUserName());
 		if(LogInController.iAvatar!=null){
 			imagenAvatar.setImage(LogInController.iAvatar);
 		}else{
@@ -152,7 +152,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 
 		if (result.get() == ButtonType.OK){
 			boolean datos_Correctos=true;
-			if(!tflViejoMail.getText().equals(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getMail())){
+			if(!tflViejoMail.getText().equals(com.pasapalabra.game.utilities.ServiceLocator.userInfo.getMail())){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
 				alert2.setTitle("Mail no coincide");
@@ -198,7 +198,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
-					com.pasapalabra.game.utilities.ClientConnexion.userInfo.setMail(tflNuevoMail.getText());
+					com.pasapalabra.game.utilities.ServiceLocator.userInfo.setMail(tflNuevoMail.getText());
 					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
 				}catch(Exception a){
 					Alert alert2 = new Alert(AlertType.INFORMATION);

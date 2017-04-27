@@ -115,9 +115,6 @@ public class SignInController extends Control implements Initializable {
 
 	ContextMenu userMailElegido = new ContextMenu();
 
-
-	public static String[]Datos_usuario=new String[5];
-
 	public static boolean MailExiste=false;
 
 

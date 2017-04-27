@@ -99,7 +99,7 @@ public class ProfileController extends ExtenderClassController implements Initia
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		//		
-		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ClientConnexion.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.utilities.ServiceLocator.userInfo.getUserName());
 
 		btnAmigos.setOpacity(0.3f);
 		btnEstadisticas.setOpacity(0.3f);
