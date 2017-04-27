@@ -264,7 +264,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Amigos");
-			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Friends", event);
 		}
 	}
 
@@ -286,7 +286,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Perfil");
-			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 		}
 	}
 
@@ -308,7 +308,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
 			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
-			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
 		}
 	}
 
@@ -365,7 +365,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 		try {
 			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.utilities.ServiceLocator.play(QuestionType.valueOf(Tipo[1])); 
-			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("JuegoPrincipal", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -375,7 +375,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			juegoEnCurso=false;
-			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			log.log(Level.WARNING, "Error en la partida", e);
 			e.printStackTrace();
 
@@ -387,7 +387,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 			juegoEnCurso=false;
-			WindowUtilities.windowTransition("Juego", event);
+			WindowUtilities.windowTransition("ThemeElection", event);
 			log.log(Level.WARNING, "No se ha encontrado partida.", e);
 			e.printStackTrace();
 		} 

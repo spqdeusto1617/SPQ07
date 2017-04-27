@@ -244,7 +244,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK){
-			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 		}
 		else{
 			//Nada
@@ -259,14 +259,14 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	 * @param event
 	 */
 	public void btnJugar(MouseEvent event){
-		WindowUtilities.windowTransition("Juego", event);
+		WindowUtilities.windowTransition("ThemeElection", event);
 	}
 	
 	/**Transition to friends window
 	 * @param event
 	 */
 	public void btnAmigos(MouseEvent event){
-		WindowUtilities.windowTransition("Amigos", event);
+		WindowUtilities.windowTransition("Friends", event);
 	}
 
 	/**Transition to profile window
@@ -274,14 +274,14 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	 */
 	public void btnMiPerfil(MouseEvent event){
 
-		WindowUtilities.windowTransition("Perfil", event);
+		WindowUtilities.windowTransition("Profile", event);
 	}
 
 	/**Transition to statistics window
 	 * @param event
 	 */
 	public void btnEstadisticas(MouseEvent event){
-		WindowUtilities.windowTransition("Estadisticas", event);
+		WindowUtilities.windowTransition("Statistics", event);
 	}
 
 	

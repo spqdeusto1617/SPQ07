@@ -131,7 +131,7 @@ public class AboutController extends Control implements Initializable {
 	 * @param event
 	 */
 	public void volver(MouseEvent event){
-		String pantallaALaQueIr = "Juego";
+		String pantallaALaQueIr = "ThemeElection";
 		log.log(Level.FINEST, "Se ha vuelto a la pantalla de " + pantallaALaQueIr);
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition(pantallaALaQueIr, event);
 	}

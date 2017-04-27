@@ -199,7 +199,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
 					com.pasapalabra.game.utilities.ServiceLocator.userInfo.setMail(tflNuevoMail.getText());
-					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
+					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 				}catch(Exception a){
 					Alert alert2 = new Alert(AlertType.INFORMATION);
 					alert2.setTitle("Se produjo un error al tramitar sus datos");
@@ -273,7 +273,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
-					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
+					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 				}catch(Exception a){
 
 					Alert alert2 = new Alert(AlertType.ERROR);
@@ -316,7 +316,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK){
-			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 		}
 		else{
 			//Nada
@@ -331,14 +331,14 @@ public class InformationChangeController extends ExtenderClassController impleme
 	 * @param event
 	 */
 	public void btnJugar(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 	}
 
 	/**Transition to friends window
 	 * @param event
 	 */
 	public void btnAmigos(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Friends", event);
 	}
 
 	/**Transition to profile window
@@ -346,14 +346,14 @@ public class InformationChangeController extends ExtenderClassController impleme
 	 */
 	public void btnMiPerfil(MouseEvent event){
 
-		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 	}
 
 	/**Transition to statistics window
 	 * @param event
 	 */
 	public void btnEstadisticas(MouseEvent event){
-		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
 	}
 
 	/**Method to close current session

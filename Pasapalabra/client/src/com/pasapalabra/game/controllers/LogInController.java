@@ -150,7 +150,7 @@ public class LogInController extends Control implements Initializable {
 			try {	log.log(Level.FINEST, "LogIn OK. Transición de ventana a Juego");
 				com.pasapalabra.game.utilities.ServiceLocator.login(txtUsuario.getText(), txtContra.getText());
 				
-				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
+				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			} catch (Exception e) {
 				log.log(Level.INFO, "Error de LogIn", e);
 				//Aviso

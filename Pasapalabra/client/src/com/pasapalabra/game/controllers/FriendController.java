@@ -213,7 +213,7 @@ public class FriendController extends ExtenderClassController implements Initial
 	 * @param event
 	 */
 	public void btnJugar(MouseEvent event){
-		WindowUtilities.windowTransition("Juego", event);
+		WindowUtilities.windowTransition("ThemeElection", event);
 	}
 
 	public void btnAmigos(MouseEvent event){
@@ -243,14 +243,14 @@ public class FriendController extends ExtenderClassController implements Initial
 	 * @param event
 	 */
 	public void btnMiPerfil(MouseEvent event){
-		WindowUtilities.windowTransition("Perfil", event);
+		WindowUtilities.windowTransition("Profile", event);
 	}
 
 	/**Transition to statistics window
 	 * @param event
 	 */
 	public void btnEstadisticas(MouseEvent event){
-		WindowUtilities.windowTransition("Estadisticas", event);
+		WindowUtilities.windowTransition("Statistics", event);
 	}
 	
 	/**Method to close the current user session

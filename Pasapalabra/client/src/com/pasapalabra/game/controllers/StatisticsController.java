@@ -126,7 +126,7 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	@FXML
 	 void btnJugar(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Juego");
-		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Juego", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 	 }
 
 	 /**Transition to profile window
@@ -135,7 +135,7 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 @FXML
 	 void btnMiPerfil(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Perfil");
-		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Perfil", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 	 }
 
 	 @FXML
@@ -155,7 +155,7 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	@FXML
 	 void btnEstadisticas(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Estadisticas");
-		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Estadisticas", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
 	 }
 
 	 /**Transition to friends window
@@ -164,7 +164,7 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 @FXML
 	 void btnAmigos(MouseEvent event) {
 		 log.log(Level.FINEST, "Transición a Amigos");
-		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Amigos", event);
+		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Friends", event);
 	 }
 
 	 /**Method to close current session
