@@ -108,7 +108,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 	@FXML public Button btnAmigos;
 	@FXML public Button btnJuego;
 	@FXML public Button btnDescartar;
-	@FXML public Button btnCambiar;
+	@FXML public Button btnCambiarCorreo;
 	@FXML public Button btnCambiarContrasenia;
 
 

@@ -753,7 +753,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		/**Evento de ratón. Cuando se ha producido una elección.
 		 * @param event
 		 */
-		/*
+		
 		@FXML
 		void eleccionHecha(MouseEvent event){
 			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
@@ -798,7 +798,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			}
 
 		}
-		*/
+		
 		//Servidor - Así se han seteado los textos del tiempo y la puntuación.
 		//Se deben modificar con el paso del tiempo.
 		/*

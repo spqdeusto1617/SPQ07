@@ -90,6 +90,8 @@ public class ProfileController extends ExtenderClassController implements Initia
 	@FXML public Button btnPerfil;
 	@FXML public Button btnAmigos;
 	@FXML public Button btnJuego;
+	@FXML public Button btnCambiarDatos; 
+	@FXML public Button btnEliminarCuenta; 
 
 	// public static ArrayList<String> Datos_Necesarios_Cliente=new ArrayList<>();
 

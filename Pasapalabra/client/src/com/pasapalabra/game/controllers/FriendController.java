@@ -97,6 +97,7 @@ public class FriendController extends ExtenderClassController implements Initial
 	@FXML public Button btnPerfil;
 	@FXML public Button btnAmigos;
 	@FXML public Button btnJuego;
+	@FXML public Button btnBuscar; 
 
 
 	private final ObservableList<Person> data =
