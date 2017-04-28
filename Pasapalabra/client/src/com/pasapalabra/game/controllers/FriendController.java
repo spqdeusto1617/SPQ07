@@ -81,9 +81,9 @@ public class FriendController extends ExtenderClassController implements Initial
 
 	//@FXML public Rectangle rectanguloEstadisticas;
 
-	@FXML public Rectangle rectanguloBuscarAmigos;
+	//@FXML public Rectangle rectanguloBuscarAmigos;
 
-	@FXML public Text texTextoBuscarAmigos;
+	//@FXML public Text texTextoBuscarAmigos;
 
 	@FXML public TableView<Person>tblTablaAmigos;
 

@@ -83,7 +83,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 	//@FXML public Text txtDescartar;
 
-	@FXML public Text txtEliminar;
+	//@FXML public Text txtEliminar;
 
 	@FXML public TextField tfdCorreo;
 
@@ -100,6 +100,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	@FXML public Button btnDescartar;
 	@FXML public Button btnCambiar;
 	@FXML public Button btnCambiarContrasenia;
+	@FXML public Button btnEliminar;
 
 
 

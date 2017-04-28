@@ -74,15 +74,15 @@ public class ProfileController extends ExtenderClassController implements Initia
 
 	//@FXML public Rectangle rectanguloEstadisticas;
 
-	@FXML public Rectangle rectanguloCambiarDatos;
+	//@FXML public Rectangle rectanguloCambiarDatos;
 
-	@FXML public Rectangle rectanguloEliminarCuenta;
+	//@FXML public Rectangle rectanguloEliminarCuenta;
 
 	@FXML public ImageView imgCambioFotoPerfil;
 
-	@FXML public Text txtCambiarDatos;
+	//@FXML public Text txtCambiarDatos;
 
-	@FXML public Text txtEliminarCuenta;
+	//@FXML public Text txtEliminarCuenta;
 
 	//Buttons
 	@FXML public Button btnCerrarSesion;
