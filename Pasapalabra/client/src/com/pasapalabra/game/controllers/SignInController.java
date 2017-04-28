@@ -465,7 +465,10 @@ public class SignInController extends Control implements Initializable {
 			userDateValidator.hide();
 			chkTerminos.setSelected(false);
 
-			Datos_usuario[3]=dateFormat.format(date2);
+			//UserDTO dto=new UserDto(); No se si sería esto
+			udto.setDOB(date2);
+			//Datos_usuario[3]=dateFormat.format(date2);
+			
 		}
 		else{
 			datosCorrectos=false;  

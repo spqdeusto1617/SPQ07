@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import com.pasapalabra.game.model.DTO.QuestionType;
 import com.pasapalabra.game.utilities.PanelThread;
 import com.pasapalabra.game.utilities.WindowUtilities;
+import com.pasapalabra.game.service.*;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -1474,6 +1475,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			}
 		}
 
+		public void BusquedaPartida(){
+			
+		}
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			/*TODO: revise thisConexion_cliente.Correctas=0;

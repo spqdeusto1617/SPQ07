@@ -1,13 +1,18 @@
 package com.pasapalabra.game.controllers;
 
+import java.awt.HeadlessException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
+import com.pasapalabra.game.utilities.ServiceLocator;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -58,6 +63,7 @@ public class GameController implements Initializable{
 	@FXML public Button btnContestar;
 	@FXML public Button btnPasar;
 	@FXML public Button btnRendirse;
+	@FXML public Button btnVolver;
 	
 	
 	/*TODO: check this@FXML
@@ -450,6 +456,44 @@ public class GameController implements Initializable{
 				}
 	}
 			
+	public void marcarRespuesta(char letra, boolean correcta){
+		int posLetra= Pos_Letra(letra); 
+		if(correcta){
+			
+		}
+	}
+	public void mostrarPuntuacion(){
+		UserScoreDTO uscore= new UserScoreDTO(3, 21); 
+		try {
+			uscore = ServiceLocator.getResults();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
+		try {
+			JOptionPane.showMessageDialog(null, uscore, "Info", JOptionPane.INFORMATION_MESSAGE);
+		} catch (HeadlessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void volverAtras(Event event){
+		try {
+			if(ServiceLocator.endGame()){
+				btnVolver.setDisable(false);
+				WindowUtilities.windowTransition("ThemeElection", event);
+			}else{
+				btnVolver.setDisable(true);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
