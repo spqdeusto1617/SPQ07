@@ -62,112 +62,113 @@ public class CaptureWindow extends Control implements Initializable{
 
 	public static Logger log = AppLogger.getWindowLogger(CaptureWindow.class.getName());
 
-	//ArrayList interno del programa.
-	public static ArrayList<Image> aLNoticias;
+	//Internal array for this class
+	public static ArrayList<Image> aLNews;
 
-	//ArrayList externo del programa.
-	public static ArrayList<File> aLNoticiasFicheros = new ArrayList<File>();
+	//External array for another class
+	public static ArrayList<File> aLNewsFile = new ArrayList<File>();
 
 	/*
-	Esta separación es debida a que Image no es serializable y, por tanto,
-	no se puede enviar por ningún tipo de conexión.
+	This separation is because Image is not serializable, and thus, unable to send it
+	through the Internet.
 	 */
 
 	/*
-	Representa la selección de la imagen que se ha hecho en la ventana.
-	Sirve para recordar lo pulsado la pulsación antes
+	This represent the image´s selection in the window
+	This is for remind which image was selected before
 	 */
-	ImageView seleccionAnterior;
+	ImageView previousSelection;
 
 	@FXML
-	private Pane pGestionarNoticias;
+	private Pane pNewsHandler;
 
 	@FXML
-	private Pane pServidor;
+	private Pane pServer;
 
 	@FXML
 	private SplitPane spPane;
 
 	@FXML
-	private Text txtHoraDelSistema;
+	private Text txtSystemHour;
 
 	@FXML
-	private TextArea listaMensajes;
+	private TextArea messagesList;
 
 	@FXML
-	private Pane pPrincipal;
+	private Pane pMain;
 
 	@FXML
-	private Text txtTiempoTranscurrido;
+	private Text txtElapsedTime;
 
 	@FXML
-	private FlowPane fNoticias;
+	private FlowPane fNews;
 
 	@FXML
-	private Text txtEstadoServidor;
+	private Text txtServerStatus;
 
 	@FXML
-	private Button btnSalir;
+	private Button exitBtn;
 
 	@FXML
-	private Button btnVolver;
+	private Button returnBtn;
 
 	@FXML
-	private Button btnEliminar;
+	private Button removeBtn;
 
 	@FXML
-	private Text txtPuertoServidor;
+	private Text txtServerPort;
 
 	@FXML
-	private Button btnAnyadir;
+	private Button addBtn;
 
 	@FXML
-	private Text txtIpServidor;
+	private Text txtServerIp;
 
 	/**
-	 * @param event Evento que hace 
+	 * @param event Event to load files to send them to the client
 	 */
 	@FXML
-	void anyadir(MouseEvent event) {
-		//El usuario elige el fichero
+	void add(MouseEvent event) {
+		//We chose the file
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Seleccionar imagen para noticia");
+		fileChooser.setTitle("Select new´s image");
 		fileChooser.getExtensionFilters().addAll(
 				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg"));
 		File selectedFile = fileChooser.showOpenDialog((Stage) ((Node) event.getSource()).getScene().getWindow());
 
-		//Si el fichero es nulo, entonces, no se continua.
+		//If the file is null, we can´t continue.
 		if(selectedFile == null) return;
 
-		//Se añade a la ventana y se guarda (true)
-		anyadirAVentana(selectedFile, true);
+		//We add the image to the 
+		addToWindow(selectedFile, true);
 	}
 
 	@FXML
-	void eliminar(MouseEvent event) {
+	void remove(MouseEvent event) {
 		//Solo se eliminará si la selección existe y el usuario lo confirma.
-		if(seleccionAnterior != null){
+		if(previousSelection != null){
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Borrar noticia");
-			alert.setHeaderText("¿Está segur@ de que desea borrar la noticia seleccionada?");
-			alert.setContentText("Al borrar esta noticia no volverá a aparecerle a ningún usuario que se conecte.");
+			alert.setTitle("Delete new");
+			alert.setHeaderText("Do you want to delete this new");
+			alert.setContentText("After deleting it, no user can receive it back.");
 
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			Optional<ButtonType> result = alert.showAndWait();
+		
 			if (result.get() == ButtonType.OK){
 				Alert alert2 = new Alert(AlertType.INFORMATION);
-				alert2.setTitle("AVISO!");
+				alert2.setTitle("WARNING!");
 				alert2.setHeaderText(null);
-				alert2.setContentText("No somos capaces de encontrar tu imagen en el sistema de archivos. Por favor, elija cual era el archivo que intentó eliminar.");
-				alert2.setGraphic(seleccionAnterior);
+				alert2.setContentText("We cant find the image. Please select the image in your system.");
+				alert2.setGraphic(previousSelection);
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
 
 				//Elige la imagen en el sistema de archivos porque no somos capaces de saber cual era.
 				FileChooser fileChooser = new FileChooser();
-				fileChooser.setTitle("Seleccionar imagen para eliminar");
+				fileChooser.setTitle("Select image to delete");
 				fileChooser.setInitialDirectory(getSystemDefaultPath(null).toFile());
 				fileChooser.getExtensionFilters().addAll(
 						new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg"));
@@ -184,13 +185,13 @@ public class CaptureWindow extends Control implements Initializable{
 							//Se elimina el archivo 'físico'.
 							Files.delete(selectedFile.toPath());
 						} catch (IOException e) {
-							log.log(Level.WARNING, "No se ha eliminado el archivo con ruta: " + selectedFile.getAbsolutePath(), e);
+							log.log(Level.WARNING, "We can´t delete the image with the route: " + selectedFile.getAbsolutePath(), e);
 							e.printStackTrace();
 						}
 						//Se elimina el archivo de la ventana.
-						fNoticias.getChildren().remove(seleccionAnterior);
+						fNews.getChildren().remove(previousSelection);
 						//Se deselecciona el archivo.
-						seleccionAnterior = null;
+						previousSelection = null;
 					}
 				}
 			}
@@ -201,25 +202,25 @@ public class CaptureWindow extends Control implements Initializable{
 
 
 	@FXML
-	void volver(MouseEvent event) {
+	void mReturn(MouseEvent event) {
 		playAnimation(true);
 	}
 
 	@FXML
-	void gestionarNoticias(MouseEvent event) {
+	void manageNews(MouseEvent event) {
 		playAnimation(false);
 	}
 
-	void playAnimation(boolean servidor_notNoticias){
+	void playAnimation(boolean server_notNews){
 		Platform.runLater(new Runnable() {
 
 			@Override
 			public void run() {
-				if(servidor_notNoticias){
+				if(server_notNews){
 					TranslateTransition translate = TranslateTransitionBuilder
 							.create()
 							.duration(new Duration(1000))
-							.node(pServidor)
+							.node(pServer)
 							.toX(0)
 							.autoReverse(false)
 							.build();
@@ -227,7 +228,7 @@ public class CaptureWindow extends Control implements Initializable{
 					TranslateTransition translate2 = TranslateTransitionBuilder
 							.create()
 							.duration(new Duration(1000))
-							.node(pGestionarNoticias)
+							.node(pNewsHandler)
 							.toX(0)
 							.autoReverse(false)
 							.build();
@@ -239,7 +240,7 @@ public class CaptureWindow extends Control implements Initializable{
 					TranslateTransition translate = TranslateTransitionBuilder
 							.create()
 							.duration(new Duration(1000))
-							.node(pServidor)
+							.node(pServer)
 							.toX(-600)
 							.autoReverse(false)
 							.build();
@@ -247,7 +248,7 @@ public class CaptureWindow extends Control implements Initializable{
 					TranslateTransition translate2 = TranslateTransitionBuilder
 							.create()
 							.duration(new Duration(1000))
-							.node(pGestionarNoticias)
+							.node(pNewsHandler)
 							.toX(-600)
 							.autoReverse(false)
 							.build();
@@ -264,11 +265,11 @@ public class CaptureWindow extends Control implements Initializable{
 	}
 
 	@FXML
-	void salir(MouseEvent event) {
+	void exit(MouseEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Salir de la aplicación");
-		alert.setHeaderText("¿Está segur@ de que desea salir de la aplicación?");
-		alert.setContentText("Si sale de la aplicación, todos los usuarios conectados al servidor perderán el progreso que estén haciendo en este momento.");
+		alert.setTitle("Exit the application");
+		alert.setHeaderText("Do you really want to exit the applicaction");
+		alert.setContentText("If you exit htis application, all the data will be lost.");
 
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
@@ -286,61 +287,61 @@ public class CaptureWindow extends Control implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//Se crea el log handler
+		//We create the log
 		AppLogger.crearLogHandler(log, CaptureWindow.class.getName());
-		//Se cargan las imágenes de los botones.
+		//The button´s images are loaded here
 		try {
 			Image img;
 			img = new Image(this.getClass().getResource("/res/back.png").toURI().toURL().toString());
 			ImageView ivV = new ImageView(img);
 			ivV.setFitHeight(10); ivV.setFitWidth(10);
 			ivV.setSmooth(true);
-			btnVolver.setGraphic(ivV);
+			returnBtn.setGraphic(ivV);
 
 
 			img = new Image(this.getClass().getResource("/res/delete.png").toURI().toURL().toString());
 			ivV = new ImageView(img);
 			ivV.setFitHeight(10); ivV.setFitWidth(10);
 			ivV.setSmooth(true);
-			btnEliminar.setGraphic(ivV);
+			removeBtn.setGraphic(ivV);
 
 			img = new Image(this.getClass().getResource("/res/add.png").toURI().toURL().toString());
 			ivV = new ImageView(img);
 			ivV.setFitHeight(10); ivV.setFitWidth(10);
 			ivV.setSmooth(true);
-			btnAnyadir.setGraphic(ivV);
+			addBtn.setGraphic(ivV);
 
-		} catch (MalformedURLException e2) {
-			log.log(Level.WARNING, "Error al cargar la parte gráfica de los botones de la ventana", e2);
+		} catch (MalformedURLException e2) {//graphic
+			log.log(Level.WARNING, "Error at loading the button´s graphic part", e2);
 		} catch (URISyntaxException e2) {
-			log.log(Level.WARNING, "Error al cargar la parte gráfica de los botones de la ventana", e2);
+			log.log(Level.WARNING, "Error at loading the button´s graphic part", e2);
 		}
 
-		//Se crea el arraylist
-		aLNoticias = new ArrayList<>();
-		Image iGuardar;
-		//Se cargan todos los ficheros gráficos que hayan en esa carpeta.
-		if (cargarFicheros() != null) {
-			for (File fImage : cargarFicheros()) {
+		//We create the arraylist
+		aLNews = new ArrayList<>();
+		Image iSave;
+		//All the graphic part are loaded into a folder
+		if (fileLoad() != null) {
+			for (File fImage : fileLoad()) {
 				try {
 					if(Files.isRegularFile(fImage.toPath())){
 
 						System.out.println(fImage.toPath());
-						iGuardar = new Image(fImage.toURI().toURL().toString());
-						aLNoticiasFicheros.add(fImage);
-						aLNoticias.add(iGuardar);
-						anyadirAVentana(fImage, false);
+						iSave = new Image(fImage.toURI().toURL().toString());
+						aLNewsFile.add(fImage);
+						aLNews.add(iSave);
+						addToWindow(fImage, false);
 					}
 				} catch (Exception e) {
-					log.log(Level.WARNING, "Error al cargar los ficheros a la ventana", e);
+					log.log(Level.WARNING, "Error while loading files to the window", e);
 				}
 			}
 		}
-		//Saca la fecha en la que el servidor se encendió.
-		Date fComienzo = new Date();
-		//Coge el puerto del servidor
+		//We get the date when the server stared.
+		Date startDate = new Date();
+		//We get the app port
 		//txtPuertoServidor.setText(String.valueOf(Servidor.PUERTO_DEL_SERVIDOR));
-		//Se carga la ip externa del servidor
+		//The external ip is loaded
 		try {
 			URL whatismyip = new URL("http://checkip.amazonaws.com");
 			BufferedReader in;
@@ -348,13 +349,13 @@ public class CaptureWindow extends Control implements Initializable{
 			in = new BufferedReader(new InputStreamReader(
 					whatismyip.openStream()));
 			String ip = in.readLine();
-			txtIpServidor.setText(ip);
+			txtServerIp.setText(ip);
 		} catch (IOException e1) {
-			log.log(Level.WARNING, "Error al cargar la IP del servidor", e1);
+			log.log(Level.WARNING, "Error while loading the appliction´s IP", e1);
 		}
 
 		//Setea el texto
-		txtEstadoServidor.setText("en línea");
+		txtServerStatus.setText("online");
 
 
 		new Thread(new Runnable() {
@@ -365,28 +366,28 @@ public class CaptureWindow extends Control implements Initializable{
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						log.log(Level.WARNING, "Error al dormir el hilo", e);
+						log.log(Level.WARNING, "Error while sleeping this thread", e);
 					}
 					Platform.runLater(new Runnable() {
 
 						@Override
 						public void run() {
-							//Actualiza los mensajes
+							//The messages are updated
 						//	listaMensajes.setText(Servidor.s2);
 
-							//Carga el tiempo transcurrido.
-							long diff = new Date().getTime() - fComienzo.getTime();
+							//The elapsed time is loaded
+							long diff = new Date().getTime() - startDate.getTime();
 
 							long diffSeconds = diff / 1000 % 60;
 							long diffMinutes = diff / (60 * 1000) % 60;
 							long diffHours = diff / (60 * 60 * 1000) % 24;
 							long diffDays = diff / (24 * 60 * 60 * 1000);
-							txtTiempoTranscurrido.setText(diffDays + "días " + diffHours + "horas " + diffMinutes + "minutos " + diffSeconds + "segundos");
+							txtElapsedTime.setText(diffDays + "days " + diffHours + "hours " + diffMinutes + "minutes " + diffSeconds + "seconds");
 
 							DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 							Date today = Calendar.getInstance().getTime();
 							String reportDate = df.format(today);
-							txtHoraDelSistema.setText(reportDate);
+							txtSystemHour.setText(reportDate);
 
 							double [] a = spPane.getDividerPositions();
 							if(a[0]<0.5){
@@ -401,12 +402,12 @@ public class CaptureWindow extends Control implements Initializable{
 
 	}
 
-	/**Método para guardar fichero en la carpeta del servidor
-	 * @param f Fichero a guardar.
+	/**Method to save an image to a folder
+	 * @param f file to save.
 	 */
-	public static void guardarFichero(File f){
+	public static void saveToFile(File f){
 		//		if(existeRaw(f)){
-		//			//Ya existe
+		//			//It already exits
 		//
 		//		}else{
 		String extension = "";
@@ -416,7 +417,7 @@ public class CaptureWindow extends Control implements Initializable{
 			extension = f.getAbsolutePath().substring(i);
 		}
 
-		//Opciones de copia
+		//Copy options
 		CopyOption[] options = new CopyOption[]{
 				StandardCopyOption.REPLACE_EXISTING,
 				StandardCopyOption.COPY_ATTRIBUTES
@@ -424,27 +425,27 @@ public class CaptureWindow extends Control implements Initializable{
 		Path p = null;
 		try {
 			p = getSystemDefaultPath(extension);
-			//Copia el fichero
+			//Copies the file
 			Files.copy(f.toPath(),p,options);
 			System.out.println(p);
 		} catch (IOException e) {
-			log.log(Level.WARNING, "Error al copiar el archivo " + f.getAbsolutePath() + " a " + p  , e);
+			log.log(Level.WARNING, "Error at coping the file: " + f.getAbsolutePath() + " to " + p  , e);
 		}
 		try {
 			File file = new File(p.toUri());
-			aLNoticiasFicheros.add(file);
-			aLNoticias.add(new Image(file.toURI().toURL().toString()));
+			aLNewsFile.add(file);
+			aLNews.add(new Image(file.toURI().toURL().toString()));
 		} catch (MalformedURLException e) {
-			log.log(Level.WARNING, "Error al añadir la imagen al array. " + p.toUri().toString(), e);
+			log.log(Level.WARNING, "Error at adding the image to the array. " + p.toUri().toString(), e);
 		}
 		//		}
 	}
-
-	/**Método para añadir a ventana y guardar (depende del parámetro booleano) un fichero gráfico
-	 * @param selectedFile Fichero para añadir a la ventana
-	 * @param guardar True: guardar - False: no guardar.
+	
+	/**Method to add and save to the windows (if a boolean is true) a graphic image
+	 * @param selectedFile the file to add to the window
+	 * @param save True: save - False: not save.
 	 */
-	public void anyadirAVentana(File selectedFile, boolean guardar){
+	public void addToWindow(File selectedFile, boolean save){
 		//		if(existeRaw(selectedFile)){}
 		//		else{
 		try {
@@ -454,10 +455,10 @@ public class CaptureWindow extends Control implements Initializable{
 
 				@Override
 				public void handle(Event event) {
-					if(seleccionAnterior != null){
-						seleccionAnterior.setEffect(null);
+					if(previousSelection != null){
+						previousSelection.setEffect(null);
 					}
-					seleccionAnterior = (ImageView) event.getSource();
+					previousSelection = (ImageView) event.getSource();
 					//Se le añade un efecto glow
 					DropShadow borderGlow = new DropShadow();
 					borderGlow.setOffsetY(0f);
@@ -466,34 +467,33 @@ public class CaptureWindow extends Control implements Initializable{
 					borderGlow.setWidth(20);
 					borderGlow.setHeight(20);
 
-					seleccionAnterior.setEffect(borderGlow);
+					previousSelection.setEffect(borderGlow);
 				}
 			});
-			fNoticias.getChildren().add(iv);
-			if(guardar) guardarFichero(selectedFile);
+			fNews.getChildren().add(iv);
+			if(save) saveToFile(selectedFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		//		}
 	}
 
-	/**Consigue todos los ficheros pero en vez de en un array, lo pasa a ArrayList.
-	 * @return Todos los ficheros gráficos de la carpeta de imágenes del servidor.
+	/** We get all the files, but instead of an array, in an arraylist
+	 * @return All the graphics files from the server´s images folder
 	 */
-	public static ArrayList<File> cargarFicheros(){
-		ArrayList<File> aLDevolucion = new ArrayList<File>();
+	public static ArrayList<File> fileLoad(){
+		ArrayList<File> aLRetreive = new ArrayList<File>();
 		for (File file : getAllFiles()) {
-			aLDevolucion.add(file);
+			aLRetreive.add(file);
 		}
-		return aLDevolucion;
+		return aLRetreive;
 	}
 
-
-	/**Método para conseguir la Ruta que se utilizará para guardar las imágenes o
-	 * para saber donde están guardadas.
-	 * @param extension null si queremos obtener la ruta donde estan guardados los archivos
-	 * un string con la extensión si queremos obtener una ruta en la cual guardar un archivo.
-	 * @return devuelve la Ruta del archivo a guardar o de la carpeta en la que se encuentra todo.
+	
+	/**Method to get the route it will be used to save the images or to know where are saved 
+	 * @param extension null if we want to get the path to the image
+	 * a string with the extension we want to obtain to save a file
+	 * @return we return the path to the file to save, or the folder where everything is saved
 	 */
 	public static Path getSystemDefaultPath(String extension){
 		String s = "";
@@ -506,7 +506,7 @@ public class CaptureWindow extends Control implements Initializable{
 			f = new File("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\ServerImgs\\" + s);
 
 			f.mkdirs();
-			log.log(Level.FINEST, "El archivo creado estará en: " + f.getAbsolutePath());
+			log.log(Level.FINEST, "The selected file will be created in: " + f.getAbsolutePath());
 			return f.toPath();
 
 		}else if(System.getProperty("os.name").startsWith("Mac")){
@@ -515,21 +515,22 @@ public class CaptureWindow extends Control implements Initializable{
 			f = new File("/Users/"+System.getProperty("user.name")+"/Pasapalabra/ServerImgs/" + s);
 
 			f.mkdirs();
-			log.log(Level.FINEST, "El archivo creado estará en: " + f.getAbsolutePath());
+			log.log(Level.FINEST, "The selected file will be created in: " + f.getAbsolutePath());
 			return f.toPath();
 
 		}else{
-			//LINUX y si no pues se hará mal y saltará una excepción...
+			//LINUX and if not an exception will be throw...
 			f = new File("/home/"+System.getProperty("user.name")+"/Pasapalabra/ServerImgs/" + s);
 
 			f.mkdirs();
-			log.log(Level.FINEST, "El archivo creado estará en: " + f.getAbsolutePath());
+			log.log(Level.FINEST, "The selected file will be created in: " + f.getAbsolutePath());
 			return f.toPath();
 		}
 	}
 
-	/**Método para conseguir todos los ficheros de una carpeta.
-	 * @return Array de File que contiene todos los ficheros de la carpeta.
+	
+	 /** Method to obtain all the files from a folder
+	 * @return An array of Files with all the files from the folder
 	 */
 	public static File[] getAllFiles(){
 		return getSystemDefaultPath(null).toFile().listFiles(new FilenameFilter() {
@@ -540,11 +541,11 @@ public class CaptureWindow extends Control implements Initializable{
 		});
 	}
 
-	/**Calcula el número de ficheros que existen en la carpeta.
-	 * @return Numero de archivos en la carpeta.
+	/**Calculates the number of files in a folder.
+	 * @return Number of files in a folder.
 	 */
 	public static int getNumberOfFiles(){
-		if(cargarFicheros() != null) return cargarFicheros().size();
+		if(fileLoad() != null) return fileLoad().size();
 		else return 0;
 	}
 }

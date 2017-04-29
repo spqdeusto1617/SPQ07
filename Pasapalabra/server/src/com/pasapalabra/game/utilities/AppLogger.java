@@ -6,28 +6,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.XMLFormatter;
 
-/**Clase para de utilidad para crear un archivo log en las demás clases.
- * Parece que está adaptada solamente para ventanas pero está más que preparada para
- * hacer frente a cualquier tipo de código java, sea o no ventana.
- * He usado la palabra window para que sea más sencillo el encontrar el método
- * cuando se programa.
+/**Utility class to create a log file in the other classes.
+ * It seems that it is adapted for the windows only, but it is more than ready for
+ * dealing with any type of java code, whether is a window or not.
+ * I used the word window to make it easier to find the method when programmed.
  * @author asier.gutierrez
- *
  */
 public class AppLogger {
 
-	//Por defecto en una clase sería algo así.
+	//By default, it will be like this.
 	public static Logger log = Logger.getLogger(AppLogger.class.getName());
-
-	//Para evitar que en cada clase se tenga que hacer esto desarrollamos este método.
-	/**Método para getear el Logger de la clase teniendo el nombre de la propia clase.
-	 * El por qué de esto es que así se puede loggear si se ha podido o no obtener el logger.
-	 * Es decir, según la aplicación se encienda ya empieza el log muchísimo antes.
-	 * @param nombreClase el nombre que tiene la clase en la que buscar el Logger.
-	 * @return El Logger de la clase que se ha indicado.
+	//To not having to create this in all the classes, we create this method.
+	/**Method to get the logger for the class, by getting the class name.
+	 * This is because we can log if we got or not the logger.
+	 * That mean that the logger can start way earlier that the app.
+	 * @param className the class name that the logger indicated.
+	 * @return The logger of the indicated class.
 	 */
-	public static Logger getWindowLogger(String nombreClase){
-		return Logger.getLogger(nombreClase);
+	public static Logger getWindowLogger(String className){
+		return Logger.getLogger(className);
 	}
 
 
@@ -43,23 +40,23 @@ public class AppLogger {
 	 * @param wLogger el logger de la clase de la cual queremos crear un handler.
 	 * @return true/false dependiendo de si se ha podido crear o no. Generalmente siempre se va a poder.
 	 */
-	public static Boolean crearLogHandler(Logger wLogger, String nombreClase){
+	public static Boolean crearLogHandler(Logger wLogger, String className){
 		try {
-			//Creamos un handler nulo
+			//We create a null handler
 			FileHandler handler = null;
 
-			//Dependiendo del sistema operativo lo guardaremos en un sitio u otro.
-			//Habra una excepcion si no existe la carpeta Pasapalabra y Logs entonces se hace un try catch y en el catch se crea.
-			//Para todos los SO igual.
+			//Depending of the OS, we store the log in diferent places.
+			//If the folder: "Pasapalabra" does not exit, the application enters in a catch, where the folder is created.
+			//For all the OS is equally done.
 			if(System.getProperty("os.name").startsWith("Windows")){
 				//WINDOWS
 
 				try{
-					handler = new FileHandler("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\Logs\\"+nombreClase+".xml",true);
+					handler = new FileHandler("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\Logs\\"+className+".xml",true);
 				}catch(Exception winEx){
 					new File("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\Logs\\").mkdirs();
-					handler = new FileHandler("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\Logs\\"+nombreClase+".xml",true);
-					//Si ya no funciona lo dejamos.
+					handler = new FileHandler("C:\\Users\\"+System.getProperty("user.name")+"\\Pasapalabra\\Logs\\"+className+".xml",true);
+					//If it does not work, we stop it.
 				}
 
 
@@ -67,45 +64,45 @@ public class AppLogger {
 				//MAC
 
 				try{
-					handler = new FileHandler("/Users/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+nombreClase+".xml",true);
+					handler = new FileHandler("/Users/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+className+".xml",true);
 				}catch(Exception macEx){
 					new File("/Users/"+System.getProperty("user.name")+"/Pasapalabra/Logs/").mkdirs();
-					handler = new FileHandler("/Users/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+nombreClase+".xml",true);
-					//Si ya no funciona lo dejamos.
+					handler = new FileHandler("/Users/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+className+".xml",true);
+					//If it does not work, we stop trying.
 				}
 
 			}else{
-				//LINUX y si no pues se hará mal y saltará una excepción...
+				//LINUX and if not, an Exception is thrown
 
 				try{
-					handler = new FileHandler("/home/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+nombreClase+".xml",true);
+					handler = new FileHandler("/home/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+className+".xml",true);
 				}catch(Exception linEx){
 					new File("/home/"+System.getProperty("user.name")+"/Pasapalabra/Logs/").mkdirs();
-					handler = new FileHandler("/home/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+nombreClase+".xml",true);
-					//Si ya no funciona lo dejamos.
+					handler = new FileHandler("/home/"+System.getProperty("user.name")+"/Pasapalabra/Logs/"+className+".xml",true);
+					//If it does not work, we stop trying.
 				}
 
 			}
 
-			//Una vez tenemos ya el handler bien formado le ponemos un formateador XML
+			//When we have a logger properly done, we create a handler and we set the format.
 			handler.setFormatter(new XMLFormatter());
 
-			//No queremos padres de handlers
+			//We don´t want handler´s parents.
 			wLogger.setUseParentHandlers(false);
 
-			//Le añadimos al logger su respectivo handler.
+			//We add the logger to the respective handler.
 			wLogger.addHandler(handler);
 
 		}
 		catch ( Exception e ) {
-			//Si hay excepción, aunque el handler no funcione loggeamos. Más no podemos hacer. [Debido al presupuesto, claro]
+			//If there is an exception, even if the handler does not work, we log. We can´t do anymore. [Due to budget, of course]
 			System.out.println(e);
-			wLogger.log(Level.FINEST,"Ya hay un archivo log de Main");
+			wLogger.log(Level.FINEST,"There is already a log file from the main class");
 
-			//Si se ha creado mal return -> false
+			//If it was created wrong, return -> false
 			return false;
 		}
-		//Si se ha creado bien return -> true
+		//If it was created right, return -> true
 		return true;
 	}
 }

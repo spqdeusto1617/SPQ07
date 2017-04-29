@@ -8,20 +8,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="pPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.server.CVentanaCaptura">
+<Pane fx:id="pMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.server.CaptureWindow">
    <children>
-      <Pane fx:id="pGestionarNoticias" layoutX="600.0" prefHeight="400.0" prefWidth="600.0">
+      <Pane fx:id="pNewsHandler" layoutX="600.0" prefHeight="400.0" prefWidth="600.0">
          <children>
             <BorderPane prefHeight="400.0" prefWidth="600.0">
                <top>
                   <FlowPane prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="btnAnyadir" mnemonicParsing="false" onMouseClicked="#anyadir" text="Añadir">
+                        <Button fx:id="addBtn" mnemonicParsing="false" onMouseClicked="#add" text="Add">
                            <FlowPane.margin>
                               <Insets left="5.0" top="5.0" />
                            </FlowPane.margin>
                         </Button>
-                        <Button fx:id="btnEliminar" mnemonicParsing="false" onMouseClicked="#eliminar" text="Eliminar">
+                        <Button fx:id="removeBtn" mnemonicParsing="false" onMouseClicked="#remove" text="Remove">
                            <FlowPane.margin>
                               <Insets left="10.0" top="5.0" />
                            </FlowPane.margin>
@@ -34,7 +34,7 @@
                               <Insets left="40.0" />
                            </FlowPane.margin>
                         </Text>
-                        <Button id="volver" fx:id="btnVolver" mnemonicParsing="false" onMouseClicked="#volver" text="Volver">
+                        <Button id="return" fx:id="returnBtn" mnemonicParsing="false" onMouseClicked="#mReturn" text="Return">
                            <FlowPane.margin>
                               <Insets left="15.0" top="5.0" />
                            </FlowPane.margin>
@@ -45,7 +45,7 @@
                <center>
                   <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <content>
-                        <FlowPane fx:id="fNoticias" hgap="15.0" prefHeight="363.0" prefWidth="597.0" vgap="5.0">
+                        <FlowPane fx:id="fNews" hgap="15.0" prefHeight="363.0" prefWidth="597.0" vgap="5.0">
                            <padding>
                               <Insets left="15.0" top="10.0" />
                            </padding></FlowPane>
@@ -55,7 +55,7 @@
             </BorderPane>
          </children>
       </Pane>
-      <Pane fx:id="pServidor" prefHeight="400.0" prefWidth="600.0">
+      <Pane fx:id="pServer" prefHeight="400.0" prefWidth="600.0">
          <children>
             <SplitPane fx:id="spPane" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0">
                <items>
@@ -65,12 +65,12 @@
                            <center>
                               <GridPane BorderPane.alignment="CENTER">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Servidor Pasapalabra online" GridPane.columnIndex="1">
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pasapalabra server OnLine" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
                                     </Text>
-                                    <Button fx:id="btnSalir" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onMouseClicked="#salir" prefHeight="27.0" prefWidth="62.0" styleClass="cerrar" text="Cerrar" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <Button fx:id="exitBtn" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" onMouseClicked="#exit" prefHeight="27.0" prefWidth="62.0" styleClass="cerrar" text="Cerrar" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets bottom="-20.0" left="140.0" />
                                        </GridPane.margin>
@@ -81,7 +81,7 @@
                                        </image>
                                     </ImageView>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Build 01 @ 2016/01/16 ~ 21:00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Button mnemonicParsing="false" onMouseClicked="#gestionarNoticias" text="Gestionar noticias" GridPane.rowIndex="2">
+                                    <Button mnemonicParsing="false" onMouseClicked="#manageNews" text="Gestionar noticias" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets bottom="-20.0" left="5.0" />
                                        </GridPane.margin>
@@ -106,38 +106,38 @@
                                           <VBox prefHeight="83.0" prefWidth="181.0">
                                              <children>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IP" />
-                                                <Text fx:id="txtIpServidor" strokeType="OUTSIDE" strokeWidth="0.0" text="-" />
+                                                <Text fx:id="txtServerIp" strokeType="OUTSIDE" strokeWidth="0.0" text="-" />
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Puerto">
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
                                                 </Text>
-                                                <Text fx:id="txtPuertoServidor" strokeType="OUTSIDE" strokeWidth="0.0" text="-" />
+                                                <Text fx:id="txtServerPort" strokeType="OUTSIDE" strokeWidth="0.0" text="-" />
                                              </children>
                                           </VBox>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane animated="false" text="Estado">
+                                    <TitledPane animated="false" text="Status">
                                        <content>
                                           <VBox prefHeight="83.0" prefWidth="181.0">
                                              <children>
-                                                <Text fx:id="txtEstadoServidor" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="estado" text="-" />
+                                                <Text fx:id="txtServerStatus" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="estado" text="-" />
                                              </children>
                                           </VBox>
                                        </content>
                                     </TitledPane>
-                                    <TitledPane prefHeight="84.0" prefWidth="228.0" text="Datos horarios">
+                                    <TitledPane prefHeight="84.0" prefWidth="228.0" text="Time data">
                                        <content>
                                           <VBox prefHeight="200.0" prefWidth="100.0">
                                              <children>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hora del sistema:" />
-                                                <Text fx:id="txtHoraDelSistema" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="211.1318359375" />
+                                                <Text fx:id="txtSystemHour" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="211.1318359375" />
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tiempo transcurrido desde inicio:">
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
                                                 </Text>
-                                                <Text fx:id="txtTiempoTranscurrido" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="208.1318359375" />
+                                                <Text fx:id="txtElapsedTime" strokeType="OUTSIDE" strokeWidth="0.0" text="-" textAlignment="CENTER" wrappingWidth="208.1318359375" />
                                              </children>
                                           </VBox>
                                        </content>
@@ -150,7 +150,7 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <TextArea fx:id="listaMensajes" editable="false" layoutX="114.0" layoutY="-2.0" prefHeight="195.0" prefWidth="598.0" promptText="---SERVIDOR---" text="---SERVIDOR---" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <TextArea fx:id="messagesList" editable="false" layoutX="114.0" layoutY="-2.0" prefHeight="195.0" prefWidth="598.0" promptText="---SERVIDOR---" text="---SERVIDOR---" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </items>
