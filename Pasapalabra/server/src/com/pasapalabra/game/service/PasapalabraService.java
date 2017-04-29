@@ -93,10 +93,8 @@ public class PasapalabraService implements IPasapalabraService{
 		currentQuestions.put(session.getToken(), questions);
 
 		if(SessionManager.isValidSession(session)){
-			try{
-				waitingClients.get(type).get(0);
-			}catch (Exception e) {
-				
+
+			if(!waitingClients.containsKey(type)){
 				waitingClients.put(type, new ArrayList<String>());
 				waitingClients.get(type).add(session.getToken());
 				currentClients.put(session.getToken(), service);
@@ -108,6 +106,7 @@ public class PasapalabraService implements IPasapalabraService{
 			if(waitingClients.get(type).isEmpty()){
 				System.out.println("Waiting clients esta vacio");
 				waitingClients.get(type).add(session.getToken());
+				currentClients.put(session.getToken(), service);
 				currentResult.put(session.getToken(), new UserScore());
 				return new UserDTO("Wait");//TODO: revise this
 			}
@@ -121,6 +120,7 @@ public class PasapalabraService implements IPasapalabraService{
 			currentResult.put(session.getToken(), new UserScore());
 			currentClients.put(session.getToken(), service);
 			IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
+			
 			client.getUser(UserAssembler.getInstance().assembleToDTO(currentUsers.get(session.getToken())));
 			return UserAssembler.getInstance().assembleToDTO(currentUsers.get(currentMatches.get(session.getToken())));//We get the first question
 		}
@@ -278,7 +278,6 @@ public class PasapalabraService implements IPasapalabraService{
 				currentClients.remove(session.getToken());
 				currentResult.remove(session.getToken());
 				currentQuestions.remove(session.getToken());
-
 			}
 
 		}
@@ -302,15 +301,20 @@ public class PasapalabraService implements IPasapalabraService{
 		/*PasapalabraService service = new PasapalabraService();
 		Token token = null;
 		Token token2 = null;
-		//Token token3 = null;
+		Token token3 = null;
+		Token token4 = null;
 		try {
-			token = service.login("Me", "Test");
-			System.out.println("Token1: "+token.getToken());
+			token = service.login("Jugador 1", "Test");
+			//System.out.println("Token1: "+token.getToken());
 
-			token2 = service.login("You", "Test2");
-			System.out.println("Token2: "+token2.getToken());
+			token2 = service.login("Jugador 2", "Test2");
+			//System.out.println("Token2: "+token2.getToken());
 
-			//token3 = service.login("He", "Test3");
+			token3 = service.login("Jugador 3", "Test3");
+			//System.out.println("Token3: "+token3.getToken());
+			
+			token4 = service.login("Jugador 4", "Test3");
+			
 		} catch (RemoteException | SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -318,22 +322,52 @@ public class PasapalabraService implements IPasapalabraService{
 		//System.out.println(token.getToken());
 		ClientService clientservice1 = new ClientService();
 		ClientService clientservice2 = new ClientService();
-		//ClientService clientservice3 = new ClientService();
+		ClientService clientservice3 = new ClientService();
+		ClientService clientservice4 = new ClientService();
 		try {
 			UserDTO test = service.play(token, QuestionType.All.toString(),clientservice1);
 			//System.out.println("Respuesta del servidor: "+test.getUserName());
-
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			service.exitMatchMaking(token, QuestionType.All.toString());
+			System.out.println("Salimos del matchmaking");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/*test = service.play(token, QuestionType.All.toString(),clientservice1);
+			System.out.println("Respuesta del servidor: "+test.getUserName());
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			test = service.play(token, QuestionType.All.toString(),clientservice1);
 			UserDTO test2 = service.play(token2, QuestionType.All.toString(), clientservice2);
-
-			//UserDTO test3 = service.play(token3, QuestionType.All.toString(), clientservice3);
-			System.out.println(test2.getUserName());
+			System.out.println("Juego 1");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			UserDTO test3 = service.play(token3, QuestionType.All.toString(), clientservice3);
+			System.out.println(test3.getUserName());
 
 			//System.out.println("Test:"+test3.getUserName());
 			//System.out.println(test.getUserName());
 			QuestionDTO question2 = service.getQuestion(token2);
 			System.out.println("question"+question2);
 			boolean result = service.answerQuestion(token2, "Answer");
-			System.out.println(result);
+			System.out.println("Respuesta servidor:"+result);
 			for(char alphabet = 'a'; alphabet <= 'z'; alphabet++ ){
 				question2 = service.getQuestion(token2);
 				System.out.println("question"+question2);
@@ -348,7 +382,7 @@ public class PasapalabraService implements IPasapalabraService{
 			result = service.answerQuestion(token, "Answer");
 			System.out.println(result);
 			for(char alphabet = 'a'; alphabet <= 'z'; alphabet++ ){
-				
+
 				question = service.getQuestion(token);
 				System.out.println("question"+question);
 				result = service.answerQuestion(token, Character.toString(alphabet));
@@ -356,12 +390,23 @@ public class PasapalabraService implements IPasapalabraService{
 			}
 			UserScoreDTO score2 = service.getResults(token);
 			System.out.println(score2);
+			System.out.println("--------------------------------------------------------");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Siguiente partida");
+			System.out.println(test3.getUserName());
+			UserDTO test4 = service.play(token4, QuestionType.All.toString(),clientservice4);
+			System.out.println(test4.getUserName());
 		} catch (RemoteException | SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-*/
-	}
+
+	*/}
 
 
 
