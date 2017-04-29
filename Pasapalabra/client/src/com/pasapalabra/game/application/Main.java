@@ -138,7 +138,7 @@ public class Main extends Application {
 				if (lockInstance("block.dat")){
 					//Aquí se carga toda la aplicación
 					try {
-						com.pasapalabra.game.utilities.ServiceLocator.startConnection(args);
+						com.pasapalabra.game.service.ServiceLocator.startConnection(args);
 					} catch (MalformedURLException | NotBoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

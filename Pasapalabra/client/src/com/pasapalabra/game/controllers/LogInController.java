@@ -85,7 +85,7 @@ public class LogInController extends Control implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		//Se inicia el handler del logger
 		com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, LogInController.class.getName());
-		if(!com.pasapalabra.game.utilities.ServiceLocator.serverReady){
+		if(!com.pasapalabra.game.service.ServiceLocator.serverReady){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("No hay conexión con el servidor");
 
@@ -148,7 +148,7 @@ public class LogInController extends Control implements Initializable {
 		if(txtUsuario.getText().length()>0&&txtContra.getText().length()>0){
 			//txtIncorrecto.setText("Usuario y/o contraseña incorrecto/s");
 			try {	log.log(Level.FINEST, "LogIn OK. Transición de ventana a Juego");
-				com.pasapalabra.game.utilities.ServiceLocator.login(txtUsuario.getText(), txtContra.getText());
+				com.pasapalabra.game.service.ServiceLocator.login(txtUsuario.getText(), txtContra.getText());
 				
 				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			} catch (Exception e) {
@@ -184,7 +184,7 @@ public class LogInController extends Control implements Initializable {
 	 */
 	public void registro(MouseEvent event){
 		log.log(Level.FINEST, "Método de registro iniciado");
-		if( com.pasapalabra.game.utilities.ServiceLocator.serverReady == false ){
+		if( com.pasapalabra.game.service.ServiceLocator.serverReady == false ){
 			log.log(Level.INFO, "El servidor no está operativo para el registro");
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("El servidor no está operativo");

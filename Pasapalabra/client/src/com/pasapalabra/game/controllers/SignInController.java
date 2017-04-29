@@ -2,6 +2,7 @@
 package com.pasapalabra.game.controllers;
 
 import java.awt.Desktop;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -85,7 +86,7 @@ public class SignInController extends Control implements Initializable {
 	private DatePicker dpFechaNacimiento;
 
 	@FXML
-	private ImageView ImgImagenUsuario;
+	private BufferedImage ImgImagenUsuario;
 
 	@FXML
 	private CheckBox chkTerminos;
@@ -118,11 +119,7 @@ public class SignInController extends Control implements Initializable {
 
 	ContextMenu userMailElegido = new ContextMenu();
 
-	public static boolean MailExiste=false;
-
-
-
-	public static boolean UsuarioExiste=false;
+	private Date userDate;
 
 	SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -268,12 +265,7 @@ public class SignInController extends Control implements Initializable {
 		}
 		else{
 			try{
-				UserDTO udto= new UserDTO(txtNombreUsuario.getText(), txtCorreoUsuario.getText(), ImgImagenUsuario, fcNacimiento, games , gamesWon, gamesLost)
-				//Datos_usuario[0]=txtNombreUsuario.getText();
-
-				//Datos_usuario[1]=txtCorreoUsuario.getText();
-
-				Datos_usuario[2]=pflContrasenya.getText();
+				UserDTO udto= new UserDTO(txtNombreUsuario.getText(), txtCorreoUsuario.getText(), ImgImagenUsuario, userDate, 0 , 0, 0);
 
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 
@@ -292,25 +284,51 @@ public class SignInController extends Control implements Initializable {
 
 				if (result.get() == ButtonType.OK){
 
-					//TODO: create usercom.pasapalabra.game.utilidades.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilities.Acciones_servidor.Crear_Usuario.toString(), Datos_usuario);
+					boolean finalResult = com.pasapalabra.game.service.ServiceLocator.createUser(udto, pflContrasenya.getText());
+					if(finalResult){
+						Alert alert2 = new Alert(AlertType.INFORMATION);
 
-					Alert alert2 = new Alert(AlertType.INFORMATION);
+						alert2.setTitle("Usuario creado con éxito");
 
-					alert2.setTitle("Usuario creado con éxito");
+						alert2.setHeaderText("Éxito en la operación");
 
-					alert2.setHeaderText("Éxito en la operación");
-
-					alert2.setContentText("Se ha creado el usuario con éxito");
-
-
-					alert2.initModality(Modality.APPLICATION_MODAL);
-					//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
-					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-
-					alert2.showAndWait();
+						alert2.setContentText("Se ha creado el usuario con éxito");
 
 
-					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("LogIn", event);
+						alert2.initModality(Modality.APPLICATION_MODAL);
+						//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
+						alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+
+						alert2.showAndWait();
+
+
+						com.pasapalabra.game.utilities.WindowUtilities.windowTransition("LogIn", event);
+					}
+					else{
+						
+						Alert alert2 = new Alert(AlertType.INFORMATION);
+
+						alert2.setTitle("Datos existentes");
+
+						alert2.setHeaderText("El usuario ya existe, por favor, introduzca otro usuario");
+
+						alert2.setContentText("Se ha creado el usuario con éxito");
+
+
+						alert2.initModality(Modality.APPLICATION_MODAL);
+						//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
+						alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+
+						alert2.showAndWait();
+
+						//userMailElegido.show(txtCorreoUsuario, Side.BOTTOM, 0, 0);
+
+						chkTerminos.setSelected(false);
+
+						btnCrear.setDisable(true);
+
+						userNameElegido.show(txtNombreUsuario, Side.BOTTOM, 0, 0);
+					}
 				}
 			}catch(Exception a){
 				Alert alert2 = new Alert(AlertType.ERROR);
@@ -327,32 +345,7 @@ public class SignInController extends Control implements Initializable {
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 
 				alert2.showAndWait();
-				if(MailExiste){
-					userMailElegido.show(txtCorreoUsuario, Side.BOTTOM, 0, 0);
-					chkTerminos.setSelected(false);
-					btnCrear.setDisable(true);
-				}
-				else if(UsuarioExiste){
-					userNameElegido.show(txtNombreUsuario, Side.BOTTOM, 0, 0);
-					chkTerminos.setSelected(false);
-					btnCrear.setDisable(true);
-				}
-				else{
-					Alert alert3 = new Alert(AlertType.ERROR);
 
-					alert3.setTitle("Error inesperado");
-
-					alert3.setHeaderText("Un error inesperado ocurrió");
-
-					alert3.setContentText("Parece que ha ocurrido un error inesperado, por favor, intenteló de nuevo más tarde");
-
-
-					alert3.initModality(Modality.APPLICATION_MODAL);
-					//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
-					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-
-					alert3.showAndWait();	
-				}
 			}
 
 		}
@@ -422,8 +415,13 @@ public class SignInController extends Control implements Initializable {
 				baos.flush();
 				byte[] imageInByte = baos.toByteArray();
 				baos.close();
-				Datos_usuario[4]=file.getAbsolutePath();
-				ImgImagenUsuario.setImage(new Image(path));
+				Image img = new Image(path);
+
+				//TODO: check this image
+				ImgImagenUsuario = ImageIO.read(file);
+
+
+
 			}
 		}catch(Exception a){
 
@@ -466,9 +464,11 @@ public class SignInController extends Control implements Initializable {
 			chkTerminos.setSelected(false);
 
 			//UserDTO dto=new UserDto(); No se si sería esto
-			udto.setDOB(date2);
+
 			//Datos_usuario[3]=dateFormat.format(date2);
-			
+
+			userDate = date;
+
 		}
 		else{
 			datosCorrectos=false;  

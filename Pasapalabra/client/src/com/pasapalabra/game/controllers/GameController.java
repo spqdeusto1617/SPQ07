@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
-import com.pasapalabra.game.utilities.ServiceLocator;
+import com.pasapalabra.game.service.ServiceLocator;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.event.Event;
@@ -84,10 +84,10 @@ public class GameController implements Initializable{
 	void btnContestar(MouseEvent event) {
 		//SERVIDOR
 		//Respuesta
-		if(com.pasapalabra.game.utilities.ServiceLocator.gameEnd){
+		if(com.pasapalabra.game.service.ServiceLocator.gameEnd){
 			UserScoreDTO score = null;
 			try {
-				score = com.pasapalabra.game.utilities.ServiceLocator.getResults();
+				score = com.pasapalabra.game.service.ServiceLocator.getResults();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -111,12 +111,12 @@ public class GameController implements Initializable{
 			}
 			else{
 				//if(Conexion_cliente.Mi_Turno){
-					if(!com.pasapalabra.game.utilities.ServiceLocator.gameEnd){
+					if(!com.pasapalabra.game.service.ServiceLocator.gameEnd){
 						
 
 
 						try{
-							rightAnswered = com.pasapalabra.game.utilities.ServiceLocator.answerQuestion(tfRespuesta.getText());
+							rightAnswered = com.pasapalabra.game.service.ServiceLocator.answerQuestion(tfRespuesta.getText());
 
 						}catch(Exception a){
 							Alert alert = new Alert(AlertType.ERROR);
@@ -143,7 +143,7 @@ public class GameController implements Initializable{
 								foo++;
 								textoPuntuacionU.setText("Acertadas: "+Integer.toString(foo));
 
-								int Num_Letra=Pos_Letra(com.pasapalabra.game.utilities.ServiceLocator.currentLetter);System.out.println(Num_Letra+" la posicion de la letra");
+								int Num_Letra=Pos_Letra(com.pasapalabra.game.service.ServiceLocator.currentLetter);System.out.println(Num_Letra+" la posicion de la letra");
 								//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+com.pasapalabra.game.utilities.ServiceLocator.currentLetter+"-green.png")));
 							}catch(Exception a){
 								a.printStackTrace();
@@ -156,12 +156,12 @@ public class GameController implements Initializable{
 							//alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 							//				alert.show();
 
-							int Num_Letra=Pos_Letra(com.pasapalabra.game.utilities.ServiceLocator.currentLetter);System.out.println(Num_Letra);
+							int Num_Letra=Pos_Letra(com.pasapalabra.game.service.ServiceLocator.currentLetter);System.out.println(Num_Letra);
 							//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+com.pasapalabra.game.utilities.ServiceLocator.currentLetter+"-red.png")));
 						}
 						
 						try {
-							com.pasapalabra.game.utilities.ServiceLocator.endGame();
+							com.pasapalabra.game.service.ServiceLocator.endGame();
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							Alert alert = new Alert(AlertType.ERROR);
@@ -173,10 +173,10 @@ public class GameController implements Initializable{
 							e1.printStackTrace();
 							return;
 						}
-						if(com.pasapalabra.game.utilities.ServiceLocator.gameEnd){
+						if(com.pasapalabra.game.service.ServiceLocator.gameEnd){
 							UserScoreDTO score = null;
 							try {
-								score = com.pasapalabra.game.utilities.ServiceLocator.getResults();
+								score = com.pasapalabra.game.service.ServiceLocator.getResults();
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								Alert alert = new Alert(AlertType.ERROR);
@@ -210,7 +210,7 @@ public class GameController implements Initializable{
 					}
 					else{
 					try {
-						currentQuestion = com.pasapalabra.game.utilities.ServiceLocator.getQuestion();
+						currentQuestion = com.pasapalabra.game.service.ServiceLocator.getQuestion();
 						taPreguntas.setText(currentQuestion.getQuestion());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -358,7 +358,7 @@ public class GameController implements Initializable{
 		}*/
 				
 		try{
-			rightAnswered = com.pasapalabra.game.utilities.ServiceLocator.answerQuestion("Pasapalabra");
+			rightAnswered = com.pasapalabra.game.service.ServiceLocator.answerQuestion("Pasapalabra");
 			if(!rightAnswered)System.out.println("Ha habido un error al pasar de palabra");
 		}catch(Exception a){
 			Alert alert = new Alert(AlertType.ERROR);
@@ -371,7 +371,7 @@ public class GameController implements Initializable{
 			return;
 		} 
 		try {
-			currentQuestion = com.pasapalabra.game.utilities.ServiceLocator.getQuestion();
+			currentQuestion = com.pasapalabra.game.service.ServiceLocator.getQuestion();
 			taPreguntas.setText(currentQuestion.getQuestion());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
