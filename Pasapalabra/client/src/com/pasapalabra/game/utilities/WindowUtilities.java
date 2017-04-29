@@ -12,6 +12,7 @@ import com.pasapalabra.game.controllers.ExtenderClassController;
 import com.pasapalabra.game.controllers.FriendController;
 import com.pasapalabra.game.controllers.StatisticsController;
 import com.pasapalabra.game.controllers.ThemeController;
+import com.pasapalabra.game.service.ServiceLocator;
 import com.pasapalabra.game.controllers.ProfileController;
 
 import javafx.event.Event;
