@@ -123,7 +123,7 @@ public class CaptureWindow extends Control implements Initializable{
 
 	@FXML
 	private Text txtServerIp;
-	
+
 	@FXML
 	private Text txtServerService;
 
@@ -158,7 +158,7 @@ public class CaptureWindow extends Control implements Initializable{
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			Optional<ButtonType> result = alert.showAndWait();
-		
+
 			if (result.get() == ButtonType.OK){
 				Alert alert2 = new Alert(AlertType.INFORMATION);
 				alert2.setTitle("WARNING!");
@@ -211,7 +211,16 @@ public class CaptureWindow extends Control implements Initializable{
 
 	@FXML
 	void manageNews(MouseEvent event) {
-		playAnimation(false);
+		//playAnimation(false);
+		Alert alert = new Alert(AlertType.INFORMATION);
+
+		alert.setTitle("Function not yet implemented.");
+		
+		alert.setHeaderText("Do not use this function");
+		 
+		alert.setContentText("This Function is not implemented, please, do not use it");
+
+		alert.showAndWait();
 	}
 
 	void playAnimation(boolean server_notNews){
@@ -300,7 +309,7 @@ public class CaptureWindow extends Control implements Initializable{
 			ivV.setFitHeight(10); ivV.setFitWidth(10);
 			ivV.setSmooth(true);
 			returnBtn.setGraphic(ivV);
-			
+
 
 			img = new Image(this.getClass().getResource("/res/delete.png").toURI().toURL().toString());
 			ivV = new ImageView(img);
@@ -377,7 +386,7 @@ public class CaptureWindow extends Control implements Initializable{
 						@Override
 						public void run() {
 							//The messages are updated
-						//	listaMensajes.setText(Servidor.s2);
+							//	listaMensajes.setText(Servidor.s2);
 
 							//The elapsed time is loaded
 							long diff = new Date().getTime() - startDate.getTime();
@@ -444,7 +453,7 @@ public class CaptureWindow extends Control implements Initializable{
 		}
 		//		}
 	}
-	
+
 	/**Method to add and save to the windows (if a boolean is true) a graphic image
 	 * @param selectedFile the file to add to the window
 	 * @param save True: save - False: not save.
@@ -493,7 +502,7 @@ public class CaptureWindow extends Control implements Initializable{
 		return aLRetreive;
 	}
 
-	
+
 	/**Method to get the route it will be used to save the images or to know where are saved 
 	 * @param extension null if we want to get the path to the image
 	 * a string with the extension we want to obtain to save a file
@@ -532,8 +541,8 @@ public class CaptureWindow extends Control implements Initializable{
 		}
 	}
 
-	
-	 /** Method to obtain all the files from a folder
+
+	/** Method to obtain all the files from a folder
 	 * @return An array of Files with all the files from the folder
 	 */
 	public static File[] getAllFiles(){

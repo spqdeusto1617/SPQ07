@@ -34,9 +34,15 @@ import javafx.stage.WindowEvent;
 public class Server extends Application{
 	
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(Server.class.getName());
+	
 	public static MongoConnection mongoConnection;
+	
 	public static String serverPort;
+	
 	public static String serviceName;
+	
+	private static boolean serverOnline = true;
+	
 	public static void main(String[] args) {
 
 	    	System.out.println("Starting server...");
@@ -66,7 +72,7 @@ public class Server extends Application{
 				System.out.println("Server at '" + serverAddress + "' active and waiting connections...");
 			} catch (RemoteException | MalformedURLException e) {
 				System.out.println("Error while starting the server.");
-				e.printStackTrace();
+				serverOnline = false;
 			}
 	    
 			launch(args);
@@ -75,31 +81,45 @@ public class Server extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		if(!serverOnline){
+		Alert alert = new Alert(AlertType.ERROR);
+		
+		alert.setTitle("Error while starting the server.");
+		
+		alert.setHeaderText("Impossible to start the server");
+		
+		alert.setContentText("An error occurred during the start of the server.\nPlease, make"
+				+ " sure your connection is working and you have inicializate the RMI registry properly");
+		
+		alert.showAndWait();
+
+		System.exit(0);
+		}
 		try {
 			AppLogger.crearLogHandler(log, Server.class.getName());
-			//Cargar página con el FXML elegido
+			//Load the main pane
 			Pane page =  FXMLLoader.load(Server.class.getResource("/fxml/Server.fxml"));
-			log.log(Level.FINEST, "Cargado fichero FXML de LogIn en el pane");
+			log.log(Level.FINEST, "FXML file loaded in the Pane");
 
 
-			//Añadir la página a la escena
+			//Add page to the scene
 			Scene scene = new Scene(page);
-			log.log(Level.FINEST, "Añadido pane a la escena");
+			log.log(Level.FINEST, "Added pane to the scene");
 
-			//Añadir a la escena el CSS
+			//Add the css
 			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
-			log.log(Level.FINEST, "Añadido css a la escena");
+			log.log(Level.FINEST, "Css added to the scene");
 
-			//Usarse para servidor.
-			//Puede que se necesite algún día.
-			//Añadir un escuchador para cuando se cierre la ventana 
+			//Use this in the server
+			//It may be used in the future.
+			//Add a listener in case the window is closed 
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
 					Alert alert = new Alert(AlertType.CONFIRMATION);
-					alert.setTitle("Salir de la aplicación");
-					alert.setHeaderText("¿Está segur@ de que desea salir de la aplicación?");
-					alert.setContentText("Si sale de la aplicación, todos los usuarios conectados al servidor perderán el progreso que estén haciendo en este momento.\n\n¿Está segur@?");
+					alert.setTitle("Exit form the application");
+					alert.setHeaderText("Are you sure you want to terminate the server?");
+					alert.setContentText("If you exit from the server, all progress will be lost, are you sure about that?");
 
 					alert.initModality(Modality.APPLICATION_MODAL);
 					alert.initOwner((Stage)event.getSource());
@@ -115,35 +135,35 @@ public class Server extends Application{
 
 
 
-			//Icono
+			//Icon
 			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/iconopsp.png")));
-			log.log(Level.FINEST, "Añadido icono a la ventana");
+			log.log(Level.FINEST, "Added icon to the main window");
 			//Título de la ventana
-			primaryStage.setTitle("Pasapalabra - Servidor");
-			log.log(Level.FINEST, "Añadido título a la ventana");
+			primaryStage.setTitle("Pasapalabra - Server");
+			log.log(Level.FINEST, "Added title to the window");
 
 
-			//Poner escena
+			//Put scene
 			primaryStage.setScene(scene);
-			log.log(Level.FINEST, "Añadida escena a la ventana");
+			log.log(Level.FINEST, "Added scene to the window");
 
-			//No se puede hacer resize
+			//The window can´t be resizable 
 			primaryStage.setResizable(false);
-			//Por ello, desactivamos los botones para hacer resize (maximizar)
+			//We disable the property all the elements form the windows to being resizable
 			primaryStage.initStyle(StageStyle.UTILITY);
-			log.log(Level.FINEST, "Desactivados botones resize de la ventana");
+			log.log(Level.FINEST, "All the recize button disabled");
 
 			primaryStage.sizeToScene();
-			//Mostrar ventana
+			//Show window
 			primaryStage.show();
-			log.log(Level.FINEST, "Ventana mostrada");
-			//Centrar ventana
+			log.log(Level.FINEST, "Window shown");
+			//Center window
 			WindowUtilites.centerWindow(primaryStage);
-			log.log(Level.FINEST, "Centrada la ventana");
+			log.log(Level.FINEST, "Window centered");
 
 		} catch(Exception e) {
 			e.printStackTrace();
-			log.log(Level.SEVERE, "Error en start de Main.java", e);
+			log.log(Level.SEVERE, "Error while starting Main.java", e);
 		}
 
 	}
