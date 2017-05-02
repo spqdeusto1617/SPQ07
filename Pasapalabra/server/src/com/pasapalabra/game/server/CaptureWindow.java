@@ -123,6 +123,9 @@ public class CaptureWindow extends Control implements Initializable{
 
 	@FXML
 	private Text txtServerIp;
+	
+	@FXML
+	private Text txtServerServiceName;
 
 	/**
 	 * @param event Event to load files to send them to the client
@@ -297,7 +300,7 @@ public class CaptureWindow extends Control implements Initializable{
 			ivV.setFitHeight(10); ivV.setFitWidth(10);
 			ivV.setSmooth(true);
 			returnBtn.setGraphic(ivV);
-
+			
 
 			img = new Image(this.getClass().getResource("/res/delete.png").toURI().toURL().toString());
 			ivV = new ImageView(img);
@@ -340,7 +343,6 @@ public class CaptureWindow extends Control implements Initializable{
 		//We get the date when the server stared.
 		Date startDate = new Date();
 		//We get the app port
-		//txtPuertoServidor.setText(String.valueOf(Servidor.PUERTO_DEL_SERVIDOR));
 		//The external ip is loaded
 		try {
 			URL whatismyip = new URL("http://checkip.amazonaws.com");
@@ -350,11 +352,13 @@ public class CaptureWindow extends Control implements Initializable{
 					whatismyip.openStream()));
 			String ip = in.readLine();
 			txtServerIp.setText(ip);
+			txtServerPort.setText(Server.serverPort);
+			txtServerServiceName.setText(Server.serviceName);
 		} catch (IOException e1) {
 			log.log(Level.WARNING, "Error while loading the appliction´s IP", e1);
 		}
 
-		//Setea el texto
+		//Set the server status
 		txtServerStatus.setText("online");
 
 

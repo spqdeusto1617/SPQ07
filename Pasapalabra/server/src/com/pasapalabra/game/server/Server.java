@@ -35,6 +35,8 @@ public class Server extends Application{
 	
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(Server.class.getName());
 	public static MongoConnection mongoConnection;
+	public static String serverPort;
+	public static String serviceName;
 	public static void main(String[] args) {
 
 	    	System.out.println("Starting server...");
@@ -59,6 +61,8 @@ public class Server extends Application{
 			
 			try {
 				Naming.rebind(serverAddress,  UnicastRemoteObject.exportObject(pasapalabraService, 0));
+				serverPort = args[1];
+				serviceName = args[2];
 				System.out.println("Server at '" + serverAddress + "' active and waiting connections...");
 			} catch (RemoteException | MalformedURLException e) {
 				System.out.println("Error while starting the server.");
@@ -74,7 +78,7 @@ public class Server extends Application{
 		try {
 			AppLogger.crearLogHandler(log, Server.class.getName());
 			//Cargar página con el FXML elegido
-			Pane page =  FXMLLoader.load(Server.class.getResource("/fxml/Servidor.fxml"));
+			Pane page =  FXMLLoader.load(Server.class.getResource("/fxml/Server.fxml"));
 			log.log(Level.FINEST, "Cargado fichero FXML de LogIn en el pane");
 
 
