@@ -125,7 +125,7 @@ public class CaptureWindow extends Control implements Initializable{
 	private Text txtServerIp;
 	
 	@FXML
-	private Text txtServerServiceName;
+	private Text txtServerService;
 
 	/**
 	 * @param event Event to load files to send them to the client
@@ -353,7 +353,7 @@ public class CaptureWindow extends Control implements Initializable{
 			String ip = in.readLine();
 			txtServerIp.setText(ip);
 			txtServerPort.setText(Server.serverPort);
-			txtServerServiceName.setText(Server.serviceName);
+			txtServerService.setText(Server.serviceName);
 		} catch (IOException e1) {
 			log.log(Level.WARNING, "Error while loading the appliction´s IP", e1);
 		}
