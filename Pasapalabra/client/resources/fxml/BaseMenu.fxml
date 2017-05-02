@@ -22,7 +22,7 @@
             <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
       <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="170.0" layoutX="18.0" layoutY="909.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logeado como:" />
+      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logged as:" />
       <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
       <Circle fx:id="circuloPanel" fill="#21cbffa3" layoutX="215.0" layoutY="584.0" onMouseClicked="#esPanel" radius="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
          <cursor>
@@ -41,12 +41,12 @@
          </font>
       </Text>
       <ImageView fx:id="imagenAvatar1" fitHeight="73.0" fitWidth="128.0" layoutX="37.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnJuego" layoutX="21.0" layoutY="186.0" mnemonicParsing="false" onMouseClicked="#btnJugar" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Jugar" textFill="#f7fff7">
+      <Button fx:id="btnJuego" layoutX="21.0" layoutY="186.0" mnemonicParsing="false" onMouseClicked="#btnJugar" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Play" textFill="#f7fff7">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnAmigos" layoutX="21.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Amigos">
+      <Button fx:id="btnAmigos" layoutX="21.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Friends">
          <font>
             <Font size="18.0" />
          </font>
@@ -59,16 +59,16 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="btnPerfil" layoutX="21.0" layoutY="317.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Mi perfil" textFill="#fffdfd">
+      <Button fx:id="btnPerfil" layoutX="21.0" layoutY="317.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="My Profile" textFill="#fffdfd">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnEstadisticas" layoutX="21.0" layoutY="390.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Estadísticas" textFill="WHITE">
+      <Button fx:id="btnEstadisticas" layoutX="21.0" layoutY="390.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Statistics" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnCerrarSesion" layoutX="38.0" layoutY="563.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Cerrar sesión" textFill="WHITE" />
+      <Button fx:id="btnCerrarSesion" layoutX="38.0" layoutY="563.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Log out" textFill="WHITE" />
    </children>
 </Pane>
