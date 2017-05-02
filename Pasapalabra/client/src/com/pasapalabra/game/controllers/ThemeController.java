@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.pasapalabra.game.model.DTO.QuestionType;
+import com.pasapalabra.game.model.DTO.UserDTO;
 import com.pasapalabra.game.utilities.PanelThread;
 import com.pasapalabra.game.utilities.WindowUtilities;
 import com.pasapalabra.game.service.*;
@@ -1479,8 +1480,29 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			}
 		}
 
-		public void BusquedaPartida(){
+		public void BusquedaPartida(MouseEvent event){
 			
+			try {
+				QuestionType type = null; 
+				UserDTO udto= com.pasapalabra.game.service.ServiceLocator.play(type);
+				if(udto.getUserName().equals("Wait")){
+					Alert alert = new Alert(AlertType.INFORMATION);
+
+					alert.setTitle("Wait");
+
+					alert.setHeaderText("Searching game");
+
+					alert.setContentText("Wait, searching game...");
+
+					alert.showAndWait();
+				}else{
+					log.log(Level.FINEST, "Transicion de ventana a Juego");
+					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 		}
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
