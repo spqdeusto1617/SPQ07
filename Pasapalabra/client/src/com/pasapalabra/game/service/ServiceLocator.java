@@ -1,4 +1,4 @@
-package com.pasapalabra.game.service;
+ package com.pasapalabra.game.service;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;

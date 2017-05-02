@@ -343,16 +343,19 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		juegoEnCurso = true;
 		//Servidor
 		//aLEleccion es el arrayList de la elección (Modalidad + Tema) y todos los elementos
-		String[]Tipo=new String[2];
+		//String[]Tipo=new String[2];
+		QuestionType type; 
 		for (QuestionSelectedObject obsp : aLEleccion) {
 			if (obsp.isElegido()) {
 				if(obsp.isModoDeJuego_notTipoPregunta()){
 					//ESTE ES EL MODO DE JUEGO ELEGIDO
-					Tipo[0]=obsp.getTexto().getText();
+					//tipo[1]
+					type=obsp.getTexto().getText();
 
 				}else{
 					//ESTE ES EL TEMA DE JUEGO ELEGIDO
-					Tipo[1]=obsp.getTexto().getText();
+					//tipo[2]
+					type=obsp.getTexto().getText();
 				}
 			}
 		}
@@ -364,7 +367,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 		try {
 			//TODO: cambiar
-			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.service.ServiceLocator.play(QuestionType.valueOf(Tipo[1])); 
+			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.service.ServiceLocator.play(type); 
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
