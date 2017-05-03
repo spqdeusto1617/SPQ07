@@ -20,7 +20,7 @@
             <Image url="@../images/LogoPasapalabra.png" />
          </image></ImageView>
       <ImageView fx:id="imagenAvatar" fitHeight="73.0" fitWidth="128.0" layoutX="34.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
-      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="52.0" layoutY="535.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logged as: " />
+      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="70.0" layoutY="533.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logged as: " />
       <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
       <Circle fx:id="circuloPanel" fill="#21cbffa3" layoutX="215.0" layoutY="584.0" onMouseClicked="#esPanel" radius="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
          <cursor>
@@ -179,7 +179,7 @@
          </font>
       </Button>
       <Button fx:id="btnCerrarSesion" layoutX="27.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Log out" textFill="WHITE" />
-      <Button fx:id="btnJugar" layoutX="582.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#aJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #0000FF;" text="¡Play!" textFill="WHITE">
+      <Button fx:id="btnJugar" layoutX="582.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#aJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #0000FF;" text="Play!" textFill="WHITE">
          <font>
             <Font name="Arial" size="18.0" />
          </font>

@@ -50,7 +50,7 @@
                   <Text layoutX="29.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disk space" />
                   <Text layoutX="190.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="124Mb" textAlignment="CENTER" wrappingWidth="62.13671875" />
                   <Text layoutX="424.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1Gb" textAlignment="CENTER" wrappingWidth="50.755859375" />
-                  <Text layoutX="20.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jave Version" textAlignment="CENTER" wrappingWidth="120.501953125" />
+                  <Text layoutX="20.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java Version" textAlignment="CENTER" wrappingWidth="120.501953125" />
                   <Text layoutX="195.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java7" textAlignment="CENTER" wrappingWidth="52.13671875" />
                   <Text layoutX="425.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Java8" textAlignment="CENTER" wrappingWidth="49.888671875" />
                   <Separator layoutX="104.0" layoutY="210.0" prefHeight="0.0" prefWidth="381.0" />
@@ -92,22 +92,22 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <Text layoutX="57.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
+                  <Text layoutX="57.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="19.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residencia:">
+                  <Text layoutX="19.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residence:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="35.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
+                  <Text layoutX="35.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Studies:">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="20.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivación:">
+                  <Text layoutX="20.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivation:">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -142,7 +142,7 @@
                         <Insets top="2.0" />
                      </opaqueInsets>
                   </Separator>
-                  <Text layoutX="366.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad:">
+                  <Text layoutX="366.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age:">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -152,7 +152,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="329.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residencia:">
+                  <Text layoutX="329.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Residence:">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -162,7 +162,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="344.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estudios:">
+                  <Text layoutX="344.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Studies:">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -172,7 +172,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text layoutX="330.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivación:">
+                  <Text layoutX="330.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Motivation:">
                      <font>
                         <Font size="14.0" />
                      </font>
