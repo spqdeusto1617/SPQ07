@@ -71,6 +71,7 @@ public class Server extends Application{
 				serviceName = args[2];
 				System.out.println("Server at '" + serverAddress + "' active and waiting connections...");
 			} catch (RemoteException | MalformedURLException e) {
+				e.printStackTrace();
 				System.out.println("Error while starting the server.");
 				serverOnline = false;
 			}

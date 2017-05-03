@@ -86,7 +86,9 @@ public class SignInController extends Control implements Initializable {
 	private DatePicker dpFechaNacimiento;
 
 	@FXML
-	private BufferedImage ImgImagenUsuario;
+	private ImageView ImgImagenUsuario;
+	
+	private BufferedImage userImg;
 
 	@FXML
 	private CheckBox chkTerminos;
@@ -241,6 +243,10 @@ public class SignInController extends Control implements Initializable {
 
 		}
 	}
+	
+	public void comprobarContrasenya2(Event event){
+
+			}
 
 	/**Button in order to create a user. Before the creation, needs to check that the information is complete.
 	 * To the contrary, the button can not be pressed
@@ -265,7 +271,7 @@ public class SignInController extends Control implements Initializable {
 		}
 		else{
 			try{
-				UserDTO udto= new UserDTO(txtNombreUsuario.getText(), txtCorreoUsuario.getText(), ImgImagenUsuario, userDate, 0 , 0, 0);
+				UserDTO udto= new UserDTO(txtNombreUsuario.getText(), txtCorreoUsuario.getText(), userImg, userDate, 0 , 0, 0);
 
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 
@@ -409,16 +415,16 @@ public class SignInController extends Control implements Initializable {
 			else{
 				String path="file:///"+file.getAbsolutePath();
 				BufferedImage originalImage = ImageIO.read(file);
-
+				
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				ImageIO.write( originalImage, "jpg", baos );
 				baos.flush();
 				byte[] imageInByte = baos.toByteArray();
 				baos.close();
 				Image img = new Image(path);
-
+				ImgImagenUsuario.setImage(img);
 				//TODO: check this image
-				ImgImagenUsuario = ImageIO.read(file);
+				userImg = ImageIO.read(file);
 
 
 
@@ -484,7 +490,8 @@ public class SignInController extends Control implements Initializable {
 	public void irATerminos(MouseEvent event){
 		//TODO: ¿path en el jar?
 
-		String path="src/pdfEULA/EULA.pdf";
+		String path="/pdfEULA/EULA.pdf";
+		
 		//Usarlo si lo acabamos exportando a .jar
 		//		try {
 		//			path = ExportResource("src/pdfEULA/EULA.pdf");

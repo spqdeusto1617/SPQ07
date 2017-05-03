@@ -93,6 +93,7 @@ public class LogInController extends Control implements Initializable {
 			alert.initModality(Modality.APPLICATION_MODAL);			
 			alert.showAndWait();
 			btnLogin.setDisable(true);
+			estadoServidor.setImage(new Image("/images/desconectado.png"));
 		}
 		else btnLogin.setDisable(false);
 		try{
