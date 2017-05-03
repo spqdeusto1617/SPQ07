@@ -132,25 +132,25 @@ public class SignInController extends Control implements Initializable {
 
 		//panel.getStylesheets().add("/css/application.css");
 		userNameValidator.getItems().add(
-				new MenuItem("El nombre de usuario tiene que tener entre 8-16 caracteres"));
+				new MenuItem("The user name must be between 8 and 16 characters"));
 
 		userMailValidator.getItems().add(
-				new MenuItem("El correo no es válido"));
+				new MenuItem("Email not acceptable"));
 
 		userPasswordValidator.getItems().add(
-				new MenuItem("Contraseña corta"));
+				new MenuItem("Short password"));
 
 		userPasswordValidator2.getItems().add(
-				new MenuItem("Las contraseñas no coinciden"));
+				new MenuItem("Passwords don't match"));
 
 		userDateValidator.getItems().add(
-				new MenuItem("Tienes que tener al menos 13 años para poder jugar"));
+				new MenuItem("You must be 13 years or older to play"));
 
 		userNameElegido.getItems().add(
-				new MenuItem("El nombre de usuario ya existe"));
+				new MenuItem("The user name already exists"));
 
 		userMailElegido.getItems().add(
-				new MenuItem("El correo ya existe"));
+				new MenuItem("The email already exists"));
 
 		pfdRepetirContrasenya.focusedProperty().addListener(new ChangeListener<Boolean>() {
 
@@ -258,9 +258,9 @@ public class SignInController extends Control implements Initializable {
 			datosCorrectos=false;
 			btnCrear.setDisable(true);
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Parece que falla algo");
+			alert.setTitle("Something fails");
 
-			alert.setContentText("Parece que hay algún problema con los datos. Por favor, revise los datos antes de registrarse.");
+			alert.setContentText("There is a problem with the information introduced. Please, revise it before you sign in.");
 			alert.initModality(Modality.APPLICATION_MODAL);
 
 
@@ -283,11 +283,11 @@ public class SignInController extends Control implements Initializable {
 
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 
-				alert.setTitle("Crear nuevo usuario");
+				alert.setTitle("Create new user");
 
-				alert.setHeaderText("¿Está seguro?");
+				alert.setHeaderText("Are you sure?");
 
-				alert.setContentText("¿Está seguro de que desea crear el anterior usuario?");
+				alert.setContentText("Are you sure you want to create the previous user?");
 
 
 				alert.initModality(Modality.APPLICATION_MODAL);
@@ -302,11 +302,11 @@ public class SignInController extends Control implements Initializable {
 					if(finalResult){
 						Alert alert2 = new Alert(AlertType.INFORMATION);
 
-						alert2.setTitle("Usuario creado con éxito");
+						alert2.setTitle("User created succesfuly");
 
-						alert2.setHeaderText("Éxito en la operación");
+						alert2.setHeaderText("Operation succes");
 
-						alert2.setContentText("Se ha creado el usuario con éxito");
+						alert2.setContentText("The user has been created succesfuly");
 
 
 						alert2.initModality(Modality.APPLICATION_MODAL);
@@ -322,11 +322,11 @@ public class SignInController extends Control implements Initializable {
 						
 						Alert alert2 = new Alert(AlertType.ERROR);
 
-						alert2.setTitle("Datos existentes");
+						alert2.setTitle("Existing data");
 
-						alert2.setHeaderText("El usuario ya existe");
+						alert2.setHeaderText("The user already exists");
 
-						alert2.setContentText("El usuario introducido ya existe. Por favor, introduzca otro nombre de usuario");
+						alert2.setContentText("The user introduced already exists. Please, introduce another Username.");
 
 
 						alert2.initModality(Modality.APPLICATION_MODAL);
@@ -347,11 +347,11 @@ public class SignInController extends Control implements Initializable {
 			}catch(Exception a){
 				Alert alert2 = new Alert(AlertType.ERROR);
 
-				alert2.setTitle("Error al tramitar la creación de usuario");
+				alert2.setTitle("Error while proccesing the creation of the user");
 
-				alert2.setHeaderText("Error cuando se intentó crear el usuario");
+				alert2.setHeaderText("Error trying to create the user");
 
-				alert2.setContentText("Se ha produciod un error cuando intentaba crear su usario, por favor, revise la información y cambielá si es necesario");
+				alert2.setContentText("An error has occurred when the user was trying to create, please, revise the information and change it if it's neccesary.");
 
 
 				alert2.initModality(Modality.APPLICATION_MODAL);
@@ -374,11 +374,11 @@ public class SignInController extends Control implements Initializable {
 		//Crea alerta de tipo confirmación
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		//Pone título
-		alert.setTitle("Cancelar el nuevo usuario");
+		alert.setTitle("Cancel the new user");
 		//Pone cabecera
-		alert.setHeaderText("¿Está seguro?");
+		alert.setHeaderText("Are you sure?");
 		//Pone contenido
-		alert.setContentText("¿Está seguro de que desea descartar el usuario que está creando?");
+		alert.setContentText("Are you sure you want to discard the creation of the user?");
 
 		//Añade modalidad
 		alert.initModality(Modality.APPLICATION_MODAL);
