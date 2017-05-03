@@ -320,13 +320,13 @@ public class SignInController extends Control implements Initializable {
 					}
 					else{
 						
-						Alert alert2 = new Alert(AlertType.INFORMATION);
+						Alert alert2 = new Alert(AlertType.ERROR);
 
 						alert2.setTitle("Datos existentes");
 
-						alert2.setHeaderText("El usuario ya existe, por favor, introduzca otro usuario");
+						alert2.setHeaderText("El usuario ya existe");
 
-						alert2.setContentText("Se ha creado el usuario con éxito");
+						alert2.setContentText("El usuario introducido ya existe. Por favor, introduzca otro nombre de usuario");
 
 
 						alert2.initModality(Modality.APPLICATION_MODAL);
