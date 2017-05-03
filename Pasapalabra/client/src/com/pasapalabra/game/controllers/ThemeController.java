@@ -1483,7 +1483,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		public void BusquedaPartida(MouseEvent event){
 			
 			try {
-				QuestionType type = null; 
+				QuestionType type = QuestionType.All; 
 				UserDTO udto= com.pasapalabra.game.service.ServiceLocator.play(type);
 				if(udto.getUserName().equals("Wait")){
 					Alert alert = new Alert(AlertType.INFORMATION);
@@ -1494,13 +1494,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 					alert.setContentText("Wait, searching game...");
 
-					alert.showAndWait();
+					alert.show();
 				}else{
 					log.log(Level.FINEST, "Transicion de ventana a Juego");
 					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
+				log.log(Level.WARNING, "Error, no se ha podido conectar");
 				e.printStackTrace();
 			} 
 		}
