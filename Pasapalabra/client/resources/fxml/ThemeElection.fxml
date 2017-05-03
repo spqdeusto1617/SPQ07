@@ -105,47 +105,47 @@
          </cursor>
       </Rectangle>
       <ImageView fx:id="imgRival" fitHeight="128.0" fitWidth="128.0" layoutX="141.0" layoutY="787.0" pickOnBounds="true" />
-      <Button fx:id="btnTodos" layoutX="260.0" layoutY="248.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Todos">
+      <Button fx:id="btnTodos" layoutX="260.0" layoutY="248.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="All">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnDeportes" layoutX="294.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Deportes">
+      <Button fx:id="btnDeportes" layoutX="294.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Sport">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnEntretenimiento" layoutX="497.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Entretenimiento">
+      <Button fx:id="btnEntretenimiento" layoutX="497.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Entertaining">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnCiencia" layoutX="258.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Ciencia">
+      <Button fx:id="btnCiencia" layoutX="258.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Science">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnHistoria" layoutX="553.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Historia">
+      <Button fx:id="btnHistoria" layoutX="553.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="History">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnArte" layoutX="298.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Arte">
+      <Button fx:id="btnArte" layoutX="298.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Art">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnGeo" layoutX="523.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Geografía">
+      <Button fx:id="btnGeo" layoutX="523.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Geography">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnAleatorio" layoutX="268.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #e417d3;" text="VS Aleatorio" textFill="WHITE">
+      <Button fx:id="btnAleatorio" layoutX="268.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #e417d3;" text="VS Random" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnAmigo" disable="true" layoutX="478.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #e417d3;" text="VS Amigo" textFill="#fffdff">
+      <Button fx:id="btnAmigo" disable="true" layoutX="478.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #e417d3;" text="VS Friend" textFill="#fffdff">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
