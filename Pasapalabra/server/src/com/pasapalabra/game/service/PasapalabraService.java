@@ -63,7 +63,7 @@ public class PasapalabraService implements IPasapalabraService{
 			User user = uDao.getUserByLogin(userName, pass);
 			//User user = new User(userName, "a@a", pass, null, new Date(), 0, 0, 0);
 			//UserDTO userDTO = UserAssembler.getInstance().assembleToDTO(user);
-			if(currentUsers.containsValue(user)) throw new SecurityException();
+			if(currentUsers.contains(user)) throw new SecurityException();
 			Token token = SessionManager.createSession(userName);
 			currentUsers.put(token.getToken(), user);
 			return token;

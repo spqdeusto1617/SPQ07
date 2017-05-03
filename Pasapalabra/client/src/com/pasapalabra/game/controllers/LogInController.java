@@ -3,6 +3,8 @@ package com.pasapalabra.game.controllers;
 import java.awt.Desktop;
 import java.io.File;
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.security.AccessControlException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -152,19 +154,58 @@ public class LogInController extends Control implements Initializable {
 				com.pasapalabra.game.service.ServiceLocator.login(txtUsuario.getText(), txtContra.getText());
 				
 				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
-			} catch (Exception e) {
-				log.log(Level.INFO, "Error de LogIn", e);
+			} catch (AccessControlException e) {
+				log.log(Level.INFO, "Error de LogIn, user does not exist", e);
 				//Aviso
 				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("No se puede iniciar la sesión");
+				alert.setTitle("User name or password incorrect");
 
-				alert.setContentText("Parece que no se puede iniciar la sesion");
+				alert.setContentText("Your username and/or password are incorrect, please check them and try again");
 				alert.initModality(Modality.APPLICATION_MODAL);	
 				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert.showAndWait();
 				txtContra.setText("");
+				
 
+			} catch (RemoteException e) {
+				log.log(Level.INFO, "Error de LogIn, connection not ok", e);
+				//Aviso
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error accesing the server");
 
+				alert.setContentText("An error ocurred while trying to connect to the server. Please, check your connection and try again");
+				alert.initModality(Modality.APPLICATION_MODAL);	
+				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				alert.showAndWait();
+				txtContra.setText("");
+		
+
+			}catch (SecurityException e) {
+				log.log(Level.INFO, "Error de LogIn, user does not exist", e);
+				//Aviso
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Duplicated username");
+
+				alert.setContentText("This username is already logged. If this is not correct, try to contact with an admin");
+				alert.initModality(Modality.APPLICATION_MODAL);	
+				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				alert.showAndWait();
+				txtContra.setText("");
+				
+
+			}
+			catch (Exception e) {
+				log.log(Level.INFO, "Error de LogIn, unexpected error", e);
+				//Aviso
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Unexpected error occured during the login");
+
+				alert.setContentText("An unexpeced error occurred during the login, please try again");
+				alert.initModality(Modality.APPLICATION_MODAL);	
+				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				alert.showAndWait();
+				txtContra.setText("");
+				
 			}
 		}
 		else{

@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.security.AccessControlException;
 
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.QuestionType;
@@ -66,6 +67,7 @@ public class ServiceLocator{
 	public static void login(String userName, String pass) throws Exception{
 		try{
 			sessionAuth = service.login(userName, pass);
+			if(sessionAuth == null)throw new AccessControlException("No user");
 		}catch(Exception a){
 			throw a;
 		}
