@@ -3,6 +3,7 @@ package com.pasapalabra.game.controllers;
 import java.awt.HeadlessException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
@@ -375,7 +376,9 @@ public class GameController implements Initializable{
 
 		try{
 			rightAnswered = com.pasapalabra.game.service.ServiceLocator.answerQuestion("Pasapalabra");
-			if(!rightAnswered)System.out.println("Ha habido un error al pasar de palabra");
+			if(!rightAnswered){
+				log.log(Level.WARNING, "Error al pasar de palabra");
+			}
 		}catch(Exception a){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Hubo un error");

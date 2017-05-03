@@ -1160,7 +1160,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		}
 		*/
 		
-		@FXML 
+		@FXML //MIRAR
 		void selected(MouseEvent event){
 			for(Button boton: aLBotones){
 				if(boton.isPressed()){
@@ -1169,13 +1169,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					});
 					}
 				else{
-					System.out.println("Boton no seleccionado");
+					//System.out.println("Boton no seleccionado");
+					log.log(Level.WARNING, "Error, boton no seleccionado");
 				}
 			}
 			
 		}
 		
-		@FXML 
+		@FXML //MIRAR
 		void notSelected(MouseEvent event){
 			for(Button boton: aLBotones){
 				if(!boton.isPressed()){
@@ -1184,7 +1185,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					});
 					}
 				else{
-					System.out.println("Boton si está seleccionado");
+					//System.out.println("Boton si está seleccionado");
+					log.log(Level.FINEST, "Boton si está seleccionado");
 				}
 			}
 			
