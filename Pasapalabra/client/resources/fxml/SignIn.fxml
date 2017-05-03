@@ -30,7 +30,7 @@
       <Text layoutX="417.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repeat password" />
       <Text layoutX="88.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
       <Text layoutX="88.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <Text layoutX="418.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Birth date" />
+      <Text layoutX="418.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of birth" />
       <Button fx:id="btnCrear" disable="true" layoutX="523.0" layoutY="367.0" mnemonicParsing="false" onMousePressed="#crearUsuario" text="Create" />
       <Button fx:id="btnCancelar" layoutX="347.0" layoutY="367.0" mnemonicParsing="false" onMousePressed="#cancelarUsuario" text="Cancel" />
       <Text layoutX="112.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert your image" />
