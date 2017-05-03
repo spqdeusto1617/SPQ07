@@ -11,7 +11,9 @@ import com.pasapalabra.game.application.Main;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -134,8 +136,18 @@ public class StatisticsController extends ExtenderClassController implements Ini
 		 */
 	 @FXML
 	 void btnMiPerfil(MouseEvent event) {
-		 log.log(Level.FINEST, "Transición a Perfil");
-		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
+			Alert alert = new Alert(AlertType.INFORMATION);
+
+			alert.setTitle("Function not yet implemented.");
+			
+			alert.setHeaderText("Do not use this function");
+			 
+			alert.setContentText("This Function is not implemented, please, do not use it");
+
+			alert.showAndWait();
+			
+		 //log.log(Level.FINEST, "Transición a Perfil");
+		 //com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 	 }
 
 	 @FXML
@@ -154,8 +166,17 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 */
 	@FXML
 	 void btnEstadisticas(MouseEvent event) {
-		 log.log(Level.FINEST, "Transición a Estadisticas");
-		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
+		Alert alert = new Alert(AlertType.INFORMATION);
+
+		alert.setTitle("Function not yet implemented.");
+		
+		alert.setHeaderText("Do not use this function");
+		 
+		alert.setContentText("This Function is not implemented, please, do not use it");
+
+		alert.showAndWait(); 
+		//log.log(Level.FINEST, "Transición a Estadisticas");
+		 //com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
 	 }
 
 	 /**Transition to friends window
@@ -163,8 +184,17 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 */
 	 @FXML
 	 void btnAmigos(MouseEvent event) {
-		 log.log(Level.FINEST, "Transición a Amigos");
-		 com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Friends", event);
+			Alert alert = new Alert(AlertType.INFORMATION);
+
+			alert.setTitle("Function not yet implemented.");
+			
+			alert.setHeaderText("Do not use this function");
+			 
+			alert.setContentText("This Function is not implemented, please, do not use it");
+
+			alert.showAndWait();
+		 //log.log(Level.FINEST, "Transición a Amigos");
+		 //com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Friends", event);
 	 }
 
 	 /**Method to close current session

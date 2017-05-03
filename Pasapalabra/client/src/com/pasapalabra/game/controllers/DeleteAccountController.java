@@ -267,22 +267,48 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	 * @param event
 	 */
 	public void btnAmigos(MouseEvent event){
-		WindowUtilities.windowTransition("Friends", event);
+		Alert alert = new Alert(AlertType.INFORMATION);
+
+		alert.setTitle("Function not yet implemented.");
+		
+		alert.setHeaderText("Do not use this function");
+		 
+		alert.setContentText("This Function is not implemented, please, do not use it");
+
+		alert.showAndWait();
+		//WindowUtilities.windowTransition("Friends", event);
 	}
 
 	/**Transition to profile window
 	 * @param event
 	 */
 	public void btnMiPerfil(MouseEvent event){
+		Alert alert = new Alert(AlertType.INFORMATION);
 
-		WindowUtilities.windowTransition("Profile", event);
+		alert.setTitle("Function not yet implemented.");
+		
+		alert.setHeaderText("Do not use this function");
+		 
+		alert.setContentText("This Function is not implemented, please, do not use it");
+
+		alert.showAndWait();
+		//WindowUtilities.windowTransition("Profile", event);
 	}
 
 	/**Transition to statistics window
 	 * @param event
 	 */
 	public void btnEstadisticas(MouseEvent event){
-		WindowUtilities.windowTransition("Statistics", event);
+		Alert alert = new Alert(AlertType.INFORMATION);
+
+		alert.setTitle("Function not yet implemented.");
+		
+		alert.setHeaderText("Do not use this function");
+		 
+		alert.setContentText("This Function is not implemented, please, do not use it");
+
+		alert.showAndWait();
+		//WindowUtilities.windowTransition("Statistics", event);
 	}
 
 	
