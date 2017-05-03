@@ -271,6 +271,14 @@ public class SignInController extends Control implements Initializable {
 		}
 		else{
 			try{
+				if(userImg == null){
+					userImg = ImageIO.read(new File("../images/Registro/DUI.png"));
+				}
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+			try{
 				UserDTO udto= new UserDTO(txtNombreUsuario.getText(), txtCorreoUsuario.getText(), userImg, userDate, 0 , 0, 0);
 
 				Alert alert = new Alert(AlertType.CONFIRMATION);
