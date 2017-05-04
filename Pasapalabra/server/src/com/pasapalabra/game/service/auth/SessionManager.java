@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SessionManager {
 
 	/**
-	 * Map for gestionating all the current sessions
+	 * Map for managing all the current sessions
 	 */
 	public static ConcurrentHashMap<String, String> hmSessions = new ConcurrentHashMap<String, String>();
 	
@@ -65,6 +65,10 @@ public class SessionManager {
 		return hmSessions.containsValue(username);
 	}
 
+	/**
+	 * Method to remove an user from the userlist(the user has disconnected)
+	 * @param session: his session token
+	 */
 	public static void removeUser(Token session){
 		hmSessions.remove(session.getToken());
 	}

@@ -2,15 +2,15 @@ package com.pasapalabra.game.service;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.pasapalabra.game.dao.QuestionDAO;
 import com.pasapalabra.game.dao.UserDAO;
 import com.pasapalabra.game.dao.mongodb.QuestionMongoDAO;
 import com.pasapalabra.game.dao.mongodb.UserMongoDAO;
 import com.pasapalabra.game.model.Question;
-import com.pasapalabra.game.model.QuestionType;
 import com.pasapalabra.game.model.User;
 import com.pasapalabra.game.model.UserScore;
 import com.pasapalabra.game.model.DTO.QuestionDTO;
@@ -28,6 +28,9 @@ import com.pasapalabra.game.service.auth.Token;
  * @author Ivan
  */
 public class PasapalabraService implements IPasapalabraService{
+	
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(PasapalabraService.class.getName());
+	
 	private static ConcurrentHashMap<String, User> currentUsers = new ConcurrentHashMap<>();
 
 	private static ConcurrentHashMap<String, ArrayList<Question>> currentQuestions = new ConcurrentHashMap<String, ArrayList<Question>>();
@@ -49,7 +52,7 @@ public class PasapalabraService implements IPasapalabraService{
 				com.pasapalabra.game.server.Server.mongoConnection.datastore.save(new User(userData.getUserName(), userData.getMail(), pass, userData.getProfileImage(), userData.getDOB(), 0, 0, 0));
 				return true;
 			}catch (Exception e) {
-				e.printStackTrace();
+				log.log(Level.SEVERE, "Error occurred while trying to registry a new user", e);
 				throw new RemoteException();
 			}
 		}
@@ -182,7 +185,7 @@ public class PasapalabraService implements IPasapalabraService{
 				return true;
 			}
 			else if(answer.equals("Pasapalabra")){ 
-				System.out.println("Server - Pasamos palabra");
+				log.log(Level.INFO, "Server - Pasapalabra");
 				currentResult.get(session.getToken()).nextLetter();
 				return true;
 			}
@@ -209,7 +212,7 @@ public class PasapalabraService implements IPasapalabraService{
 		if(SessionManager.isValidSession(session)){
 			if(currentQuestions.containsKey(session.getToken()))return questionsAnswered(currentQuestions.get(session.getToken()));
 		}
-
+		log.log(Level.INFO, "Not valid session "+session.getToken());
 		return false;
 
 	}
@@ -228,6 +231,7 @@ public class PasapalabraService implements IPasapalabraService{
 				currentMatches.remove(token1);
 				currentMatches.put(token2, token1);
 				client.changeTurn(ScoreAssembler.getInstance().assembleToDTO(finalScore1));
+				log.log(Level.INFO, "Changed players");
 				return ScoreAssembler.getInstance().assembleToDTO(finalScore1);
 			}
 			UserDAO uDAO = new UserMongoDAO(Server.mongoConnection);
@@ -251,6 +255,7 @@ public class PasapalabraService implements IPasapalabraService{
 			currentClients.remove(session.getToken());
 			currentClients.remove(currentMatches.get(session.getToken()));
 			currentMatches.remove(session.getToken());
+			log.log(Level.INFO, "Game ended");
 			return ScoreAssembler.getInstance().assembleToDTO(finalScore1);
 		}
 		else{
@@ -278,6 +283,7 @@ public class PasapalabraService implements IPasapalabraService{
 				currentClients.remove(session.getToken());
 				currentResult.remove(session.getToken());
 				currentQuestions.remove(session.getToken());
+				log.log(Level.INFO, "User exit matchmakig");
 			}
 
 		}
@@ -291,6 +297,7 @@ public class PasapalabraService implements IPasapalabraService{
 				if(!currentQuestions.containsKey(session.getToken())){
 					currentUsers.remove(session.getToken());
 					SessionManager.removeUser(session);
+					log.log(Level.INFO, "User delog");
 					return true;
 				}
 			}

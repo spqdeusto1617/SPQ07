@@ -144,15 +144,16 @@ public class CaptureWindow extends Control implements Initializable{
 
 		//We add the image to the 
 		addToWindow(selectedFile, true);
+		log.log(Level.INFO, "Image added: "+selectedFile.getAbsolutePath());
 	}
 
 	@FXML
 	void remove(MouseEvent event) {
-		//Solo se eliminará si la selección existe y el usuario lo confirma.
+		//It will be removed only if the user says it.
 		if(previousSelection != null){
 			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Delete new");
-			alert.setHeaderText("Do you want to delete this new");
+			alert.setTitle("Delete news");
+			alert.setHeaderText("Do you want to delete this news");
 			alert.setContentText("After deleting it, no user can receive it back.");
 
 			alert.initModality(Modality.APPLICATION_MODAL);
@@ -221,6 +222,8 @@ public class CaptureWindow extends Control implements Initializable{
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
+		
+		log.log(Level.INFO, "User tried to access the news handler");
 	}
 
 	void playAnimation(boolean server_notNews){
