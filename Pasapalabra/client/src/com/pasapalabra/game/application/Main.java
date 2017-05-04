@@ -135,7 +135,7 @@ public class Main extends Application {
 	 * @param args console arguments
 	 */
 	public static void main(String[] args) {
-				if (lockInstance("block.dat")){
+				/*if (lockInstance("block.dat")){
 					//Aquí se carga toda la aplicación
 					try {
 						com.pasapalabra.game.service.ServiceLocator.startConnection(args);
@@ -158,7 +158,23 @@ public class Main extends Application {
 					log.log(Level.INFO, "Ventana NO cargada. Ya hay una instancia de la clase. Se ejecuta hilo de advertencia soporte único a monoinstancia");
 					//Cargamos el hilo de rutina monoinstancia. Nuestro hilo main muere después.
 					MonoInstanceRoutine.main(args);
-				}
+				}*/
+		try {
+			com.pasapalabra.game.service.ServiceLocator.startConnection(args);
+		} catch (MalformedURLException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		catch(RemoteException r){
+			r.printStackTrace();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		launch(args);
+		log.log(Level.FINEST, "Ventana cargada. FIN HILO MAIN.JAVA");
 	}
 
 	private static boolean lockInstance(final String lockFile) {

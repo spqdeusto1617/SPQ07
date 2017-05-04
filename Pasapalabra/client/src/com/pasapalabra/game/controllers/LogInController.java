@@ -150,10 +150,10 @@ public class LogInController extends Control implements Initializable {
 		
 		if(txtUsuario.getText().length()>0&&txtContra.getText().length()>0){
 			//txtIncorrecto.setText("Usuario y/o contraseña incorrecto/s");
-			try {	log.log(Level.FINEST, "LogIn OK. Transición de ventana a Juego");
+			try {	log.log(Level.FINEST, "LogIn OK. Comprobamos el login");
 				com.pasapalabra.game.service.ServiceLocator.login(txtUsuario.getText(), txtContra.getText());
 				
-				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
+				//com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			} catch (AccessControlException e) {
 				log.log(Level.INFO, "Error de LogIn, user does not exist", e);
 				//Aviso
@@ -165,10 +165,11 @@ public class LogInController extends Control implements Initializable {
 				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert.showAndWait();
 				txtContra.setText("");
+				return;
 				
 
 			} catch (RemoteException e) {
-				log.log(Level.INFO, "Error de LogIn, connection not ok", e);
+				log.log(Level.INFO, "Login error, connection not ok", e);
 				//Aviso
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error accesing the server");
@@ -178,10 +179,11 @@ public class LogInController extends Control implements Initializable {
 				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert.showAndWait();
 				txtContra.setText("");
-		
+				e.printStackTrace();
+				return;
 
 			}catch (SecurityException e) {
-				log.log(Level.INFO, "Error de LogIn, user does not exist", e);
+				log.log(Level.INFO, "Login error, user does not exist", e);
 				//Aviso
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Duplicated username");
@@ -192,10 +194,11 @@ public class LogInController extends Control implements Initializable {
 				alert.showAndWait();
 				txtContra.setText("");
 				
-
+				e.printStackTrace();
+				return;
 			}
 			catch (Exception e) {
-				log.log(Level.INFO, "Error de LogIn, unexpected error", e);
+				log.log(Level.INFO, "Login error, unexpected error", e);
 				//Aviso
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Unexpected error occured during the login");
@@ -205,8 +208,53 @@ public class LogInController extends Control implements Initializable {
 				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert.showAndWait();
 				txtContra.setText("");
-				
+				e.printStackTrace();
+				return;
 			}
+			try {	log.log(Level.FINEST, "LogIn OK. Transición de ventana a Juego");
+			com.pasapalabra.game.service.ServiceLocator.retreiveUserData();
+			
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
+		} catch (SecurityException e) {
+			log.log(Level.INFO, "Login Error, impossible to retreive your userdata", e);
+			//Aviso
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Impossible to retreive your info");
+
+			alert.setContentText("An error occured trying to retrevie your information, please try again");
+			alert.initModality(Modality.APPLICATION_MODAL);	
+			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert.showAndWait();
+			txtContra.setText("");
+			
+
+		} catch (RemoteException e) {
+			log.log(Level.INFO, "Login error, connection not ok", e);
+			//Aviso
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error accesing the server");
+
+			alert.setContentText("An error ocurred while trying to download from the server. Please, check your connection and try again");
+			alert.initModality(Modality.APPLICATION_MODAL);	
+			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert.showAndWait();
+			txtContra.setText("");
+	
+
+		}
+		catch (Exception e) {
+			log.log(Level.INFO, "Error de LogIn, unexpected error", e);
+			//Aviso
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Unexpected error occured during the login");
+
+			alert.setContentText("An unexpeced error occurred during the login, please try again");
+			alert.initModality(Modality.APPLICATION_MODAL);	
+			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert.showAndWait();
+			txtContra.setText("");
+			e.printStackTrace();
+		}
 		}
 		else{
 			log.log(Level.INFO, "Error de LogIn - El usuario no ha insertado nada.");

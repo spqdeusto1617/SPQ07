@@ -359,7 +359,8 @@ public class SignInController extends Control implements Initializable {
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 
 				alert2.showAndWait();
-
+				
+				a.printStackTrace();
 			}
 
 		}

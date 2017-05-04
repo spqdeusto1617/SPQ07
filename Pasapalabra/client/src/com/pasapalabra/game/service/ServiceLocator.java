@@ -71,9 +71,14 @@ public class ServiceLocator{
 		}catch(Exception a){
 			throw a;
 		}
+		
+	}
+	
+	public static void retreiveUserData() throws Exception{
 		try{
 			userInfo = service.getData(sessionAuth);
 		}catch(Exception e){
+			delogging();
 			throw e;
 		}
 	}
