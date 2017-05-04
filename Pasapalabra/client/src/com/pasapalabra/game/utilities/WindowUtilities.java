@@ -123,7 +123,14 @@ public class WindowUtilities {
 
 				//En la clase del servidor habrá una rutina para cerrar sesión.
 				try {
-					if(ServiceLocator.delogging())windowTransition("LogIn", event);
+					if(ServiceLocator.delogging()){
+						com.pasapalabra.game.service.ServiceLocator.sessionAuth = null;
+
+						com.pasapalabra.game.service.ServiceLocator.userInfo = null;
+
+						windowTransition("LogIn", event);
+
+					}
 					else{
 						Alert alert3 = new Alert(AlertType.ERROR);
 						//Pone título

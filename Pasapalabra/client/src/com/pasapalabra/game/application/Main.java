@@ -6,17 +6,23 @@ import java.net.MalformedURLException;
 import java.nio.channels.FileLock;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -54,41 +60,27 @@ public class Main extends Application {
 			//Añadir un escuchador para cuando se cierre la ventana 
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override public void handle(WindowEvent t) {
-					/*TODO: when delog, check thisif(!com.pasapalabra.game.utilities.Conexion_cliente.Datos_Usuario.isEmpty()){
-						String[] Datos=new String[1];
-						if(EventosJuego.juegoEnCurso==false){
-							
-							Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
-							try {
-								Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
-								
-							} catch (Exception e) {
-								//TODO: gestionar la excepción(¿mensaje de error?)
-							} 
-						}else{
-							Datos[0]=Conexion_cliente.Datos_Usuario.get(0);
-							System.out.println("Nos rendimos, al cerrar la ventana");
-							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="Rendirse";
-							try {
-								com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
-								Conexion_cliente.lanzaConexion(Conexion_cliente.Ip_Local, Acciones_servidor.Delog.toString(),Datos);
-							} catch (SecurityException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (Error e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							
+					if(com.pasapalabra.game.service.ServiceLocator.playing){
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Can´t exit");
+						alert.setHeaderText("You can´t exit while playing");
+						alert.setContentText("You can´t exit while you are playing. Please wait until the game is over");
+						alert.show();
+						return;//TODO: revise this
+					}
+					else{
+						try{
+							com.pasapalabra.game.service.ServiceLocator.delogging();
+
+							log.log(Level.INFO, "Exiting from the platform");
+							System.exit(0);
+						}catch (Exception e) {
+							// TODO: handle exception
+							log.log(Level.SEVERE, "Error occurred trying to delog from the server", e);
+							System.exit(0);
 						}
-						
-					}*/
+
+					}
 				}
 			});
 
@@ -135,14 +127,14 @@ public class Main extends Application {
 	 * @param args console arguments
 	 */
 	public static void main(String[] args) {
-				/*if (lockInstance("block.dat")){
+		/*if (lockInstance("block.dat")){
 					//Aquí se carga toda la aplicación
 					try {
 						com.pasapalabra.game.service.ServiceLocator.startConnection(args);
 					} catch (MalformedURLException | NotBoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						
+
 					}
 					catch(RemoteException r){
 						r.printStackTrace();
@@ -164,7 +156,7 @@ public class Main extends Application {
 		} catch (MalformedURLException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+
 		}
 		catch(RemoteException r){
 			r.printStackTrace();
