@@ -1551,7 +1551,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			panel.applyCss();*/
 			//SERVIDOR
 			//TODO Cargar imagen personal
-			if(LogInController.iAvatar!=null){
+			if(com.pasapalabra.game.service.ServiceLocator.userInfo.getProfileImage()!=null){
 				imagenAvatar.setImage(LogInController.iAvatar);
 			}else{
 				String imagen = "fPerfil";
