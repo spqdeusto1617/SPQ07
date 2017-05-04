@@ -400,54 +400,65 @@ public class SignInController extends Control implements Initializable {
 	 * @param event of the mouse
 	 */
 	public void cambiarImagen(MouseEvent event){
-		//Otro stage para cargar el filechooser
-		Stage stageFilechooser = new Stage();
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.getExtensionFilters().addAll(
-				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg"));
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
 
-		try{
-			//AnotherStage2: para que lance el filechooser
-			file = fileChooser.showOpenDialog(stageFilechooser);
-			if(file.length()>5242880){
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Tamaño excesivo");
-				alert.initModality(Modality.APPLICATION_MODAL);
+		alert.setTitle("Function not yet implemented.");
+		
+		alert.setHeaderText("Do not use this function");
+		 
+		alert.setContentText("This Function is not implemented, please, do not use it");
 
-				//Elijo el dueño de la alerta (o la base) de la misma.
-				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				alert.setContentText("Parece que la imagen es muy grande, por favor, introduzca una imagen más pequeña (tamaño máximo: 5Mb).");
-
-				alert.showAndWait();
-
-			}
-			else{
-				String path="file:///"+file.getAbsolutePath();
-				BufferedImage originalImage = ImageIO.read(file);
-				
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				ImageIO.write( originalImage, "jpg", baos );
-				baos.flush();
-				byte[] imageInByte = baos.toByteArray();
-				baos.close();
-				Image img = new Image(path);
-				ImgImagenUsuario.setImage(img);
-				//TODO: check this image
-				userImg = ImageIO.read(file);
-
-
-
-			}
-		}catch(Exception a){
-
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error al leer la imagen");
-
-			alert.setContentText("Se ha producido un error a la hora de leer la imagen. Por favor intenteló otra vez.");
-
-			alert.showAndWait();
-
-		}
+		alert.showAndWait();
+		
+//		//Otro stage para cargar el filechooser
+//		Stage stageFilechooser = new Stage();
+//		FileChooser fileChooser = new FileChooser();
+//		fileChooser.getExtensionFilters().addAll(
+//				new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif", "*.jpeg"));
+//
+//		try{
+//			//AnotherStage2: para que lance el filechooser
+//			file = fileChooser.showOpenDialog(stageFilechooser);
+//			if(file.length()>5242880){
+//				Alert alert = new Alert(AlertType.ERROR);
+//				alert.setTitle("Tamaño excesivo");
+//				alert.initModality(Modality.APPLICATION_MODAL);
+//
+//				//Elijo el dueño de la alerta (o la base) de la misma.
+//				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+//				alert.setContentText("Parece que la imagen es muy grande, por favor, introduzca una imagen más pequeña (tamaño máximo: 5Mb).");
+//
+//				alert.showAndWait();
+//
+//			}
+//			else{
+//				String path="file:///"+file.getAbsolutePath();
+//				BufferedImage originalImage = ImageIO.read(file);
+//				
+//				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//				ImageIO.write( originalImage, "jpg", baos );
+//				baos.flush();
+//				byte[] imageInByte = baos.toByteArray();
+//				baos.close();
+//				Image img = new Image(path);
+//				ImgImagenUsuario.setImage(img);
+//				//TODO: check this image
+//				userImg = ImageIO.read(file);
+//
+//
+//
+//			}
+//		}catch(Exception a){
+//
+//			Alert alert = new Alert(AlertType.ERROR);
+//			alert.setTitle("Error al leer la imagen");
+//
+//			alert.setContentText("Se ha producido un error a la hora de leer la imagen. Por favor intenteló otra vez.");
+//
+//			alert.showAndWait();
+//
+//		}
 
 
 	}

@@ -42,7 +42,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
-      <CheckBox fx:id="chkTerminos" layoutX="328.0" layoutY="335.0" mnemonicParsing="false" onAction="#aceptaTerminos" text="I accept terms and conditions" />
+      <CheckBox fx:id="chkTerminos" layoutX="379.0" layoutY="330.0" mnemonicParsing="false" onAction="#aceptaTerminos" text="I accept terms and conditions" />
       <ImageView fitHeight="85.0" fitWidth="149.0" layoutX="85.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/LogoPasapalabra.png" />
