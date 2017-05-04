@@ -62,17 +62,16 @@ public class Server extends Application{
 	    	mongoConnection = new MongoConnection("com.pasapalabra.game.model", mongoClient, "pasapalabra"); 	
 	    	
 			String serverAddress = "//" + args[0] + ":" + args[1] + "/" + args[2];
-			System.out.println(" * Server name: " + serverAddress);
+			
 			IPasapalabraService pasapalabraService = new PasapalabraService();
 			
 			try {
 				Naming.rebind(serverAddress,  UnicastRemoteObject.exportObject(pasapalabraService, 0));
 				serverPort = args[1];
 				serviceName = args[2];
-				System.out.println("Server at '" + serverAddress + "' active and waiting connections...");
+				log.log(Level.INFO, "Server at '" + serverAddress + "' active and waiting connections...");
 			} catch (RemoteException | MalformedURLException e) {
-				e.printStackTrace();
-				System.out.println("Error while starting the server.");
+				log.log(Level.SEVERE, "Error trying to registry the server", e);
 				serverOnline = false;
 			}
 	    
@@ -93,6 +92,8 @@ public class Server extends Application{
 				+ " sure your connection is working and you have inicializate the RMI registry properly");
 		
 		alert.showAndWait();
+		
+		log.log(Level.INFO, "Exiting from the server");
 
 		System.exit(0);
 		}
@@ -127,6 +128,7 @@ public class Server extends Application{
 					Optional<ButtonType> result = alert.showAndWait();
 					if (result.get() == ButtonType.OK){
 						Platform.exit();
+						log.log(Level.INFO, "Exiting from the application");
 						System.exit(0);
 					} else {
 						event.consume();
@@ -139,7 +141,7 @@ public class Server extends Application{
 			//Icon
 			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/iconopsp.png")));
 			log.log(Level.FINEST, "Added icon to the main window");
-			//Título de la ventana
+			//Window´s title
 			primaryStage.setTitle("Pasapalabra - Server");
 			log.log(Level.FINEST, "Added title to the window");
 
@@ -163,7 +165,7 @@ public class Server extends Application{
 			log.log(Level.FINEST, "Window centered");
 
 		} catch(Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			log.log(Level.SEVERE, "Error while starting Main.java", e);
 		}
 

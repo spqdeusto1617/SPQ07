@@ -499,7 +499,7 @@ public class SignInController extends Control implements Initializable {
 	public void irATerminos(MouseEvent event){
 		//TODO: ¿path en el jar?
 
-		String path="/pdfEULA/EULA.pdf";
+		String path="./resources/pdfEULA/EULA.pdf";
 		
 		//Usarlo si lo acabamos exportando a .jar
 		//		try {

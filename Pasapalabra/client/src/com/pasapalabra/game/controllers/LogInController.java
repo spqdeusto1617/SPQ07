@@ -88,10 +88,11 @@ public class LogInController extends Control implements Initializable {
 		//Se inicia el handler del logger
 		com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, LogInController.class.getName());
 		if(!com.pasapalabra.game.service.ServiceLocator.serverReady){
+			log.log(Level.INFO, "Server offline");
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("No hay conexión con el servidor");
+			alert.setTitle("No connection with the server");
 
-			alert.setContentText("Parece que el servidor no está disponible, por favor, inténtelo más tarde");
+			alert.setContentText("The server is currenlty offlile, please check your connection and try again");
 			alert.initModality(Modality.APPLICATION_MODAL);			
 			alert.showAndWait();
 			btnLogin.setDisable(true);
@@ -99,10 +100,8 @@ public class LogInController extends Control implements Initializable {
 		}
 		else btnLogin.setDisable(false);
 		try{
-			log.log(Level.FINE, "Se ha inicializado EventosLogIn.java. Intento de conexión con servidor...");
-			//Empieza conexión
-			//com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilities.Acciones_servidor.Comprobar.toString(),null);
-			log.log(Level.INFO, "Conexión iniciada.");
+			
+			log.log(Level.INFO, "Conenction started correctly");
 			aLNoticias = new ArrayList<>();
 			if((aLNoticiasFicheros != null) || (!aLNoticiasFicheros.isEmpty())){
 				for (File archivoGrafico : aLNoticiasFicheros) {
@@ -122,21 +121,21 @@ public class LogInController extends Control implements Initializable {
 		}catch(NullPointerException a){
 			a.printStackTrace();
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Parece que algo ha salido mal");
+			alert.setTitle("Something went wrong");
 
-			alert.setContentText("Parece que las noticias no están disponibles");
+			alert.setContentText("Some error occured trying to retreive the news");
 			alert.initModality(Modality.APPLICATION_MODAL);			
 			alert.showAndWait();
+			log.log(Level.SEVERE, "Error trying to retreive data from the server. ",a);
 		}catch (Exception e) {
 			
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Parece que algo ha salido mal");
+			alert.setTitle("Something went wrong");
 
-			alert.setContentText("Parece que ha habido un error insesperado, podrá jugar de todos modos");
+			alert.setContentText("Unespected error ocurred. you can play anyway");
 			alert.initModality(Modality.APPLICATION_MODAL);			
 			alert.showAndWait();
-			log.log(Level.SEVERE,"Error al iniciar:"+e.getMessage());
-			e.printStackTrace();
+			log.log(Level.SEVERE, "Error trying to retreive data from the server. ",e);
 
 		}
 	}
@@ -145,17 +144,17 @@ public class LogInController extends Control implements Initializable {
 	 * @param event
 	 */
 	public void loginSession(MouseEvent event){
-		log.log(Level.FINEST, "Evento de LogIn");
+		log.log(Level.FINEST, "Login event");
 		//Se controlan todos los datos.
 		
 		if(txtUsuario.getText().length()>0&&txtContra.getText().length()>0){
 			//txtIncorrecto.setText("Usuario y/o contraseña incorrecto/s");
-			try {	log.log(Level.FINEST, "LogIn OK. Comprobamos el login");
+			try {	log.log(Level.FINEST, "Checking credentials");
 				com.pasapalabra.game.service.ServiceLocator.login(txtUsuario.getText(), txtContra.getText());
 				
 				//com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			} catch (AccessControlException e) {
-				log.log(Level.INFO, "Error de LogIn, user does not exist", e);
+				log.log(Level.SEVERE, "LoginError, user does not exist", e);
 				//Aviso
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("User name or password incorrect");
@@ -169,7 +168,7 @@ public class LogInController extends Control implements Initializable {
 				
 
 			} catch (RemoteException e) {
-				log.log(Level.INFO, "Login error, connection not ok", e);
+				log.log(Level.SEVERE, "Login error, impossible to connect to the server", e);
 				//Aviso
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error accesing the server");
@@ -183,7 +182,7 @@ public class LogInController extends Control implements Initializable {
 				return;
 
 			}catch (SecurityException e) {
-				log.log(Level.INFO, "Login error, user does not exist", e);
+				log.log(Level.SEVERE, "Login error, duplicated username", e);
 				//Aviso
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Duplicated username");
@@ -198,7 +197,7 @@ public class LogInController extends Control implements Initializable {
 				return;
 			}
 			catch (Exception e) {
-				log.log(Level.INFO, "Login error, unexpected error", e);
+				log.log(Level.SEVERE, "Login error, unexpected error", e);
 				//Aviso
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Unexpected error occured during the login");
@@ -211,12 +210,12 @@ public class LogInController extends Control implements Initializable {
 				e.printStackTrace();
 				return;
 			}
-			try {	log.log(Level.FINEST, "LogIn OK. Transición de ventana a Juego");
+			try {	log.log(Level.FINEST, "LogIn OK. Retreiving userdata");
 			com.pasapalabra.game.service.ServiceLocator.retreiveUserData();
 			
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 		} catch (SecurityException e) {
-			log.log(Level.INFO, "Login Error, impossible to retreive your userdata", e);
+			log.log(Level.SEVERE, "Login Error, impossible to retreive your userdata", e);
 			//Aviso
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Impossible to retreive your info");
@@ -229,7 +228,7 @@ public class LogInController extends Control implements Initializable {
 			
 
 		} catch (RemoteException e) {
-			log.log(Level.INFO, "Login error, connection not ok", e);
+			log.log(Level.SEVERE, "Error retreiving userdata, connection not ok", e);
 			//Aviso
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error accesing the server");
@@ -243,7 +242,7 @@ public class LogInController extends Control implements Initializable {
 
 		}
 		catch (Exception e) {
-			log.log(Level.INFO, "Error de LogIn, unexpected error", e);
+			log.log(Level.SEVERE, "Error retreiving userdata, unexpected error", e);
 			//Aviso
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Unexpected error occured during the login");
@@ -257,12 +256,12 @@ public class LogInController extends Control implements Initializable {
 		}
 		}
 		else{
-			log.log(Level.INFO, "Error de LogIn - El usuario no ha insertado nada.");
+			log.log(Level.INFO, "Login error - User tried to login without data.");
 			//Si el usuario no ha insertado nada en los campos de login se le avisará.
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Texto vacio");
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Empty username/password");
 
-			alert.setContentText("Parece que no has introducido ningún texto, por favor, intente introducir su usuario y contraseña antes");
+			alert.setContentText("No username/password introduced, please introduce userdata and try again");
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
@@ -273,18 +272,18 @@ public class LogInController extends Control implements Initializable {
 	 * @param event of the mouse
 	 */
 	public void registro(MouseEvent event){
-		log.log(Level.FINEST, "Método de registro iniciado");
+		log.log(Level.FINEST, "Registry method inicialized");
 		if( com.pasapalabra.game.service.ServiceLocator.serverReady == false ){
-			log.log(Level.INFO, "El servidor no está operativo para el registro");
+			log.log(Level.INFO, "Server not ready");
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("El servidor no está operativo");
+			alert.setTitle("Server currenly offline");
 
-			alert.setContentText("El servidor no está operativo actualmente, no se puede registrar");
+			alert.setContentText("The server is currenlly offline, please try to reset the program");
 			alert.initModality(Modality.APPLICATION_MODAL);			
 			alert.showAndWait();
 		}
 		else{
-			log.log(Level.FINEST, "Transición a ventana registro porque el servidor está operativo.");
+			log.log(Level.FINEST, "Window transition to singin");
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("SignIn", event);
 		}
 	}
@@ -293,14 +292,13 @@ public class LogInController extends Control implements Initializable {
 	 * @param event of the mouse
 	 */
 	public void irAGitHub(MouseEvent event){
-		log.log(Level.FINEST, "Ir a GitHub");
+		log.log(Level.FINEST, "Go to github");
 		try {
 			//Desktop-getea el desktop-navega en-nueva URL-URL-a URI
-			Desktop.getDesktop().browse(new URL("https://github.com/asier-gutierrez/Pasapalabra").toURI());
-			log.log(Level.INFO, "Se ha accedido sin problema a GitHub");
+			Desktop.getDesktop().browse(new URL("https://github.com/spqdeusto1617/SPQ07").toURI());
+			log.log(Level.INFO, "Sucessfull acess to gihub");
 		} catch (Exception e) {
-			log.log(Level.WARNING, "Error en el método irAGitHub", e);
-			e.printStackTrace();
+			log.log(Level.WARNING, "Error trying to acess github", e);
 		}
 	}
 
