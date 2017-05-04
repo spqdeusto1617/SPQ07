@@ -56,4 +56,17 @@ public class SessionManager {
 		return token;
 	}
 	
+	/**
+	 * Method to validate if an user exist
+	 * @param username: the username to validate
+	 * @return: true or false if the user exist
+	 */
+	public static boolean userExist(String username){
+		return hmSessions.containsValue(username);
+	}
+
+	public static void removeUser(Token session){
+		hmSessions.remove(session.getToken());
+	}
+
 }

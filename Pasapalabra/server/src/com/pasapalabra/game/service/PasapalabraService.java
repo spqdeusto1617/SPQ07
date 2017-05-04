@@ -63,7 +63,7 @@ public class PasapalabraService implements IPasapalabraService{
 			User user = uDao.getUserByLogin(userName, pass);
 			//User user = new User(userName, "a@a", pass, null, new Date(), 0, 0, 0);
 			//UserDTO userDTO = UserAssembler.getInstance().assembleToDTO(user);
-			if(currentUsers.contains(user)) throw new SecurityException();
+			if(SessionManager.userExist(userName)) throw new SecurityException();
 			Token token = SessionManager.createSession(userName);
 			currentUsers.put(token.getToken(), user);
 			return token;
@@ -120,7 +120,7 @@ public class PasapalabraService implements IPasapalabraService{
 			currentResult.put(session.getToken(), new UserScore());
 			currentClients.put(session.getToken(), service);
 			IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
-			
+
 			client.getUser(UserAssembler.getInstance().assembleToDTO(currentUsers.get(session.getToken())));
 			return UserAssembler.getInstance().assembleToDTO(currentUsers.get(currentMatches.get(session.getToken())));//We get the first question
 		}
@@ -286,10 +286,13 @@ public class PasapalabraService implements IPasapalabraService{
 
 	@Override
 	public boolean deLogin(Token session) throws RemoteException {
-		if(currentUsers.containsKey(session.getToken())){ 
-			if(!currentQuestions.containsKey(session.getToken())){
-				currentUsers.remove(session.getToken());
-				return true;
+		if(SessionManager.isValidSession(session)){
+			if(currentUsers.containsKey(session.getToken())){ 
+				if(!currentQuestions.containsKey(session.getToken())){
+					currentUsers.remove(session.getToken());
+					SessionManager.removeUser(session);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -312,9 +315,9 @@ public class PasapalabraService implements IPasapalabraService{
 
 			token3 = service.login("Jugador 3", "Test3");
 			//System.out.println("Token3: "+token3.getToken());
-			
+
 			token4 = service.login("Jugador 4", "Test3");
-			
+
 		} catch (RemoteException | SecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -358,7 +361,7 @@ public class PasapalabraService implements IPasapalabraService{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			UserDTO test3 = service.play(token3, QuestionType.All.toString(), clientservice3);
 			System.out.println(test3.getUserName());
 
@@ -406,7 +409,7 @@ public class PasapalabraService implements IPasapalabraService{
 			e.printStackTrace();
 		}
 
-	*/}
+		 */}
 
 
 
