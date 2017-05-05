@@ -27,7 +27,7 @@ public interface IPasapalabraService extends Remote {
 	 * @throws RemoteException: if some error occurred during the process
 	 * @throws SecurityException: if the user tries to login more than once
 	 */
-	public Token login(String userName, String pass) throws RemoteException,SecurityException;
+	public Token login(String userName, String pass) throws RemoteException;
 	
 	/**
 	 * Method for deloging from the applicaciton 

@@ -43,4 +43,10 @@ public interface IClientService extends Remote{
 	 */
 	public UserScoreDTO changeTurn(UserScoreDTO score) throws RemoteException;
 	
+	/**
+	 * Method to indicate the  user that his rival has disconnected 
+	 * @throws RemoteException
+	 */
+	public void otherDisconnected() throws RemoteException;
+	
 }
