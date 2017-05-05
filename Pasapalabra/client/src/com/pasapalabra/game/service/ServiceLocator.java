@@ -67,7 +67,7 @@ public class ServiceLocator{
 	public static void login(String userName, String pass) throws Exception{
 		try{
 			sessionAuth = service.login(userName, pass);
-			if(sessionAuth == null)throw new AccessControlException("No user");
+			if(sessionAuth == null)throw new RemoteException("Error");
 		}catch(Exception a){
 			throw a;
 		}
@@ -93,7 +93,6 @@ public class ServiceLocator{
 	}
 	
 	public static boolean exitGame() throws Exception{
-		if(playing) return false;
 		try{
 			return service.deLogin(sessionAuth);
 		}catch (Exception e) {
@@ -106,7 +105,7 @@ public class ServiceLocator{
 	public static UserDTO play(QuestionType type) throws Exception{
 		try{
 			UserDTO user = service.play(sessionAuth, type.toString(), cService);
-			
+			if(user == null)//TODO: delog this user
 			if(user.getUserName().equals("Wait")){
 				ServiceLocator.type = type;
 				player1 = true;
@@ -135,6 +134,7 @@ public class ServiceLocator{
 	public static QuestionDTO getQuestion() throws Exception{
 		try{
 			QuestionDTO question = service.getQuestion(sessionAuth);
+			if(question == null)//TODO: delog game
 			currentLetter = question.getLeter();
 			if(question.getLeter() == 'z')reachZ = true;
 			return question;
@@ -145,7 +145,6 @@ public class ServiceLocator{
 	}
 	
 	public static boolean delogging() throws Exception{
-		if(playing) return false;
 		try{
 			return service.deLogin(sessionAuth);
 			 

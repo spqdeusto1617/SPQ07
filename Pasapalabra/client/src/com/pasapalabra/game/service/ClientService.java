@@ -50,7 +50,7 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	@Override
 	public void otherDisconnected() throws RemoteException {
 		System.err.println("Su rival se ha desconectado, saliendo del juego");
-		//TODO: exit the game
+		//TODO: exit the game(Use windowUtilities.forcedCloseSession
 	}
 
 }

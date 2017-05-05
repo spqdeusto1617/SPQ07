@@ -132,7 +132,7 @@ public class WindowUtilities {
 
 					}
 					else{
-						Alert alert3 = new Alert(AlertType.ERROR);
+						/*Alert alert3 = new Alert(AlertType.ERROR);
 						//Pone título
 						alert3.setTitle("Error");
 						//Pone cabecera
@@ -144,7 +144,13 @@ public class WindowUtilities {
 						//Añade 'dueño'
 						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 
-						alert3.showAndWait();
+						alert3.showAndWait();*/
+						com.pasapalabra.game.service.ServiceLocator.sessionAuth = null;
+
+						com.pasapalabra.game.service.ServiceLocator.userInfo = null;
+
+						log.log(Level.INFO, "Delog while result == false");
+						windowTransition("LogIn", event);
 					}
 				} catch (Exception e) {
 					log.log(Level.WARNING, "Error al cerrar sesion", e);
@@ -176,6 +182,21 @@ public class WindowUtilities {
 	//Eventos generalizados para plantillas descendientes [SIN REDEFINICIÓN DE ELEMENTOS] de VENTANA_BASE_DE_MENU_V2.fxml
 
 	//
+
+	public static void forcedCloseSession(Event event){
+
+
+		com.pasapalabra.game.service.ServiceLocator.sessionAuth = null;
+
+		com.pasapalabra.game.service.ServiceLocator.userInfo = null;
+
+		windowTransition("LogIn", event);
+
+
+		//
+
+
+	}
 
 	/**Método para dado un evento de hover sube el nivel de transparencia (de 0.2 a 0.8).
 	 * Cuando pierde el el hover baja el nivel de transparencia a 0.2 otra vez.
