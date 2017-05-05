@@ -2,6 +2,8 @@ package com.pasapalabra.game.service;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,6 +13,7 @@ import com.pasapalabra.game.dao.UserDAO;
 import com.pasapalabra.game.dao.mongodb.QuestionMongoDAO;
 import com.pasapalabra.game.dao.mongodb.UserMongoDAO;
 import com.pasapalabra.game.model.Question;
+import com.pasapalabra.game.model.QuestionType;
 import com.pasapalabra.game.model.User;
 import com.pasapalabra.game.model.UserScore;
 import com.pasapalabra.game.model.DTO.QuestionDTO;
@@ -22,15 +25,16 @@ import com.pasapalabra.game.model.assembler.UserAssembler;
 import com.pasapalabra.game.server.Server;
 import com.pasapalabra.game.service.auth.SessionManager;
 import com.pasapalabra.game.service.auth.Token;
+import com.pasapalabra.game.service.auth.TokenGenerator;
 
 /**
  * Class that implements all the methods available to the server.
  * @author Ivan
  */
 public class PasapalabraService implements IPasapalabraService{
-	
+
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(PasapalabraService.class.getName());
-	
+
 	private static ConcurrentHashMap<String, User> currentUsers = new ConcurrentHashMap<>();
 
 	private static ConcurrentHashMap<String, ArrayList<Question>> currentQuestions = new ConcurrentHashMap<String, ArrayList<Question>>();
@@ -59,14 +63,16 @@ public class PasapalabraService implements IPasapalabraService{
 		else return false;
 	}
 
-	public Token login(String userName, String pass) throws RemoteException, SecurityException
+	public Token login(String userName, String pass) throws RemoteException
 	{
 		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
 		if(uDao.checkIfExists(userName)){
 			User user = uDao.getUserByLogin(userName, pass);
 			//User user = new User(userName, "a@a", pass, null, new Date(), 0, 0, 0);
-			//UserDTO userDTO = UserAssembler.getInstance().assembleToDTO(user);
-			if(SessionManager.userExist(userName)) throw new SecurityException();
+			if(SessionManager.userExist(userName)) {
+				deLogin(new Token(getUserToken(userName)));
+				log.log(Level.INFO, "user "+userName+" exists");
+			}
 			Token token = SessionManager.createSession(userName);
 			currentUsers.put(token.getToken(), user);
 			return token;
@@ -80,6 +86,7 @@ public class PasapalabraService implements IPasapalabraService{
 	}
 
 	public UserDTO play(Token session, String type,IClientService service) throws RemoteException, SecurityException{
+		if(!SessionManager.isValidSession(session)) return null;
 		if(currentQuestions.containsKey(session.getToken())) throw new SecurityException();
 		QuestionDAO qDAO = new QuestionMongoDAO(Server.mongoConnection);
 		ArrayList<Question> questions = new ArrayList<>();
@@ -95,42 +102,37 @@ public class PasapalabraService implements IPasapalabraService{
 		questions.add(new Question("works?", "we hope so", 'ñ', "Unknown")); //for testing purposes*/
 		currentQuestions.put(session.getToken(), questions);
 
-		if(SessionManager.isValidSession(session)){
 
-			if(!waitingClients.containsKey(type)){
-				waitingClients.put(type, new ArrayList<String>());
-				waitingClients.get(type).add(session.getToken());
-				currentClients.put(session.getToken(), service);
-				currentResult.put(session.getToken(), new UserScore());
 
-				return new UserDTO("Wait");//TODO: revise this
-			}
-			//If there is that category, but no players
-			if(waitingClients.get(type).isEmpty()){
-				System.out.println("Waiting clients esta vacio");
-				waitingClients.get(type).add(session.getToken());
-				currentClients.put(session.getToken(), service);
-				currentResult.put(session.getToken(), new UserScore());
-				return new UserDTO("Wait");//TODO: revise this
-			}
-			currentMatches.put(session.getToken(),waitingClients.get(type).get(0));
-			waitingClients.get(type).remove(0);
-			/*for(char alphabet = 'a'; alphabet <= 'z'; alphabet++){
+		if(!waitingClients.containsKey(type)){
+			waitingClients.put(type, new ArrayList<String>());
+			waitingClients.get(type).add(session.getToken());
+			currentClients.put(session.getToken(), service);
+			currentResult.put(session.getToken(), new UserScore());
+
+			return new UserDTO("Wait");//TODO: revise this
+		}
+		//If there is that category, but no players
+		if(waitingClients.get(type).isEmpty()){
+			System.out.println("Waiting clients esta vacio");
+			waitingClients.get(type).add(session.getToken());
+			currentClients.put(session.getToken(), service);
+			currentResult.put(session.getToken(), new UserScore());
+			return new UserDTO("Wait");//TODO: revise this
+		}
+		currentMatches.put(session.getToken(),waitingClients.get(type).get(0));
+		waitingClients.get(type).remove(0);
+		/*for(char alphabet = 'a'; alphabet <= 'z'; alphabet++){
 					questions.add(qDAO.getRandomQuestionByLeter(alphabet));
 				} 
 				questions.add(qDAO.getRandomQuestionByLeter('ñ'));
 				currentQuestions.put(session.getToken(), questions);*/
-			currentResult.put(session.getToken(), new UserScore());
-			currentClients.put(session.getToken(), service);
-			IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
+		currentResult.put(session.getToken(), new UserScore());
+		currentClients.put(session.getToken(), service);
+		IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
 
-			client.getUser(UserAssembler.getInstance().assembleToDTO(currentUsers.get(session.getToken())));
-			return UserAssembler.getInstance().assembleToDTO(currentUsers.get(currentMatches.get(session.getToken())));//We get the first question
-		}
-
-		else{
-			return null;
-		}
+		client.getUser(UserAssembler.getInstance().assembleToDTO(currentUsers.get(session.getToken())));
+		return UserAssembler.getInstance().assembleToDTO(currentUsers.get(currentMatches.get(session.getToken())));//We get the first question
 	}
 
 	public QuestionDTO getQuestion(Token session) throws RemoteException{
@@ -273,6 +275,25 @@ public class PasapalabraService implements IPasapalabraService{
 		return true;
 	}
 
+	private static String getUserToken(String userName){
+		Map<String, User> map = currentUsers;
+		for (Map.Entry<String, User> entry : map.entrySet()) {
+			if(entry.getValue().getUserName().equals(userName)){
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+
+	private static String getRivalToken(String token){
+		Map<String, String> map = currentMatches;
+		for (Map.Entry<String, String> entry : map.entrySet()) {
+			if(entry.getValue().equals(token)){
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
 	@Override
 	public void exitMatchMaking(Token session, String type) throws RemoteException {
 
@@ -294,11 +315,57 @@ public class PasapalabraService implements IPasapalabraService{
 	public boolean deLogin(Token session) throws RemoteException {
 		if(SessionManager.isValidSession(session)){
 			if(currentUsers.containsKey(session.getToken())){ 
-				if(!currentQuestions.containsKey(session.getToken())){
+				if(!currentQuestions.containsKey(session.getToken())){//The player is not playing, no problem
 					currentUsers.remove(session.getToken());
 					SessionManager.removeUser(session);
 					log.log(Level.INFO, "User delog");
 					return true;
+				}
+				else{//The player is playing, we try to exit 
+					if(currentMatches.contains(session.getToken())){//The user is not currently playing
+						String rivalToken = getRivalToken(session.getToken());
+						IClientService client = (IClientService) currentClients.get(rivalToken);
+						currentClients.remove(session.getToken());
+						currentQuestions.remove(session.getToken());
+						currentQuestions.remove(rivalToken);
+						currentResult.remove(session.getToken());
+						currentResult.remove(rivalToken);
+						currentMatches.remove(rivalToken);
+						currentUsers.remove(session.getToken());
+						SessionManager.removeUser(session);
+						client.otherDisconnected();//We notify his rival that he has exited
+						log.log(Level.INFO, "User delog while not playing");
+						return true;
+					}
+					else if(currentMatches.containsKey(session.getToken())){//the user is playing
+						String rivalToken = currentMatches.get(session.getToken());
+						IClientService client= (IClientService) currentClients.get(rivalToken);
+						currentClients.remove(session.getToken());
+						currentQuestions.remove(session.getToken());
+						currentQuestions.remove(rivalToken);
+						currentResult.remove(session.getToken());
+						currentResult.remove(rivalToken);
+						currentMatches.remove(session.getToken());
+						currentUsers.remove(session.getToken());
+						SessionManager.removeUser(session);
+						client.otherDisconnected();//We notify his rival that he has exited
+						log.log(Level.INFO, "User delog while playing");
+						return true;
+
+					}
+					else if(waitingClients.containsKey(session.getToken())){//The player is waiting to play
+						waitingClients.get(QuestionType.All).remove(session.getToken());
+						currentQuestions.remove(session.getToken());
+						currentClients.remove(session.getToken());
+						currentResult.remove(session.getToken());
+						currentUsers.remove(session.getToken());
+						SessionManager.removeUser(session);
+						log.log(Level.INFO, "User delog while waiting");
+						return true;
+					}
+					else{
+						return false;
+					}
 				}
 			}
 		}
@@ -313,11 +380,18 @@ public class PasapalabraService implements IPasapalabraService{
 		Token token2 = null;
 		Token token3 = null;
 		Token token4 = null;
+		ClientService clientservice1 = new ClientService();
+		ClientService clientservice2 = new ClientService();
+		ClientService clientservice3 = new ClientService();
+		ClientService clientservice4 = new ClientService();
 		try {
-			token = service.login("Jugador 1", "Test");
-			//System.out.println("Token1: "+token.getToken());
+			token = service.login("12345678", "12345678");
+			System.out.println("Token1: "+token.getToken());
 
-			token2 = service.login("Jugador 2", "Test2");
+			token2 = service.login("12345678", "12345678");
+
+			UserDTO userDTO = service.play(token, QuestionType.All.toString(), clientservice1);
+			if(userDTO == null)System.out.println("Null");
 			//System.out.println("Token2: "+token2.getToken());
 
 			token3 = service.login("Jugador 3", "Test3");
@@ -329,6 +403,8 @@ public class PasapalabraService implements IPasapalabraService{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
 		//System.out.println(token.getToken());
 		ClientService clientservice1 = new ClientService();
 		ClientService clientservice2 = new ClientService();
@@ -348,10 +424,10 @@ public class PasapalabraService implements IPasapalabraService{
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			/*test = service.play(token, QuestionType.All.toString(),clientservice1);
+
+			test = service.play(token, QuestionType.All.toString(),clientservice1);
 			System.out.println("Respuesta del servidor: "+test.getUserName());
 			try {
 				Thread.sleep(1000);
