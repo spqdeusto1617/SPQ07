@@ -1,5 +1,251 @@
 package com.pasapalabra.game.service;
 
-public class ServiceGameTest {
+import static org.junit.Assert.assertEquals;
 
+import java.lang.Thread.UncaughtExceptionHandler;
+import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.util.Date;
+
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+
+import com.pasapalabra.game.model.QuestionType;
+import com.pasapalabra.game.model.DTO.QuestionDTO;
+import com.pasapalabra.game.model.DTO.UserDTO;
+import com.pasapalabra.game.model.DTO.UserScoreDTO;
+import com.pasapalabra.game.server.Server;
+import com.pasapalabra.game.service.auth.Token;
+import com.pasapalabra.game.service.auth.TokenGenerator;
+
+public class ServiceGameTest {
+	
+	private static final String HOST = "127.0.0.1";
+	private static final String PORT = "1099";
+	private static final String SERVICE = "Pasapalabra";
+	
+	private static Thread serverThread;
+	
+	
+	private static IPasapalabraService ppService;
+	
+	private static boolean registrationSucceded = false;
+	private static boolean deLoginSucceded = false;
+	private static UserDTO user1 = new UserDTO(
+			TokenGenerator.nextUniqueID().getToken(),
+			TokenGenerator.nextUniqueID().getToken()+"@aa.com",
+			null,
+			new Date(),
+			0,
+			0
+			);
+	private static UserDTO user2 = new UserDTO(
+			TokenGenerator.nextUniqueID().getToken(),
+			TokenGenerator.nextUniqueID().getToken()+"@aa.com",
+			null,
+			new Date(),
+			0,
+			0
+			);
+	private static String user1Password = TokenGenerator.nextUniqueID().getToken();
+	private static String user2Password = TokenGenerator.nextUniqueID().getToken();
+	private static Token user1Token = null;
+	private static Token user2Token = null;
+	private static IClientService service1 = new ClientService();
+	private static IClientService service2 = new ClientService();
+	private static UserScoreDTO userScore = null;
+	
+	@BeforeClass
+	public static void startServer(){
+		//File projectBase = new File(TestLauncher.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getParentFile().getParentFile().getParentFile().getParentFile();
+		
+		
+		serverThread = new Thread(new Runnable() {			
+			@Override
+			public void run() {
+				//System.setProperty("java.rmi.server.codebase",  "file:" + projectBase.getAbsolutePath() + "/");
+				System.setProperty("java.security.policy", "security/java.policy");
+				try {
+					java.rmi.registry.LocateRegistry.createRegistry(1099);
+					System.out.println("RMI registry ready.");
+				} catch (Exception e) {
+					System.out.println("Exception starting RMI registry:");
+					e.printStackTrace();
+				}
+				Server.main(new String[]{HOST, PORT, SERVICE});
+			}
+		});	
+		
+		serverThread.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+			
+			@Override
+			public void uncaughtException(Thread t, Throwable e) {
+				
+			}
+		});
+		
+		serverThread.start();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+		}
+		
+		try {
+			String URL = "//" + HOST + ":" + PORT + "/" + SERVICE;
+			ppService = (IPasapalabraService) Naming.lookup(URL);
+		} catch (Exception e) {
+			throw new RuntimeException("Error connecting to the server", e);
+		}
+		
+		try {
+			registrationSucceded = ppService.registry(user1,user1Password);
+			assertEquals(true, registrationSucceded);
+			registrationSucceded = ppService.registry(user2,user2Password);
+			assertEquals(true, registrationSucceded);
+		} catch (RemoteException e) {
+			throw new RuntimeException("Registration failed", e);
+		}
+		
+	}
+	
+	@Before
+	@Required(max = 120, average = 30)
+	public void login() {
+		try {
+			user1Token = ppService.login(user1.getUserName(), user1Password);
+			user2Token = ppService.login(user2.getUserName(), user2Password);
+		} catch (RemoteException e) {
+			throw new RuntimeException("Login failed", e);
+		}
+	}
+	
+	@Test
+	@Required(max = 100, average = 20)
+	public void exitMatchMaking(){
+		UserDTO result = null;
+		try{
+			result = ppService.play(user1Token, QuestionType.All.toString(), service1);
+		}catch (RemoteException e) {
+			throw new RuntimeException("Regisrty failed", e);
+		}catch (IllegalArgumentException e) {
+			// TODO: handle exception
+			throw new RuntimeException("Regisrty failed", e);
+		}
+		assertEquals("Wait", result.getUserName());
+		try{
+			ppService.exitMatchMaking(user1Token, QuestionType.All.toString());
+		}catch (RemoteException e) {
+			throw new RuntimeException("Login failed", e);
+		}
+	}
+	
+	@Test
+	@PerfTest(duration = 2000)
+	@Required(throughput = 2)
+	public void Play(){
+		UserDTO result1 = null;
+		UserDTO result2 = null;
+		QuestionDTO question = null;
+		boolean result = false;
+		try{
+			result1 = ppService.play(user1Token, QuestionType.All.toString(), service1);
+		}catch (RemoteException e) {
+			throw new RuntimeException("Regisrty failed", e);
+		}catch (IllegalArgumentException e) {
+			// TODO: handle exception
+			throw new RuntimeException("Regisrty failed", e);
+		}
+		assertEquals("Wait", result1.getUserName());
+		try{
+			result2 = ppService.play(user2Token, QuestionType.All.toString(), service2);
+			assertEquals(user1.getUserName(), result2.getUserName());
+		}catch (RemoteException e) {
+			throw new RuntimeException("Playing failed", e);
+		}
+		
+		try{
+			question = ppService.getQuestion(user2Token);
+			assertEquals("Test", question.getQuestion());
+			assertEquals('a', question.getLeter());
+			assertEquals("Unknown", question.getCreator());
+		}catch (RemoteException e) {
+			throw new RuntimeException("Playing failed", e);
+		}
+		
+		try{
+			result = ppService.answerQuestion(user2Token, "Pasapalabra");
+			assertEquals(true, result);
+			result = ppService.answerQuestion(user1Token, "Answer");
+			assertEquals(false, result);
+		}catch (RemoteException e) {
+			throw new RuntimeException("Playing failed", e);
+		}
+		try{
+			for(char alphabet = 'a'; alphabet <= 'z'; alphabet++ ){
+				question = ppService.getQuestion(user2Token);
+				result = ppService.answerQuestion(user2Token, Character.toString(alphabet));
+			}
+		}catch (RemoteException e) {
+			throw new RuntimeException("Playing failed", e);
+		}
+		try{
+			question = ppService.getQuestion(user2Token);
+			assertEquals('a', question.getLeter());
+			result = ppService.answerQuestion(user2Token, "Answer");
+			assertEquals(true, result);
+		}catch (RemoteException e) {
+			throw new RuntimeException("Playing failed", e);
+		}
+		
+		try{
+			userScore = ppService.getResults(user2Token);
+			assertEquals(1, userScore.getRightAnswered());
+		}catch (RemoteException e) {
+			throw new RuntimeException("Playing failed", e);
+		}
+		try{
+			result = ppService.answerQuestion(user1Token, "Answer");
+			assertEquals(true, result);
+		}catch (RemoteException e) {
+			throw new RuntimeException("Playing failed", e);
+		}
+		try{
+			for(char alphabet = 'a'; alphabet <= 'z'; alphabet++ ){
+				question = ppService.getQuestion(user1Token);
+				result = ppService.answerQuestion(user1Token, "Answer");
+			}
+		}catch (RemoteException e) {
+			throw new RuntimeException("Playing failed", e);
+		}
+		try{
+			userScore = ppService.getResults(user1Token);
+			assertEquals(true, userScore.isVictory());
+		}catch (RemoteException e) {
+			throw new RuntimeException("Playing failed", e);
+		}
+	}
+	
+	@After
+	public void deLogin(){
+		try{
+			deLoginSucceded = ppService.deLogin(user1Token);
+			deLoginSucceded = ppService.deLogin(user2Token);
+		}catch(Exception e) {
+			throw new RuntimeException("Data retrieving failed", e);
+		}
+	}
+	
+	@AfterClass
+	public static void stopServer(){
+		try{serverThread.interrupt();}catch(Exception e){}
+	}
+	
+	
 }

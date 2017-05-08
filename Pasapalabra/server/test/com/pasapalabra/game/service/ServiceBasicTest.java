@@ -9,12 +9,17 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.Date;
 
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
-import com.pasapalabra.game.main.TestLauncher;
+//import com.pasapalabra.game.main.TestLauncher;
 import com.pasapalabra.game.model.DTO.UserDTO;
 import com.pasapalabra.game.server.Server;
 import com.pasapalabra.game.service.auth.Token;
@@ -31,6 +36,7 @@ public class ServiceBasicTest {
 	private static IPasapalabraService ppService;
 	
 	private static boolean registrationSucceded = false;
+	private static boolean deloginSucceded = false;
 	private static UserDTO userToTest = new UserDTO(
 			TokenGenerator.nextUniqueID().getToken(),
 			TokenGenerator.nextUniqueID().getToken()+"@aa.com",
@@ -43,16 +49,15 @@ public class ServiceBasicTest {
 	private static Token userToken = null;
 	
 	
-	
 	@BeforeClass
 	public static void startServer(){
-		File projectBase = new File(TestLauncher.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getParentFile().getParentFile().getParentFile().getParentFile();
+		//File projectBase = new File(TestLauncher.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getParentFile().getParentFile().getParentFile().getParentFile();
 		
 		
 		serverThread = new Thread(new Runnable() {			
 			@Override
 			public void run() {
-				System.setProperty("java.rmi.server.codebase",  "file:" + projectBase.getAbsolutePath() + "/");
+				//System.setProperty("java.rmi.server.codebase",  "file:" + projectBase.getAbsolutePath() + "/");
 				System.setProperty("java.security.policy", "security/java.policy");
 				try {
 					java.rmi.registry.LocateRegistry.createRegistry(1099);
@@ -112,6 +117,7 @@ public class ServiceBasicTest {
 	
 	
 	@Test
+	@Required(max = 100)
 	public void loginTest() {
 		Token fakeUser = null;
 		try {
@@ -125,6 +131,8 @@ public class ServiceBasicTest {
 	}
 	
 	@Test
+	@PerfTest(invocations = 200)
+	@Required(max = 2000, average = 350)
 	public void getData() {
 		UserDTO userData = null;
 		
@@ -143,6 +151,16 @@ public class ServiceBasicTest {
 				&& userData.getGamesWon() == userToTest.getGamesWon()
 				&& userData.getGamesLost() == userToTest.getGamesLost();
 		assertEquals(true, isEqual);
+	}
+	
+	@After
+	public void deLogin(){
+		try{
+			deloginSucceded = ppService.deLogin(userToken);
+		}catch(Exception e) {
+			throw new RuntimeException("Data retrieving failed", e);
+		}
+		assertEquals(true, deloginSucceded);
 	}
 	
 	

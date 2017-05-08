@@ -38,6 +38,14 @@ public class UserScoreDTO implements Serializable{
 		this.wrongAnswered = wrongAnswered;
 	}
 
+	public boolean isVictory() {
+		return victory;
+	}
+
+	public void setVictory(boolean victory) {
+		this.victory = victory;
+	}
+
 	public UserScoreDTO(int rightAnswered, int wrongAnswered,boolean victory) {
 		super();
 		this.rightAnswered = rightAnswered;
@@ -52,7 +60,7 @@ public class UserScoreDTO implements Serializable{
 	public void lost(){
 		this.victory = false;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "UserScoreDTO [rightAnswered=" + rightAnswered + ", wrongAnswered=" + wrongAnswered + ", victory="
