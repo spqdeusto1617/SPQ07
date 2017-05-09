@@ -2,7 +2,6 @@
 package com.pasapalabra.game.controllers;
 
 import java.awt.Desktop;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -50,9 +49,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.FileChooser.ExtensionFilter;
 
 /**Class that manages events from Registro.fxml
  * @author asier.gutierrez
