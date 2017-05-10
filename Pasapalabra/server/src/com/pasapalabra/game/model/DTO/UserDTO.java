@@ -26,7 +26,7 @@ public class UserDTO implements Serializable{
 
 	private String mail;
 
-	private BufferedImage profileImage;
+	private String profileImage;
 
 	private Date DOB;
 
@@ -60,11 +60,11 @@ public class UserDTO implements Serializable{
 		this.mail = mail;
 	}
 
-	public BufferedImage getProfileImage() {
+	public String getProfileImage() {
 		return profileImage;
 	}
 
-	public void setProfileImage(BufferedImage profileImage) {
+	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
 	}
 
@@ -106,7 +106,7 @@ public class UserDTO implements Serializable{
 				+ ", GamesWon=" + gamesWon + ", GamesLost=" + gamesLost + "]";
 	}
 
-	public UserDTO(String userName, String mail, BufferedImage profileImage, Date dOB,int gamesWon, int gamesLost) {
+	public UserDTO(String userName, String mail, String profileImage, Date dOB,int gamesWon, int gamesLost) {
 		super();
 		this.userName = userName;
 		this.mail = mail;

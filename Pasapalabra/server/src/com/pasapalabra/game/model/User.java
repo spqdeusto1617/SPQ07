@@ -1,6 +1,5 @@
 package com.pasapalabra.game.model;
 
-import java.awt.image.BufferedImage;
 import java.util.Date;
 
 import org.bson.types.ObjectId;
@@ -10,8 +9,6 @@ import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Index;
 import org.mongodb.morphia.annotations.IndexOptions;
 import org.mongodb.morphia.annotations.Indexes;
-
-import com.pasapalabra.game.model.DTO.UserDTO;
 
 /**
  * Class for managing the user´s information
@@ -41,7 +38,7 @@ public class User{
 
 	private String pass;
 
-	private BufferedImage profileImage;
+	private String profileImage;
 
 	private Date DOB;
 
@@ -52,7 +49,7 @@ public class User{
 
 	private User(){super();}
 
-	public User(String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
+	public User(String userName, String mail, String pass, String profileImage, Date dOB, int gamesWon,
 			int gamesLost, int gamesPerticipated) {
 		super();
 		this.userName = userName;
@@ -65,7 +62,7 @@ public class User{
 
 	}
 
-	public User(ObjectId oid, String userName, String mail, String pass, BufferedImage profileImage, Date dOB, int gamesWon,
+	public User(ObjectId oid, String userName, String mail, String pass, String profileImage, Date dOB, int gamesWon,
 			int gamesLost) {
 		super();
 		this.id = oid;
@@ -117,13 +114,13 @@ public class User{
 
 
 
-	public BufferedImage getProfileImage() {
+	public String getProfileImage() {
 		return profileImage;
 	}
 
 
 
-	public void setProfileImage(BufferedImage profileImage) {
+	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
 	}
 
