@@ -1,12 +1,13 @@
 package com.pasapalabra.game.service;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 import com.pasapalabra.game.model.DTO.UserDTO;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
 
-public class ClientService extends UnicastRemoteObject implements IClientService{
+public class ClientService extends UnicastRemoteObject implements IClientService, Serializable{
 	/**
 	 * 
 	 */
@@ -31,19 +32,19 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	}
 	//TODO: implement this
 	@Override
-	public UserScoreDTO finalResult(UserScoreDTO score) throws RemoteException {
+	public void finalResult(UserScoreDTO score) throws RemoteException {
 		System.err.println("La puntuación final del otro usuario es: "+score);
 		ServiceLocator.playing = false;//TODO: transicion de vuelta
 		ServiceLocator.turn = false;
 		ServiceLocator.player1 = false;
-		return score;
+		
 	}
 	//TODO: implement this (change to observer mode)
 	@Override
-	public UserScoreDTO changeTurn(UserScoreDTO score) throws RemoteException {
+	public void changeTurn(UserScoreDTO score) throws RemoteException {
 		System.err.println("La puntuación de su rival es: "+score+" y ahora le toca jugar a usted");
 		 ServiceLocator.turn = true;
-		 return score;
+		
 		 //TODO: play now
 		
 	}

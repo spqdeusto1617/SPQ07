@@ -30,18 +30,16 @@ public interface IClientService extends Remote{
 	/**
 	 * Method to get the final result of the other player
 	 * @param score: the score of the other player
-	 * @return the score of the rival
 	 * @throws RemoteException: if some error occurred during the process
 	 */
-	public UserScoreDTO finalResult(UserScoreDTO score) throws RemoteException;
+	public void finalResult(UserScoreDTO score) throws RemoteException;
 	
 	/**
 	 * Method to indicate to the client that is his turn
 	 * @param score: the score of the other player
-	 * @return the score of the rival
 	 * @throws RemoteException: if some error occurred during the process
 	 */
-	public UserScoreDTO changeTurn(UserScoreDTO score) throws RemoteException;
+	public void changeTurn(UserScoreDTO score) throws RemoteException;
 	
 	/**
 	 * Method to indicate the  user that his rival has disconnected 
