@@ -49,14 +49,18 @@
             <FlowPane layoutX="90.0" layoutY="50.0" prefHeight="370.0" prefWidth="420.0">
                <children>
                   <BorderPane prefHeight="50.0" prefWidth="420.0">
-                     <left>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Victories" BorderPane.alignment="CENTER" />
-                     </left>
-                     <right>
-                        <Text fx:id="txtVictorias" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
-                     </right>
                      <center>
-                        <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
+                        <BorderPane prefHeight="50.0" prefWidth="420.0" BorderPane.alignment="CENTER">
+                           <left>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Victories" BorderPane.alignment="CENTER" />
+                           </left>
+                           <right>
+                              <Text fx:id="txtVictorias" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                           <center>
+                              <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
                      </center>
                   </BorderPane>
                   <BorderPane prefHeight="50.0" prefWidth="420.0">
@@ -72,17 +76,6 @@
                   </BorderPane>
                   <BorderPane prefHeight="50.0" prefWidth="420.0">
                      <left>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Draws" BorderPane.alignment="CENTER" />
-                     </left>
-                     <right>
-                        <Text fx:id="txtEmpates" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
-                     </right>
-                     <center>
-                        <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
-                  <BorderPane prefHeight="50.0" prefWidth="420.0">
-                     <left>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Games played" wrappingWidth="52.78466796875" BorderPane.alignment="CENTER" />
                      </left>
                      <center>
@@ -91,22 +84,18 @@
                      <right>
                         <Text fx:id="txtPartidasJugadas" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
                      </right></BorderPane>
-                  <BorderPane prefHeight="50.0" prefWidth="420.0">
-                     <bottom>
-                        <Text fx:id="txtRatio" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
-                     </bottom>
-                     <center>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Victories/Defeats proportion" BorderPane.alignment="CENTER" />
-                     </center>
-                  </BorderPane>
                   <Region prefHeight="100.0" prefWidth="420.0" />
                   <BorderPane prefHeight="70.0" prefWidth="420.0">
                      <top>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ranking position" BorderPane.alignment="CENTER" />
+                        <BorderPane prefHeight="50.0" prefWidth="420.0" BorderPane.alignment="CENTER">
+                           <bottom>
+                              <Text fx:id="txtRatio" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                           </bottom>
+                           <center>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Victories/Defeats proportion" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
                      </top>
-                     <center>
-                        <Text fx:id="txtPosicion" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
-                     </center>
                   </BorderPane>
                </children>
             </FlowPane>
@@ -115,6 +104,7 @@
                   <Font name="System Bold" size="17.0" />
                </font>
             </Text>
+            <Text fx:id="userNametxt" fill="#111010" layoutX="183.0" layoutY="47.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
          </children>
       </Pane>
       <ImageView fx:id="imagenAvatar1" fitHeight="73.0" fitWidth="128.0" layoutX="32.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />

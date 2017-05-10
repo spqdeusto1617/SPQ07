@@ -112,6 +112,7 @@ public class PasapalabraService implements IPasapalabraService{
 
 			return new UserDTO("Wait");//TODO: revise this
 		}
+		
 		//If there is that category, but no players
 		if(waitingClients.get(type).isEmpty()){
 			System.out.println("Waiting clients esta vacio");

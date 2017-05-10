@@ -42,31 +42,25 @@ import javafx.stage.Stage;
  */
 public class ThemeController extends ExtenderClassController implements Initializable{
 
-
 	//Logger de la clase
 
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ThemeController.class.getName());
 
-
-	//*COMIENZO DE DECLARACIÓN DE ATRIBUTOS*
-	//_________________________________________
+	//*START OF THE DECLARATION*
 	public static final int PUNTOSTOTALES = 27;
 	public Image imagenDelRival;
 	public int vecesHechoX = 0;
 	public int vecesHechoY = 0;
+	public QuestionType type; 
 	public static boolean juegoEnCurso = false;
 	public boolean ventanaMenuDentro = false;
 	public ArrayList<ImageView> panelLetrasJugador = new ArrayList<>(); //Panel con todos los labels del jugador
 	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
 	public ArrayList<Node> menuDesplegable; //Colección de todos los elementos del menu desplegable.
-	//public ArrayList<GameButton> aLBotonesJuego;
-	
-	public ArrayList<Button> aLBotones; 
-
+	public ArrayList<Button> aLBotones = new ArrayList<Button>(); 
 
 	//Declaration of the panel
 	@FXML public Pane panel;
-
 
 	@FXML public Text textoESPanel;
 
@@ -81,73 +75,15 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML public Rectangle rectanguloPanel;
 
 	@FXML public Circle circuloPlus;
-
-	//@FXML public Rectangle rectanguloCerrarSesion;
-
-	//@FXML public Rectangle rectanguloAmigos;
-
-	//@FXML public Text textoJugar;
-
+	
 	@FXML public Text textoLogeadoComo;
-
-	//@FXML public Rectangle rectanguloMiPerfil;
-
-	//@FXML public Rectangle rectanguloJugar;
-
-	//@FXML public Text textoAmigos;
 
 	@FXML public Circle circuloPanel;
 
 	@FXML public Text textoNombreDeUsuario;
 
-	//@FXML public Text textoEstadisticas;
-
 	@FXML public ImageView imagenAvatar;
 
-	//@FXML public Rectangle rectanguloEstadisticas;
-
-
-
-
-	//Elementos que desaparecen a la derecha
-	//Texto
-	@FXML public Text selecMJ;
-	@FXML public Text selecTP;
-
-	/*
-	//Seleccionables
-	@FXML public Rectangle vsAleatorio;
-	@FXML public Rectangle vsAmigo;
-	@FXML public Rectangle rTodos;
-	@FXML public Rectangle rGeo;
-	@FXML public Rectangle rArte;
-	@FXML public Rectangle rHist;
-	@FXML public Rectangle rCien;
-	@FXML public Rectangle rEntret;
-	@FXML public Rectangle rDep;
-	@FXML public Rectangle rJug;
-	 
-	 
-	//Textos de los seleccionables
-	@FXML public Text tVSAleatorio;
-	@FXML public Text tVSAmigo;
-	@FXML public Text tTodos;
-	@FXML public Text tGeo;
-	@FXML public Text tArte;
-	@FXML public Text tHist;
-	@FXML public Text tCien;
-	@FXML public Text tEntret;
-	@FXML public Text tDep;
-	@FXML public Text textoRJug;
-	
-
-	//Rectangulos de estilo
-	@FXML public Rectangle tdpSeleccionado;
-	@FXML public Rectangle tdpNSeleccionado;
-	@FXML public Rectangle mdjSeleccionado;
-	@FXML public Rectangle mdjNSeleccionado;
-	*/
-	
 	//Botones
 	@FXML public Button btnJugar;
 	@FXML public Button btnCerrarSesion;
@@ -165,32 +101,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML public Button btnDeportes;
 	@FXML public Button btnTodos;
 
-
-	//Elementos de la gui de juego no inicializados [Salvo algunos para copiar el StyleSheet ya que en javafx no se pueden clonar los nodos].
-	/*public TextField tfRespuesta;
-	@FXML public Rectangle rContestar;
-	@FXML public Rectangle rPreguntas;
-	@FXML public TextArea taPreguntas;
-	@FXML public Rectangle rPasar;
-	@FXML public Text textoContestar;
-	@FXML public Text textoPasar;
-	@FXML public ImageView imgUsuario;
-	@FXML public ImageView imgRival;
-	@FXML public Text textoTiempoUsuario;
-	@FXML public Text textoTiempoRival;
-
-	@FXML public Text textoPuntuacionU;
-	@FXML public Text textoPuntuacionR;
-
-	@FXML public Rectangle rRendirse;
-	@FXML public Text textoRendirse;
-
-	@FXML public Text textoUsernameUser;
-	@FXML public Text textoUsernameRival;
-	*/
-
-	//_________________________________________
-	//*FIN DE DECLARACIÓN DE ATRIBUTOS
+	//*END OF THE DECLARATION
 
 
 	/**Method to play the game
@@ -249,6 +160,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		}
 	}
 
+	
 	@FXML
 	void btnAmigos(MouseEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -294,7 +206,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
-			
+		
 //		if(juegoEnCurso){
 //			//Alerta
 //			Alert alert2 = new Alert(AlertType.INFORMATION);
@@ -317,33 +229,24 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 */
 	@FXML
 	void btnEstadisticas(MouseEvent event) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-
-		alert.setTitle("Function not yet implemented.");
 		
-		alert.setHeaderText("Do not use this function");
-		 
-		alert.setContentText("This Function is not implemented, please, do not use it");
-
-		alert.showAndWait();
 		
-//		if(juegoEnCurso){
-//			//Alerta
-//			Alert alert2 = new Alert(AlertType.INFORMATION);
-//			alert2.setTitle("Juego en curso");
-//			alert2.setHeaderText(null);
-//			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
-//					+ " Termina la partida para poder avanzar a esa ventana");
-//			alert2.initModality(Modality.APPLICATION_MODAL);
-//			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-//			alert2.showAndWait();
-//			log.log(Level.FINE, "El juego está en curso.");
-//		}else{
-//			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
-//			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
-//		}
+		if(com.pasapalabra.game.service.ServiceLocator.playing){
+			//Alerta
+			Alert alert2 = new Alert(AlertType.INFORMATION);
+			alert2.setTitle("Juego en curso");
+			alert2.setHeaderText(null);
+			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
+					+ " Termina la partida para poder avanzar a esa ventana");
+			alert2.initModality(Modality.APPLICATION_MODAL);
+			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert2.showAndWait();
+			log.log(Level.FINE, "El juego está en curso.");
+		}else{
+			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
+		}
 	}
-
 
 	//Elimina nivel de transparencia
 	@FXML
@@ -365,10 +268,46 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		log.log(Level.FINEST, "Cierre de sesión");
 		com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	}
-
+	
+	//TODO
+	@FXML 
+	void btnAll(MouseEvent event){
+		QuestionType type = QuestionType.All; 
+	}
+	
+	@FXML 
+	void btnSports(MouseEvent event){
+		QuestionType type = QuestionType.Sport; 
+	}
+	
+	
+	/**Method that check if question type button and VS random button is clicked. 
+	 *  @return false if both buttons are not pressed
+	 *  @return true if both buttons are pressed
+	 */
+	boolean bothClicked(){
+		if (btnAleatorio.isPressed() || btnAmigo.isPressed()){
+			//for(Button aLBotones: boton){
+			//if(boton.isPressed(){
+			//return true;
+			if(btnCiencia.isPressed() || btnDeportes.isPressed() 
+				|| btnArte.isPressed() || btnEntretenimiento.isPressed()
+				|| btnGeo.isPressed() || btnHistoria.isPressed() 
+				|| btnTodos.isPressed()){
+				return true; 
+			}else{
+				return false; 
+			}
+		}else{
+			return false; 
+		}
+	}
+	
+	//boolean true al hacer click en los botones y si los dos son true hace latransición a game sino no. 
+	//Deportes... hacen lo mismo que el all
 	@FXML
 	void aJugar(MouseEvent event){
-		if(!preguntasBienSeleccionadas())return;
+		if(!bothClicked())return;
 		if(juegoEnCurso) return;
 		/*Inhabilitamos rápidamente que el botón de jugar vuelva a poder ser pulsado.
 		 *(Es posible que después de varias comprobaciones necesitemos volverlo a poner a falso)
@@ -377,19 +316,30 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		//Servidor
 		//aLEleccion es el arrayList de la elección (Modalidad + Tema) y todos los elementos
 		//String[]Tipo=new String[2];
-		QuestionType type= QuestionType.All; 
-		for (QuestionSelectedObject obsp : aLEleccion) {
-			if (obsp.isElegido()) {
-				if(obsp.isModoDeJuego_notTipoPregunta()){
-					//ESTE ES EL MODO DE JUEGO ELEGIDO
-					//tipo[1]
-					type=obsp.getTexto().getText();
-
-				}else{
-					//ESTE ES EL TEMA DE JUEGO ELEGIDO
-					//tipo[2]
-					type=obsp.getTexto().getText();
+		QuestionType type = null; 
+//		for (QuestionSelectedObject obsp : aLEleccion) {
+//			if (obsp.isElegido()) {
+//				if(obsp.isModoDeJuego_notTipoPregunta()){
+//					//ESTE ES EL MODO DE JUEGO ELEGIDO
+//					//tipo[1]
+//					type=obsp.getTexto().getText();
+//
+//				}else{
+//					//ESTE ES EL TEMA DE JUEGO ELEGIDO
+//					//tipo[2]
+//					type=obsp.getTexto().getText();
+//				}
+//			}
+//		}
+		for(Button botonTema: aLBotones){
+			if(botonTema.isPressed()){
+				//FALTARIA RECORRER LOS QUESTION TYPES, NO TENGO NI IDEA
+				if(botonTema.getText().equals(type.toString())){
+					//type.toString().equals(botonTema.getText());
+					log.log(Level.INFO, "Button selected");
 				}
+			}else{
+				log.log(Level.WARNING, "Error, there is not any theme selected. Please, select one");
 			}
 		}
 
@@ -401,7 +351,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		try {
 			//TODO: cambiar
 			//com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.service.ServiceLocator.play(type); 
-			com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.service.ServiceLocator.getQuestion(); 
+			// ANTES utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Jugar.toString(), Tipo);
+			com.pasapalabra.game.service.ServiceLocator.startConnection(String[] args);
+			//com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.service.ServiceLocator.getQuestion(); 
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
@@ -795,47 +747,47 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		
 		@FXML
 		void eleccionHecha(MouseEvent event){
-			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
-				if(event.getSource().equals(objetoSeleccionPregunta.getRectangulo()) 
-						|| event.getSource().equals(objetoSeleccionPregunta.getTexto()) 
-						|| event.getSource().equals(objetoSeleccionPregunta.getTituloSeccion())){
-					if(objetoSeleccionPregunta.isElegido()){
-						//No se hace nada porque ya está elegido.
-					}else{
-						if(objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
-							for (QuestionSelectedObject objetoSeleccionPregunta1 : aLEleccion) {
-								if(objetoSeleccionPregunta1.isModoDeJuego_notTipoPregunta()){
-									if(objetoSeleccionPregunta == objetoSeleccionPregunta1){
-										objetoSeleccionPregunta1.setElegido(true);
-										objetoSeleccionPregunta1.getRectangulo().setFill(mdjSeleccionado.getFill());
-										objetoSeleccionPregunta1.getRectangulo().setStroke(mdjSeleccionado.getStroke());
-									}else{
-										objetoSeleccionPregunta1.setElegido(false);
-										objetoSeleccionPregunta1.getRectangulo().setFill(mdjNSeleccionado.getFill());
-										objetoSeleccionPregunta1.getRectangulo().setStroke(mdjNSeleccionado.getStroke());
-									}
-								}
-							}
-						}else if (!objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
-							for (QuestionSelectedObject objetoSeleccionPregunta2 : aLEleccion) {
-								if(!objetoSeleccionPregunta2.isModoDeJuego_notTipoPregunta()){
-									if(objetoSeleccionPregunta == objetoSeleccionPregunta2){
-										objetoSeleccionPregunta2.setElegido(true);
-										objetoSeleccionPregunta2.getRectangulo().setFill(tdpSeleccionado.getFill());
-										objetoSeleccionPregunta2.getRectangulo().setStroke(tdpSeleccionado.getStroke());
-									}else if(!objetoSeleccionPregunta2.isSeccion_notSeleccionable()){
-										objetoSeleccionPregunta2.setElegido(false);
-										objetoSeleccionPregunta2.getRectangulo().setFill(tdpNSeleccionado.getFill());
-										objetoSeleccionPregunta2.getRectangulo().setStroke(tdpNSeleccionado.getStroke());
-									}
-								}
-							}
-						}
-					}
-
-				}
-			}
-
+//			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
+//				if(event.getSource().equals(objetoSeleccionPregunta.getRectangulo()) 
+//						|| event.getSource().equals(objetoSeleccionPregunta.getTexto()) 
+//						|| event.getSource().equals(objetoSeleccionPregunta.getTituloSeccion())){
+//					if(objetoSeleccionPregunta.isElegido()){
+//						//No se hace nada porque ya está elegido.
+//					}else{
+//						if(objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
+//							for (QuestionSelectedObject objetoSeleccionPregunta1 : aLEleccion) {
+//								if(objetoSeleccionPregunta1.isModoDeJuego_notTipoPregunta()){
+//									if(objetoSeleccionPregunta == objetoSeleccionPregunta1){
+//										objetoSeleccionPregunta1.setElegido(true);
+//										objetoSeleccionPregunta1.getRectangulo().setFill(mdjSeleccionado.getFill());
+//										objetoSeleccionPregunta1.getRectangulo().setStroke(mdjSeleccionado.getStroke());
+//									}else{
+//										objetoSeleccionPregunta1.setElegido(false);
+//										objetoSeleccionPregunta1.getRectangulo().setFill(mdjNSeleccionado.getFill());
+//										objetoSeleccionPregunta1.getRectangulo().setStroke(mdjNSeleccionado.getStroke());
+//									}
+//								}
+//							}
+//						}else if (!objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
+//							for (QuestionSelectedObject objetoSeleccionPregunta2 : aLEleccion) {
+//								if(!objetoSeleccionPregunta2.isModoDeJuego_notTipoPregunta()){
+//									if(objetoSeleccionPregunta == objetoSeleccionPregunta2){
+//										objetoSeleccionPregunta2.setElegido(true);
+//										objetoSeleccionPregunta2.getRectangulo().setFill(tdpSeleccionado.getFill());
+//										objetoSeleccionPregunta2.getRectangulo().setStroke(tdpSeleccionado.getStroke());
+//									}else if(!objetoSeleccionPregunta2.isSeccion_notSeleccionable()){
+//										objetoSeleccionPregunta2.setElegido(false);
+//										objetoSeleccionPregunta2.getRectangulo().setFill(tdpNSeleccionado.getFill());
+//										objetoSeleccionPregunta2.getRectangulo().setStroke(tdpNSeleccionado.getStroke());
+//									}
+//								}
+//							}
+//						}
+//					}
+//
+//				}
+//			}
+//
 		}
 		
 		//Servidor - Así se han seteado los textos del tiempo y la puntuación.
@@ -1199,30 +1151,29 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		}
 		*/
 
-		public void eliminarOpcionesPartida(boolean eliminar_notAnyadir){
-			panel.getChildren().remove(btnJugar);
-			if(eliminar_notAnyadir){
-				for (QuestionSelectedObject osp : aLEleccion) {
-					if(osp.isSeccion_notSeleccionable()){
-						panel.getChildren().remove(osp.getTituloSeccion());
-					}else{
-						//panel.getChildren().remove(osp.getRectangulo());
-						//panel.getChildren().remove(osp.getTexto());
-						//panel.getChildren().remove(Button); 
-					}
-				}
-			}else{
-				for (QuestionSelectedObject osp : aLEleccion) {
-					if(osp.isSeccion_notSeleccionable()){
-						panel.getChildren().add(osp.getTituloSeccion());
-					}else{
-						panel.getChildren().add(osp.getRectangulo());
-						panel.getChildren().add(osp.getTexto());
-					}
-				}
-			}
-
-		}
+//		public void eliminarOpcionesPartida(boolean eliminar_notAnyadir){
+//			panel.getChildren().remove(btnJugar);
+//			if(eliminar_notAnyadir){
+//				for (QuestionSelectedObject osp : aLEleccion) {
+//					if(osp.isSeccion_notSeleccionable()){
+//						panel.getChildren().remove(osp.getTituloSeccion());
+//					}else{
+//						//panel.getChildren().remove(osp.getRectangulo());
+//						//panel.getChildren().remove(osp.getTexto());
+//						//panel.getChildren().remove(Button); 
+//					}
+//				}
+//			}else{
+//				for (QuestionSelectedObject osp : aLEleccion) {
+//					if(osp.isSeccion_notSeleccionable()){
+//						panel.getChildren().add(osp.getTituloSeccion());
+//					}else{
+//						panel.getChildren().add(osp.getRectangulo());
+//						panel.getChildren().add(osp.getTexto());
+//					}
+//				}
+//			}
+//	}
 
 		/**Method to create the rosco of the game with all the letters. 
 		 * @param amigo_notEnemigo
@@ -1454,49 +1405,51 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		}
 
 		*/
-		/**Method that check that the theme is well selected
-		 * @return true if yes
-		 * @return false if the theme is not well selected
-		 */
-		boolean preguntasBienSeleccionadas(){
-			/*
-			int count = 0;
-			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
-				if(objetoSeleccionPregunta.isElegido()) count++;
-				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
-					if(objetoSeleccionPregunta.getTexto().getText().equals("VS Amigo")){
-						if(objetoSeleccionPregunta.isElegido()){
-							//Dialogo VS Amigo no disponible en versión 1.0;
-							return false;
-						}
-					}
-				}
-			}
-			if(count == 2) return true; 
-			else{
-				//Dialogo elige modo y el tema
-				return false;
-			}
-			*/
-			int count = 0;
-			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
-				if(objetoSeleccionPregunta.isElegido()) count++;
-				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
-					if(btnAmigo.isPressed()){
-						if(objetoSeleccionPregunta.isElegido()){
-							//Dialogo VS Amigo no disponible en versión 1.0;
-							return false;
-						}
-					}
-				}
-			}
-			if(count == 2) return true; 
-			else{
-				//Dialogo elige modo y el tema
-				return false;
-			}
-		}
-
+		
+		
+//		/**Method that check that the theme is well selected
+//		 * @return true if yes
+//		 * @return false if the theme is not well selected
+//		 */
+//		boolean preguntasBienSeleccionadas(){
+//			/*
+//			int count = 0;
+//			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
+//				if(objetoSeleccionPregunta.isElegido()) count++;
+//				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
+//					if(objetoSeleccionPregunta.getTexto().getText().equals("VS Amigo")){
+//						if(objetoSeleccionPregunta.isElegido()){
+//							//Dialogo VS Amigo no disponible en versión 1.0;
+//							return false;
+//						}
+//					}
+//				}
+//			}
+//			if(count == 2) return true; 
+//			else{
+//				//Dialogo elige modo y el tema
+//				return false;
+//			}
+//			*/
+//			int count = 0;
+//			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
+//				if(objetoSeleccionPregunta.isElegido()) count++;
+//				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
+//					if(btnAmigo.isPressed()){
+//						if(objetoSeleccionPregunta.isElegido()){
+//							//Dialogo VS Amigo no disponible en versión 1.0;
+//							return false;
+//						}
+//					}
+//				}
+//			}
+//			if(count == 2) return true; 
+//			else{
+//				//Dialogo elige modo y el tema
+//				return false;
+//			}
+//		}
+//		
 		/**Method that manages the E S of the panel
 		 * @param event 
 		 */
@@ -1609,6 +1562,12 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			aLEleccion.add(new QuestionSelectedObject(tEntret, rEntret, false));
 			aLEleccion.add(new QuestionSelectedObject(tDep, rDep, false));
 			*/
+			aLBotones.add(btnArte); 
+			aLBotones.add(btnCiencia); 
+			aLBotones.add(btnDeportes); 
+			aLBotones.add(btnEntretenimiento); 
+			aLBotones.add(btnGeo); 
+			aLBotones.add(btnHistoria); 
 			
 			panel.getStylesheets().add("/css/application.css");
 		}
