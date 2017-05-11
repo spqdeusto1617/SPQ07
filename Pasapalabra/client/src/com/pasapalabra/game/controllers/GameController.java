@@ -559,15 +559,17 @@ public class GameController implements Initializable{
 			iv.setLayoutY(coordY());
 			iv.setFitHeight(25);
 			iv.setFitWidth(25);
-	
-			//CARGAMOS LA IMAGEN. NO LLEGA AQUI. ME DICE QUE LA I ES 0 Y NO LLEGA A INCREMENTARSE
+			
+			//CARGAMOS LA IMAGEN. 
+			//NO LLEGA AQUI. ME DICE QUE LA I ES 0 Y NO LLEGA A INCREMENTARSE, es decir, 
+			//SE QUEDA EN LA A Y NO SE INCREMENTA
 			if(i == 14){
 				letraABC--;
 				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/ñ-blue.png")));
 			}else{
 
 				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/"+letraABC+"-blue.png")));
-				
+				System.out.println("AQUI"+letraABC);
 			} 
 
 			panel.getChildren().add(iv);
