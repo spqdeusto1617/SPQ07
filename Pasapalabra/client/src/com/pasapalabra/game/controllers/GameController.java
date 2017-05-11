@@ -568,6 +568,7 @@ public class GameController implements Initializable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 
 			//A—ADIMOS EL LABEL AL ARRAYLIST DE LABELS
 			aLImgV.add(iv);
