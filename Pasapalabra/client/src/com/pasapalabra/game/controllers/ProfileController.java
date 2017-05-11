@@ -1,18 +1,28 @@
 package com.pasapalabra.game.controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
+
+import org.apache.commons.codec.binary.Base64;
+
+import com.pasapalabra.game.service.ServiceLocator;
+
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,9 +31,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 /**Class that manages events from Profile.fxml
  * @author alvaro
@@ -107,9 +116,10 @@ public class ProfileController extends ExtenderClassController implements Initia
 		btnEstadisticas.setOpacity(0.3f);
 		btnJuego.setOpacity(0.3f);
 		btnPerfil.setOpacity(1f);
-		if(LogInController.iAvatar!=null){
-			imagenAvatar.setImage(LogInController.iAvatar);
-			imgCambioFotoPerfil.setImage(LogInController.iAvatar);
+		if(ServiceLocator.userIMG != null){
+			imagenAvatar.setImage(ServiceLocator.userIMG);
+			imgCambioFotoPerfil.setImage(ServiceLocator.userIMG);
+			
 		}else{
 			String imagen = "fPerfil";
 			Random rand = new Random();
@@ -120,8 +130,8 @@ public class ProfileController extends ExtenderClassController implements Initia
 
 			Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 			imagenAvatar.setImage(i);
-			imgCambioFotoPerfil.setImage(i);
 		}
+
 		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
 		imagenAvatar.setClip(clip);
 		imagenAvatar.setSmooth(true); 
@@ -201,7 +211,7 @@ public class ProfileController extends ExtenderClassController implements Initia
 		}
 	}
 
-	
+
 	/**Transition to game window
 	 * @param event
 	 */
@@ -216,9 +226,9 @@ public class ProfileController extends ExtenderClassController implements Initia
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
-		
+
 		alert.setHeaderText("Do not use this function");
-		 
+
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
@@ -229,33 +239,33 @@ public class ProfileController extends ExtenderClassController implements Initia
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
-		
+
 		alert.setHeaderText("Do not use this function");
-		 
+
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
-		
-//		Alert alert = new Alert(AlertType.INFORMATION);
-//		log.log(Level.FINEST, "Alerta de información creada");
-//		//Añadimos título a la alerta
-//		alert.setTitle("Información");
-//		log.log(Level.FINEST, "Título añadido a la alerta");
-//		//Dejamos que la cabecera sea nula
-//		alert.setHeaderText(null);
-//		log.log(Level.FINEST, "Cabecera nula añadida a la alerta");
-//		//Añadimos el contenido que tendrá la alerta
-//		alert.setContentText("Ya estás en la ventana de perfil, selecciona una acción.");
-//		log.log(Level.FINEST, "Contenido de texto añadido a la alerta");
-//		//Añadimos modalidad de la alerta
-//		alert.initModality(Modality.APPLICATION_MODAL);
-//		log.log(Level.FINEST, "Añadida modalidad para la alerta");
-//		//Añadimos dueño de la alerta (Ventana sobre la cual se ejecutará)
-//		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-//		log.log(Level.FINEST, "Añadido dueño sobre el cual se ejecuta la alerta. Se mostrará la alerta...");
-//		//Muestra la alerta y espera a que el usuario cierre la ventana
-//		alert.showAndWait();
-//		log.log(Level.FINEST, "Alerta de información creada, mostrada y cerrada");
+
+		//		Alert alert = new Alert(AlertType.INFORMATION);
+		//		log.log(Level.FINEST, "Alerta de información creada");
+		//		//Añadimos título a la alerta
+		//		alert.setTitle("Información");
+		//		log.log(Level.FINEST, "Título añadido a la alerta");
+		//		//Dejamos que la cabecera sea nula
+		//		alert.setHeaderText(null);
+		//		log.log(Level.FINEST, "Cabecera nula añadida a la alerta");
+		//		//Añadimos el contenido que tendrá la alerta
+		//		alert.setContentText("Ya estás en la ventana de perfil, selecciona una acción.");
+		//		log.log(Level.FINEST, "Contenido de texto añadido a la alerta");
+		//		//Añadimos modalidad de la alerta
+		//		alert.initModality(Modality.APPLICATION_MODAL);
+		//		log.log(Level.FINEST, "Añadida modalidad para la alerta");
+		//		//Añadimos dueño de la alerta (Ventana sobre la cual se ejecutará)
+		//		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		//		log.log(Level.FINEST, "Añadido dueño sobre el cual se ejecuta la alerta. Se mostrará la alerta...");
+		//		//Muestra la alerta y espera a que el usuario cierre la ventana
+		//		alert.showAndWait();
+		//		log.log(Level.FINEST, "Alerta de información creada, mostrada y cerrada");
 	}
 
 
@@ -266,9 +276,9 @@ public class ProfileController extends ExtenderClassController implements Initia
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
-		
+
 		alert.setHeaderText("Do not use this function");
-		 
+
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
