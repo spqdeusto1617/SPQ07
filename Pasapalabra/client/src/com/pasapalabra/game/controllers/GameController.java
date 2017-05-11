@@ -2,6 +2,7 @@ package com.pasapalabra.game.controllers;
 
 import java.awt.HeadlessException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -48,6 +50,7 @@ public class GameController implements Initializable{
 	private static boolean rightAnswered;
 	public static QuestionDTO currentQuestion;
 
+	@FXML public Pane panel;
 	@FXML public Rectangle rPreguntas; 
 	@FXML public TextArea taPreguntas;
 
@@ -531,6 +534,88 @@ public class GameController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void crearRosco(boolean amigo_notEnemigo, ArrayList<ImageView> aLImgV){
+		ImageView iv;
+		char letraABC = 'a';
+
+		for (int i = 0; i < PUNTOSTOTALES; i++) {
+			//VARIABLE ABCD...
+
+
+			//CREAMOS ImageView
+			iv = new ImageView();
+
+			iv.setLayoutX(coordX(amigo_notEnemigo));
+			iv.setLayoutY(coordY());
+			iv.setFitHeight(25);
+			iv.setFitWidth(25);
+
+			//CARGAMOS LA IMAGEN
+			if(i == 14){
+				letraABC--;
+				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/ñ-blue.png")));
+			}else{
+
+				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/"+letraABC+"-blue.png")));
+			} 
+
+			panel.getChildren().add(iv);
+			try {
+				Thread.sleep(30);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			//A—ADIMOS EL LABEL AL ARRAYLIST DE LABELS
+			aLImgV.add(iv);
+
+			//SUMAMOS 1 A LA LETRA
+			letraABC++;
+		}
+
+
+
+	}
+
+	/**
+	 * @param amigo_notEnemigo 
+	 * @return  the coordinate X to make the rosco
+	 */
+	public int coordX(boolean amigo_notEnemigo){
+		int resultado;
+		//double divisionCircunferencia = 360/27;
+		//resultado = (int)(200* (Math.cos(200+divisionCircunferencia*vecesHechoX/2)))+300;
+
+		//(Radio * Coseno de ((360grados partido por número de elementos a repartir * número de elementos creados * pi partido por 180) - pi partido por 2) + posición del rádio en X
+		//Nota: El radio ha de ser igual al de Y, si no, no se dibujará un rosco redondo.
+		if(amigo_notEnemigo) resultado = (int)(150 * Math.cos((360/27.0)*vecesHechoX*(Math.PI/180)-Math.PI/2)) + 200;
+		else resultado = (int)(150 * Math.cos((360/27.0)*vecesHechoX*(Math.PI/180)-Math.PI/2)) + 575;
+
+		vecesHechoX++;
+		//		System.out.println(resultado);
+		return resultado;
+	}
+
+
+	/**
+	 * @return the coordinate Y to make the rosco
+	 */
+	public int coordY(){
+		int resultado;
+		//double divisionCircunferencia = 360/27;
+
+		//resultado = (int)(200* (Math.sin(200+divisionCircunferencia*vecesHechoY/2))) +300;
+
+		//(Radio * Seno de ((360grados partido por número de elementos a repartir * número de elementos creados * pi partido por 180) - pi partido por 2) + posición del rádio en Y
+		//Nota: El radio ha de ser igual al de Y, si no, no se dibujará un rosco redondo.
+		resultado = (int)(150 * Math.sin((360/27.0)*vecesHechoY*(Math.PI/180)-Math.PI/2)) +200;
+
+		vecesHechoY++;
+		//		System.out.println(resultado);
+		return resultado;
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
