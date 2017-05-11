@@ -6,10 +6,15 @@ import java.util.Random;
 import com.pasapalabra.game.dao.QuestionDAO;
 import com.pasapalabra.game.model.Question;
 
+/** Defines all database Question related needed methods.
+ * @author Guti
+ *
+ */
 public class QuestionMongoDAO extends QuestionDAO {
 
 	private MongoConnection connection;
 
+	
 	public QuestionMongoDAO(MongoConnection mongoConnection) {
 		this.connection = mongoConnection;
 	}

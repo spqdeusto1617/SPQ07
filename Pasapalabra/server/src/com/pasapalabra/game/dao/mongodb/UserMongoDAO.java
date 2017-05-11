@@ -9,6 +9,10 @@ import com.pasapalabra.game.dao.UserDAO;
 import com.pasapalabra.game.model.User;
 import com.pasapalabra.game.service.auth.TokenGenerator;
 
+/** Defines all database User related needed methods.
+ * @author Guti
+ *
+ */
 public class UserMongoDAO extends UserDAO {
 
 	private MongoConnection connection;
