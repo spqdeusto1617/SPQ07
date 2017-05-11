@@ -88,7 +88,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML public Circle circuloPanel;
 
 	@FXML public Text textoNombreDeUsuario;
-	
+
 	@FXML public Text searchTXT;
 
 	@FXML public ImageView imagenAvatar;
@@ -110,7 +110,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML public Button btnEntretenimiento;
 	@FXML public Button btnDeportes;
 	@FXML public Button btnTodos;
-	 
+
 
 	//*END OF THE DECLARATION
 
@@ -234,7 +234,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 		}
 	}
-	
+
 	@FXML
 	void cancelMatch(MouseEvent event){
 		try {
@@ -386,9 +386,24 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				ClientService.rivalData = user;
 				ServiceLocator.player1 = false;
 				ServiceLocator.turn = true;
-				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
-			}
-		} catch (SecurityException e) {
+				if(user.getProfileImage() != null){
+					byte[] imageByteArray = Base64.decodeBase64(user.getProfileImage());
+					try {
+						BufferedImage imag = ImageIO.read(new ByteArrayInputStream(imageByteArray));
+
+						if (imag != null) {
+							ClientService.rivalIMG = SwingFXUtils.toFXImage(imag, null);
+
+						}else{
+							ClientService.rivalIMG = null;
+						}
+					}catch (Exception e) {
+						ClientService.rivalIMG = null;
+					}
+					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
+				}
+			} 
+		}catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Error al iniciar la partida");

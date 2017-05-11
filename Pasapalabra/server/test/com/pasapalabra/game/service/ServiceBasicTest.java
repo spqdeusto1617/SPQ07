@@ -3,7 +3,6 @@ package com.pasapalabra.game.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import java.io.File;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -11,12 +10,10 @@ import java.util.Date;
 
 import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.Required;
-import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Rule;
 import org.junit.Test;
 
 //import com.pasapalabra.game.main.TestLauncher;
@@ -36,7 +33,8 @@ public class ServiceBasicTest {
 	private static IPasapalabraService ppService;
 	
 	private static boolean registrationSucceded = false;
-	private static boolean deloginSucceded = false;
+	private static boolean logoutSucceded = false;
+	
 	private static UserDTO userToTest = new UserDTO(
 			TokenGenerator.nextUniqueID().getToken(),
 			TokenGenerator.nextUniqueID().getToken()+"@aa.com",
@@ -101,7 +99,7 @@ public class ServiceBasicTest {
 	
 	
 	@Before
-	public void login() {
+	public void loginHook() {
 		try {
 			userToken = ppService.login(userToTest.getUserName(), userPassword);
 		} catch (RemoteException e) {
@@ -118,7 +116,7 @@ public class ServiceBasicTest {
 	
 	@Test
 	@Required(max = 100)
-	public void loginTest() {
+	public void login() {
 		Token fakeUser = null;
 		try {
 			fakeUser = ppService.login(TokenGenerator.nextUniqueID().getToken(), TokenGenerator.nextUniqueID().getToken());
@@ -153,14 +151,25 @@ public class ServiceBasicTest {
 		assertEquals(true, isEqual);
 	}
 	
+	
+	@Test
+	public void logout(){
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		assertEquals(true, logoutSucceded);
+	}
+	
+	
 	@After
-	public void deLogin(){
+	public void logoutHook(){
 		try{
-			deloginSucceded = ppService.deLogin(userToken);
+			logoutSucceded = ppService.deLogin(userToken);
 		}catch(Exception e) {
 			throw new RuntimeException("Data retrieving failed", e);
 		}
-		assertEquals(true, deloginSucceded);
 	}
 	
 	
