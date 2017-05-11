@@ -1,5 +1,8 @@
 package com.pasapalabra.game.controllers;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -7,13 +10,17 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
+
+import org.apache.commons.codec.binary.Base64;
+
 import com.pasapalabra.game.model.DTO.QuestionType;
 import com.pasapalabra.game.model.DTO.UserDTO;
 import com.pasapalabra.game.utilities.PanelThread;
 import com.pasapalabra.game.utilities.WindowUtilities;
-import com.pasapalabra.game.service.*;
 
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -1503,6 +1510,41 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//SERVIDOR
 			//TODO Cargar imagen personal
 			if(com.pasapalabra.game.service.ServiceLocator.userInfo.getProfileImage()!=null){
+				
+				byte[] imageByteArray = Base64.decodeBase64(com.pasapalabra.game.service.ServiceLocator.userInfo.getProfileImage());
+				try {
+					BufferedImage imag = ImageIO.read(new ByteArrayInputStream(imageByteArray));
+
+					if (imag != null) {
+						System.out.println("If");
+						imagenAvatar.setImage(SwingFXUtils.toFXImage(imag, null));
+					}
+					else{
+						System.out.println("ELSE");
+						String imagen = "fPerfil";
+						Random rand = new Random();
+						int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+						if(randomNum == 666){
+							imagen = "fPerfilPirata";
+						}
+
+						Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+						imagenAvatar.setImage(i);
+					}
+
+				} catch (IOException e) {
+
+					log.log(Level.SEVERE, "Error occurred trying to create the user image",e);
+					String imagen = "fPerfil";
+					Random rand = new Random();
+					int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+					if(randomNum == 666){
+						imagen = "fPerfilPirata";
+					}
+
+					Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+					imagenAvatar.setImage(i);
+				}
 				imagenAvatar.setImage(LogInController.iAvatar);
 			}else{
 				String imagen = "fPerfil";
@@ -1514,6 +1556,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 				Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 				imagenAvatar.setImage(i);
+		
 			}
 			Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
 			imagenAvatar.setClip(clip);
