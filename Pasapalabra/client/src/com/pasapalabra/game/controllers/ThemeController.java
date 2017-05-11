@@ -16,6 +16,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import com.pasapalabra.game.model.DTO.QuestionType;
 import com.pasapalabra.game.model.DTO.UserDTO;
+import com.pasapalabra.game.service.ServiceLocator;
 import com.pasapalabra.game.utilities.PanelThread;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
@@ -204,41 +205,17 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 */
 	@FXML
 	void btnMiPerfil(MouseEvent event) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-
-		alert.setTitle("Function not yet implemented.");
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//
+//		alert.setTitle("Function not yet implemented.");
+//		
+//		alert.setHeaderText("Do not use this function");
+//		 
+//		alert.setContentText("This Function is not implemented, please, do not use it");
+//
+//		alert.showAndWait();
 		
-		alert.setHeaderText("Do not use this function");
-		 
-		alert.setContentText("This Function is not implemented, please, do not use it");
-
-		alert.showAndWait();
-		
-//		if(juegoEnCurso){
-//			//Alerta
-//			Alert alert2 = new Alert(AlertType.INFORMATION);
-//			alert2.setTitle("Juego en curso");
-//			alert2.setHeaderText(null);
-//			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
-//					+ " Termina la partida para poder avanzar a esa ventana");
-//			alert2.initModality(Modality.APPLICATION_MODAL);
-//			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-//			alert2.showAndWait();
-//			log.log(Level.FINE, "El juego está en curso.");
-//		}else{
-//			log.log(Level.FINEST, "Transicion de ventana a Perfil");
-//			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
-//		}
-	}
-
-	/**Method to go to the statistics window when the game is not in progress
-	 * @param event
-	 */
-	@FXML
-	void btnEstadisticas(MouseEvent event) {
-		
-		
-		if(com.pasapalabra.game.service.ServiceLocator.playing){
+		if(ServiceLocator.playing){
 			//Alerta
 			Alert alert2 = new Alert(AlertType.INFORMATION);
 			alert2.setTitle("Juego en curso");
@@ -250,9 +227,33 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert2.showAndWait();
 			log.log(Level.FINE, "El juego está en curso.");
 		}else{
-			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
-			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
+			log.log(Level.FINEST, "Transicion de ventana a Perfil");
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 		}
+	}
+
+	/**Method to go to the statistics window when the game is not in progress
+	 * @param event
+	 */
+	@FXML
+	void btnEstadisticas(MouseEvent event) {
+		
+		
+//		if(com.pasapalabra.game.service.ServiceLocator.playing){
+//			//Alerta
+//			Alert alert2 = new Alert(AlertType.INFORMATION);
+//			alert2.setTitle("Juego en curso");
+//			alert2.setHeaderText(null);
+//			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
+//					+ " Termina la partida para poder avanzar a esa ventana");
+//			alert2.initModality(Modality.APPLICATION_MODAL);
+//			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+//			alert2.showAndWait();
+//			log.log(Level.FINE, "El juego está en curso.");
+//		}else{
+//			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
+//			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
+//		}
 	}
 
 	//Elimina nivel de transparencia
