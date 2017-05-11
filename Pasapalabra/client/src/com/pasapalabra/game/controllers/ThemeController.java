@@ -16,6 +16,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import com.pasapalabra.game.model.DTO.QuestionType;
 import com.pasapalabra.game.model.DTO.UserDTO;
+import com.pasapalabra.game.service.ClientService;
 import com.pasapalabra.game.service.ServiceLocator;
 import com.pasapalabra.game.utilities.PanelThread;
 import com.pasapalabra.game.utilities.WindowUtilities;
@@ -60,7 +61,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	public int vecesHechoX = 0;
 	public int vecesHechoY = 0;
 	public QuestionType type; 
-	public static boolean juegoEnCurso = false;
+	//public static boolean ServiceLocator.playing = false;
 	public boolean ventanaMenuDentro = false;
 	public ArrayList<ImageView> panelLetrasJugador = new ArrayList<>(); //Panel con todos los labels del jugador
 	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
@@ -83,17 +84,20 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML public Rectangle rectanguloPanel;
 
 	@FXML public Circle circuloPlus;
-	
+
 	@FXML public Text textoLogeadoComo;
 
 	@FXML public Circle circuloPanel;
 
 	@FXML public Text textoNombreDeUsuario;
+	
+	@FXML public Text searchTXT;
 
 	@FXML public ImageView imagenAvatar;
 
 	//Botones
 	@FXML public Button btnJugar;
+	@FXML public Button btnCancel;
 	@FXML public Button btnCerrarSesion;
 	@FXML public Button btnEstadisticas;
 	@FXML public Button btnPerfil;
@@ -108,6 +112,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML public Button btnEntretenimiento;
 	@FXML public Button btnDeportes;
 	@FXML public Button btnTodos;
+	 
 
 	//*END OF THE DECLARATION
 
@@ -117,9 +122,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 */
 	@FXML 
 	void btnJugar(MouseEvent event) {
-		log.log(Level.FINEST, "Botón de jugar pulsado y JuegoEnCurso = " + juegoEnCurso);
+		log.log(Level.FINEST, "Botón de jugar pulsado y ServiceLocator.playing = " + ServiceLocator.playing);
 		//Compruebo si se está jugando
-		if(juegoEnCurso){
+		if(ServiceLocator.playing){
 			//Si se está jugando, entonces creo una alerta para decir que está ya el juego en curso
 			//Creo una alerta de tipo informativa
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -168,36 +173,36 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		}
 	}
 
-	
+
 	@FXML
 	void btnAmigos(MouseEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
-		
+
 		alert.setHeaderText("Do not use this function");
-		 
+
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
-//	
-//
-//		if(juegoEnCurso){
-//			//Alerta
-//			Alert alert2 = new Alert(AlertType.INFORMATION);
-//			alert2.setTitle("Juego en curso");
-//			alert2.setHeaderText(null);
-//			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
-//					+ " Termina la partida para poder avanzar a esa ventana");
-//			alert2.initModality(Modality.APPLICATION_MODAL);
-//			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-//			alert2.showAndWait();
-//			log.log(Level.FINE, "El juego está en curso.");
-//		}else{
-//			log.log(Level.FINEST, "Transicion de ventana a Amigos");
-//			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Friends", event);
-//		}
-//control sift 7
+		//	
+		//
+		//		if(ServiceLocator.playing){
+		//			//Alerta
+		//			Alert alert2 = new Alert(AlertType.INFORMATION);
+		//			alert2.setTitle("Juego en curso");
+		//			alert2.setHeaderText(null);
+		//			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
+		//					+ " Termina la partida para poder avanzar a esa ventana");
+		//			alert2.initModality(Modality.APPLICATION_MODAL);
+		//			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		//			alert2.showAndWait();
+		//			log.log(Level.FINE, "El juego está en curso.");
+		//		}else{
+		//			log.log(Level.FINEST, "Transicion de ventana a Amigos");
+		//			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Friends", event);
+		//		}
+		//control sift 7
 	}
 
 	/**Method to go to the profile window when the game is not in progress
@@ -205,16 +210,16 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 */
 	@FXML
 	void btnMiPerfil(MouseEvent event) {
-//		Alert alert = new Alert(AlertType.INFORMATION);
-//
-//		alert.setTitle("Function not yet implemented.");
-//		
-//		alert.setHeaderText("Do not use this function");
-//		 
-//		alert.setContentText("This Function is not implemented, please, do not use it");
-//
-//		alert.showAndWait();
-		
+		//		Alert alert = new Alert(AlertType.INFORMATION);
+		//
+		//		alert.setTitle("Function not yet implemented.");
+		//		
+		//		alert.setHeaderText("Do not use this function");
+		//		 
+		//		alert.setContentText("This Function is not implemented, please, do not use it");
+		//
+		//		alert.showAndWait();
+
 		if(ServiceLocator.playing){
 			//Alerta
 			Alert alert2 = new Alert(AlertType.INFORMATION);
@@ -231,29 +236,40 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 		}
 	}
+	
+	@FXML
+	void cancelMatch(MouseEvent event){
+		try {
+			ServiceLocator.exitMatchMaking();
+			btnCancel.setVisible(false);
+			searchTXT.setVisible(false);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**Method to go to the statistics window when the game is not in progress
 	 * @param event
 	 */
 	@FXML
 	void btnEstadisticas(MouseEvent event) {
-		
-		
-//		if(com.pasapalabra.game.service.ServiceLocator.playing){
-//			//Alerta
-//			Alert alert2 = new Alert(AlertType.INFORMATION);
-//			alert2.setTitle("Juego en curso");
-//			alert2.setHeaderText(null);
-//			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
-//					+ " Termina la partida para poder avanzar a esa ventana");
-//			alert2.initModality(Modality.APPLICATION_MODAL);
-//			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-//			alert2.showAndWait();
-//			log.log(Level.FINE, "El juego está en curso.");
-//		}else{
-//			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
-//			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
-//		}
+
+
+		//		if(com.pasapalabra.game.service.ServiceLocator.playing){
+		//			//Alerta
+		//			Alert alert2 = new Alert(AlertType.INFORMATION);
+		//			alert2.setTitle("Juego en curso");
+		//			alert2.setHeaderText(null);
+		//			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
+		//					+ " Termina la partida para poder avanzar a esa ventana");
+		//			alert2.initModality(Modality.APPLICATION_MODAL);
+		//			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+		//			alert2.showAndWait();
+		//			log.log(Level.FINE, "El juego está en curso.");
+		//		}else{
+		//			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
+		//			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
+		//		}
 	}
 
 	//Elimina nivel de transparencia
@@ -276,19 +292,19 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		log.log(Level.FINEST, "Cierre de sesión");
 		com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	}
-	
+
 	//TODO
 	@FXML 
 	void btnAll(MouseEvent event){
 		QuestionType type = QuestionType.All; 
 	}
-	
+
 	@FXML 
 	void btnSports(MouseEvent event){
 		QuestionType type = QuestionType.Sport; 
 	}
-	
-	
+
+
 	/**Method that check if question type button and VS random button is clicked. 
 	 *  @return false if both buttons are not pressed
 	 *  @return true if both buttons are pressed
@@ -299,9 +315,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//if(boton.isPressed(){
 			//return true;
 			if(btnCiencia.isPressed() || btnDeportes.isPressed() 
-				|| btnArte.isPressed() || btnEntretenimiento.isPressed()
-				|| btnGeo.isPressed() || btnHistoria.isPressed() 
-				|| btnTodos.isPressed()){
+					|| btnArte.isPressed() || btnEntretenimiento.isPressed()
+					|| btnGeo.isPressed() || btnHistoria.isPressed() 
+					|| btnTodos.isPressed()){
 				return true; 
 			}else{
 				return false; 
@@ -310,36 +326,36 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			return false; 
 		}
 	}
-	
+
 	//boolean true al hacer click en los botones y si los dos son true hace latransición a game sino no. 
 	//Deportes... hacen lo mismo que el all
 	@FXML
 	void aJugar(MouseEvent event){
-		if(!bothClicked())return;
-		if(juegoEnCurso) return;
+		//if(!bothClicked())return;
+		if(ServiceLocator.playing) return;
 		/*Inhabilitamos rápidamente que el botón de jugar vuelva a poder ser pulsado.
 		 *(Es posible que después de varias comprobaciones necesitemos volverlo a poner a falso)
 		 */
-		juegoEnCurso = true;
+		ServiceLocator.playing = true;
 		//Servidor
 		//aLEleccion es el arrayList de la elección (Modalidad + Tema) y todos los elementos
 		//String[]Tipo=new String[2];
-		QuestionType type = null; 
-//		for (QuestionSelectedObject obsp : aLEleccion) {
-//			if (obsp.isElegido()) {
-//				if(obsp.isModoDeJuego_notTipoPregunta()){
-//					//ESTE ES EL MODO DE JUEGO ELEGIDO
-//					//tipo[1]
-//					type=obsp.getTexto().getText();
-//
-//				}else{
-//					//ESTE ES EL TEMA DE JUEGO ELEGIDO
-//					//tipo[2]
-//					type=obsp.getTexto().getText();
-//				}
-//			}
-//		}
-		for(Button botonTema: aLBotones){
+		QuestionType type = QuestionType.All; 
+		//		for (QuestionSelectedObject obsp : aLEleccion) {
+		//			if (obsp.isElegido()) {
+		//				if(obsp.isModoDeJuego_notTipoPregunta()){
+		//					//ESTE ES EL MODO DE JUEGO ELEGIDO
+		//					//tipo[1]
+		//					type=obsp.getTexto().getText();
+		//
+		//				}else{
+		//					//ESTE ES EL TEMA DE JUEGO ELEGIDO
+		//					//tipo[2]
+		//					type=obsp.getTexto().getText();
+		//				}
+		//			}
+		//		}
+		/*for(Button botonTema: aLBotones){
 			if(botonTema.isPressed()){
 				//FALTARIA RECORRER LOS QUESTION TYPES, NO TENGO NI IDEA
 				if(botonTema.getText().equals(type.toString())){
@@ -349,7 +365,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			}else{
 				log.log(Level.WARNING, "Error, there is not any theme selected. Please, select one");
 			}
-		}
+		}*/
 
 		//
 		//Hasta encontrar partida, aquí.
@@ -360,7 +376,18 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//TODO: cambiar
 			// ANTES utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Jugar.toString(), Tipo);
 			UserDTO user= com.pasapalabra.game.service.ServiceLocator.play(type); 
-			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
+			if(user.getUserName().equals("Wait")){
+				ServiceLocator.player1 = true;
+				ServiceLocator.turn = false;
+				searchTXT.setVisible(true);
+				btnCancel.setVisible(true);
+			}
+			else{
+				ClientService.rivalData = user;
+				ServiceLocator.player1 = false;
+				ServiceLocator.turn = true;
+				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
+			}
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -369,7 +396,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
-			juegoEnCurso=false;
+			ServiceLocator.playing=false;
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			log.log(Level.WARNING, "Error en la partida", e);
 			e.printStackTrace();
@@ -381,7 +408,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
-			juegoEnCurso=false;
+			ServiceLocator.playing=false;
 			WindowUtilities.windowTransition("ThemeElection", event);
 			log.log(Level.WARNING, "No se ha encontrado partida.", e);
 			e.printStackTrace();
@@ -417,8 +444,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								System.out.println(Conexion_cliente.Respuesta+" respuesta");
 							}
 						}
-						
-						if(juegoEnCurso==true){
+
+						if(ServiceLocator.playing==true){
 
 
 							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="...........................";
@@ -461,7 +488,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
 								panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
 							}
-							if(juegoEnCurso==true){
+							if(ServiceLocator.playing==true){
 
 
 								com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
@@ -486,7 +513,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								alert.showAndWait();
 								deVentana.windowTransition("Juego", event);
 							}
-							if(!juegoEnCurso){
+							if(!ServiceLocator.playing){
 								Alert alert = new Alert(AlertType.INFORMATION);
 								alert.setTitle("Partida acabada");
 								alert.setHeaderText("Ha completado la partida");
@@ -516,8 +543,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						//			}
 						//TODO: indicar si el usuario ha acertado o no
 
-					
-						
+
+
 					}
 				}
 				}).start(); 
@@ -557,14 +584,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				new Thread(new Runnable() {  
 					@Override  
 					public void run() {  
-						while(!Conexion_cliente.Mi_Turno&&juegoEnCurso){
+						while(!Conexion_cliente.Mi_Turno&&ServiceLocator.playing){
 							System.out.println("Dentro del while");
-							if(juegoEnCurso){
+							if(ServiceLocator.playing){
 								try{
 									com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 								}catch(Exception a){
 									a.printStackTrace();
-									juegoEnCurso=false;
+									ServiceLocator.playing=false;
 								}	
 								System.out.println("A comprobar si el rival ha hacertado");
 								if(Conexion_cliente.Ha_Respondido){
@@ -596,7 +623,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						System.out.println("Hola");
 						int i=23-22;
 						System.out.println("A obtener pregunta en el servidor");
-						if(juegoEnCurso){
+						if(ServiceLocator.playing){
 							try {
 								com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 								taPreguntas.setText(Conexion_cliente.Pregunta);
@@ -628,11 +655,11 @@ public class ThemeController extends ExtenderClassController implements Initiali
 										textoTiempoUsuario.setText(Integer.toString(i));
 										if(!Conexion_cliente.Respuesta.equals("...........................")){
 											i=20;
-											
+
 										}
 									}
-									
-									if(juegoEnCurso==true){
+
+									if(ServiceLocator.playing==true){
 
 
 										com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="...........................";
@@ -675,7 +702,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 											int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
 											panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
 										}
-										if(juegoEnCurso==true){
+										if(ServiceLocator.playing==true){
 
 
 											com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
@@ -700,7 +727,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 											alert.showAndWait();
 											deVentana.windowTransition("Juego", event);
 										}
-										if(!juegoEnCurso){
+										if(!ServiceLocator.playing){
 											Alert alert = new Alert(AlertType.INFORMATION);
 											alert.setTitle("Partida acabada");
 											alert.setHeaderText("Ha completado la partida");
@@ -730,8 +757,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 									//			}
 									//TODO: indicar si el usuario ha acertado o no
 
-								
-									
+
+
 								}
 							}
 							}).start(); 
@@ -739,66 +766,66 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				}).start(); 
 
 
-*/
-
-			} 
-		
-
-
-
-		//TODO: Cambiar el método
-		/**Evento de ratón. Cuando se ha producido una elección.
-		 * @param event
 		 */
-		
-		@FXML
-		void eleccionHecha(MouseEvent event){
-//			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
-//				if(event.getSource().equals(objetoSeleccionPregunta.getRectangulo()) 
-//						|| event.getSource().equals(objetoSeleccionPregunta.getTexto()) 
-//						|| event.getSource().equals(objetoSeleccionPregunta.getTituloSeccion())){
-//					if(objetoSeleccionPregunta.isElegido()){
-//						//No se hace nada porque ya está elegido.
-//					}else{
-//						if(objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
-//							for (QuestionSelectedObject objetoSeleccionPregunta1 : aLEleccion) {
-//								if(objetoSeleccionPregunta1.isModoDeJuego_notTipoPregunta()){
-//									if(objetoSeleccionPregunta == objetoSeleccionPregunta1){
-//										objetoSeleccionPregunta1.setElegido(true);
-//										objetoSeleccionPregunta1.getRectangulo().setFill(mdjSeleccionado.getFill());
-//										objetoSeleccionPregunta1.getRectangulo().setStroke(mdjSeleccionado.getStroke());
-//									}else{
-//										objetoSeleccionPregunta1.setElegido(false);
-//										objetoSeleccionPregunta1.getRectangulo().setFill(mdjNSeleccionado.getFill());
-//										objetoSeleccionPregunta1.getRectangulo().setStroke(mdjNSeleccionado.getStroke());
-//									}
-//								}
-//							}
-//						}else if (!objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
-//							for (QuestionSelectedObject objetoSeleccionPregunta2 : aLEleccion) {
-//								if(!objetoSeleccionPregunta2.isModoDeJuego_notTipoPregunta()){
-//									if(objetoSeleccionPregunta == objetoSeleccionPregunta2){
-//										objetoSeleccionPregunta2.setElegido(true);
-//										objetoSeleccionPregunta2.getRectangulo().setFill(tdpSeleccionado.getFill());
-//										objetoSeleccionPregunta2.getRectangulo().setStroke(tdpSeleccionado.getStroke());
-//									}else if(!objetoSeleccionPregunta2.isSeccion_notSeleccionable()){
-//										objetoSeleccionPregunta2.setElegido(false);
-//										objetoSeleccionPregunta2.getRectangulo().setFill(tdpNSeleccionado.getFill());
-//										objetoSeleccionPregunta2.getRectangulo().setStroke(tdpNSeleccionado.getStroke());
-//									}
-//								}
-//							}
-//						}
-//					}
-//
-//				}
-//			}
-//
-		}
-		
-		//Servidor - Así se han seteado los textos del tiempo y la puntuación.
-		//Se deben modificar con el paso del tiempo.
-		/*
+
+	} 
+
+
+
+
+	//TODO: Cambiar el método
+	/**Evento de ratón. Cuando se ha producido una elección.
+	 * @param event
+	 */
+
+	@FXML
+	void eleccionHecha(MouseEvent event){
+		//			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
+		//				if(event.getSource().equals(objetoSeleccionPregunta.getRectangulo()) 
+		//						|| event.getSource().equals(objetoSeleccionPregunta.getTexto()) 
+		//						|| event.getSource().equals(objetoSeleccionPregunta.getTituloSeccion())){
+		//					if(objetoSeleccionPregunta.isElegido()){
+		//						//No se hace nada porque ya está elegido.
+		//					}else{
+		//						if(objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
+		//							for (QuestionSelectedObject objetoSeleccionPregunta1 : aLEleccion) {
+		//								if(objetoSeleccionPregunta1.isModoDeJuego_notTipoPregunta()){
+		//									if(objetoSeleccionPregunta == objetoSeleccionPregunta1){
+		//										objetoSeleccionPregunta1.setElegido(true);
+		//										objetoSeleccionPregunta1.getRectangulo().setFill(mdjSeleccionado.getFill());
+		//										objetoSeleccionPregunta1.getRectangulo().setStroke(mdjSeleccionado.getStroke());
+		//									}else{
+		//										objetoSeleccionPregunta1.setElegido(false);
+		//										objetoSeleccionPregunta1.getRectangulo().setFill(mdjNSeleccionado.getFill());
+		//										objetoSeleccionPregunta1.getRectangulo().setStroke(mdjNSeleccionado.getStroke());
+		//									}
+		//								}
+		//							}
+		//						}else if (!objetoSeleccionPregunta.isModoDeJuego_notTipoPregunta()){
+		//							for (QuestionSelectedObject objetoSeleccionPregunta2 : aLEleccion) {
+		//								if(!objetoSeleccionPregunta2.isModoDeJuego_notTipoPregunta()){
+		//									if(objetoSeleccionPregunta == objetoSeleccionPregunta2){
+		//										objetoSeleccionPregunta2.setElegido(true);
+		//										objetoSeleccionPregunta2.getRectangulo().setFill(tdpSeleccionado.getFill());
+		//										objetoSeleccionPregunta2.getRectangulo().setStroke(tdpSeleccionado.getStroke());
+		//									}else if(!objetoSeleccionPregunta2.isSeccion_notSeleccionable()){
+		//										objetoSeleccionPregunta2.setElegido(false);
+		//										objetoSeleccionPregunta2.getRectangulo().setFill(tdpNSeleccionado.getFill());
+		//										objetoSeleccionPregunta2.getRectangulo().setStroke(tdpNSeleccionado.getStroke());
+		//									}
+		//								}
+		//							}
+		//						}
+		//					}
+		//
+		//				}
+		//			}
+		//
+	}
+
+	//Servidor - Así se han seteado los textos del tiempo y la puntuación.
+	//Se deben modificar con el paso del tiempo.
+	/*
 
 
     @FXML public Text textoTiempoUsuario;
@@ -806,13 +833,13 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
     @FXML public Text textoPuntuacionU;
     @FXML public Text textoPuntuacionR;
-		 */
-/*
+	 */
+	/*
 		@FXML
 		void btnContestar(MouseEvent event) {
 			//SERVIDOR
 			//Respuesta
-			if(!juegoEnCurso){
+			if(!ServiceLocator.playing){
 				Alert alert=new Alert(AlertType.INFORMATION);
 				alert.setTitle("Partida acabada");
 				alert.setHeaderText("Ha completado la partida");
@@ -822,7 +849,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				deVentana.windowTransition("Juego", event);
 			}
 			else{	
-			
+
 				if(tfRespuesta.getText().length()==0){
 					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Respuesta en blanco");
@@ -833,7 +860,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				}
 				else{
 					if(Conexion_cliente.Mi_Turno){
-						if(juegoEnCurso==true){
+						if(ServiceLocator.playing==true){
 
 
 							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
@@ -876,7 +903,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
 								panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
 							}
-							if(juegoEnCurso==true){
+							if(ServiceLocator.playing==true){
 
 
 								com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
@@ -901,7 +928,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								alert.showAndWait();
 								deVentana.windowTransition("Juego", event);
 							}
-							if(!juegoEnCurso){
+							if(!ServiceLocator.playing){
 								Alert alert = new Alert(AlertType.INFORMATION);
 								alert.setTitle("Partida acabada");
 								alert.setHeaderText("Ha completado la partida");
@@ -936,14 +963,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						new Thread(new Runnable() {  
 							@Override  
 							public void run() {  
-								while(!Conexion_cliente.Mi_Turno&&juegoEnCurso){
+								while(!Conexion_cliente.Mi_Turno&&ServiceLocator.playing){
 									System.out.println("Dentro del while");
-									if(juegoEnCurso){
+									if(ServiceLocator.playing){
 										try{
 											com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 										}catch(Exception a){
 											a.printStackTrace();
-											juegoEnCurso=false;
+											ServiceLocator.playing=false;
 										}	
 										System.out.println("A comprobar si el rival ha hacertado");
 										if(Conexion_cliente.Ha_Respondido){
@@ -975,7 +1002,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								System.out.println("Hola");
 								int i=23-22;
 								System.out.println("A obtener pregunta en el servidor");
-								if(juegoEnCurso){
+								if(ServiceLocator.playing){
 									try{
 										com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 
@@ -1011,7 +1038,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//SERVIDOR
 			//Algo
 			if(Conexion_cliente.Mi_Turno){
-				if(juegoEnCurso==true){
+				if(ServiceLocator.playing==true){
 					com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="Pasapalabra";
 					try{
 						com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
@@ -1026,7 +1053,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					}catch(Exception a){
 						a.printStackTrace();
 					}
-					if(!juegoEnCurso){
+					if(!ServiceLocator.playing){
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.setTitle("Partida acabada");
 						alert.setHeaderText("Ha completado la partida");
@@ -1066,7 +1093,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK){
-					if(juegoEnCurso==true){
+					if(ServiceLocator.playing==true){
 						try{	
 							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="Rendirse";
 							com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
@@ -1102,180 +1129,180 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				return letra_Actual-'a';
 			}
 		}
-		*/
-		@FXML
-		void masInfo(MouseEvent event){
-			if(!juegoEnCurso){
-				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("AcercaDe", event);
-			}
+	 */
+	@FXML
+	void masInfo(MouseEvent event){
+		if(!ServiceLocator.playing){
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("AcercaDe", event);
 		}
+	}
 
-		/*
+	/*
 		@FXML
 		void entradoCSS(MouseEvent event){
 			GameButton.seleccionar_notDeseleccionar(true,aLBotones,event);
-			
+
 		}
-		*/
-		
-		@FXML //MIRAR
-		void selected(MouseEvent event){
-			for(Button boton: aLBotones){
-				if(boton.isPressed()){
-					boton.setOnAction((ActionEvent e) ->{
-						boton.getStyleClass().add("addBobOk"); //Añadir por ejemplo AddBoOk y en el css poner .addBoOk 
-					});
-					}
-				else{
-					//System.out.println("Boton no seleccionado");
-					log.log(Level.WARNING, "Error, boton no seleccionado");
-				}
+	 */
+
+	@FXML //MIRAR
+	void selected(MouseEvent event){
+		for(Button boton: aLBotones){
+			if(boton.isPressed()){
+				boton.setOnAction((ActionEvent e) ->{
+					boton.getStyleClass().add("addBobOk"); //Añadir por ejemplo AddBoOk y en el css poner .addBoOk 
+				});
 			}
-			
-		}
-		
-		@FXML //MIRAR
-		void notSelected(MouseEvent event){
-			for(Button boton: aLBotones){
-				if(!boton.isPressed()){
-					boton.setOnAction((ActionEvent e) ->{
-						boton.getStyleClass().add("addBobOk"); //Añadir por ejemplo AddBoOk y en el css poner .addBoOk 
-					});
-					}
-				else{
-					//System.out.println("Boton si está seleccionado");
-					log.log(Level.FINEST, "Boton si está seleccionado");
-				}
+			else{
+				//System.out.println("Boton no seleccionado");
+				log.log(Level.WARNING, "Error, boton no seleccionado");
 			}
-			
 		}
-		
-		/*
+
+	}
+
+	@FXML //MIRAR
+	void notSelected(MouseEvent event){
+		for(Button boton: aLBotones){
+			if(!boton.isPressed()){
+				boton.setOnAction((ActionEvent e) ->{
+					boton.getStyleClass().add("addBobOk"); //Añadir por ejemplo AddBoOk y en el css poner .addBoOk 
+				});
+			}
+			else{
+				//System.out.println("Boton si está seleccionado");
+				log.log(Level.FINEST, "Boton si está seleccionado");
+			}
+		}
+
+	}
+
+	/*
 		@FXML
 		void salidoCSS(MouseEvent event){
 			GameButton.seleccionar_notDeseleccionar(false,aLBotones,event);
 		}
-		*/
+	 */
 
-//		public void eliminarOpcionesPartida(boolean eliminar_notAnyadir){
-//			panel.getChildren().remove(btnJugar);
-//			if(eliminar_notAnyadir){
-//				for (QuestionSelectedObject osp : aLEleccion) {
-//					if(osp.isSeccion_notSeleccionable()){
-//						panel.getChildren().remove(osp.getTituloSeccion());
-//					}else{
-//						//panel.getChildren().remove(osp.getRectangulo());
-//						//panel.getChildren().remove(osp.getTexto());
-//						//panel.getChildren().remove(Button); 
-//					}
-//				}
-//			}else{
-//				for (QuestionSelectedObject osp : aLEleccion) {
-//					if(osp.isSeccion_notSeleccionable()){
-//						panel.getChildren().add(osp.getTituloSeccion());
-//					}else{
-//						panel.getChildren().add(osp.getRectangulo());
-//						panel.getChildren().add(osp.getTexto());
-//					}
-//				}
-//			}
-//	}
+	//		public void eliminarOpcionesPartida(boolean eliminar_notAnyadir){
+	//			panel.getChildren().remove(btnJugar);
+	//			if(eliminar_notAnyadir){
+	//				for (QuestionSelectedObject osp : aLEleccion) {
+	//					if(osp.isSeccion_notSeleccionable()){
+	//						panel.getChildren().remove(osp.getTituloSeccion());
+	//					}else{
+	//						//panel.getChildren().remove(osp.getRectangulo());
+	//						//panel.getChildren().remove(osp.getTexto());
+	//						//panel.getChildren().remove(Button); 
+	//					}
+	//				}
+	//			}else{
+	//				for (QuestionSelectedObject osp : aLEleccion) {
+	//					if(osp.isSeccion_notSeleccionable()){
+	//						panel.getChildren().add(osp.getTituloSeccion());
+	//					}else{
+	//						panel.getChildren().add(osp.getRectangulo());
+	//						panel.getChildren().add(osp.getTexto());
+	//					}
+	//				}
+	//			}
+	//	}
 
-		/**Method to create the rosco of the game with all the letters. 
-		 * @param amigo_notEnemigo
-		 * @param aLImgV
-		 */
-		public void crearRosco(boolean amigo_notEnemigo, ArrayList<ImageView> aLImgV){
-			ImageView iv;
-			char letraABC = 'a';
+	/**Method to create the rosco of the game with all the letters. 
+	 * @param amigo_notEnemigo
+	 * @param aLImgV
+	 */
+	public void crearRosco(boolean amigo_notEnemigo, ArrayList<ImageView> aLImgV){
+		ImageView iv;
+		char letraABC = 'a';
 
-			for (int i = 0; i < PUNTOSTOTALES; i++) {
-				//VARIABLE ABCD...
+		for (int i = 0; i < PUNTOSTOTALES; i++) {
+			//VARIABLE ABCD...
 
 
-				//CREAMOS ImageView
-				iv = new ImageView();
+			//CREAMOS ImageView
+			iv = new ImageView();
 
-				iv.setLayoutX(coordX(amigo_notEnemigo));
-				iv.setLayoutY(coordY());
-				iv.setFitHeight(25);
-				iv.setFitWidth(25);
+			iv.setLayoutX(coordX(amigo_notEnemigo));
+			iv.setLayoutY(coordY());
+			iv.setFitHeight(25);
+			iv.setFitWidth(25);
 
-				//CARGAMOS LA IMAGEN
-				if(i == 14){
-					letraABC--;
-					iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/ñ-blue.png")));
-				}else{
+			//CARGAMOS LA IMAGEN
+			if(i == 14){
+				letraABC--;
+				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/ñ-blue.png")));
+			}else{
 
-					iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/"+letraABC+"-blue.png")));
-				} 
+				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/"+letraABC+"-blue.png")));
+			} 
 
-				panel.getChildren().add(iv);
-				try {
-					Thread.sleep(30);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				//A—ADIMOS EL LABEL AL ARRAYLIST DE LABELS
-				aLImgV.add(iv);
-
-				//SUMAMOS 1 A LA LETRA
-				letraABC++;
+			panel.getChildren().add(iv);
+			try {
+				Thread.sleep(30);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
+			//A—ADIMOS EL LABEL AL ARRAYLIST DE LABELS
+			aLImgV.add(iv);
 
-
+			//SUMAMOS 1 A LA LETRA
+			letraABC++;
 		}
 
-		/**
-		 * @param amigo_notEnemigo 
-		 * @return  the coordinate X to make the rosco
-		 */
-		public int coordX(boolean amigo_notEnemigo){
-			int resultado;
-			//double divisionCircunferencia = 360/27;
-			//resultado = (int)(200* (Math.cos(200+divisionCircunferencia*vecesHechoX/2)))+300;
 
-			//(Radio * Coseno de ((360grados partido por número de elementos a repartir * número de elementos creados * pi partido por 180) - pi partido por 2) + posición del rádio en X
-			//Nota: El radio ha de ser igual al de Y, si no, no se dibujará un rosco redondo.
-			if(amigo_notEnemigo) resultado = (int)(150 * Math.cos((360/27.0)*vecesHechoX*(Math.PI/180)-Math.PI/2)) + 200;
-			else resultado = (int)(150 * Math.cos((360/27.0)*vecesHechoX*(Math.PI/180)-Math.PI/2)) + 575;
 
-			vecesHechoX++;
-			//		System.out.println(resultado);
-			return resultado;
-		}
+	}
 
-		
-		/**
-		 * @return the coordinate Y to make the rosco
-		 */
-		public int coordY(){
-			int resultado;
-			//double divisionCircunferencia = 360/27;
+	/**
+	 * @param amigo_notEnemigo 
+	 * @return  the coordinate X to make the rosco
+	 */
+	public int coordX(boolean amigo_notEnemigo){
+		int resultado;
+		//double divisionCircunferencia = 360/27;
+		//resultado = (int)(200* (Math.cos(200+divisionCircunferencia*vecesHechoX/2)))+300;
 
-			//resultado = (int)(200* (Math.sin(200+divisionCircunferencia*vecesHechoY/2))) +300;
+		//(Radio * Coseno de ((360grados partido por número de elementos a repartir * número de elementos creados * pi partido por 180) - pi partido por 2) + posición del rádio en X
+		//Nota: El radio ha de ser igual al de Y, si no, no se dibujará un rosco redondo.
+		if(amigo_notEnemigo) resultado = (int)(150 * Math.cos((360/27.0)*vecesHechoX*(Math.PI/180)-Math.PI/2)) + 200;
+		else resultado = (int)(150 * Math.cos((360/27.0)*vecesHechoX*(Math.PI/180)-Math.PI/2)) + 575;
 
-			//(Radio * Seno de ((360grados partido por número de elementos a repartir * número de elementos creados * pi partido por 180) - pi partido por 2) + posición del rádio en Y
-			//Nota: El radio ha de ser igual al de Y, si no, no se dibujará un rosco redondo.
-			resultado = (int)(150 * Math.sin((360/27.0)*vecesHechoY*(Math.PI/180)-Math.PI/2)) +200;
+		vecesHechoX++;
+		//		System.out.println(resultado);
+		return resultado;
+	}
 
-			vecesHechoY++;
-			//		System.out.println(resultado);
-			return resultado;
-		}
 
-		/**Method that adds the styles designed in the juego.css
-		 */
-		public void anyadirGUI(){
-			panel.getStylesheets().add("/css/juego.css");
-			panel.getStylesheets().remove("/css/application.css");
-			BackgroundImage myBII= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/pspgamebg.png"),panel.getWidth(),panel.getHeight(),false,true),BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-			//then you set to your node
-			panel.setBackground(new Background(myBII));}
-			/*
+	/**
+	 * @return the coordinate Y to make the rosco
+	 */
+	public int coordY(){
+		int resultado;
+		//double divisionCircunferencia = 360/27;
+
+		//resultado = (int)(200* (Math.sin(200+divisionCircunferencia*vecesHechoY/2))) +300;
+
+		//(Radio * Seno de ((360grados partido por número de elementos a repartir * número de elementos creados * pi partido por 180) - pi partido por 2) + posición del rádio en Y
+		//Nota: El radio ha de ser igual al de Y, si no, no se dibujará un rosco redondo.
+		resultado = (int)(150 * Math.sin((360/27.0)*vecesHechoY*(Math.PI/180)-Math.PI/2)) +200;
+
+		vecesHechoY++;
+		//		System.out.println(resultado);
+		return resultado;
+	}
+
+	/**Method that adds the styles designed in the juego.css
+	 */
+	public void anyadirGUI(){
+		panel.getStylesheets().add("/css/juego.css");
+		panel.getStylesheets().remove("/css/application.css");
+		BackgroundImage myBII= new BackgroundImage(new Image(getClass().getResourceAsStream("/images/pspgamebg.png"),panel.getWidth(),panel.getHeight(),false,true),BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+		//then you set to your node
+		panel.setBackground(new Background(myBII));}
+	/*
 			//Cuadro de texto
 			tfRespuesta = new TextField();
 			tfRespuesta.setLayoutX(250);
@@ -1288,7 +1315,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					+ "-fx-border-width: 0 0 1 0;\n"
 					+ "-fx-background-color: transparent ;");
 
-			
+
 
 			imgUsuario.setLayoutX(150);
 			imgUsuario.setLayoutY(100);
@@ -1324,7 +1351,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//Servidor
 			//Imagen del usuario y del rival
 			//Usuario
-			
+
 			if(EventosLogIn.iAvatar!=null){
 				imgUsuario.setImage(EventosLogIn.iAvatar);
 			}else{
@@ -1367,10 +1394,10 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			/*
 	    @FXML public Text textoUsernameUser;
 	    @FXML public Text textoUsernameRival;
-			 */
-			
-			//Efectos
-			/*DropShadow dropShadow = new DropShadow();
+	 */
+
+	//Efectos
+	/*DropShadow dropShadow = new DropShadow();
 			dropShadow.setColor(Color.DODGERBLUE);
 			dropShadow.setRadius(25);
 			dropShadow.setSpread(0.5);
@@ -1410,132 +1437,120 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//		panel.getStylesheets().remove("/css/application.css");
 		}
 
-		*/
-		
-		
-//		/**Method that check that the theme is well selected
-//		 * @return true if yes
-//		 * @return false if the theme is not well selected
-//		 */
-//		boolean preguntasBienSeleccionadas(){
-//			/*
-//			int count = 0;
-//			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
-//				if(objetoSeleccionPregunta.isElegido()) count++;
-//				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
-//					if(objetoSeleccionPregunta.getTexto().getText().equals("VS Amigo")){
-//						if(objetoSeleccionPregunta.isElegido()){
-//							//Dialogo VS Amigo no disponible en versión 1.0;
-//							return false;
-//						}
-//					}
-//				}
-//			}
-//			if(count == 2) return true; 
-//			else{
-//				//Dialogo elige modo y el tema
-//				return false;
-//			}
-//			*/
-//			int count = 0;
-//			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
-//				if(objetoSeleccionPregunta.isElegido()) count++;
-//				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
-//					if(btnAmigo.isPressed()){
-//						if(objetoSeleccionPregunta.isElegido()){
-//							//Dialogo VS Amigo no disponible en versión 1.0;
-//							return false;
-//						}
-//					}
-//				}
-//			}
-//			if(count == 2) return true; 
-//			else{
-//				//Dialogo elige modo y el tema
-//				return false;
-//			}
-//		}
-//		
-		/**Method that manages the E S of the panel
-		 * @param event 
-		 */
-		@FXML
-		void esPanel(MouseEvent event) {
-			if(!juegoEnCurso){
-				Alert a = new Alert(AlertType.INFORMATION);
-				a.setTitle("Información");
-				a.setHeaderText("Prueba a empezar juego para cerrar el panel");
-				a.initModality(Modality.APPLICATION_MODAL);
-				a.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				a.showAndWait();
+	 */
+
+
+	//		/**Method that check that the theme is well selected
+	//		 * @return true if yes
+	//		 * @return false if the theme is not well selected
+	//		 */
+	//		boolean preguntasBienSeleccionadas(){
+	//			/*
+	//			int count = 0;
+	//			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
+	//				if(objetoSeleccionPregunta.isElegido()) count++;
+	//				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
+	//					if(objetoSeleccionPregunta.getTexto().getText().equals("VS Amigo")){
+	//						if(objetoSeleccionPregunta.isElegido()){
+	//							//Dialogo VS Amigo no disponible en versión 1.0;
+	//							return false;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			if(count == 2) return true; 
+	//			else{
+	//				//Dialogo elige modo y el tema
+	//				return false;
+	//			}
+	//			*/
+	//			int count = 0;
+	//			for (QuestionSelectedObject objetoSeleccionPregunta : aLEleccion) {
+	//				if(objetoSeleccionPregunta.isElegido()) count++;
+	//				if(!objetoSeleccionPregunta.isSeccion_notSeleccionable()){
+	//					if(btnAmigo.isPressed()){
+	//						if(objetoSeleccionPregunta.isElegido()){
+	//							//Dialogo VS Amigo no disponible en versión 1.0;
+	//							return false;
+	//						}
+	//					}
+	//				}
+	//			}
+	//			if(count == 2) return true; 
+	//			else{
+	//				//Dialogo elige modo y el tema
+	//				return false;
+	//			}
+	//		}
+	//		
+	/**Method that manages the E S of the panel
+	 * @param event 
+	 */
+	@FXML
+	void esPanel(MouseEvent event) {
+		if(!ServiceLocator.playing){
+			Alert a = new Alert(AlertType.INFORMATION);
+			a.setTitle("Información");
+			a.setHeaderText("Prueba a empezar juego para cerrar el panel");
+			a.initModality(Modality.APPLICATION_MODAL);
+			a.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			a.showAndWait();
+		}else{
+			Platform.runLater(new PanelThread( ventanaMenuDentro, menuDesplegable ));
+			ventanaMenuDentro = !ventanaMenuDentro;
+		}
+	}
+
+	public void BusquedaPartida(MouseEvent event){
+
+		try {
+			QuestionType type = QuestionType.All; 
+			UserDTO udto= com.pasapalabra.game.service.ServiceLocator.play(type);
+			if(udto.getUserName().equals("Wait")){
+				Alert alert = new Alert(AlertType.INFORMATION);
+
+				alert.setTitle("Wait");
+
+				alert.setHeaderText("Searching game");
+
+				alert.setContentText("Wait, searching game...");
+
+				alert.show();
 			}else{
-				Platform.runLater(new PanelThread( ventanaMenuDentro, menuDesplegable ));
-				ventanaMenuDentro = !ventanaMenuDentro;
+				log.log(Level.FINEST, "Transicion de ventana a Juego");
+				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
 			}
-		}
-
-		public void BusquedaPartida(MouseEvent event){
-			
-			try {
-				QuestionType type = QuestionType.All; 
-				UserDTO udto= com.pasapalabra.game.service.ServiceLocator.play(type);
-				if(udto.getUserName().equals("Wait")){
-					Alert alert = new Alert(AlertType.INFORMATION);
-
-					alert.setTitle("Wait");
-
-					alert.setHeaderText("Searching game");
-
-					alert.setContentText("Wait, searching game...");
-
-					alert.show();
-				}else{
-					log.log(Level.FINEST, "Transicion de ventana a Juego");
-					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				log.log(Level.WARNING, "Error, no se ha podido conectar");
-				e.printStackTrace();
-			} 
-		}
-		@Override
-		public void initialize(URL location, ResourceBundle resources) {
-			/*TODO: revise thisConexion_cliente.Correctas=0;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			log.log(Level.WARNING, "Error, no se ha podido conectar");
+			e.printStackTrace();
+		} 
+	}
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		/*TODO: revise thisConexion_cliente.Correctas=0;
 			Conexion_cliente.Incorrectas=0;
 			panel.getChildren().remove(fondoCarga);
 			panel.getChildren().remove(barraCarga);
 			panel.getChildren().remove(textoCargaTranquil);
 			panel.getChildren().remove(textoCargaBuscandoPartida);
 			panel.applyCss();*/
-			//SERVIDOR
-			//TODO Cargar imagen personal
-			if(com.pasapalabra.game.service.ServiceLocator.userInfo.getProfileImage()!=null){
-				
-				byte[] imageByteArray = Base64.decodeBase64(com.pasapalabra.game.service.ServiceLocator.userInfo.getProfileImage());
-				try {
-					BufferedImage imag = ImageIO.read(new ByteArrayInputStream(imageByteArray));
+		//SERVIDOR
+		//TODO Cargar imagen personal
+		btnCancel.setVisible(false);
+		searchTXT.setVisible(false);
+		if(com.pasapalabra.game.service.ServiceLocator.userInfo.getProfileImage()!=null){
 
-					if (imag != null) {
-						System.out.println("If");
-						imagenAvatar.setImage(SwingFXUtils.toFXImage(imag, null));
-					}
-					else{
-						System.out.println("ELSE");
-						String imagen = "fPerfil";
-						Random rand = new Random();
-						int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
-						if(randomNum == 666){
-							imagen = "fPerfilPirata";
-						}
+			byte[] imageByteArray = Base64.decodeBase64(com.pasapalabra.game.service.ServiceLocator.userInfo.getProfileImage());
+			try {
+				BufferedImage imag = ImageIO.read(new ByteArrayInputStream(imageByteArray));
 
-						Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
-						imagenAvatar.setImage(i);
-					}
-
-				} catch (IOException e) {
-
-					log.log(Level.SEVERE, "Error occurred trying to create the user image",e);
+				if (imag != null) {
+					System.out.println("If");
+					imagenAvatar.setImage(SwingFXUtils.toFXImage(imag, null));
+				}
+				else{
+					System.out.println("ELSE");
 					String imagen = "fPerfil";
 					Random rand = new Random();
 					int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
@@ -1546,8 +1561,10 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 					imagenAvatar.setImage(i);
 				}
-				imagenAvatar.setImage(LogInController.iAvatar);
-			}else{
+
+			} catch (IOException e) {
+
+				log.log(Level.SEVERE, "Error occurred trying to create the user image",e);
 				String imagen = "fPerfil";
 				Random rand = new Random();
 				int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
@@ -1557,36 +1574,48 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 				Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 				imagenAvatar.setImage(i);
-		
 			}
-			Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
-			imagenAvatar.setClip(clip);
-			imagenAvatar.setSmooth(true); 
-			imagenAvatar.setCache(true); 
+			imagenAvatar.setImage(LogInController.iAvatar);
+		}else{
+			String imagen = "fPerfil";
+			Random rand = new Random();
+			int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+			if(randomNum == 666){
+				imagen = "fPerfilPirata";
+			}
 
-			//Rellenar ArrayList menu desplegable
-			this.menuDesplegable = new ArrayList<Node>();
-			//Rectángulos y círculos
-			menuDesplegable.add(rectanguloPanel);
-			menuDesplegable.add(btnAmigos);
-			menuDesplegable.add(btnCerrarSesion);
-			menuDesplegable.add(btnEstadisticas);
-			menuDesplegable.add(btnJuego);
-			menuDesplegable.add(btnPerfil);
-			menuDesplegable.add(circuloPanel);
-			menuDesplegable.add(circuloPlus);
-			menuDesplegable.add(logopsp);
-			menuDesplegable.add(textoLogeadoComo);
-			menuDesplegable.add(textoESPanel);
-			menuDesplegable.add(textoLogeadoComo);
-			menuDesplegable.add(textoPlus);
+			Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+			imagenAvatar.setImage(i);
 
-			//Variables de usuario
-			menuDesplegable.add(textoNombreDeUsuario);
-			textoNombreDeUsuario.setText(com.pasapalabra.game.service.ServiceLocator.userInfo.getUserName());
-			menuDesplegable.add(imagenAvatar);
+		}
+		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
+		imagenAvatar.setClip(clip);
+		imagenAvatar.setSmooth(true); 
+		imagenAvatar.setCache(true); 
 
-			/* ya no hay rectangulos y textos. No se necesita objeto seleccion pregunta
+		//Rellenar ArrayList menu desplegable
+		this.menuDesplegable = new ArrayList<Node>();
+		//Rectángulos y círculos
+		menuDesplegable.add(rectanguloPanel);
+		menuDesplegable.add(btnAmigos);
+		menuDesplegable.add(btnCerrarSesion);
+		menuDesplegable.add(btnEstadisticas);
+		menuDesplegable.add(btnJuego);
+		menuDesplegable.add(btnPerfil);
+		menuDesplegable.add(circuloPanel);
+		menuDesplegable.add(circuloPlus);
+		menuDesplegable.add(logopsp);
+		menuDesplegable.add(textoLogeadoComo);
+		menuDesplegable.add(textoESPanel);
+		menuDesplegable.add(textoLogeadoComo);
+		menuDesplegable.add(textoPlus);
+
+		//Variables de usuario
+		menuDesplegable.add(textoNombreDeUsuario);
+		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ServiceLocator.userInfo.getUserName());
+		menuDesplegable.add(imagenAvatar);
+
+		/* ya no hay rectangulos y textos. No se necesita objeto seleccion pregunta
 			//Rellenar elementos.
 			this.aLEleccion = new ArrayList<QuestionSelectedObject>();
 			//Elementos título
@@ -1603,14 +1632,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			aLEleccion.add(new QuestionSelectedObject(tCien, rCien, false));
 			aLEleccion.add(new QuestionSelectedObject(tEntret, rEntret, false));
 			aLEleccion.add(new QuestionSelectedObject(tDep, rDep, false));
-			*/
-			aLBotones.add(btnArte); 
-			aLBotones.add(btnCiencia); 
-			aLBotones.add(btnDeportes); 
-			aLBotones.add(btnEntretenimiento); 
-			aLBotones.add(btnGeo); 
-			aLBotones.add(btnHistoria); 
-			
-			panel.getStylesheets().add("/css/application.css");
-		}
+		 */
+		aLBotones.add(btnArte); 
+		aLBotones.add(btnCiencia); 
+		aLBotones.add(btnDeportes); 
+		aLBotones.add(btnEntretenimiento); 
+		aLBotones.add(btnGeo); 
+		aLBotones.add(btnHistoria); 
+
+		panel.getStylesheets().add("/css/application.css");
 	}
+}
