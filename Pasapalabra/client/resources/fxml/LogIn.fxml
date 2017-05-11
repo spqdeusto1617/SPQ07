@@ -69,5 +69,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Text>
+      <Button fx:id="btnGame" layoutX="320.0" layoutY="358.0" mnemonicParsing="false" onMouseClicked="#Game" prefHeight="25.0" prefWidth="9.0" text="Button" />
    </children>
 </Pane>

@@ -63,8 +63,6 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	public QuestionType type; 
 	//public static boolean ServiceLocator.playing = false;
 	public boolean ventanaMenuDentro = false;
-	public ArrayList<ImageView> panelLetrasJugador = new ArrayList<>(); //Panel con todos los labels del jugador
-	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
 	public ArrayList<Node> menuDesplegable; //Colección de todos los elementos del menu desplegable.
 	public ArrayList<Button> aLBotones = new ArrayList<Button>(); 
 
@@ -1210,10 +1208,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	//			}
 	//	}
 
-	/**Method to create the rosco of the game with all the letters. 
-	 * @param amigo_notEnemigo
-	 * @param aLImgV
-	 */
+	
 	
 
 	/**Method that adds the styles designed in the juego.css
@@ -1293,7 +1288,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			imgUsuario.setCache(true); 
 
 			//Rival
-			if(imagenDelRival!=null){
+			if(Rival!=null){
 				imgRival.setImage(imagenDelRival);
 			}else{
 				String imagen = "fPerfil";
