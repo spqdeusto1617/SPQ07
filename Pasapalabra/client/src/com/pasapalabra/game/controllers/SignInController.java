@@ -272,7 +272,7 @@ public class SignInController extends Control implements Initializable {
 		}
 		else{
 			try{
-				UserDTO udto= new UserDTO(txtNombreUsuario.getText(), txtCorreoUsuario.getText(), null, userDate, 0 , 0, 0);
+				UserDTO udto= new UserDTO(txtNombreUsuario.getText(), txtCorreoUsuario.getText(), userImg, userDate, 0, 0);
 
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 

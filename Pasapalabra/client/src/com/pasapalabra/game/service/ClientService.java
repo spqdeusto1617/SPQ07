@@ -13,6 +13,8 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	 */
 	private static final long serialVersionUID = 1L;
 	String name;
+	
+	public static UserDTO rivalData;
 
 	public ClientService(String name) throws RemoteException {
 		super();
@@ -21,7 +23,7 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	//TODO: implement this
 	@Override
 	public void getUser(UserDTO user) throws RemoteException {
-		System.err.println("Nombre de usuario: "+user.getUserName());
+		rivalData = user;
 		ServiceLocator.playing = true;
 	}
 	//TODO: implement this
@@ -37,6 +39,7 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 		ServiceLocator.playing = false;//TODO: transicion de vuelta
 		ServiceLocator.turn = false;
 		ServiceLocator.player1 = false;
+		rivalData = null;
 		
 	}
 	//TODO: implement this (change to observer mode)
@@ -51,6 +54,10 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	@Override
 	public void otherDisconnected() throws RemoteException {
 		System.err.println("Su rival se ha desconectado, saliendo del juego");
+		ServiceLocator.turn = false;
+		ServiceLocator.playing = false;
+		ServiceLocator.player1 = false;
+		rivalData = null;
 		//TODO: exit the game(Use windowUtilities.forcedCloseSession
 	}
 
