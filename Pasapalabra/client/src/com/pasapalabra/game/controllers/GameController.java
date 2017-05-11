@@ -49,8 +49,12 @@ public class GameController implements Initializable{
 	public boolean ventanaMenuDentro = false;
 	private static boolean rightAnswered;
 	public static QuestionDTO currentQuestion;
+	public ArrayList<ImageView> panelLetrasJugador = new ArrayList<>(); //Panel con todos los labels del jugador
+	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
+	
 
 	@FXML public Pane panel;
+	@FXML public ImageView iv;
 	@FXML public Rectangle rPreguntas; 
 	@FXML public TextArea taPreguntas;
 
@@ -526,7 +530,7 @@ public class GameController implements Initializable{
 		try {
 			if(ServiceLocator.endGame()){
 				btnVolver.setDisable(false);
-				WindowUtilities.windowTransition("ThemeElection", event);
+				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			}else{
 				btnVolver.setDisable(true);
 			}
@@ -536,8 +540,12 @@ public class GameController implements Initializable{
 		}
 	}
 	
+	/**Method to create the rosco of the game with all the letters. 
+	 * @param amigo_notEnemigo
+	 * @param aLImgV
+	 */
 	public void crearRosco(boolean amigo_notEnemigo, ArrayList<ImageView> aLImgV){
-		ImageView iv;
+		//ImageView iv;
 		char letraABC = 'a';
 
 		for (int i = 0; i < PUNTOSTOTALES; i++) {
@@ -545,24 +553,28 @@ public class GameController implements Initializable{
 
 
 			//CREAMOS ImageView
-			iv = new ImageView();
+			//iv = new ImageView();
 
 			iv.setLayoutX(coordX(amigo_notEnemigo));
 			iv.setLayoutY(coordY());
 			iv.setFitHeight(25);
 			iv.setFitWidth(25);
-
-			//CARGAMOS LA IMAGEN
+			
+			//CARGAMOS LA IMAGEN. 
+			//NO LLEGA AQUI. ME DICE QUE LA I ES 0 Y NO LLEGA A INCREMENTARSE, es decir, 
+			//SE QUEDA EN LA A Y NO SE INCREMENTA
 			if(i == 14){
 				letraABC--;
 				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/ñ-blue.png")));
 			}else{
 
 				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/"+letraABC+"-blue.png")));
+				System.out.println("AQUI"+letraABC);
 			} 
 
 			panel.getChildren().add(iv);
 			try {
+				
 				Thread.sleep(30);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -570,15 +582,12 @@ public class GameController implements Initializable{
 			}
 			
 
-			//A—ADIMOS EL LABEL AL ARRAYLIST DE LABELS
+			//AÑADIMOS EL LABEL AL ARRAYLIST DE LABELS
 			aLImgV.add(iv);
 
 			//SUMAMOS 1 A LA LETRA
 			letraABC++;
 		}
-
-
-
 	}
 
 	/**
@@ -596,7 +605,7 @@ public class GameController implements Initializable{
 		else resultado = (int)(150 * Math.cos((360/27.0)*vecesHechoX*(Math.PI/180)-Math.PI/2)) + 575;
 
 		vecesHechoX++;
-		//		System.out.println(resultado);
+		//	System.out.println(resultado);
 		return resultado;
 	}
 
@@ -615,20 +624,26 @@ public class GameController implements Initializable{
 		resultado = (int)(150 * Math.sin((360/27.0)*vecesHechoY*(Math.PI/180)-Math.PI/2)) +200;
 
 		vecesHechoY++;
-		//		System.out.println(resultado);
+		//	System.out.println(resultado);
 		return resultado;
 	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try {
-			currentQuestion = ServiceLocator.getQuestion();
+			crearRosco(true, panelLetrasJugador);
+			crearRosco(true, panelLetrasContrincante); 
+			iv.setDisable(false);
+			//DESCOMENTAR
+			//currentQuestion = ServiceLocator.getQuestion();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		taPreguntas.setText(currentQuestion.getQuestion());
-		textoUsernameRival.setText(com.pasapalabra.game.service.ClientService.rivalData.getUserName());
-		textoUsernameUser.setText(ServiceLocator.userInfo.getUserName());
+		//DESCOMENTAR
+		//taPreguntas.setText(currentQuestion.getQuestion());
+		//textoUsernameRival.setText(com.pasapalabra.game.service.ClientService.rivalData.getUserName());
+		//textoUsernameUser.setText(ServiceLocator.userInfo.getUserName());
 	}
 }
