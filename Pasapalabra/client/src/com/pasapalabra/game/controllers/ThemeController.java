@@ -241,6 +241,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	void cancelMatch(MouseEvent event){
 		try {
 			ServiceLocator.exitMatchMaking();
+			ServiceLocator.playing = false;
 			btnCancel.setVisible(false);
 			searchTXT.setVisible(false);
 		}catch (Exception e) {
@@ -341,6 +342,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		//aLEleccion es el arrayList de la elección (Modalidad + Tema) y todos los elementos
 		//String[]Tipo=new String[2];
 		QuestionType type = QuestionType.All; 
+		ServiceLocator.type = type;
 		//		for (QuestionSelectedObject obsp : aLEleccion) {
 		//			if (obsp.isElegido()) {
 		//				if(obsp.isModoDeJuego_notTipoPregunta()){

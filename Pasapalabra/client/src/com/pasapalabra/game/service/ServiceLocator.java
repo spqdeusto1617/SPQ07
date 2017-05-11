@@ -4,7 +4,6 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.security.AccessControlException;
 
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.QuestionType;
@@ -24,8 +23,6 @@ public class ServiceLocator{
 	public static Token sessionAuth;
 
 	public static UserDTO userInfo;
-	
-	public static UserDTO rivalInfo;
 
 	public static boolean serverReady;
 
@@ -37,7 +34,7 @@ public class ServiceLocator{
 	
 	private static boolean reachZ = false;
 	
-	private static QuestionType type;
+	public static QuestionType type;
 
 	//public static boolean gameEnd = false;
 	

@@ -535,6 +535,14 @@ public class GameController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		try {
+			currentQuestion = ServiceLocator.getQuestion();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		taPreguntas.setText(currentQuestion.getQuestion());
+		textoUsernameRival.setText(com.pasapalabra.game.service.ClientService.rivalData.getUserName());
+		textoUsernameUser.setText(ServiceLocator.userInfo.getUserName());
 	}
 }
