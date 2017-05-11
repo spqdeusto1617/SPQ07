@@ -572,6 +572,7 @@ public class GameController implements Initializable{
 
 			panel.getChildren().add(iv);
 			try {
+				
 				Thread.sleep(30);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
