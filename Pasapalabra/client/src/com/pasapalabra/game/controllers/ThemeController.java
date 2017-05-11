@@ -350,10 +350,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 		try {
 			//TODO: cambiar
-			//com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.service.ServiceLocator.play(type); 
 			// ANTES utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Jugar.toString(), Tipo);
-			com.pasapalabra.game.service.ServiceLocator.startConnection(String[] args);
-			//com.pasapalabra.game.controllers.GameController.currentQuestion = com.pasapalabra.game.service.ServiceLocator.getQuestion(); 
+			UserDTO user= com.pasapalabra.game.service.ServiceLocator.play(type); 
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block
