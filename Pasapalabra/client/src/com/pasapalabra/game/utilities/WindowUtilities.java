@@ -186,9 +186,11 @@ public class WindowUtilities {
 	public static void forcedCloseSession(Event event){
 
 
-		com.pasapalabra.game.service.ClientConnection.sessionAuth = null;
+		ClientConnection.sessionAuth = null;
 
-		com.pasapalabra.game.service.ClientConnection.userInfo = null;
+		ClientConnection.userInfo = null;
+		
+		ClientConnection.userIMG = null;
 
 		windowTransition("LogIn", event);
 

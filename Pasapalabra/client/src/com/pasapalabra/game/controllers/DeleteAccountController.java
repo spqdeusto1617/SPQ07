@@ -1,11 +1,13 @@
 package com.pasapalabra.game.controllers;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import com.pasapalabra.game.service.ClientConnection;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.event.Event;
@@ -90,7 +92,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	@FXML public PasswordField pfdContrasenya;
 
 	@FXML public PasswordField pfdRepetirContrasenya;
-	
+
 	//Buttons
 	@FXML public Button btnCerrarSesion;
 	@FXML public Button btnEstadisticas;
@@ -110,8 +112,8 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 		panel.getStylesheets().add("/css/application.css");
 		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
-		if(LogInController.iAvatar!=null){
-			imagenAvatar.setImage(LogInController.iAvatar);
+		if(ClientConnection.userIMG!=null){
+			imagenAvatar.setImage(ClientConnection.userIMG);
 		}else{
 			String imagen = "fPerfil";
 			Random rand = new Random();
@@ -165,6 +167,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 					alert3.initModality(Modality.APPLICATION_MODAL);
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert3.showAndWait();
+					tfdCorreo.setText("");
 				}
 				if(!pfdContrasenya.getText().equals(pfdRepetirContrasenya.getText())){
 					datos_Correctos=false;
@@ -175,6 +178,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 					alert3.initModality(Modality.APPLICATION_MODAL);
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert3.showAndWait();
+					pfdRepetirContrasenya.setText("");
 				}
 				/*if(!pfdContrasenya.getText().equals(com.pasapalabra.game.utilities.Conexion_cliente.Datos_Usuario.get(3))){
 					datos_Correctos=false;
@@ -190,16 +194,54 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 				if(datos_Correctos==true){
 					try{
-						//TODO: Delete account
-						Alert alert3 = new Alert(AlertType.INFORMATION);
-						alert3.setTitle("Éxito al eliminar su cuenta");
-						alert3.setHeaderText("Se ha eliminado su cuenta con éxito");
-						alert3.setContentText("Se ha producido la eliminación de su cuenta, procedemos a enviarlo al LogIn");
+						//TODO: change mail (validate pass)tflNuevoMail.getText()
+
+						Boolean opResult = ClientConnection.removeUser(pfdContrasenya.getText());
+						if(opResult == false){
+							Alert alert3 = new Alert(AlertType.ERROR);
+							alert3.setTitle("Pass incorrect");
+							alert3.setHeaderText("The pass is incorrect");
+							alert3.setContentText("The password is incorrect, please insert your pass again");
+							alert3.initModality(Modality.APPLICATION_MODAL);
+							alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+							alert3.showAndWait();
+							pfdContrasenya.setText("");
+						}
+						else if(opResult == true){
+							Alert alert3 = new Alert(AlertType.INFORMATION);
+							alert3.setTitle("Success with the changes");
+							alert3.setHeaderText("Your account was removed successfully");
+							alert3.setContentText("Your data was removed successfully, you now will return to the main page");
+							alert3.initModality(Modality.APPLICATION_MODAL);
+							alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+							alert3.showAndWait();
+							com.pasapalabra.game.service.ClientConnection.userInfo = null;
+							ClientConnection.sessionAuth = null;
+							ClientConnection.cService = null;
+							ClientConnection.userIMG = null;
+							com.pasapalabra.game.utilities.WindowUtilities.windowTransition("LogIn", event);
+						}else{
+							WindowUtilities.forcedCloseSession(event);
+						}
+					}catch(NullPointerException a){
+						Alert alert3 = new Alert(AlertType.ERROR);
+						alert3.setTitle("Error trying to save your new data");
+						alert3.setHeaderText("There was an error trying to update your data");
+						alert3.setContentText("An error occurred trying to update your data, please try again");
 						alert3.initModality(Modality.APPLICATION_MODAL);
 						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert3.showAndWait();
-						WindowUtilities.windowTransition("LogIn", event);
-					}catch(Exception a){
+					}
+					catch(RemoteException a){
+						Alert alert3 = new Alert(AlertType.ERROR);
+						alert3.setTitle("Error trying to connect to the server");
+						alert3.setHeaderText("An error ocurred with the connection");
+						alert3.setContentText("An error occurred trying to access to the server, please check your connection and try again");
+						alert3.initModality(Modality.APPLICATION_MODAL);
+						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert3.showAndWait();
+					}
+					catch(Exception a){
 						Alert alert3 = new Alert(AlertType.INFORMATION);
 						alert3.setTitle("Se produjo un error al tramitar sus datos");
 						alert3.setHeaderText("Parece que se ha producido un error al cambiar los datos");
@@ -255,14 +297,14 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 
 
-	
+
 	/**Transition to Game window
 	 * @param event
 	 */
 	public void btnJugar(MouseEvent event){
 		WindowUtilities.windowTransition("ThemeElection", event);
 	}
-	
+
 	/**Transition to friends window
 	 * @param event
 	 */
@@ -270,9 +312,9 @@ public class DeleteAccountController extends ExtenderClassController implements 
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
-		
+
 		alert.setHeaderText("Do not use this function");
-		 
+
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
@@ -283,16 +325,16 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	 * @param event
 	 */
 	public void btnMiPerfil(MouseEvent event){
-		Alert alert = new Alert(AlertType.INFORMATION);
-
-		alert.setTitle("Function not yet implemented.");
-		
-		alert.setHeaderText("Do not use this function");
-		 
-		alert.setContentText("This Function is not implemented, please, do not use it");
-
-		alert.showAndWait();
-		//WindowUtilities.windowTransition("Profile", event);
+		//		Alert alert = new Alert(AlertType.INFORMATION);
+		//
+		//		alert.setTitle("Function not yet implemented.");
+		//		
+		//		alert.setHeaderText("Do not use this function");
+		//		 
+		//		alert.setContentText("This Function is not implemented, please, do not use it");
+		//
+		//		alert.showAndWait();
+		WindowUtilities.windowTransition("Profile", event);
 	}
 
 	/**Transition to statistics window
@@ -302,16 +344,16 @@ public class DeleteAccountController extends ExtenderClassController implements 
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
-		
+
 		alert.setHeaderText("Do not use this function");
-		 
+
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
 		//WindowUtilities.windowTransition("Statistics", event);
 	}
 
-	
+
 	/**Method that closes the current session
 	 * @param event
 	 */
@@ -324,13 +366,13 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		WindowUtilities.efectoTransparenciaOnHover(event, this);
+		//WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		WindowUtilities.efectoTransparenciaOnHover(event, this);
+		//WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel	

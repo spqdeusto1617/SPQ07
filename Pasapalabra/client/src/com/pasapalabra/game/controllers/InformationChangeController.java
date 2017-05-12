@@ -1,12 +1,16 @@
 package com.pasapalabra.game.controllers;
 
 import java.net.URL;
+import java.rmi.RemoteException;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.pasapalabra.game.service.ClientConnection;
+import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -100,7 +104,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 	@FXML public PasswordField pfdNuevaContrasenya;
 
 	@FXML public PasswordField pfdNuevaContrasenya1;
-	
+
 	//Buttons
 	@FXML public Button btnCerrarSesion;
 	@FXML public Button btnEstadisticas;
@@ -152,7 +156,7 @@ public class InformationChangeController extends ExtenderClassController impleme
 
 		if (result.get() == ButtonType.OK){
 			boolean datos_Correctos=true;
-			if(!tflViejoMail.getText().equals(com.pasapalabra.game.service.ClientConnection.userInfo.getMail())){
+			if(!tflViejoMail.getText().equals(ClientConnection.userInfo.getMail())){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
 				alert2.setTitle("Mail no coincide");
@@ -190,17 +194,50 @@ public class InformationChangeController extends ExtenderClassController impleme
 			if(datos_Correctos==true){
 				try{
 					//TODO: change mail (validate pass)tflNuevoMail.getText()
-	
-					Alert alert2 = new Alert(AlertType.INFORMATION);
-					alert2.setTitle("Éxito al cambiar sus datos");
-					alert2.setHeaderText("Se han cambiado los datos con éxito");
-					alert2.setContentText("Sus datos se han alterado con éxito");
+
+					Boolean opResult = ClientConnection.changeUserData(pflContrasenyaUsuario.getText(), tflNuevoMail.getText(), null, null);
+					if(opResult == false){
+						Alert alert2 = new Alert(AlertType.ERROR);
+						alert2.setTitle("Pass incorrect");
+						alert2.setHeaderText("The pass is incorrect");
+						alert2.setContentText("The password is incorrect, please insert your pass again");
+						alert2.initModality(Modality.APPLICATION_MODAL);
+						alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert2.showAndWait();
+						pflContrasenyaUsuario.setText("");
+					}
+					else if(opResult == true){
+						Alert alert2 = new Alert(AlertType.INFORMATION);
+						alert2.setTitle("Success with the changes");
+						alert2.setHeaderText("The data was updated correctly");
+						alert2.setContentText("Your data was updated correctly");
+						alert2.initModality(Modality.APPLICATION_MODAL);
+						alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert2.showAndWait();
+						com.pasapalabra.game.service.ClientConnection.userInfo.setMail(tflNuevoMail.getText());
+						com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
+					}else{
+						WindowUtilities.forcedCloseSession(event);
+					}
+				}catch(NullPointerException a){
+					Alert alert2 = new Alert(AlertType.ERROR);
+					alert2.setTitle("Error trying to save your new data");
+					alert2.setHeaderText("There was an error trying to update your data");
+					alert2.setContentText("An error occurred trying to update your data, please try again");
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
-					com.pasapalabra.game.service.ClientConnection.userInfo.setMail(tflNuevoMail.getText());
-					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
-				}catch(Exception a){
+				}
+				catch(RemoteException a){
+					Alert alert2 = new Alert(AlertType.ERROR);
+					alert2.setTitle("Error trying to connect to the server");
+					alert2.setHeaderText("An error ocurred with the connection");
+					alert2.setContentText("An error occurred trying to access to the server, please check your connection and try again");
+					alert2.initModality(Modality.APPLICATION_MODAL);
+					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert2.showAndWait();
+				}
+				catch(Exception a){
 					Alert alert2 = new Alert(AlertType.INFORMATION);
 					alert2.setTitle("Se produjo un error al tramitar sus datos");
 					alert2.setHeaderText("Parece que se ha producido un error al cambiar los datos");
@@ -265,18 +302,50 @@ public class InformationChangeController extends ExtenderClassController impleme
 			}
 			if(datos_Correctos==true){
 				try{
-					//TODO: change pass (validate)
-					Alert alert2 = new Alert(AlertType.INFORMATION);
-					alert2.setTitle("Éxito al cambiar sus datos");
-					alert2.setHeaderText("Se han cambiado los datos con éxito");
-					alert2.setContentText("Sus datos se han alterado con éxito");
+
+					Boolean opResult = ClientConnection.changeUserData(pfdAntiguaContrasenya.getText(), null, null, pfdNuevaContrasenya.getText());
+					if(opResult == false){
+						Alert alert2 = new Alert(AlertType.ERROR);
+						alert2.setTitle("Pass incorrect");
+						alert2.setHeaderText("The pass is incorrect");
+						alert2.setContentText("The password is incorrect, please insert your pass again");
+						alert2.initModality(Modality.APPLICATION_MODAL);
+						alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert2.showAndWait();
+						pfdAntiguaContrasenya.setText("");
+					}
+					else if(opResult == true){
+						Alert alert2 = new Alert(AlertType.INFORMATION);
+						alert2.setTitle("Success with the changes");
+						alert2.setHeaderText("The data was updated correctly");
+						alert2.setContentText("Your data was updated correctly");
+						alert2.initModality(Modality.APPLICATION_MODAL);
+						alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert2.showAndWait();
+						com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
+					}else{
+						WindowUtilities.forcedCloseSession(event);
+					}
+				}catch(NullPointerException a){
+					Alert alert2 = new Alert(AlertType.ERROR);
+					alert2.setTitle("Error trying to save your new data");
+					alert2.setHeaderText("There was an error trying to update your data");
+					alert2.setContentText("An error occurred trying to update your data, please try again");
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
-					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
-				}catch(Exception a){
-
+				}
+				catch(RemoteException a){
 					Alert alert2 = new Alert(AlertType.ERROR);
+					alert2.setTitle("Error trying to connect to the server");
+					alert2.setHeaderText("An error ocurred with the connection");
+					alert2.setContentText("An error occurred trying to access to the server, please check your connection and try again");
+					alert2.initModality(Modality.APPLICATION_MODAL);
+					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert2.showAndWait();
+				}
+				catch(Exception a){
+					Alert alert2 = new Alert(AlertType.INFORMATION);
 					alert2.setTitle("Se produjo un error al tramitar sus datos");
 					alert2.setHeaderText("Parece que se ha producido un error al cambiar los datos");
 					alert2.setContentText("Se ha producido un error al intentar cambiar los datos, por favor, intenteló de nuevo más tarde");
@@ -341,9 +410,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
-		
+
 		alert.setHeaderText("Do not use this function");
-		 
+
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
@@ -357,9 +426,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
-		
+
 		alert.setHeaderText("Do not use this function");
-		 
+
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();
@@ -373,9 +442,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
-		
+
 		alert.setHeaderText("Do not use this function");
-		 
+
 		alert.setContentText("This Function is not implemented, please, do not use it");
 
 		alert.showAndWait();

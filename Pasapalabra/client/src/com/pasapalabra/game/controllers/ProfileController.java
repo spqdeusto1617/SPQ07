@@ -1,13 +1,13 @@
 package com.pasapalabra.game.controllers;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -15,15 +15,15 @@ import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
 
 import com.pasapalabra.game.service.ClientConnection;
-import com.pasapalabra.game.service.ServiceLocator;
+import com.pasapalabra.game.utilities.WindowUtilities;
 
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -32,6 +32,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
@@ -120,7 +121,7 @@ public class ProfileController extends ExtenderClassController implements Initia
 		if(ClientConnection.userIMG != null){
 			imagenAvatar.setImage(ClientConnection.userIMG);
 			imgCambioFotoPerfil.setImage(ClientConnection.userIMG);
-			
+
 		}else{
 			String imagen = "fPerfil";
 			Random rand = new Random();
@@ -179,22 +180,77 @@ public class ProfileController extends ExtenderClassController implements Initia
 				try{
 					String path="file:///"+file.getAbsolutePath();
 
-					LogInController.iAvatar=new Image(path);
-					//TODO: change userInfo
-					//TODO: cambiar la imagen en la BBDD
-					imgCambioFotoPerfil.setImage(new Image(path));
-					imagenAvatar.setImage(new Image(path));
-				}catch(Exception a){
-					a.printStackTrace();
-					Alert alert = new Alert(AlertType.ERROR);
-					alert.setTitle("Error al cambiar la imagen");
+					BufferedImage originalImage = ImageIO.read(file);
 
-					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					ImageIO.write( originalImage, "jpg", baos );
+					baos.flush();
+					byte[] imageInByte = baos.toByteArray();
+					baos.close();
 
-					alert.setContentText("Se ha producido un error inesperado cuando se intentó cambiar la imagen, por favor, inténtelo de nuevo más tarde.");
+					String newUserIMG = Base64.encodeBase64URLSafeString(imageInByte);
 
-					alert.showAndWait();
+					TextInputDialog dialog = new TextInputDialog("");
+					dialog.setTitle("Password");
+					dialog.setHeaderText("Insert your password");
+					dialog.setContentText("Please enter your password:");
+					Optional<String> result = dialog.showAndWait();
+					if (!result.isPresent()){
+						return;
+					}
+					Boolean opResult = ClientConnection.changeUserData(result.get(), null,newUserIMG , null);
+					if(opResult == false){
+						Alert alert2 = new Alert(AlertType.ERROR);
+						alert2.setTitle("Pass incorrect");
+						alert2.setHeaderText("The pass is incorrect");
+						alert2.setContentText("The password is incorrect, please insert your pass again");
+						alert2.initModality(Modality.APPLICATION_MODAL);
+						alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert2.showAndWait();
 
+					}
+					else if(opResult == true){
+						Alert alert2 = new Alert(AlertType.INFORMATION);
+						alert2.setTitle("Success with the changes");
+						alert2.setHeaderText("The data was updated correctly");
+						alert2.setContentText("Your data was updated correctly");
+						alert2.initModality(Modality.APPLICATION_MODAL);
+						alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+						alert2.showAndWait();
+						LogInController.iAvatar = new Image(path);
+						ClientConnection.userIMG = new Image(path);
+						imgCambioFotoPerfil.setImage(new Image(path));
+						imagenAvatar.setImage(new Image(path));
+						com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
+					}else{
+						WindowUtilities.forcedCloseSession(event);
+					}
+				}catch(NullPointerException a){
+					Alert alert2 = new Alert(AlertType.ERROR);
+					alert2.setTitle("Error trying to save your new data");
+					alert2.setHeaderText("There was an error trying to update your data");
+					alert2.setContentText("An error occurred trying to update your data, please try again");
+					alert2.initModality(Modality.APPLICATION_MODAL);
+					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert2.showAndWait();
+				}
+				catch(RemoteException a){
+					Alert alert2 = new Alert(AlertType.ERROR);
+					alert2.setTitle("Error trying to connect to the server");
+					alert2.setHeaderText("An error ocurred with the connection");
+					alert2.setContentText("An error occurred trying to access to the server, please check your connection and try again");
+					alert2.initModality(Modality.APPLICATION_MODAL);
+					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert2.showAndWait();
+				}
+				catch(Exception a){
+					Alert alert2 = new Alert(AlertType.INFORMATION);
+					alert2.setTitle("Se produjo un error al tramitar sus datos");
+					alert2.setHeaderText("Parece que se ha producido un error al cambiar los datos");
+					alert2.setContentText("Se ha producido un error al intentar cambiar los datos, por favor, intenteló de nuevo más tarde");
+					alert2.initModality(Modality.APPLICATION_MODAL);
+					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert2.showAndWait();
 				}
 			}
 		}catch(Exception a){
