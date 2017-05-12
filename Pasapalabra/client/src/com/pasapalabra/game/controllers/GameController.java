@@ -546,7 +546,7 @@ public class GameController implements Initializable{
 		for (int i = 0; i < PUNTOSTOTALES; i++) {
 			//VARIABLE ABCD...
 
-
+			
 			//CREAMOS ImageView
 			//iv = new ImageView();
 

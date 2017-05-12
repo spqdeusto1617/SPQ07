@@ -214,56 +214,56 @@ public class StatisticsController extends ExtenderClassController implements Ini
 		//com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, Main.class.getName());
 		//log.log(Level.FINEST, "Inicializando EventosEstadisticas");
 		//Poner la imagen de avatar
-		if(com.pasapalabra.game.service.ClientConnection.userInfo.getProfileImage()!=null){
-			//Si no es nula, pone la que hay
-			log.log(Level.FINEST, "El avatar en EventosLogIn.iAvatar no es nulo");
-			imagenAvatar.setImage(LogInController.iAvatar);//TODO: check this
-		}else{
-			/*Si es nula significa que el usuario no tiene imagen puesta
-			 entonces se pone una por defecto*/
-			log.log(Level.FINEST, "El avatar en EventosLogIn.iAvatar es nulo");
-			String imagen = "fPerfil";
-			Random rand = new Random();
-			int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
-			if(randomNum == 666){
-				imagen = "fPerfilPirata";
-			}
-
-			Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
-			imagenAvatar.setImage(i);
-		}
-		//Se añaden más campos
-		log.log(Level.FINEST, "Añadiendo todos los campos");
-		//Se hace un clip sobre la imagen para que sea circular
-		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
-		imagenAvatar.setClip(clip);
-		imagenAvatar.setSmooth(true); 
-		imagenAvatar.setCache(true); 
-		//Se pone el nombre de usuario
-		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
-
-		//Se ponen los datos relacionados con esta ventana. Es decir, estadísticas.
-
-		txtDerrotas.setText(Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost()));
-
-		txtVictorias.setText(Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon()));
-		double d = 1;
-		if(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost() == 0){
-			if(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon() == 0) d = 0;
-		}
-		else{
-			try{
-				d = com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon()/com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost();
-				 if (d == Double.POSITIVE_INFINITY || d == Double.NEGATIVE_INFINITY) d = 0;
-			}catch (ArithmeticException e) {
-				// TODO: handle exception
-				log.log(Level.WARNING, "Error occurred during the operation", e);
-				d = 0;
-			}
-		}
-		txtRatio.setText(String.valueOf(d));
-		txtPartidasJugadas.setText(Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost()) + Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon()));
-		log.log(Level.FINEST, "Todos los campos añadidos");
-		userNametxt.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
+//		if(com.pasapalabra.game.service.ClientConnection.userInfo.getProfileImage()!=null){
+//			//Si no es nula, pone la que hay
+//			log.log(Level.FINEST, "El avatar en EventosLogIn.iAvatar no es nulo");
+//			imagenAvatar.setImage(LogInController.iAvatar);//TODO: check this
+//		}else{
+//			/*Si es nula significa que el usuario no tiene imagen puesta
+//			 entonces se pone una por defecto*/
+//			log.log(Level.FINEST, "El avatar en EventosLogIn.iAvatar es nulo");
+//			String imagen = "fPerfil";
+//			Random rand = new Random();
+//			int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+//			if(randomNum == 666){
+//				imagen = "fPerfilPirata";
+//			}
+//
+//			Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+//			imagenAvatar.setImage(i);
+//		}
+//		//Se añaden más campos
+//		log.log(Level.FINEST, "Añadiendo todos los campos");
+//		//Se hace un clip sobre la imagen para que sea circular
+//		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
+//		imagenAvatar.setClip(clip);
+//		imagenAvatar.setSmooth(true); 
+//		imagenAvatar.setCache(true); 
+//		//Se pone el nombre de usuario
+//		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
+//
+//		//Se ponen los datos relacionados con esta ventana. Es decir, estadísticas.
+//
+//		txtDerrotas.setText(Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost()));
+//
+//		txtVictorias.setText(Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon()));
+//		double d = 1;
+//		if(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost() == 0){
+//			if(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon() == 0) d = 0;
+//		}
+//		else{
+//			try{
+//				d = com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon()/com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost();
+//				 if (d == Double.POSITIVE_INFINITY || d == Double.NEGATIVE_INFINITY) d = 0;
+//			}catch (ArithmeticException e) {
+//				// TODO: handle exception
+//				log.log(Level.WARNING, "Error occurred during the operation", e);
+//				d = 0;
+//			}
+//		}
+//		txtRatio.setText(String.valueOf(d));
+//		txtPartidasJugadas.setText(Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost()) + Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon()));
+//		log.log(Level.FINEST, "Todos los campos añadidos");
+//		userNametxt.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
 	}
 }
