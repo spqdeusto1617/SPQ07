@@ -211,8 +211,8 @@ public class StatisticsController extends ExtenderClassController implements Ini
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, Main.class.getName());
-		log.log(Level.FINEST, "Inicializando EventosEstadisticas");
+		//com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, Main.class.getName());
+		//log.log(Level.FINEST, "Inicializando EventosEstadisticas");
 		//Poner la imagen de avatar
 		if(com.pasapalabra.game.service.ClientConnection.userInfo.getProfileImage()!=null){
 			//Si no es nula, pone la que hay

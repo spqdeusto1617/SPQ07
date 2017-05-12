@@ -308,7 +308,7 @@ public class LogInController extends Control implements Initializable {
 		}
 	}
 	
-	//PROVISIONAL
+	//PROVISIONAL BORRARLO CUANDO FUNCIONE
 	public void Estadisticas(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
 	}
