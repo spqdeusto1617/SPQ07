@@ -53,6 +53,10 @@ public class LogInController extends Control implements Initializable {
 
 	@FXML
 	private Button btnLogin;
+	@FXML
+	private Button btnStati;
+	@FXML
+	private Button btnGame; 
 
 	@FXML
 	private Label txtIncorrecto;
@@ -303,6 +307,15 @@ public class LogInController extends Control implements Initializable {
 			log.log(Level.WARNING, "Error trying to acess github", e);
 		}
 	}
+	
+	//PROVISIONAL
+	public void Estadisticas(MouseEvent event){
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
+	}
+	public void Game(MouseEvent event){
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
+	}
+
 
 	public Pane createPage(int pageIndex, ArrayList<Image> aLNoticias) {
 		Pane pageBox = new Pane();

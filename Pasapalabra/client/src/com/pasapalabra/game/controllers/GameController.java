@@ -49,11 +49,14 @@ public class GameController implements Initializable{
 	public boolean ventanaMenuDentro = false;
 	private static boolean rightAnswered;
 	public static QuestionDTO currentQuestion;
+	public ArrayList<ImageView> panelLetrasJugador = new ArrayList<>(); //Panel con todos los labels del jugador
+	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
+	
 
 	@FXML public Pane panel;
 	@FXML public Rectangle rPreguntas; 
 	@FXML public TextArea taPreguntas;
-
+	@FXML public ImageView iv; 
 	@FXML public Text textoTiempoUsuario; 
 	@FXML public Text textoTiempoRival; 
 
@@ -537,7 +540,7 @@ public class GameController implements Initializable{
 	}
 	
 	public void crearRosco(boolean amigo_notEnemigo, ArrayList<ImageView> aLImgV){
-		ImageView iv;
+		//ImageView iv;
 		char letraABC = 'a';
 
 		for (int i = 0; i < PUNTOSTOTALES; i++) {
@@ -545,7 +548,7 @@ public class GameController implements Initializable{
 
 
 			//CREAMOS ImageView
-			iv = new ImageView();
+			//iv = new ImageView();
 
 			iv.setLayoutX(coordX(amigo_notEnemigo));
 			iv.setLayoutY(coordY());
@@ -576,9 +579,6 @@ public class GameController implements Initializable{
 			//SUMAMOS 1 A LA LETRA
 			letraABC++;
 		}
-
-
-
 	}
 
 	/**
@@ -618,17 +618,22 @@ public class GameController implements Initializable{
 		//		System.out.println(resultado);
 		return resultado;
 	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try {
-			currentQuestion = ClientConnection.getQuestion();
+			//currentQuestion = ClientConnection.getQuestion();
+			crearRosco(true, panelLetrasJugador);
+			crearRosco(true, panelLetrasContrincante);
+			iv.setDisable(false);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		taPreguntas.setText(currentQuestion.getQuestion());
-		textoUsernameRival.setText(com.pasapalabra.game.service.ClientService.rivalData.getUserName());
-		textoUsernameUser.setText(ClientConnection.userInfo.getUserName());
+		
+		//taPreguntas.setText(currentQuestion.getQuestion());
+		//textoUsernameRival.setText(com.pasapalabra.game.service.ClientService.rivalData.getUserName());
+		//textoUsernameUser.setText(ClientConnection.userInfo.getUserName());
 	}
 }
