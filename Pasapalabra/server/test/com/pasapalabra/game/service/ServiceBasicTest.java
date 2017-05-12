@@ -3,7 +3,6 @@ package com.pasapalabra.game.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-import java.lang.Thread.UncaughtExceptionHandler;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.Date;
@@ -16,21 +15,15 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.pasapalabra.game.main.TestLauncher;
 //import com.pasapalabra.game.main.TestLauncher;
 import com.pasapalabra.game.model.DTO.UserDTO;
-import com.pasapalabra.game.server.Server;
 import com.pasapalabra.game.service.auth.Token;
 import com.pasapalabra.game.service.auth.TokenGenerator;
 
 public class ServiceBasicTest {
-
-	private static final String HOST = "127.0.0.1";
-	private static final String PORT = "1099";
-	private static final String SERVICE = "Pasapalabra";
 	
-	private static Thread serverThread;
-	
-	private static IPasapalabraService ppService;
+	public static IPasapalabraService ppService;
 	
 	private static boolean registrationSucceded = false;
 	private static boolean logoutSucceded = false;
@@ -49,41 +42,9 @@ public class ServiceBasicTest {
 	
 	@BeforeClass
 	public static void startServer(){
-		//File projectBase = new File(TestLauncher.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getParentFile().getParentFile().getParentFile().getParentFile().getParentFile();
-		
-		
-		serverThread = new Thread(new Runnable() {			
-			@Override
-			public void run() {
-				//System.setProperty("java.rmi.server.codebase",  "file:" + projectBase.getAbsolutePath() + "/");
-				System.setProperty("java.security.policy", "security/java.policy");
-				try {
-					java.rmi.registry.LocateRegistry.createRegistry(1099);
-					System.out.println("RMI registry ready.");
-				} catch (Exception e) {
-					System.out.println("Exception starting RMI registry:");
-					e.printStackTrace();
-				}
-				Server.main(new String[]{HOST, PORT, SERVICE});
-			}
-		});	
-		
-		serverThread.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
-			
-			@Override
-			public void uncaughtException(Thread t, Throwable e) {
-				
-			}
-		});
-		
-		serverThread.start();
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-		}
 		
 		try {
-			String URL = "//" + HOST + ":" + PORT + "/" + SERVICE;
+			String URL = "//" + TestLauncher.SERVER_HOST + ":" + TestLauncher.SERVER_PORT + "/" + TestLauncher.SERVER_SERVICE_NAME;
 			ppService = (IPasapalabraService) Naming.lookup(URL);
 		} catch (Exception e) {
 			throw new RuntimeException("Error connecting to the server", e);
@@ -174,8 +135,6 @@ public class ServiceBasicTest {
 	
 	
 	@AfterClass
-	public static void stopServer(){
-		try{serverThread.interrupt();}catch(Exception e){}
-	}
+	public static void stopServer(){ }
 
 }

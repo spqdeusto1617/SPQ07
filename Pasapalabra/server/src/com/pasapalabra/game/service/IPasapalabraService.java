@@ -54,7 +54,7 @@ public interface IPasapalabraService extends Remote {
 	 * @throws RemoteException: if some error occurred during the process
 	 * @throws SecurityException: if the user tries to play more than once simultaneously
 	 */
-	public UserDTO play(Token session, String type,IClientService service) throws RemoteException, SecurityException;
+	public UserDTO play(Token session, String type, IClientService service) throws RemoteException, SecurityException;
 
 	/**Method for getting a question from the server
 	 * @param session: the session token given after login 

@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.pasapalabra.game.dao.UserDAO;
+import com.pasapalabra.game.main.TestLauncher;
 import com.pasapalabra.game.model.User;
 import com.pasapalabra.game.service.auth.TokenGenerator;
 
@@ -29,7 +30,7 @@ public class UserDAOTest {
 		MongoClientOptions.Builder options = MongoClientOptions.builder();
     	options.socketKeepAlive(true);
     	MongoClient mongoClient = new MongoClient("127.0.0.1:27017", options.build());
-    	mongoConnection = new MongoConnection("com.pasapalabra.game.model", mongoClient, "pasapalabra");
+    	mongoConnection = new MongoConnection("com.pasapalabra.game.model", mongoClient, TestLauncher.DB_NAME);
     	
     	
     	// Instanciates DAO

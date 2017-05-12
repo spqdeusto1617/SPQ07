@@ -9,6 +9,7 @@ import org.junit.Test;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.pasapalabra.game.dao.QuestionDAO;
+import com.pasapalabra.game.main.TestLauncher;
 import com.pasapalabra.game.model.Question;
 
 /** Question DAO with MongoDB tests
@@ -28,7 +29,7 @@ public class QuestionDAOTest {
 		MongoClientOptions.Builder options = MongoClientOptions.builder();
     	options.socketKeepAlive(true);
     	MongoClient mongoClient = new MongoClient("127.0.0.1:27017", options.build());
-    	mongoConnection = new MongoConnection("com.pasapalabra.game.model", mongoClient, "pasapalabra");
+    	mongoConnection = new MongoConnection("com.pasapalabra.game.model", mongoClient, TestLauncher.DB_NAME);
     	
     	
     	// Instanciates DAO
@@ -42,7 +43,7 @@ public class QuestionDAOTest {
 	
 	@Test
 	public void getQuestionByLetter() {
-		int size = 10;
+		int size = 1000;
 		Question[] questions = new Question[size];
 		for(int i = 0; i < size; i++) {
 			questions[i] = questionDAO.getRandomQuestionByLeter('A');
@@ -55,7 +56,10 @@ public class QuestionDAOTest {
 				aValues++;
 		}
 		
+		// Checks if returns something
 		assertNotEquals(null, questionDAO.getRandomQuestionByLeter('A'));
+		
+		// Checks if it is a random retrieve
 		assertNotEquals(0, size-aValues);
 	}
 	
