@@ -17,7 +17,7 @@ import org.apache.commons.codec.binary.Base64;
 import com.pasapalabra.game.model.DTO.QuestionType;
 import com.pasapalabra.game.model.DTO.UserDTO;
 import com.pasapalabra.game.service.ClientService;
-import com.pasapalabra.game.service.ServiceLocator;
+import com.pasapalabra.game.service.ClientConnection;
 import com.pasapalabra.game.utilities.PanelThread;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
@@ -61,7 +61,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	public int vecesHechoX = 0;
 	public int vecesHechoY = 0;
 	public QuestionType type; 
-	//public static boolean ServiceLocator.playing = false;
+	//public static boolean ClientConnection.playing = false;
 	public boolean ventanaMenuDentro = false;
 	public ArrayList<ImageView> panelLetrasJugador = new ArrayList<>(); //Panel con todos los labels del jugador
 	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
@@ -122,9 +122,9 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 */
 	@FXML 
 	void btnJugar(MouseEvent event) {
-		log.log(Level.FINEST, "Botón de jugar pulsado y ServiceLocator.playing = " + ServiceLocator.playing);
+		log.log(Level.FINEST, "Botón de jugar pulsado y ClientConnection.playing = " + ClientConnection.playing);
 		//Compruebo si se está jugando
-		if(ServiceLocator.playing){
+		if(ClientConnection.playing){
 			//Si se está jugando, entonces creo una alerta para decir que está ya el juego en curso
 			//Creo una alerta de tipo informativa
 			Alert alert = new Alert(AlertType.INFORMATION);
@@ -187,7 +187,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		alert.showAndWait();
 		//	
 		//
-		//		if(ServiceLocator.playing){
+		//		if(ClientConnection.playing){
 		//			//Alerta
 		//			Alert alert2 = new Alert(AlertType.INFORMATION);
 		//			alert2.setTitle("Juego en curso");
@@ -220,7 +220,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		//
 		//		alert.showAndWait();
 
-		if(ServiceLocator.playing){
+		if(ClientConnection.playing){
 			//Alerta
 			Alert alert2 = new Alert(AlertType.INFORMATION);
 			alert2.setTitle("Juego en curso");
@@ -240,8 +240,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML
 	void cancelMatch(MouseEvent event){
 		try {
-			ServiceLocator.exitMatchMaking();
-			ServiceLocator.playing = false;
+			ClientConnection.exitMatchMaking();
+			ClientConnection.playing = false;
 			btnCancel.setVisible(false);
 			searchTXT.setVisible(false);
 		}catch (Exception e) {
@@ -255,8 +255,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML
 	void btnEstadisticas(MouseEvent event) {
 
-
-		//		if(com.pasapalabra.game.service.ServiceLocator.playing){
+		//		if(com.pasapalabra.game.service.ClientConnection.playing){
 		//			//Alerta
 		//			Alert alert2 = new Alert(AlertType.INFORMATION);
 		//			alert2.setTitle("Juego en curso");
@@ -333,16 +332,16 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML
 	void aJugar(MouseEvent event){
 		//if(!bothClicked())return;
-		if(ServiceLocator.playing) return;
+		if(ClientConnection.playing) return;
 		/*Inhabilitamos rápidamente que el botón de jugar vuelva a poder ser pulsado.
 		 *(Es posible que después de varias comprobaciones necesitemos volverlo a poner a falso)
 		 */
-		ServiceLocator.playing = true;
+		ClientConnection.playing = true;
 		//Servidor
 		//aLEleccion es el arrayList de la elección (Modalidad + Tema) y todos los elementos
 		//String[]Tipo=new String[2];
 		QuestionType type = QuestionType.All; 
-		ServiceLocator.type = type;
+		ClientConnection.qType = type;
 		//		for (QuestionSelectedObject obsp : aLEleccion) {
 		//			if (obsp.isElegido()) {
 		//				if(obsp.isModoDeJuego_notTipoPregunta()){
@@ -377,17 +376,17 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		try {
 			//TODO: cambiar
 			// ANTES utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Jugar.toString(), Tipo);
-			UserDTO user= com.pasapalabra.game.service.ServiceLocator.play(type); 
+			UserDTO user= com.pasapalabra.game.service.ClientConnection.play(type); 
 			if(user.getUserName().equals("Wait")){
-				ServiceLocator.player1 = true;
-				ServiceLocator.turn = false;
+				ClientConnection.player1 = true;
+				ClientConnection.turn = false;
 				searchTXT.setVisible(true);
 				btnCancel.setVisible(true);
 			}
 			else{
 				ClientService.rivalData = user;
-				ServiceLocator.player1 = false;
-				ServiceLocator.turn = true;
+				ClientConnection.player1 = false;
+				ClientConnection.turn = true;
 				if(user.getProfileImage() != null){
 					byte[] imageByteArray = Base64.decodeBase64(user.getProfileImage());
 					try {
@@ -413,7 +412,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
-			ServiceLocator.playing=false;
+			ClientConnection.playing=false;
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			log.log(Level.WARNING, "Error en la partida", e);
 			e.printStackTrace();
@@ -425,7 +424,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
-			ServiceLocator.playing=false;
+			ClientConnection.playing=false;
 			WindowUtilities.windowTransition("ThemeElection", event);
 			log.log(Level.WARNING, "No se ha encontrado partida.", e);
 			e.printStackTrace();
@@ -462,7 +461,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 							}
 						}
 
-						if(ServiceLocator.playing==true){
+						if(ClientConnection.playing==true){
 
 
 							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="...........................";
@@ -505,7 +504,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
 								panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
 							}
-							if(ServiceLocator.playing==true){
+							if(ClientConnection.playing==true){
 
 
 								com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
@@ -530,7 +529,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								alert.showAndWait();
 								deVentana.windowTransition("Juego", event);
 							}
-							if(!ServiceLocator.playing){
+							if(!ClientConnection.playing){
 								Alert alert = new Alert(AlertType.INFORMATION);
 								alert.setTitle("Partida acabada");
 								alert.setHeaderText("Ha completado la partida");
@@ -601,14 +600,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				new Thread(new Runnable() {  
 					@Override  
 					public void run() {  
-						while(!Conexion_cliente.Mi_Turno&&ServiceLocator.playing){
+						while(!Conexion_cliente.Mi_Turno&&ClientConnection.playing){
 							System.out.println("Dentro del while");
-							if(ServiceLocator.playing){
+							if(ClientConnection.playing){
 								try{
 									com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 								}catch(Exception a){
 									a.printStackTrace();
-									ServiceLocator.playing=false;
+									ClientConnection.playing=false;
 								}	
 								System.out.println("A comprobar si el rival ha hacertado");
 								if(Conexion_cliente.Ha_Respondido){
@@ -640,7 +639,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						System.out.println("Hola");
 						int i=23-22;
 						System.out.println("A obtener pregunta en el servidor");
-						if(ServiceLocator.playing){
+						if(ClientConnection.playing){
 							try {
 								com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 								taPreguntas.setText(Conexion_cliente.Pregunta);
@@ -676,7 +675,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 										}
 									}
 
-									if(ServiceLocator.playing==true){
+									if(ClientConnection.playing==true){
 
 
 										com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="...........................";
@@ -719,7 +718,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 											int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
 											panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
 										}
-										if(ServiceLocator.playing==true){
+										if(ClientConnection.playing==true){
 
 
 											com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
@@ -744,7 +743,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 											alert.showAndWait();
 											deVentana.windowTransition("Juego", event);
 										}
-										if(!ServiceLocator.playing){
+										if(!ClientConnection.playing){
 											Alert alert = new Alert(AlertType.INFORMATION);
 											alert.setTitle("Partida acabada");
 											alert.setHeaderText("Ha completado la partida");
@@ -856,7 +855,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		void btnContestar(MouseEvent event) {
 			//SERVIDOR
 			//Respuesta
-			if(!ServiceLocator.playing){
+			if(!ClientConnection.playing){
 				Alert alert=new Alert(AlertType.INFORMATION);
 				alert.setTitle("Partida acabada");
 				alert.setHeaderText("Ha completado la partida");
@@ -877,7 +876,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				}
 				else{
 					if(Conexion_cliente.Mi_Turno){
-						if(ServiceLocator.playing==true){
+						if(ClientConnection.playing==true){
 
 
 							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
@@ -920,7 +919,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								int Num_Letra=Pos_Letra(Conexion_cliente.Letra_Actual);System.out.println(Num_Letra);
 								panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+Conexion_cliente.Letra_Actual+"-red.png")));
 							}
-							if(ServiceLocator.playing==true){
+							if(ClientConnection.playing==true){
 
 
 								com.pasapalabra.game.utilities.Conexion_cliente.Respuesta=tfRespuesta.getText();
@@ -945,7 +944,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								alert.showAndWait();
 								deVentana.windowTransition("Juego", event);
 							}
-							if(!ServiceLocator.playing){
+							if(!ClientConnection.playing){
 								Alert alert = new Alert(AlertType.INFORMATION);
 								alert.setTitle("Partida acabada");
 								alert.setHeaderText("Ha completado la partida");
@@ -980,14 +979,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 						new Thread(new Runnable() {  
 							@Override  
 							public void run() {  
-								while(!Conexion_cliente.Mi_Turno&&ServiceLocator.playing){
+								while(!Conexion_cliente.Mi_Turno&&ClientConnection.playing){
 									System.out.println("Dentro del while");
-									if(ServiceLocator.playing){
+									if(ClientConnection.playing){
 										try{
 											com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 										}catch(Exception a){
 											a.printStackTrace();
-											ServiceLocator.playing=false;
+											ClientConnection.playing=false;
 										}	
 										System.out.println("A comprobar si el rival ha hacertado");
 										if(Conexion_cliente.Ha_Respondido){
@@ -1019,7 +1018,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 								System.out.println("Hola");
 								int i=23-22;
 								System.out.println("A obtener pregunta en el servidor");
-								if(ServiceLocator.playing){
+								if(ClientConnection.playing){
 									try{
 										com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 
@@ -1055,7 +1054,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//SERVIDOR
 			//Algo
 			if(Conexion_cliente.Mi_Turno){
-				if(ServiceLocator.playing==true){
+				if(ClientConnection.playing==true){
 					com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="Pasapalabra";
 					try{
 						com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
@@ -1070,7 +1069,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					}catch(Exception a){
 						a.printStackTrace();
 					}
-					if(!ServiceLocator.playing){
+					if(!ClientConnection.playing){
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.setTitle("Partida acabada");
 						alert.setHeaderText("Ha completado la partida");
@@ -1110,7 +1109,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 				Optional<ButtonType> result = alert.showAndWait();
 				if (result.get() == ButtonType.OK){
-					if(ServiceLocator.playing==true){
+					if(ClientConnection.playing==true){
 						try{	
 							com.pasapalabra.game.utilities.Conexion_cliente.Respuesta="Rendirse";
 							com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local, com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
@@ -1149,7 +1148,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 */
 	@FXML
 	void masInfo(MouseEvent event){
-		if(!ServiceLocator.playing){
+		if(!ClientConnection.playing){
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("AcercaDe", event);
 		}
 	}
@@ -1425,7 +1424,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 */
 	@FXML
 	void esPanel(MouseEvent event) {
-		if(!ServiceLocator.playing){
+		if(!ClientConnection.playing){
 			Alert a = new Alert(AlertType.INFORMATION);
 			a.setTitle("Información");
 			a.setHeaderText("Prueba a empezar juego para cerrar el panel");
@@ -1442,7 +1441,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 		try {
 			QuestionType type = QuestionType.All; 
-			UserDTO udto= com.pasapalabra.game.service.ServiceLocator.play(type);
+			UserDTO udto= com.pasapalabra.game.service.ClientConnection.play(type);
 			if(udto.getUserName().equals("Wait")){
 				Alert alert = new Alert(AlertType.INFORMATION);
 
@@ -1473,11 +1472,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			panel.getChildren().remove(textoCargaBuscandoPartida);
 			panel.applyCss();*/
 		//SERVIDOR
-		//TODO Cargar imagen personal
+		btnAmigos.setOpacity(0.3f);
+		btnEstadisticas.setOpacity(0.3f);
+		btnJuego.setOpacity(1f);
+		btnPerfil.setOpacity(0.3f);
 		btnCancel.setVisible(false);
 		searchTXT.setVisible(false);
-		if(ServiceLocator.userIMG != null){
-			imagenAvatar.setImage(ServiceLocator.userIMG);
+		if(ClientConnection.userIMG != null){
+			imagenAvatar.setImage(ClientConnection.userIMG);
 		}else{
 			String imagen = "fPerfil";
 			Random rand = new Random();
@@ -1513,7 +1515,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 		//Variables de usuario
 		menuDesplegable.add(textoNombreDeUsuario);
-		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ServiceLocator.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
 		menuDesplegable.add(imagenAvatar);
 
 		/* ya no hay rectangulos y textos. No se necesita objeto seleccion pregunta

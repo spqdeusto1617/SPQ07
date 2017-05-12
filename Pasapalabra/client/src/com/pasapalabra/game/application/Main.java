@@ -60,7 +60,7 @@ public class Main extends Application {
 			//Añadir un escuchador para cuando se cierre la ventana 
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override public void handle(WindowEvent t) {
-					if(com.pasapalabra.game.service.ServiceLocator.playing){
+					if(com.pasapalabra.game.service.ClientConnection.playing){
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.setTitle("Can´t exit");
 						alert.setHeaderText("You can´t exit while playing");
@@ -70,7 +70,7 @@ public class Main extends Application {
 					}
 					else{
 						try{
-							com.pasapalabra.game.service.ServiceLocator.delogging();
+							com.pasapalabra.game.service.ClientConnection.delogging();
 
 							log.log(Level.INFO, "Exiting from the platform");
 							System.exit(0);

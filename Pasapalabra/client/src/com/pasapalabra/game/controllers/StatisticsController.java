@@ -149,13 +149,13 @@ public class StatisticsController extends ExtenderClassController implements Ini
 
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		//com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		//com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	/**Transition to statistics window
@@ -214,7 +214,7 @@ public class StatisticsController extends ExtenderClassController implements Ini
 		com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, Main.class.getName());
 		log.log(Level.FINEST, "Inicializando EventosEstadisticas");
 		//Poner la imagen de avatar
-		if(com.pasapalabra.game.service.ServiceLocator.userInfo.getProfileImage()!=null){
+		if(com.pasapalabra.game.service.ClientConnection.userInfo.getProfileImage()!=null){
 			//Si no es nula, pone la que hay
 			log.log(Level.FINEST, "El avatar en EventosLogIn.iAvatar no es nulo");
 			imagenAvatar.setImage(LogInController.iAvatar);//TODO: check this
@@ -240,20 +240,20 @@ public class StatisticsController extends ExtenderClassController implements Ini
 		imagenAvatar.setSmooth(true); 
 		imagenAvatar.setCache(true); 
 		//Se pone el nombre de usuario
-		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ServiceLocator.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
 
 		//Se ponen los datos relacionados con esta ventana. Es decir, estadísticas.
 
-		txtDerrotas.setText(Integer.toString(com.pasapalabra.game.service.ServiceLocator.userInfo.getGamesLost()));
+		txtDerrotas.setText(Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost()));
 
-		txtVictorias.setText(Integer.toString(com.pasapalabra.game.service.ServiceLocator.userInfo.getGamesWon()));
+		txtVictorias.setText(Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon()));
 		double d = 1;
-		if(com.pasapalabra.game.service.ServiceLocator.userInfo.getGamesLost() == 0){
-			if(com.pasapalabra.game.service.ServiceLocator.userInfo.getGamesWon() == 0) d = 0;
+		if(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost() == 0){
+			if(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon() == 0) d = 0;
 		}
 		else{
 			try{
-				d = com.pasapalabra.game.service.ServiceLocator.userInfo.getGamesWon()/com.pasapalabra.game.service.ServiceLocator.userInfo.getGamesLost();
+				d = com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon()/com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost();
 				 if (d == Double.POSITIVE_INFINITY || d == Double.NEGATIVE_INFINITY) d = 0;
 			}catch (ArithmeticException e) {
 				// TODO: handle exception
@@ -262,8 +262,8 @@ public class StatisticsController extends ExtenderClassController implements Ini
 			}
 		}
 		txtRatio.setText(String.valueOf(d));
-		txtPartidasJugadas.setText(Integer.toString(com.pasapalabra.game.service.ServiceLocator.userInfo.getGamesLost()) + Integer.toString(com.pasapalabra.game.service.ServiceLocator.userInfo.getGamesWon()));
+		txtPartidasJugadas.setText(Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesLost()) + Integer.toString(com.pasapalabra.game.service.ClientConnection.userInfo.getGamesWon()));
 		log.log(Level.FINEST, "Todos los campos añadidos");
-		userNametxt.setText(com.pasapalabra.game.service.ServiceLocator.userInfo.getUserName());
+		userNametxt.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
 	}
 }

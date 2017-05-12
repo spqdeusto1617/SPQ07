@@ -109,7 +109,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	public void initialize(URL location, ResourceBundle resources) {
 
 		panel.getStylesheets().add("/css/application.css");
-		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ServiceLocator.userInfo.getUserName());
+		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
 		if(LogInController.iAvatar!=null){
 			imagenAvatar.setImage(LogInController.iAvatar);
 		}else{
@@ -156,7 +156,7 @@ public class DeleteAccountController extends ExtenderClassController implements 
 			Optional<ButtonType> result2 = alert2.showAndWait();
 			if (result2.get() == ButtonType.OK){
 				boolean datos_Correctos=true;
-				if(!tfdCorreo.getText().equals(com.pasapalabra.game.service.ServiceLocator.userInfo.getMail())){
+				if(!tfdCorreo.getText().equals(com.pasapalabra.game.service.ClientConnection.userInfo.getMail())){
 					datos_Correctos=false;
 					Alert alert3 = new Alert(AlertType.ERROR);
 					alert3.setTitle("Mail no coincide");

@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
-import com.pasapalabra.game.service.ServiceLocator;
+import com.pasapalabra.game.service.ClientConnection;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.event.Event;
@@ -90,10 +90,10 @@ public class GameController implements Initializable{
 		//SERVIDOR
 		//Respuesta
 		try {
-			if(com.pasapalabra.game.service.ServiceLocator.endGame()){
+			if(com.pasapalabra.game.service.ClientConnection.endGame()){
 				UserScoreDTO score = null;
 				try {
-					score = com.pasapalabra.game.service.ServiceLocator.getResults();
+					score = com.pasapalabra.game.service.ClientConnection.getResults();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -118,12 +118,12 @@ public class GameController implements Initializable{
 				else{
 					//if(Conexion_cliente.Mi_Turno){
 					try {
-						if(!com.pasapalabra.game.service.ServiceLocator.endGame()){
+						if(!com.pasapalabra.game.service.ClientConnection.endGame()){
 
 
 
 							try{
-								rightAnswered = com.pasapalabra.game.service.ServiceLocator.answerQuestion(tfRespuesta.getText());
+								rightAnswered = com.pasapalabra.game.service.ClientConnection.answerQuestion(tfRespuesta.getText());
 
 							}catch(Exception a){
 								Alert alert = new Alert(AlertType.ERROR);
@@ -150,8 +150,8 @@ public class GameController implements Initializable{
 									foo++;
 									textoPuntuacionU.setText("Acertadas: "+Integer.toString(foo));
 
-									int Num_Letra=Pos_Letra(com.pasapalabra.game.service.ServiceLocator.currentLetter);System.out.println(Num_Letra+" la posicion de la letra");
-									//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+com.pasapalabra.game.utilities.ServiceLocator.currentLetter+"-green.png")));
+									int Num_Letra=Pos_Letra(com.pasapalabra.game.service.ClientConnection.currentLetter);System.out.println(Num_Letra+" la posicion de la letra");
+									//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+com.pasapalabra.game.utilities.ClientConnection.currentLetter+"-green.png")));
 								}catch(Exception a){
 									a.printStackTrace();
 								}
@@ -163,12 +163,12 @@ public class GameController implements Initializable{
 								//alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 								//				alert.show();
 
-								int Num_Letra=Pos_Letra(com.pasapalabra.game.service.ServiceLocator.currentLetter);System.out.println(Num_Letra);
-								//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+com.pasapalabra.game.utilities.ServiceLocator.currentLetter+"-red.png")));
+								int Num_Letra=Pos_Letra(com.pasapalabra.game.service.ClientConnection.currentLetter);System.out.println(Num_Letra);
+								//TODO: check thispanelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+com.pasapalabra.game.utilities.ClientConnection.currentLetter+"-red.png")));
 							}
 
 							try {
-								com.pasapalabra.game.service.ServiceLocator.endGame();
+								com.pasapalabra.game.service.ClientConnection.endGame();
 							} catch (Exception e1) {
 								// TODO Auto-generated catch block
 								Alert alert = new Alert(AlertType.ERROR);
@@ -181,10 +181,10 @@ public class GameController implements Initializable{
 								return;
 							}
 							try {
-								if(com.pasapalabra.game.service.ServiceLocator.endGame()){
+								if(com.pasapalabra.game.service.ClientConnection.endGame()){
 									UserScoreDTO score = null;
 									try {
-										score = com.pasapalabra.game.service.ServiceLocator.getResults();
+										score = com.pasapalabra.game.service.ClientConnection.getResults();
 									} catch (Exception e) {
 										// TODO Auto-generated catch block
 										Alert alert = new Alert(AlertType.ERROR);
@@ -218,7 +218,7 @@ public class GameController implements Initializable{
 								}
 								else{
 									try {
-										currentQuestion = com.pasapalabra.game.service.ServiceLocator.getQuestion();
+										currentQuestion = com.pasapalabra.game.service.ClientConnection.getQuestion();
 										taPreguntas.setText(currentQuestion.getQuestion());
 									} catch (Exception e) {
 										// TODO Auto-generated catch block
@@ -295,7 +295,7 @@ public class GameController implements Initializable{
 								System.out.println("A obtener pregunta en el servidor");
 								if(juegoEnCurso){
 									try{
-										com.pasapalabra.game.utilities.ServiceLocator.startConnection(args);
+										com.pasapalabra.game.utilities.ClientConnection.startConnection(args);
 										com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Obtener_Pregunta.toString(), null);
 
 										taPreguntas.setText(Conexion_cliente.Pregunta);
@@ -343,7 +343,7 @@ public class GameController implements Initializable{
 		//Algo
 		/*if(Conexion_cliente.Mi_Turno){
 			if(juegoEnCurso==true){
-				com.pasapalabra.game.utilities.ServiceLocator.pasapalabra=true; 
+				com.pasapalabra.game.utilities.ClientConnection.pasapalabra=true; 
 				try{
 					com.pasapalabra.game.utilities.Conexion_cliente.lanzaConexion(com.pasapalabra.game.utilities.Conexion_cliente.Ip_Local,com.pasapalabra.game.utilities.Acciones_servidor.Responder_Pregunta.toString(), null);
 				}catch(Exception a){
@@ -357,7 +357,7 @@ public class GameController implements Initializable{
 				}catch(Exception a){
 					a.printStackTrace();
 				}
-				if(com.pasapalabra.game.utilities.ServiceLocator.gameEnd){
+				if(com.pasapalabra.game.utilities.ClientConnection.gameEnd){
 					Alert alert = new Alert(AlertType.INFORMATION);
 					alert.setTitle("Partida acabada");
 					alert.setHeaderText("Ha completado la partida");
@@ -378,7 +378,7 @@ public class GameController implements Initializable{
 		}*/
 
 		try{
-			rightAnswered = com.pasapalabra.game.service.ServiceLocator.answerQuestion("Pasapalabra");
+			rightAnswered = com.pasapalabra.game.service.ClientConnection.answerQuestion("Pasapalabra");
 			if(!rightAnswered){
 				log.log(Level.WARNING, "Error al pasar de palabra");
 			}
@@ -393,7 +393,7 @@ public class GameController implements Initializable{
 			return;
 		} 
 		try {
-			currentQuestion = com.pasapalabra.game.service.ServiceLocator.getQuestion();
+			currentQuestion = com.pasapalabra.game.service.ClientConnection.getQuestion();
 			taPreguntas.setText(currentQuestion.getQuestion());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -492,8 +492,8 @@ public class GameController implements Initializable{
 	public void mostrarPuntuacion(){
 		UserScoreDTO uscore = null; 
 		try {
-			uscore = ServiceLocator.getResults();
-			if(com.pasapalabra.game.service.ServiceLocator.turn){
+			uscore = ClientConnection.getResults();
+			if(com.pasapalabra.game.service.ClientConnection.turn){
 				Alert alert = new Alert(AlertType.INFORMATION);
 
 				alert.setTitle("Final score");
@@ -524,7 +524,7 @@ public class GameController implements Initializable{
 
 	public void volverAtras(Event event){
 		try {
-			if(ServiceLocator.endGame()){
+			if(ClientConnection.endGame()){
 				btnVolver.setDisable(false);
 				WindowUtilities.windowTransition("ThemeElection", event);
 			}else{
@@ -622,13 +622,13 @@ public class GameController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try {
-			currentQuestion = ServiceLocator.getQuestion();
+			currentQuestion = ClientConnection.getQuestion();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		taPreguntas.setText(currentQuestion.getQuestion());
 		textoUsernameRival.setText(com.pasapalabra.game.service.ClientService.rivalData.getUserName());
-		textoUsernameUser.setText(ServiceLocator.userInfo.getUserName());
+		textoUsernameUser.setText(ClientConnection.userInfo.getUserName());
 	}
 }

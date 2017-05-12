@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.pasapalabra.game.service.ClientConnection;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -87,11 +89,11 @@ public class LogInController extends Control implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		//Se inicia el handler del logger
 		com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, LogInController.class.getName());
-		if(!com.pasapalabra.game.service.ServiceLocator.serverReady){
+		if(!com.pasapalabra.game.service.ClientConnection.serverReady){
 			log.log(Level.INFO, "Server offline");
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("No connection with the server");
-
+			
 			alert.setContentText("The server is currenlty offlile, please check your connection and try again");
 			alert.initModality(Modality.APPLICATION_MODAL);			
 			alert.showAndWait();
@@ -150,7 +152,7 @@ public class LogInController extends Control implements Initializable {
 		if(txtUsuario.getText().length()>0&&txtContra.getText().length()>0){
 			//txtIncorrecto.setText("Usuario y/o contraseña incorrecto/s");
 			try {	log.log(Level.FINEST, "Checking credentials");
-				com.pasapalabra.game.service.ServiceLocator.login(txtUsuario.getText(), txtContra.getText());
+				com.pasapalabra.game.service.ClientConnection.login(txtUsuario.getText(), txtContra.getText());
 				
 				//com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			} catch (AccessControlException e) {
@@ -211,7 +213,7 @@ public class LogInController extends Control implements Initializable {
 				return;
 			}
 			try {	log.log(Level.FINEST, "LogIn OK. Retreiving userdata");
-			com.pasapalabra.game.service.ServiceLocator.retreiveUserData();
+			com.pasapalabra.game.service.ClientConnection.retreiveUserData();
 			
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 		} catch (SecurityException e) {
@@ -273,7 +275,7 @@ public class LogInController extends Control implements Initializable {
 	 */
 	public void registro(MouseEvent event){
 		log.log(Level.FINEST, "Registry method inicialized");
-		if( com.pasapalabra.game.service.ServiceLocator.serverReady == false ){
+		if( com.pasapalabra.game.service.ClientConnection.serverReady == false ){
 			log.log(Level.INFO, "Server not ready");
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Server currenly offline");

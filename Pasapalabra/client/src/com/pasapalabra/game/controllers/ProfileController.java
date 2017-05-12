@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.pasapalabra.game.service.ClientConnection;
 import com.pasapalabra.game.service.ServiceLocator;
 
 import javafx.embed.swing.SwingFXUtils;
@@ -110,15 +111,15 @@ public class ProfileController extends ExtenderClassController implements Initia
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		//		
-		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ServiceLocator.userInfo.getUserName());
+		textoNombreDeUsuario.setText(ClientConnection.userInfo.getUserName());
 
 		btnAmigos.setOpacity(0.3f);
 		btnEstadisticas.setOpacity(0.3f);
 		btnJuego.setOpacity(0.3f);
 		btnPerfil.setOpacity(1f);
-		if(ServiceLocator.userIMG != null){
-			imagenAvatar.setImage(ServiceLocator.userIMG);
-			imgCambioFotoPerfil.setImage(ServiceLocator.userIMG);
+		if(ClientConnection.userIMG != null){
+			imagenAvatar.setImage(ClientConnection.userIMG);
+			imgCambioFotoPerfil.setImage(ClientConnection.userIMG);
 			
 		}else{
 			String imagen = "fPerfil";
@@ -297,13 +298,13 @@ public class ProfileController extends ExtenderClassController implements Initia
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		//com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		//com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel EDIT: ABRIR Y CERRAR	

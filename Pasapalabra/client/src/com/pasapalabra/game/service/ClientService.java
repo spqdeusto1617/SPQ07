@@ -36,7 +36,7 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	@Override
 	public void getUser(UserDTO user) throws RemoteException {
 		rivalData = user;
-		ServiceLocator.playing = true;
+		ClientConnection.playing = true;
 		if(rivalData.getProfileImage() != null){
 			byte[] imageByteArray = Base64.decodeBase64(rivalData.getProfileImage());
 			try {
@@ -63,9 +63,9 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	@Override
 	public void finalResult(UserScoreDTO score) throws RemoteException {
 		System.err.println("La puntuación final del otro usuario es: "+score);
-		ServiceLocator.playing = false;//TODO: transicion de vuelta
-		ServiceLocator.turn = false;
-		ServiceLocator.player1 = false;
+		ClientConnection.playing = false;//TODO: transicion de vuelta
+		ClientConnection.turn = false;
+		ClientConnection.player1 = false;
 		rivalData = null;
 
 	}
@@ -73,7 +73,7 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	@Override
 	public void changeTurn(UserScoreDTO score) throws RemoteException {
 		System.err.println("La puntuación de su rival es: "+score+" y ahora le toca jugar a usted");
-		ServiceLocator.turn = true;
+		ClientConnection.turn = true;
 
 		//TODO: play now
 
@@ -81,9 +81,9 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	@Override
 	public void otherDisconnected() throws RemoteException {
 		System.err.println("Su rival se ha desconectado, saliendo del juego");
-		ServiceLocator.turn = false;
-		ServiceLocator.playing = false;
-		ServiceLocator.player1 = false;
+		ClientConnection.turn = false;
+		ClientConnection.playing = false;
+		ClientConnection.player1 = false;
 		rivalData = null;
 		//TODO: exit the game(Use windowUtilities.forcedCloseSession
 	}

@@ -12,7 +12,7 @@ import com.pasapalabra.game.controllers.ExtenderClassController;
 import com.pasapalabra.game.controllers.FriendController;
 import com.pasapalabra.game.controllers.StatisticsController;
 import com.pasapalabra.game.controllers.ThemeController;
-import com.pasapalabra.game.service.ServiceLocator;
+import com.pasapalabra.game.service.ClientConnection;
 import com.pasapalabra.game.controllers.ProfileController;
 
 import javafx.event.Event;
@@ -123,10 +123,10 @@ public class WindowUtilities {
 
 				//En la clase del servidor habrá una rutina para cerrar sesión.
 				try {
-					if(ServiceLocator.delogging()){
-						com.pasapalabra.game.service.ServiceLocator.sessionAuth = null;
+					if(ClientConnection.delogging()){
+						com.pasapalabra.game.service.ClientConnection.sessionAuth = null;
 
-						com.pasapalabra.game.service.ServiceLocator.userInfo = null;
+						com.pasapalabra.game.service.ClientConnection.userInfo = null;
 
 						windowTransition("LogIn", event);
 
@@ -145,9 +145,9 @@ public class WindowUtilities {
 						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 
 						alert3.showAndWait();*/
-						com.pasapalabra.game.service.ServiceLocator.sessionAuth = null;
+						com.pasapalabra.game.service.ClientConnection.sessionAuth = null;
 
-						com.pasapalabra.game.service.ServiceLocator.userInfo = null;
+						com.pasapalabra.game.service.ClientConnection.userInfo = null;
 
 						log.log(Level.INFO, "Delog while result == false");
 						windowTransition("LogIn", event);
@@ -186,9 +186,9 @@ public class WindowUtilities {
 	public static void forcedCloseSession(Event event){
 
 
-		com.pasapalabra.game.service.ServiceLocator.sessionAuth = null;
+		com.pasapalabra.game.service.ClientConnection.sessionAuth = null;
 
-		com.pasapalabra.game.service.ServiceLocator.userInfo = null;
+		com.pasapalabra.game.service.ClientConnection.userInfo = null;
 
 		windowTransition("LogIn", event);
 

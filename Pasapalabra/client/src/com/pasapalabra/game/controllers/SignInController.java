@@ -291,7 +291,7 @@ public class SignInController extends Control implements Initializable {
 
 				if (result.get() == ButtonType.OK){
 
-					boolean finalResult = com.pasapalabra.game.service.ServiceLocator.createUser(udto, pflContrasenya.getText());
+					boolean finalResult = com.pasapalabra.game.service.ClientConnection.createUser(udto, pflContrasenya.getText());
 					if(finalResult){
 						Alert alert2 = new Alert(AlertType.INFORMATION);
 
