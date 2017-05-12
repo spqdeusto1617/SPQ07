@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.mongodb.WriteResult;
 import com.pasapalabra.game.dao.QuestionDAO;
 import com.pasapalabra.game.dao.UserDAO;
 import com.pasapalabra.game.dao.mongodb.QuestionMongoDAO;
@@ -112,7 +113,7 @@ public class PasapalabraService implements IPasapalabraService{
 
 			return new UserDTO("Wait");//TODO: revise this
 		}
-		
+
 		//If there is that category, but no players
 		if(waitingClients.get(type).isEmpty()){
 			System.out.println("Waiting clients esta vacio");
@@ -284,6 +285,51 @@ public class PasapalabraService implements IPasapalabraService{
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public Boolean changeUserIMG(Token token, String userPass, String userIMG) throws RemoteException, NullPointerException {
+		if(!SessionManager.isValidSession(token)) return null;
+		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
+		User user = uDao.getUserByLogin(currentUsers.get(token.getToken()).getUserName(), userPass);
+		if(user == null) return false;
+		user.setProfileImage(userIMG);
+		if(Server.mongoConnection.datastore.save(user) != null)return true;
+		else throw new NullPointerException();
+	}
+
+	@Override
+	public Boolean changeUserMail(Token token, String userPass, String userMail) throws RemoteException, NullPointerException{
+		if(!SessionManager.isValidSession(token)) return null;
+		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
+		User user = uDao.getUserByLogin(currentUsers.get(token.getToken()).getUserName(), userPass);
+		if(user == null) return false;
+		user.setMail(userMail);
+		if(Server.mongoConnection.datastore.save(user) != null)return true;
+		else throw new NullPointerException();
+	}
+
+	@Override
+	public Boolean changeUserPass(Token token, String userPass, String newUserPass) throws RemoteException, NullPointerException{
+		if(!SessionManager.isValidSession(token)) return null;
+		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
+		User user = uDao.getUserByLogin(currentUsers.get(token.getToken()).getUserName(), userPass);
+		if(user == null) return false;
+		user.setPass(newUserPass);
+		if(Server.mongoConnection.datastore.save(user) != null)return true;
+		else throw new NullPointerException();
+	}
+
+	@Override
+	public Boolean removeUser(Token token, String userPass) throws RemoteException, NullPointerException{
+		if(!SessionManager.isValidSession(token)) return null;
+		UserDAO uDao = new UserMongoDAO(Server.mongoConnection);
+		User user = uDao.getUserByLogin(currentUsers.get(token.getToken()).getUserName(), userPass);
+		if(user == null) return false;
+		WriteResult deleteWriteResult = null;
+		deleteWriteResult = Server.mongoConnection.datastore.delete(user);
+		if(deleteWriteResult.getN() == 1)return true;
+		else throw new NullPointerException();
 	}
 
 	private static String getRivalToken(String token){
@@ -494,6 +540,8 @@ public class PasapalabraService implements IPasapalabraService{
 		}
 
 		 */}
+
+
 
 
 
