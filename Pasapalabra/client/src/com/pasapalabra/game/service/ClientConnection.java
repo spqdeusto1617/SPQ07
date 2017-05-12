@@ -43,153 +43,179 @@ public class ClientConnection {
 	@FXML public static Image userIMG;
 
 	//TODO: handle the thrown Exception(remember to differenced)  
-		public static void login(String userName, String pass) throws Exception{
-			try{
-				sessionAuth = ServiceLocator.service.login(userName, pass);
-				if(sessionAuth == null)throw new RemoteException("Error");
-			}catch(Exception a){
-				throw a;
-			}
-
+	public static void login(String userName, String pass) throws Exception{
+		try{
+			sessionAuth = ServiceLocator.service.login(userName, pass);
+			if(sessionAuth == null)throw new RemoteException("Error");
+		}catch(Exception a){
+			throw a;
 		}
 
-		public static void retreiveUserData() throws Exception{
-			try{
-				userInfo = ServiceLocator.service.getData(sessionAuth);
-				if(userInfo.getProfileImage() != null){
-					byte[] imageByteArray = Base64.decodeBase64(userInfo.getProfileImage());
-					try {
-						BufferedImage imag = ImageIO.read(new ByteArrayInputStream(imageByteArray));
+	}
 
-						if (imag != null) {
-							userIMG = SwingFXUtils.toFXImage(imag, null);
+	public static void retreiveUserData() throws Exception{
+		try{
+			userInfo = ServiceLocator.service.getData(sessionAuth);
+			if(userInfo.getProfileImage() != null){
+				byte[] imageByteArray = Base64.decodeBase64(userInfo.getProfileImage());
+				try {
+					BufferedImage imag = ImageIO.read(new ByteArrayInputStream(imageByteArray));
 
-						}else{
-							userIMG = null;
-						}
-					}catch (Exception e) {
+					if (imag != null) {
+						userIMG = SwingFXUtils.toFXImage(imag, null);
+
+					}else{
 						userIMG = null;
 					}
-				}
-			}catch(Exception e){
-				delogging();
-				throw e;
-			}
-		}
-
-		public static boolean createUser(UserDTO userData, String pass) throws Exception{
-			try{
-				return ServiceLocator.service.registry(userData, pass);
-			}catch(Exception a){
-				throw a;
-			}
-
-		}
-
-		public static boolean exitGame() throws Exception{
-			try{
-				return ServiceLocator.service.deLogin(sessionAuth);
-			}catch (Exception e) {
-				// TODO: handle exception
-				throw e;
-			}
-		}
-
-
-		public static UserDTO play(QuestionType type) throws Exception{
-			try{
-				UserDTO user = ServiceLocator.service.play(sessionAuth, type.toString(), cService);
-				if(user == null)//TODO: delog this user
-					if(user.getUserName().equals("Wait")){
-						qType = type;
-						player1 = true;
-						turn = false;//TODO: keep the game waiting
-
-					}
-				player1 = false;
-				turn = true;
-				playing = true;
-				return user;
-			}catch (Exception e) {
-				// TODO: handle exception
-				throw e;
-			}
-		}
-
-		public static void exitMatchMaking() throws Exception{
-			try{
-				ServiceLocator.service.exitMatchMaking(sessionAuth, qType.toString());
-			}catch (Exception e) {
-				// TODO: handle exception
-				throw e;
-			}
-		}
-
-		public static QuestionDTO getQuestion() throws Exception{
-			try{
-				QuestionDTO question = ServiceLocator.service.getQuestion(sessionAuth);
-				if(question == null)//TODO: delog game
-					currentLetter = question.getLeter();
-				if(question.getLeter() == 'z')reachZ = true;
-				return question;
-			}catch (Exception e) {
-				// TODO: handle exception
-				throw e;
-			}
-		}
-
-		public static boolean delogging() throws Exception{
-			try{
-				return ServiceLocator.service.deLogin(sessionAuth);
-
-			}catch (Exception e) {
-				// TODO: handle exception
-				throw e;
-			}
-		}
-
-
-		public static boolean answerQuestion(String answer) throws Exception{
-			try{
-				return ServiceLocator.service.answerQuestion(sessionAuth, answer);
-			}catch (Exception e) {
-				// TODO: handle exception
-				throw e;
-			}
-		}
-
-		public static boolean endGame() throws Exception{
-			if(reachZ){
-				try{
-					boolean result = ServiceLocator.service.allQuestionAnswered(sessionAuth);
-					return result;
 				}catch (Exception e) {
-					// TODO: handle exception
-					throw e;
+					userIMG = null;
 				}
 			}
-			else return false;
+		}catch(Exception e){
+			delogging();
+			throw e;
 		}
-		//TODO: if player1 == false, end game, else, pass to observer mode
-		public static UserScoreDTO getResults() throws Exception{
+	}
+
+	public static boolean createUser(UserDTO userData, String pass) throws Exception{
+		try{
+			return ServiceLocator.service.registry(userData, pass);
+		}catch(Exception a){
+			throw a;
+		}
+
+	}
+
+	public static boolean exitGame() throws Exception{
+		try{
+			return ServiceLocator.service.deLogin(sessionAuth);
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
+	}
+
+
+	public static UserDTO play(QuestionType type) throws Exception{
+		try{
+			UserDTO user = ServiceLocator.service.play(sessionAuth, type.toString(), cService);
+			if(user == null)//TODO: delog this user
+				if(user.getUserName().equals("Wait")){
+					qType = type;
+					player1 = true;
+					turn = false;//TODO: keep the game waiting
+
+				}
+			player1 = false;
+			turn = true;
+			playing = true;
+			return user;
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
+	}
+
+	public static void exitMatchMaking() throws Exception{
+		try{
+			ServiceLocator.service.exitMatchMaking(sessionAuth, qType.toString());
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
+	}
+
+	public static Boolean changeUserData(String userPass, String userMail, String userIMG, String newUserPass) throws RemoteException, NullPointerException{
+		if(userPass == null)return false;
+		try{
+			Boolean result = false;
+			if(newUserPass != null) result = ServiceLocator.service.changeUserPass(sessionAuth, userPass, newUserPass);
+			else if(userMail != null) result = ServiceLocator.service.changeUserMail(sessionAuth, userPass, userMail);
+			else if(userIMG != null) result = ServiceLocator.service.changeUserIMG(sessionAuth, userPass, userIMG);
+			return result;
+		}catch(Exception a){
+			throw a;
+		}
+
+	}
+
+	public static Boolean removeUser(String userPass) throws RemoteException, NullPointerException{
+		if(userPass == null)return false;
+		try{
+			Boolean result = false;
+			result = ServiceLocator.service.removeUser(sessionAuth, userPass);
+			return result;
+		}catch(Exception a){
+			throw a;
+		}
+
+	}
+
+	public static QuestionDTO getQuestion() throws Exception{
+		try{
+			QuestionDTO question = ServiceLocator.service.getQuestion(sessionAuth);
+			if(question == null)//TODO: delog game
+				currentLetter = question.getLeter();
+			if(question.getLeter() == 'z')reachZ = true;
+			return question;
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
+	}
+
+	public static boolean delogging() throws Exception{
+		try{
+			return ServiceLocator.service.deLogin(sessionAuth);
+
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
+	}
+
+
+	public static boolean answerQuestion(String answer) throws Exception{
+		try{
+			return ServiceLocator.service.answerQuestion(sessionAuth, answer);
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
+	}
+
+	public static boolean endGame() throws Exception{
+		if(reachZ){
 			try{
-				UserScoreDTO score = ServiceLocator.service.getResults(sessionAuth);
-				if(player1){//TODO: acabar
-					playing = false;
-					player1 = false;
-					reachZ = false;
-					turn = false;
-				}
-				else{//TODO: Te toca espectar
-					turn = false;
-					reachZ = false;
-				}
-				return score;
+				boolean result = ServiceLocator.service.allQuestionAnswered(sessionAuth);
+				return result;
 			}catch (Exception e) {
 				// TODO: handle exception
 				throw e;
 			}
 		}
+		else return false;
+	}
+	//TODO: if player1 == false, end game, else, pass to observer mode
+	public static UserScoreDTO getResults() throws Exception{
+		try{
+			UserScoreDTO score = ServiceLocator.service.getResults(sessionAuth);
+			if(player1){//TODO: acabar
+				playing = false;
+				player1 = false;
+				reachZ = false;
+				turn = false;
+			}
+			else{//TODO: Te toca espectar
+				turn = false;
+				reachZ = false;
+			}
+			return score;
+		}catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		}
+	}
 
-	
+
 }

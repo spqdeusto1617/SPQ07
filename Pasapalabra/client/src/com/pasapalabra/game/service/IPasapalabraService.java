@@ -44,6 +44,45 @@ public interface IPasapalabraService extends Remote {
 	 * @throws RemoteException: if some error occurred during the process 
 	 */
 	public UserDTO getData(Token token) throws RemoteException;
+	
+	/**
+	 * Method for updating the user image
+	 * @param token: the user session token
+	 * @param userPass: his pass (to validate if that is the user
+	 * @param userIMG: his new image
+	 * @return: true if the changes are a success, false if the user data is incorrect, null if the session is incorrect
+	 * @throws RemoteException: if some error occurred during the process , NullPointerException, if there is a problem inserting the userData
+	 */
+	public Boolean changeUserIMG(Token token, String userPass, String userIMG) throws RemoteException, NullPointerException;
+	
+	/**
+	 * Method for updating the user Mail
+	 * @param token: the user session token
+	 * @param userPass: his pass (to validate if that is the user
+	 * @param userMail: his new mail
+	 * @return: true if the changes are a success, false if the user data is incorrect, null if the session is incorrect
+	 * @throws RemoteException: if some error occurred during the process , NullPointerException, if there is a problem inserting the userData
+	 */
+	public Boolean changeUserMail(Token token, String userPass, String userMail) throws RemoteException, NullPointerException;
+	
+	/**
+	 * Method for updating the user password
+	 * @param token: the user session token
+	 * @param userPass: his pass (to validate if that is the user
+	 * @param newUserPass: his new pass
+	 * @return: true if the changes are a success, false if the user data is incorrect, null if the session is incorrect
+	 * @throws RemoteException: if some error occurred during the process , NullPointerException, if there is a problem inserting the userData
+	 */
+	public Boolean changeUserPass(Token token, String userPass, String newUserPass) throws RemoteException, NullPointerException;
+
+	/**
+	 * Method for removing the user from the database
+	 * @param token: the user session token
+	 * @param userPass: his pass (to validate if that is the user)
+	 * @return: true if the user is eliminated correctly , false if the user data is incorrect, null if the session is incorrect
+	 * @throws RemoteException: if some error occurred during the process , NullPointerException, if there is a problem inserting the userData
+	 */
+	public Boolean removeUser(Token token, String userPass) throws RemoteException, NullPointerException;
 
 	/**
 	 * Method for playing, it tries to match the players depending on the category they want to play
@@ -54,7 +93,7 @@ public interface IPasapalabraService extends Remote {
 	 * @throws RemoteException: if some error occurred during the process
 	 * @throws SecurityException: if the user tries to play more than once simultaneously
 	 */
-	public UserDTO play(Token session, String type,IClientService service) throws RemoteException, SecurityException;
+	public UserDTO play(Token session, String type, IClientService service) throws RemoteException, SecurityException;
 
 	/**Method for getting a question from the server
 	 * @param session: the session token given after login 
