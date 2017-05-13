@@ -529,7 +529,7 @@ public class GameController implements Initializable{
 		try {
 			if(ClientConnection.endGame()){
 				btnVolver.setDisable(false);
-				WindowUtilities.windowTransition("ThemeElection", event);
+				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 			}else{
 				btnVolver.setDisable(true);
 			}
@@ -545,7 +545,7 @@ public class GameController implements Initializable{
 
 		for (int i = 0; i < PUNTOSTOTALES; i++) {
 			//VARIABLE ABCD...
-
+			
 			
 			//CREAMOS ImageView
 			//iv = new ImageView();
@@ -553,17 +553,18 @@ public class GameController implements Initializable{
 			iv.setLayoutX(coordX(amigo_notEnemigo));
 			iv.setLayoutY(coordY());
 			iv.setFitHeight(25);
-			iv.setFitWidth(25);
+			iv.setFitWidth(25);	
 
 			//CARGAMOS LA IMAGEN
 			if(i == 14){
 				letraABC--;
 				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/ñ-blue.png")));
 			}else{
-
+				
 				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/"+letraABC+"-blue.png")));
-			} 
-
+			}
+	
+			System.out.println(letraABC);	
 			panel.getChildren().add(iv);
 			try {
 				Thread.sleep(30);
@@ -575,9 +576,11 @@ public class GameController implements Initializable{
 
 			//A—ADIMOS EL LABEL AL ARRAYLIST DE LABELS
 			aLImgV.add(iv);
-
+			
 			//SUMAMOS 1 A LA LETRA
 			letraABC++;
+			System.out.println("vuelta"+i);
+		
 		}
 	}
 
@@ -623,7 +626,7 @@ public class GameController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try {
-			//currentQuestion = ClientConnection.getQuestion();
+			//currentQuestion = ClientConnection.getQuestion(); 
 			crearRosco(true, panelLetrasJugador);
 			crearRosco(true, panelLetrasContrincante);
 			iv.setDisable(false);
