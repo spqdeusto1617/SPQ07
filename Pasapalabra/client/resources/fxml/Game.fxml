@@ -3,43 +3,41 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fafdfe;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.GameController">
+<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #fafdfe;" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.GameController">
    <children>
-      <Rectangle fx:id="rPreguntas" arcHeight="5.0" arcWidth="5.0" fill="#9536ff8f" height="103.0" layoutX="209.0" layoutY="197.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="552.0" />
-      <TextArea fx:id="taPreguntas" editable="false" layoutX="214.0" layoutY="202.0" prefHeight="93.0" prefWidth="542.0" wrapText="true" />
-      <Text id="information" fx:id="textoTiempoUsuario" layoutX="302.0" layoutY="408.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="?????????" />
-      <Text id="information" fx:id="textoPuntuacionU" layoutX="412.0" layoutY="386.0" stroke="#b9b9b9" strokeType="OUTSIDE" strokeWidth="0.1" text="Right: 0" textAlignment="CENTER" wrappingWidth="105.61328125" />
-      <Text id="information" fx:id="textoTiempoRival" layoutX="372.0" layoutY="417.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="?????????" textAlignment="CENTER" />
-      <Text id="information" fx:id="textoPuntuacionR" layoutX="386.0" layoutY="448.0" stroke="#b9b9b9" strokeType="OUTSIDE" strokeWidth="0.1" text="Right: 0" textAlignment="CENTER" wrappingWidth="105.61328125" />
-      <Text id="username" fx:id="textoUsernameUser" layoutX="470.0" layoutY="412.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="???usr???" textAlignment="CENTER" wrappingWidth="133.07421875" />
-      <Text id="username" fx:id="textoUsernameRival" layoutX="470.0" layoutY="470.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="???usR???" textAlignment="CENTER" wrappingWidth="136.24899291992188" />
-      <Button fx:id="btnContestar" layoutX="21.0" layoutY="129.0" mnemonicParsing="false" onMouseClicked="#btnContestar" prefHeight="25.0" prefWidth="161.0" style="-fx-background-color: #7fff00;" text="Answer" wrapText="true">
+      <Rectangle fx:id="rPreguntas" arcHeight="5.0" arcWidth="5.0" fill="#9536ff8f" height="75.0" layoutX="78.0" layoutY="340.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="621.0" />
+      <TextArea fx:id="taPreguntas" editable="false" layoutX="82.0" layoutY="345.0" prefHeight="65.0" prefWidth="612.0" wrapText="true" />
+      <Text id="information" fx:id="textoTiempoUsuario" layoutX="183.0" layoutY="299.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="?????????" />
+      <Text id="information" fx:id="textoPuntuacionU" layoutX="154.0" layoutY="278.0" stroke="#b9b9b9" strokeType="OUTSIDE" strokeWidth="0.1" text="Right: 0" textAlignment="CENTER" wrappingWidth="105.61328125" />
+      <Text id="information" fx:id="textoTiempoRival" layoutX="571.0" layoutY="299.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="?????????" textAlignment="CENTER" />
+      <Text id="information" fx:id="textoPuntuacionR" layoutX="543.0" layoutY="278.0" stroke="#b9b9b9" strokeType="OUTSIDE" strokeWidth="0.1" text="Right: 0" textAlignment="CENTER" wrappingWidth="105.61328125" />
+      <Text id="username" fx:id="textoUsernameUser" layoutX="140.0" layoutY="252.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="???usr???" textAlignment="CENTER" wrappingWidth="133.07421875" />
+      <Text id="username" fx:id="textoUsernameRival" layoutX="527.0" layoutY="252.0" stroke="#c9c7c7a3" strokeType="OUTSIDE" strokeWidth="0.1" text="???usR???" textAlignment="CENTER" wrappingWidth="136.24899291992188" />
+      <Button fx:id="btnContestar" layoutX="304.0" layoutY="486.0" mnemonicParsing="false" onMouseClicked="#btnContestar" prefHeight="25.0" prefWidth="161.0" style="-fx-background-color: #7fff00;" text="Answer" wrapText="true">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Button>
-      <Button fx:id="btnPasar" layoutX="21.0" layoutY="249.0" mnemonicParsing="false" onMouseClicked="#btnPasar" prefHeight="25.0" prefWidth="161.0" style="-fx-background-color: #00ffff;" text="Pass">
+      <Button fx:id="btnPasar" layoutX="80.0" layoutY="486.0" mnemonicParsing="false" onMouseClicked="#btnPasar" prefHeight="25.0" prefWidth="161.0" style="-fx-background-color: #00ffff;" text="Pass">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Button>
-      <Button fx:id="btnRendirse" layoutX="17.0" layoutY="355.0" mnemonicParsing="false" onMouseClicked="#btnRendirse" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #dc143c;" text="Give up">
+      <Button fx:id="btnRendirse" layoutX="533.0" layoutY="486.0" mnemonicParsing="false" onMouseClicked="#btnRendirse" prefHeight="36.0" prefWidth="161.0" style="-fx-background-color: #dc143c;" text="Give up">
          <font>
             <Font name="Arial" size="19.0" />
          </font>
       </Button>
-      <TextField fx:id="tfRespuesta" layoutX="209.0" layoutY="330.0" prefHeight="25.0" prefWidth="552.0" />
-      <Button fx:id="btnVolver" layoutX="631.0" layoutY="538.0" mnemonicParsing="false" onMouseClicked="#volverAtras" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #1c11f4;" text="Return" textFill="#fdfdff">
+      <TextField fx:id="tfRespuesta" layoutX="80.0" layoutY="433.0" prefHeight="25.0" prefWidth="621.0" />
+      <Button fx:id="btnVolver" layoutX="701.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#volverAtras" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: #1c11f4;" text="Return" textFill="#fdfdff">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <ImageView fx:id="iv" fitHeight="150.0" fitWidth="535.0" layoutX="209.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </Pane>

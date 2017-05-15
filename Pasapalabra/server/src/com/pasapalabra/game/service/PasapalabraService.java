@@ -89,13 +89,13 @@ public class PasapalabraService implements IPasapalabraService{
 	public UserDTO play(Token session, String type,IClientService service) throws RemoteException, SecurityException{
 		if(!SessionManager.isValidSession(session)) return null;
 		if(currentQuestions.containsKey(session.getToken())) throw new SecurityException();
-		QuestionDAO qDAO = new QuestionMongoDAO(Server.mongoConnection);
+		/*QuestionDAO qDAO = new QuestionMongoDAO(Server.mongoConnection);
 		ArrayList<Question> questions = new ArrayList<>();
 		for(char alphabet = 'a'; alphabet <= 'z'; alphabet++){
 			questions.add(qDAO.getRandomQuestionByLeter(alphabet));
 		} 
-		questions.add(qDAO.getRandomQuestionByLeter('ñ'));
-		/*ArrayList<Question> questions = new ArrayList<>();
+		questions.add(qDAO.getRandomQuestionByLeter('ñ'));*/
+		ArrayList<Question> questions = new ArrayList<>();
 		questions.add(new Question("Test", "Answer", 'a', "Unknown"));
 		for(int i = (int)'a'; i<(int)'z'; i++){
 			questions.add(new Question("Test", "Answer", (char)(i + 1), "Unknown"));

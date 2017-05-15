@@ -399,8 +399,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 					}catch (Exception e) {
 						ClientService.rivalIMG = null;
 					}
-					com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
 				}
+				com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Game", event);
 			} 
 		}catch (SecurityException e) {
 			// TODO Auto-generated catch block
@@ -1226,7 +1226,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 * @param amigo_notEnemigo
 	 * @param aLImgV
 	 */
-	
+
 
 	/**Method that adds the styles designed in the juego.css
 	 */

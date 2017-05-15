@@ -563,8 +563,6 @@ public class GameController implements Initializable{
 				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/"+letraABC+"-blue.png")));
 			}
 
-			System.out.println(letraABC);	
-
 			try{
 				panel.getChildren().add(iv);
 			}catch (Exception e) {
@@ -583,8 +581,7 @@ public class GameController implements Initializable{
 
 			//SUMAMOS 1 A LA LETRA
 			letraABC++;
-			System.out.println("vuelta"+i);
-
+			
 		}
 	}
 
@@ -619,7 +616,7 @@ public class GameController implements Initializable{
 
 		//(Radio * Seno de ((360grados partido por número de elementos a repartir * número de elementos creados * pi partido por 180) - pi partido por 2) + posición del rádio en Y
 		//Nota: El radio ha de ser igual al de Y, si no, no se dibujará un rosco redondo.
-		resultado = (int)(150 * Math.sin((360/27.0)*vecesHechoY*(Math.PI/180)-Math.PI/2)) +200;
+		resultado = (int)(150 * Math.sin((360/27.0)*vecesHechoY*(Math.PI/180)-Math.PI/2)) +160;
 
 		vecesHechoY++;
 		//		System.out.println(resultado);
@@ -633,7 +630,6 @@ public class GameController implements Initializable{
 			//currentQuestion = ClientConnection.getQuestion(); 
 			crearRosco(true, panelLetrasJugador);
 			crearRosco(false, panelLetrasContrincante);
-			iv.setDisable(false);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
