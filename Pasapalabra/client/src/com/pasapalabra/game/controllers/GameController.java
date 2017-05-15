@@ -51,7 +51,7 @@ public class GameController implements Initializable{
 	public static QuestionDTO currentQuestion;
 	public ArrayList<ImageView> panelLetrasJugador = new ArrayList<>(); //Panel con todos los labels del jugador
 	public ArrayList<ImageView> panelLetrasContrincante = new ArrayList<>(); //Panel con todos los labels del contrincante
-	
+
 
 	@FXML public Pane panel;
 	@FXML public Rectangle rPreguntas; 
@@ -538,49 +538,53 @@ public class GameController implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void crearRosco(boolean amigo_notEnemigo, ArrayList<ImageView> aLImgV){
-		//ImageView iv;
+		ImageView iv;
 		char letraABC = 'a';
 
 		for (int i = 0; i < PUNTOSTOTALES; i++) {
 			//VARIABLE ABCD...
-			
-			
-			//CREAMOS ImageView
-			//iv = new ImageView();
+
+
+			//CREAMOS ImageV	
+			iv = new ImageView();
 
 			iv.setLayoutX(coordX(amigo_notEnemigo));
 			iv.setLayoutY(coordY());
 			iv.setFitHeight(25);
-			iv.setFitWidth(25);	
-
+			iv.setFitWidth(25);
 			//CARGAMOS LA IMAGEN
 			if(i == 14){
 				letraABC--;
 				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/ñ-blue.png")));
 			}else{
-				
+
 				iv.setImage(new Image(getClass().getResourceAsStream("/images/letras/azul/"+letraABC+"-blue.png")));
 			}
-	
+
 			System.out.println(letraABC);	
-			panel.getChildren().add(iv);
+
+			try{
+				panel.getChildren().add(iv);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 			try {
 				Thread.sleep(30);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 
 			//A—ADIMOS EL LABEL AL ARRAYLIST DE LABELS
 			aLImgV.add(iv);
-			
+
 			//SUMAMOS 1 A LA LETRA
 			letraABC++;
 			System.out.println("vuelta"+i);
-		
+
 		}
 	}
 
@@ -621,20 +625,20 @@ public class GameController implements Initializable{
 		//		System.out.println(resultado);
 		return resultado;
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		try {
 			//currentQuestion = ClientConnection.getQuestion(); 
 			crearRosco(true, panelLetrasJugador);
-			crearRosco(true, panelLetrasContrincante);
+			crearRosco(false, panelLetrasContrincante);
 			iv.setDisable(false);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		//taPreguntas.setText(currentQuestion.getQuestion());
 		//textoUsernameRival.setText(com.pasapalabra.game.service.ClientService.rivalData.getUserName());
 		//textoUsernameUser.setText(ClientConnection.userInfo.getUserName());
