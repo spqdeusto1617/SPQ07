@@ -113,23 +113,12 @@ public class ServiceBasicTest {
 	}
 	
 	
-	@Test
-	public void logout(){
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		assertEquals(true, logoutSucceded);
-	}
-	
-	
 	@After
 	public void logoutHook(){
 		try{
-			logoutSucceded = ppService.deLogin(userToken);
+			ppService.deLogin(userToken);
 		}catch(Exception e) {
-			throw new RuntimeException("Data retrieving failed", e);
+			throw new RuntimeException("Logout failed", e);
 		}
 	}
 	
