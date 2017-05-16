@@ -157,9 +157,8 @@ public class ClientConnection {
 	public static QuestionDTO getQuestion() throws Exception{
 		try{
 			QuestionDTO question = ServiceLocator.service.getQuestion(sessionAuth);
-			if(question == null)//TODO: delog game
-				//currentLetter = question.getLeter();
-				if(question.getLeter() == 'z')reachZ = true;
+			//currentLetter = question.getLeter();
+			if(question.getLeter() == 'z')reachZ = true;
 			return question;
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -169,8 +168,8 @@ public class ClientConnection {
 
 	public static boolean delogging() throws Exception{
 		try{
-		 ServiceLocator.service.deLogin(sessionAuth);
-		 return true;
+			ServiceLocator.service.deLogin(sessionAuth);
+			return true;
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw e;

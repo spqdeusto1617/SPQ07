@@ -351,9 +351,9 @@ public class PasapalabraService implements IPasapalabraService{
 				currentClients.remove(session.getToken());
 				currentResult.remove(session.getToken());
 				currentQuestions.remove(session.getToken());
-				log.log(Level.INFO, "User exit matchmakig");
+				log.log(Level.INFO, "User exit matchmaking");
 			}
-
+			
 		}
 
 	}
@@ -425,12 +425,25 @@ public class PasapalabraService implements IPasapalabraService{
 				}
 			}
 		}
-		throw new RemoteException("Error delogin");
+		else throw new RemoteException("Error delogin");
 
 	}
 
 
 	public static void main(String[] args) {//For testing purposes
+		/*PasapalabraService service = new PasapalabraService();
+		Token token = null;
+		ClientService clientservice1 = new ClientService();
+		try {
+			token = service.login("12345678", "12345678");
+			System.out.println("Token1: "+token.getToken());
+			UserDTO userDTO = service.play(token, QuestionType.All.toString(), clientservice1);
+			service.exitMatchMaking(token, QuestionType.All.toString());
+			service.deLogin(token);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}*/
 		/*PasapalabraService service = new PasapalabraService();
 		Token token = null;
 		Token token2 = null;
