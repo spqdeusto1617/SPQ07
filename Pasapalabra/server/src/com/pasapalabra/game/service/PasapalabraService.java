@@ -359,14 +359,14 @@ public class PasapalabraService implements IPasapalabraService{
 	}
 
 	@Override
-	public boolean deLogin(Token session) throws RemoteException {
+	public void deLogin(Token session) throws RemoteException {
 		if(SessionManager.isValidSession(session)){
 			if(currentUsers.containsKey(session.getToken())){ 
 				if(!currentQuestions.containsKey(session.getToken())){//The player is not playing, no problem
 					currentUsers.remove(session.getToken());
 					SessionManager.removeUser(session);
 					log.log(Level.INFO, "User delog");
-					return true;
+
 				}
 				else{//The player is playing, we try to exit 
 					if(currentMatches.contains(session.getToken())){//The user is not currently playing
@@ -380,9 +380,12 @@ public class PasapalabraService implements IPasapalabraService{
 						currentMatches.remove(rivalToken);
 						currentUsers.remove(session.getToken());
 						SessionManager.removeUser(session);
-						client.otherDisconnected();//We notify his rival that he has exited
+						try{
+							client.otherDisconnected();//We notify his rival that he has exited
+						}catch (RemoteException e) {
+							log.log(Level.SEVERE, "Error trying to contact to the other user");
+						}
 						log.log(Level.INFO, "User delog while not playing");
-						return true;
 					}
 					else if(currentMatches.containsKey(session.getToken())){//the user is playing
 						String rivalToken = currentMatches.get(session.getToken());
@@ -395,28 +398,34 @@ public class PasapalabraService implements IPasapalabraService{
 						currentMatches.remove(session.getToken());
 						currentUsers.remove(session.getToken());
 						SessionManager.removeUser(session);
-						client.otherDisconnected();//We notify his rival that he has exited
+						try{
+							client.otherDisconnected();//We notify his rival that he has exited
+						}catch (RemoteException e) {
+							log.log(Level.SEVERE, "Error trying to contact to the other user");
+						}
 						log.log(Level.INFO, "User delog while playing");
-						return true;
+
 
 					}
 					else if(waitingClients.containsKey(session.getToken())){//The player is waiting to play
-						waitingClients.get(QuestionType.All).remove(session.getToken());
+						waitingClients.get(QuestionType.All.toString()).remove(session.getToken());
 						currentQuestions.remove(session.getToken());
 						currentClients.remove(session.getToken());
 						currentResult.remove(session.getToken());
 						currentUsers.remove(session.getToken());
 						SessionManager.removeUser(session);
 						log.log(Level.INFO, "User delog while waiting");
-						return true;
+
 					}
 					else{
-						return false;
+						currentUsers.remove(session.getToken());
+						currentQuestions.remove(session.getToken());
+						SessionManager.removeUser(session);
 					}
 				}
 			}
 		}
-		return false;
+		throw new RemoteException("Error delogin");
 
 	}
 

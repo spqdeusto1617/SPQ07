@@ -22,7 +22,7 @@ public class ClientConnection {
 
 	public static ClientService cService;
 
-	public static char currentLetter;
+	//public static char currentLetter;
 
 	public static Token sessionAuth;
 
@@ -34,7 +34,7 @@ public class ClientConnection {
 
 	public static boolean turn = false;
 
-	public static boolean playing = false;
+	public static boolean  playing = false;
 
 	private static boolean reachZ = false;
 
@@ -88,7 +88,8 @@ public class ClientConnection {
 
 	public static boolean exitGame() throws Exception{
 		try{
-			return ServiceLocator.service.deLogin(sessionAuth);
+			ServiceLocator.service.deLogin(sessionAuth);
+			return true;
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw e;
@@ -106,9 +107,11 @@ public class ClientConnection {
 					turn = false;//TODO: keep the game waiting
 
 				}
-			player1 = false;
-			turn = true;
-			playing = true;
+				else{
+					player1 = false;
+					turn = true;
+					playing = true;
+				}
 			return user;
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -155,8 +158,8 @@ public class ClientConnection {
 		try{
 			QuestionDTO question = ServiceLocator.service.getQuestion(sessionAuth);
 			if(question == null)//TODO: delog game
-				currentLetter = question.getLeter();
-			if(question.getLeter() == 'z')reachZ = true;
+				//currentLetter = question.getLeter();
+				if(question.getLeter() == 'z')reachZ = true;
 			return question;
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -166,8 +169,8 @@ public class ClientConnection {
 
 	public static boolean delogging() throws Exception{
 		try{
-			return ServiceLocator.service.deLogin(sessionAuth);
-
+		 ServiceLocator.service.deLogin(sessionAuth);
+		 return true;
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw e;

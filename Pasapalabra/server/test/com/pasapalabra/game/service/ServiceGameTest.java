@@ -27,7 +27,6 @@ import helpers.ClientService;
 public class ServiceGameTest {
 	private static IPasapalabraService ppService;
 	private static boolean registrationSucceded = false;
-	private static boolean deLoginSucceded = false;
 	private static UserDTO user1 = new UserDTO(
 			TokenGenerator.nextUniqueID().getToken(),
 			TokenGenerator.nextUniqueID().getToken()+"@aa.com",
@@ -54,14 +53,14 @@ public class ServiceGameTest {
 
 	@BeforeClass
 	public static void startServer(){
-		
+
 		try {
 			String URL = "//" + TestLauncher.SERVER_HOST + ":" + TestLauncher.SERVER_PORT + "/" + TestLauncher.SERVER_SERVICE_NAME;
 			ppService = (IPasapalabraService) Naming.lookup(URL);
 		} catch (Exception e) {
 			throw new RuntimeException("Error connecting to the server", e);
 		}
-		
+
 		try {
 			service1 = new ClientService();
 		}catch(Exception e){
@@ -204,8 +203,8 @@ public class ServiceGameTest {
 	@After
 	public void logout(){
 		try{
-			deLoginSucceded = ppService.deLogin(user1Token);
-			deLoginSucceded = ppService.deLogin(user2Token);
+			ppService.deLogin(user1Token);
+			ppService.deLogin(user2Token);
 		}catch(Exception e) {
 			throw new RuntimeException("Data retrieving failed", e);
 		}
