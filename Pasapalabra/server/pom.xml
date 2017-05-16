@@ -13,11 +13,6 @@
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongodb-driver</artifactId>
-			<version>3.2.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongodb-driver</artifactId>
 			<version>3.4.2</version>
 		</dependency>
 		<dependency>
@@ -45,6 +40,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<doxygen.config.file>${project.basedir}/resources/Doxyfile</doxygen.config.file>
 	</properties>
 
 	<build>
@@ -192,6 +188,36 @@
 						<include>**/TestLauncher.java</include>
 					</includes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.soebes.maven.plugins</groupId>
+				<artifactId>doxygen-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<configuration>
+					<configurationFile>${doxygen.config.file}</configurationFile>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/docs</outputDirectory>
+								<resources>          
+									<resource>
+									<directory>${project.build.directory}/doxygen/html</directory>
+									<filtering>true</filtering>
+									</resource>
+								</resources>              
+						</configuration>            
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
