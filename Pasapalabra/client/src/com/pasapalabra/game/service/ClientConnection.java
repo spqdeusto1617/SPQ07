@@ -27,6 +27,8 @@ public class ClientConnection {
 	public static Token sessionAuth;
 
 	public static UserDTO userInfo;
+	
+	public static UserScoreDTO userScore;
 
 	public static boolean serverReady;
 
@@ -212,6 +214,7 @@ public class ClientConnection {
 				turn = false;
 				reachZ = false;
 			}
+			userScore = score;
 			return score;
 		}catch (Exception e) {
 			// TODO: handle exception

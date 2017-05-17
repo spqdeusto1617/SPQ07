@@ -1,5 +1,6 @@
 package com.pasapalabra.game.controllers;
 
+import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import com.pasapalabra.game.utilities.WindowUtilities;
 import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -253,21 +255,21 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	@FXML
 	void btnEstadisticas(MouseEvent event) {
 
-		//		if(com.pasapalabra.game.service.ClientConnection.playing){
-		//			//Alerta
-		//			Alert alert2 = new Alert(AlertType.INFORMATION);
-		//			alert2.setTitle("Juego en curso");
-		//			alert2.setHeaderText(null);
-		//			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
-		//					+ " Termina la partida para poder avanzar a esa ventana");
-		//			alert2.initModality(Modality.APPLICATION_MODAL);
-		//			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-		//			alert2.showAndWait();
-		//			log.log(Level.FINE, "El juego está en curso.");
-		//		}else{
-		//			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
-		//			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
-		//		}
+		if(com.pasapalabra.game.service.ClientConnection.playing){
+			//Alerta
+			Alert alert2 = new Alert(AlertType.INFORMATION);
+			alert2.setTitle("Juego en curso");
+			alert2.setHeaderText(null);
+			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
+					+ " Termina la partida para poder avanzar a esa ventana");
+			alert2.initModality(Modality.APPLICATION_MODAL);
+			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert2.showAndWait();
+			log.log(Level.FINE, "El juego está en curso.");
+		}else{
+			log.log(Level.FINEST, "Transicion de ventana a Estadisticas");
+			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
+		}
 	}
 
 	//Elimina nivel de transparencia
@@ -294,12 +296,12 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	//TODO
 	@FXML 
 	void btnAll(MouseEvent event){
-		QuestionType type = QuestionType.All; 
+		ClientConnection.qType = QuestionType.All; 
 	}
 
 	@FXML 
 	void btnSports(MouseEvent event){
-		QuestionType type = QuestionType.Sport; 
+		ClientConnection.qType = QuestionType.Sport; 
 	}
 
 
@@ -380,7 +382,32 @@ public class ThemeController extends ExtenderClassController implements Initiali
 				ClientConnection.turn = false;
 				searchTXT.setVisible(true);
 				btnCancel.setVisible(true);
-			}
+
+				try {  
+				//	while(ClientConnection.playing && !ClientService.found){
+						for (int i = 0; i < 10; i++) {
+							Thread.sleep(500);
+							System.out.println("Wait");
+							if(ClientService.found) i = 40;
+						}
+				} catch (InterruptedException e) {  }
+				System.out.println("FIN WAIT");
+				
+				if(ClientService.found){
+					ClientService.found = false;
+
+					WindowUtilities.windowTransition("Game", event);
+				}
+				else{
+					cancelMatch(event);
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("No match found");
+					alert.setContentText("Impssible to find a match, please try later");
+					alert.initModality(Modality.APPLICATION_MODAL);	
+					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert.showAndWait();
+				}
+			}   
 			else{
 				ClientService.rivalData = user;
 				ClientConnection.player1 = false;
@@ -783,8 +810,6 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		 */
 
 	} 
-
-
 
 
 	//TODO: Cambiar el método

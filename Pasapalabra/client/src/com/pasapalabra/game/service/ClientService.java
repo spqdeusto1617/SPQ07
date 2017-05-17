@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.codec.binary.Base64;
 
+import com.pasapalabra.game.controllers.GameController;
+import com.pasapalabra.game.controllers.ThemeController;
 import com.pasapalabra.game.model.DTO.UserDTO;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
 
@@ -27,6 +29,18 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 	@FXML public static Image rivalIMG;
 
 	public static UserDTO rivalData;
+
+	public static UserScoreDTO rivalScore;
+
+	public static volatile boolean found = false;
+
+	public static volatile boolean rivalDisconnected = false;
+
+	public static volatile boolean rivalAnswered = false;
+
+	public static volatile char leterAnswered = 'a';
+
+	public static volatile boolean rivalAnswer = false;
 
 	public ClientService(String name) throws RemoteException {
 		super();
@@ -51,40 +65,40 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 			}catch (Exception e) {
 				rivalIMG = null;
 			}
+			found = true;
 		}
 	}
 	//TODO: implement this
 	@Override
 	public void answered(char letter, boolean result) throws RemoteException {
-		System.err.println("Respuesta del otro usuario a la letra: "+letter+", "+result);
-
+		leterAnswered = letter;
+		rivalAnswer = result;
+		rivalAnswered = true;
 	}
 	//TODO: implement this
 	@Override
 	public void finalResult(UserScoreDTO score) throws RemoteException {
-		System.err.println("La puntuación final del otro usuario es: "+score);
 		ClientConnection.playing = false;//TODO: transicion de vuelta
 		ClientConnection.turn = false;
 		ClientConnection.player1 = false;
 		rivalData = null;
-
+		rivalScore = score;
 	}
 	//TODO: implement this (change to observer mode)
 	@Override
 	public void changeTurn(UserScoreDTO score) throws RemoteException {
-		System.err.println("La puntuación de su rival es: "+score+" y ahora le toca jugar a usted");
 		ClientConnection.turn = true;
-
+		rivalScore = score;
 		//TODO: play now
 
 	}
 	@Override
-	public void otherDisconnected() throws RemoteException {
-		System.err.println("Su rival se ha desconectado, saliendo del juego");
+	public void otherDisconnected() throws RemoteException {	
 		ClientConnection.turn = false;
 		ClientConnection.playing = false;
 		ClientConnection.player1 = false;
 		rivalData = null;
+		rivalDisconnected = true;
 		//TODO: exit the game(Use windowUtilities.forcedCloseSession
 	}
 
