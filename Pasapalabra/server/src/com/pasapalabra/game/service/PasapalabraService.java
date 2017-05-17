@@ -238,21 +238,19 @@ public class PasapalabraService implements IPasapalabraService{
 			}
 			UserDAO uDAO = new UserMongoDAO(Server.mongoConnection);
 			if(finalScore1.getRightAnswered() > finalScore2.getRightAnswered()){
-				//FIXME: Revise this
 				uDAO.updateScore(currentUsers.get(session.getToken()), true);
 				uDAO.updateScore(currentUsers.get(currentMatches.get(session.getToken())), false);
 				finalScore1.won();
 				finalScore2.lost();
 			}
 			else{
-				//FIXME: Revise this
-				uDAO.updateScore(currentUsers.get(session), false);
+				uDAO.updateScore(currentUsers.get(session.getToken()), false);
 				uDAO.updateScore(currentUsers.get(currentMatches.get(session.getToken())), true);
 				finalScore1.lost();
 				finalScore2.won();
 			}
 			IClientService client= (IClientService)currentClients.get(currentMatches.get(session.getToken()));
-			client.finalResult(ScoreAssembler.getInstance().assembleToDTO(finalScore2));
+			client.finalResult(ScoreAssembler.getInstance().assembleToDTO(finalScore1));
 			currentQuestions.remove(session.getToken());
 			currentResult.remove(session.getToken());
 			currentResult.remove(currentMatches.get(session.getToken()));
