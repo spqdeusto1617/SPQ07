@@ -3,6 +3,7 @@ package com.pasapalabra.game.controllers;
 import java.awt.HeadlessException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import com.pasapalabra.game.model.DTO.QuestionDTO;
 import com.pasapalabra.game.model.DTO.UserScoreDTO;
 import com.pasapalabra.game.service.ClientConnection;
+import com.pasapalabra.game.service.ClientService;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.event.Event;
@@ -57,6 +59,8 @@ public class GameController implements Initializable{
 	@FXML public Rectangle rPreguntas; 
 	@FXML public TextArea taPreguntas;
 	@FXML public ImageView iv; 
+	@FXML public ImageView imageUser; 
+	@FXML public ImageView imageRival; 
 	@FXML public Text textoTiempoUsuario; 
 	@FXML public Text textoTiempoRival; 
 
@@ -630,6 +634,36 @@ public class GameController implements Initializable{
 			//currentQuestion = ClientConnection.getQuestion(); 
 			crearRosco(true, panelLetrasJugador);
 			crearRosco(false, panelLetrasContrincante);
+			
+			//image of the user
+			if(ClientConnection.userIMG != null){
+				imageUser.setImage(ClientConnection.userIMG);
+			}else{
+				String imagen = "fPerfil";
+				Random rand = new Random();
+				int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+				if(randomNum == 666){
+					imagen = "fPerfilPirata";
+				}
+
+				Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imageUser.getBoundsInLocal().getWidth(),imageUser.getBoundsInLocal().getHeight(),false,true);
+				imageUser.setImage(i);
+			}
+			
+			//image of the rival
+			if(ClientService.rivalIMG != null){
+				imageRival.setImage(ClientService.rivalIMG);
+			}else{
+				String imagen = "fPerfil";
+				Random rand = new Random();
+				int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+				if(randomNum == 666){
+					imagen = "fPerfilPirata";
+				}
+
+				Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imageRival.getBoundsInLocal().getWidth(),imageRival.getBoundsInLocal().getHeight(),false,true);
+				imageRival.setImage(i);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
