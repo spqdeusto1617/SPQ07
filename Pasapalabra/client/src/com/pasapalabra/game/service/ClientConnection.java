@@ -200,13 +200,12 @@ public class ClientConnection {
 		}
 		else return false;
 	}
-	//TODO: if player1 == false, end game, else, pass to observer mode
+	
 	public static void getResults() throws Exception{
 		try{
 			userScore = ServiceLocator.service.getResults(sessionAuth);
 			if(player1){
 				playing = false;
-				player1 = false;
 				reachZ = false;
 				turn = false;
 			}

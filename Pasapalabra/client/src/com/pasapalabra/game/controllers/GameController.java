@@ -126,7 +126,7 @@ public class GameController implements Initializable{
 				}
 			}
 			try {
-				gameEnd =ClientConnection.endGame();
+				gameEnd = ClientConnection.endGame();
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				Alert alert = new Alert(AlertType.ERROR);
@@ -158,7 +158,7 @@ public class GameController implements Initializable{
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.setTitle("Game ended");
 						alert.setHeaderText("The game has ended");
-						alert.setContentText("The gam has ended. Press the return button to see the final results");
+						alert.setContentText("The game has ended. Press the return button to see the final results");
 						alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert.showAndWait();
 					}
@@ -169,6 +169,7 @@ public class GameController implements Initializable{
 						alert.setContentText("The gam has ended. Please, wait until your rival ends");
 						alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert.show();
+						taPreguntas.setText("Wait until your rival, "+ClientService.rivalData.getUserName()+" finish playing");
 						spectate();
 					}
 
@@ -322,10 +323,10 @@ public class GameController implements Initializable{
 			Alert alert=new Alert(AlertType.INFORMATION);
 			alert.setTitle("Game ended");
 			alert.setHeaderText("The game ended has ended");
-			alert.setContentText("The result are:\n You answered "+ClientConnection.userScore.getRightAnswered()
-			+ "right and "+ClientConnection.userScore.getWrongAnswered()+" questions wrong. \nYour "
-			+ "rival has answered "+ClientService.rivalScore.getRightAnswered()+" questions"
-			+ "right and "+ClientService.rivalScore.getWrongAnswered()+" questions wrong");
+			alert.setContentText("The result are:\nYou answered "+ClientConnection.userScore.getRightAnswered()
+			+ " questions right and "+ClientConnection.userScore.getWrongAnswered()+" questions wrong. \nYour "
+			+ "rival has answered "+ClientService.rivalScore.getRightAnswered()+" questions "
+			+ "right and "+ClientService.rivalScore.getWrongAnswered()+" questions wrong.");
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
 
@@ -347,6 +348,7 @@ public class GameController implements Initializable{
 				alert2.showAndWait();
 			}
 		}
+		ClientConnection.player1 = false;
 		WindowUtilities.windowTransition("ThemeElection", event);
 	}
 

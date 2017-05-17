@@ -85,7 +85,7 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 		rivalData = null;
 		rivalScore = score;
 	}
-	//TODO: implement this (change to observer mode)
+
 	@Override
 	public void changeTurn(UserScoreDTO score) throws RemoteException {
 		ClientConnection.turn = true;
