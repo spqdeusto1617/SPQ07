@@ -2,7 +2,6 @@ package com.pasapalabra.game.service;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
@@ -26,7 +25,6 @@ import com.pasapalabra.game.model.assembler.UserAssembler;
 import com.pasapalabra.game.server.Server;
 import com.pasapalabra.game.service.auth.SessionManager;
 import com.pasapalabra.game.service.auth.Token;
-import com.pasapalabra.game.service.auth.TokenGenerator;
 
 /**
  * Class that implements all the methods available to the server.
@@ -111,7 +109,7 @@ public class PasapalabraService implements IPasapalabraService{
 			currentClients.put(session.getToken(), service);
 			currentResult.put(session.getToken(), new UserScore());
 
-			return new UserDTO("Wait");//TODO: revise this
+			return new UserDTO("Wait");
 		}
 
 		//If there is that category, but no players
@@ -120,7 +118,7 @@ public class PasapalabraService implements IPasapalabraService{
 			waitingClients.get(type).add(session.getToken());
 			currentClients.put(session.getToken(), service);
 			currentResult.put(session.getToken(), new UserScore());
-			return new UserDTO("Wait");//TODO: revise this
+			return new UserDTO("Wait");
 		}
 		currentMatches.put(session.getToken(),waitingClients.get(type).get(0));
 		waitingClients.get(type).remove(0);
@@ -240,12 +238,14 @@ public class PasapalabraService implements IPasapalabraService{
 			}
 			UserDAO uDAO = new UserMongoDAO(Server.mongoConnection);
 			if(finalScore1.getRightAnswered() > finalScore2.getRightAnswered()){
+				//FIXME: Revise this
 				uDAO.updateScore(currentUsers.get(session.getToken()), true);
 				uDAO.updateScore(currentUsers.get(currentMatches.get(session.getToken())), false);
 				finalScore1.won();
 				finalScore2.lost();
 			}
 			else{
+				//FIXME: Revise this
 				uDAO.updateScore(currentUsers.get(session), false);
 				uDAO.updateScore(currentUsers.get(currentMatches.get(session.getToken())), true);
 				finalScore1.lost();
@@ -353,7 +353,7 @@ public class PasapalabraService implements IPasapalabraService{
 				currentQuestions.remove(session.getToken());
 				log.log(Level.INFO, "User exit matchmaking");
 			}
-			
+
 		}
 
 	}
@@ -441,7 +441,7 @@ public class PasapalabraService implements IPasapalabraService{
 			service.exitMatchMaking(token, QuestionType.All.toString());
 			service.deLogin(token);
 		}catch (Exception e) {
-			// TODO: handle exception
+		
 			e.printStackTrace();
 		}*/
 		/*PasapalabraService service = new PasapalabraService();
@@ -456,24 +456,17 @@ public class PasapalabraService implements IPasapalabraService{
 		try {
 			token = service.login("12345678", "12345678");
 			System.out.println("Token1: "+token.getToken());
-
 			token2 = service.login("12345678", "12345678");
-
 			UserDTO userDTO = service.play(token, QuestionType.All.toString(), clientservice1);
 			if(userDTO == null)System.out.println("Null");
 			//System.out.println("Token2: "+token2.getToken());
-
 			token3 = service.login("Jugador 3", "Test3");
 			//System.out.println("Token3: "+token3.getToken());
-
 			token4 = service.login("Jugador 4", "Test3");
-
 		} catch (RemoteException | SecurityException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-
-
 		//System.out.println(token.getToken());
 		ClientService clientservice1 = new ClientService();
 		ClientService clientservice2 = new ClientService();
@@ -485,7 +478,7 @@ public class PasapalabraService implements IPasapalabraService{
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			service.exitMatchMaking(token, QuestionType.All.toString());
@@ -495,13 +488,12 @@ public class PasapalabraService implements IPasapalabraService{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 			test = service.play(token, QuestionType.All.toString(),clientservice1);
 			System.out.println("Respuesta del servidor: "+test.getUserName());
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			test = service.play(token, QuestionType.All.toString(),clientservice1);
@@ -510,13 +502,11 @@ public class PasapalabraService implements IPasapalabraService{
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
-
 			UserDTO test3 = service.play(token3, QuestionType.All.toString(), clientservice3);
 			System.out.println(test3.getUserName());
-
 			//System.out.println("Test:"+test3.getUserName());
 			//System.out.println(test.getUserName());
 			QuestionDTO question2 = service.getQuestion(token2);
@@ -531,13 +521,11 @@ public class PasapalabraService implements IPasapalabraService{
 			}
 			UserScoreDTO score1 = service.getResults(token2);
 			System.out.println(score1);
-
 			QuestionDTO question = service.getQuestion(token);
 			System.out.println("question"+question);
 			result = service.answerQuestion(token, "Answer");
 			System.out.println(result);
 			for(char alphabet = 'a'; alphabet <= 'z'; alphabet++ ){
-
 				question = service.getQuestion(token);
 				System.out.println("question"+question);
 				result = service.answerQuestion(token, Character.toString(alphabet));
@@ -549,7 +537,7 @@ public class PasapalabraService implements IPasapalabraService{
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			System.out.println("Siguiente partida");
@@ -557,10 +545,9 @@ public class PasapalabraService implements IPasapalabraService{
 			UserDTO test4 = service.play(token4, QuestionType.All.toString(),clientservice4);
 			System.out.println(test4.getUserName());
 		} catch (RemoteException | SecurityException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
-
 		 */}
 
 
