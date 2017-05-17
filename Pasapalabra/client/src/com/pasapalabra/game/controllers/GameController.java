@@ -77,6 +77,7 @@ public class GameController implements Initializable{
 	@FXML public Button btnGiveUp;
 	@FXML public Button btnReturn;
 
+	
 
 	/**Method called when Contestar button is pressed in the game. 
 	 * If the answer is in blank, error
