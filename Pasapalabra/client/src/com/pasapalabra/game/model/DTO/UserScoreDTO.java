@@ -10,6 +10,11 @@ import java.io.Serializable;
  */
 public class UserScoreDTO implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	int rightAnswered;
 
 	int wrongAnswered;

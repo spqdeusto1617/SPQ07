@@ -102,11 +102,11 @@ public class ClientConnection {
 	public static UserDTO play(QuestionType type) throws Exception{
 		try{
 			UserDTO user = ServiceLocator.service.play(sessionAuth, type.toString(), cService);
-			if(user == null)//TODO: delog this user
+			if(user == null)return null;
 				if(user.getUserName().equals("Wait")){
 					qType = type;
 					player1 = true;
-					turn = false;//TODO: keep the game waiting
+					turn = false;
 
 				}
 				else{
@@ -201,21 +201,19 @@ public class ClientConnection {
 		else return false;
 	}
 	//TODO: if player1 == false, end game, else, pass to observer mode
-	public static UserScoreDTO getResults() throws Exception{
+	public static void getResults() throws Exception{
 		try{
-			UserScoreDTO score = ServiceLocator.service.getResults(sessionAuth);
-			if(player1){//TODO: acabar
+			userScore = ServiceLocator.service.getResults(sessionAuth);
+			if(player1){
 				playing = false;
 				player1 = false;
 				reachZ = false;
 				turn = false;
 			}
-			else{//TODO: Te toca espectar
+			else{
 				turn = false;
 				reachZ = false;
 			}
-			userScore = score;
-			return score;
 		}catch (Exception e) {
 			// TODO: handle exception
 			throw e;

@@ -377,6 +377,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			//TODO: cambiar
 			// ANTES utilidades.Conexion_cliente.lanzaConexion(utilidades.Conexion_cliente.Ip_Local,utilidades.Acciones_servidor.Jugar.toString(), Tipo);
 			UserDTO user= com.pasapalabra.game.service.ClientConnection.play(type); 
+			if(user == null) WindowUtilities.forcedCloseSession(event);
 			if(user.getUserName().equals("Wait")){
 				ClientConnection.player1 = true;
 				ClientConnection.turn = false;
@@ -385,13 +386,14 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 				try {  
 				//	while(ClientConnection.playing && !ClientService.found){
-						for (int i = 0; i < 10; i++) {
+						for (int i = 0; i < 40; i++) {
 							Thread.sleep(500);
-							System.out.println("Wait");
-							if(ClientService.found) i = 40;
+							
+							if(ClientService.found) {i = 60;
+							}
 						}
 				} catch (InterruptedException e) {  }
-				System.out.println("FIN WAIT");
+			
 				
 				if(ClientService.found){
 					ClientService.found = false;
