@@ -72,10 +72,10 @@ public class GameController implements Initializable{
 
 	@FXML public TextField tfRespuesta; 
 
-	@FXML public Button btnContestar;
-	@FXML public Button btnPasar;
-	@FXML public Button btnRendirse;
-	@FXML public Button btnVolver;
+	@FXML public Button btnAnswer;
+	@FXML public Button btnPass;
+	@FXML public Button btnGiveUp;
+	@FXML public Button btnReturn;
 
 
 	/**Method called when Contestar button is pressed in the game. 
@@ -83,7 +83,7 @@ public class GameController implements Initializable{
 	 * @param event
 	 */
 	@FXML
-	void btnContestar(MouseEvent event) {
+	void Answer(MouseEvent event) {
 		boolean gameEnd = false;
 		if(ClientService.rivalDisconnected)return;
 		if(!ClientConnection.playing)return;
@@ -117,11 +117,11 @@ public class GameController implements Initializable{
 					foo++;
 					textoPuntuacionU.setText("Right: "+Integer.toString(foo));
 
-					int Num_Letra=Pos_Letra(currentQuestion.getLeter());
+					int Num_Letra=Pos_Letter(currentQuestion.getLeter());
 					panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+currentQuestion.getLeter()+"-green.png")));
 				}
 				else{
-					int Num_Letra=Pos_Letra(currentQuestion.getLeter());
+					int Num_Letra=Pos_Letter(currentQuestion.getLeter());
 					panelLetrasJugador.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+currentQuestion.getLeter()+"-red.png")));
 				}
 			}
@@ -211,7 +211,7 @@ public class GameController implements Initializable{
 	 * @param event
 	 */
 	@FXML
-	void btnPasar(MouseEvent event) {
+	void Pass(MouseEvent event) {
 		if(ClientService.rivalDisconnected)return;
 		if(!ClientConnection.playing)return;
 		if(!ClientConnection.turn)return;
@@ -252,7 +252,7 @@ public class GameController implements Initializable{
 	 * @param event
 	 */
 	@FXML
-	void btnRendirse(MouseEvent event){
+	void GiveUp(MouseEvent event){
 		/*
 		if(!Conexion_cliente.Mi_Turno){
 			Alert alert = new Alert(AlertType.ERROR);
@@ -297,7 +297,7 @@ public class GameController implements Initializable{
 	 * @param letra_Actual
 	 * @return
 	 */
-	private static int Pos_Letra(char letra_Actual) {
+	private static int Pos_Letter(char letra_Actual) {
 		if(letra_Actual=='ñ'){
 			return 14;
 		}
@@ -309,7 +309,7 @@ public class GameController implements Initializable{
 		}
 	}
 
-	public void volverAtras(Event event){
+	public void returnTheme(Event event){
 		if(ClientConnection.playing)return;
 		if(ClientService.rivalDisconnected){
 			Alert alert=new Alert(AlertType.INFORMATION);
@@ -350,7 +350,7 @@ public class GameController implements Initializable{
 		WindowUtilities.windowTransition("ThemeElection", event);
 	}
 
-	public void crearRosco(boolean amigo_notEnemigo, ArrayList<ImageView> aLImgV){
+	public void createRosco(boolean amigo_notEnemigo, ArrayList<ImageView> aLImgV){
 		ImageView iv;
 		char letraABC = 'a';
 
@@ -451,11 +451,11 @@ public class GameController implements Initializable{
 							int foo = Integer.parseInt(textoPuntuacionR.getText().substring(7));
 							foo++;
 							textoPuntuacionR.setText("Right: "+Integer.toString(foo));
-							int Num_Letra = Pos_Letra(ClientService.leterAnswered);
+							int Num_Letra = Pos_Letter(ClientService.leterAnswered);
 							panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/verde/"+ClientService.leterAnswered+"-green.png")));
 						}
 						else{
-							int Num_Letra=Pos_Letra(ClientService.leterAnswered);
+							int Num_Letra=Pos_Letter(ClientService.leterAnswered);
 							panelLetrasContrincante.get(Num_Letra).setImage(new Image(getClass().getResourceAsStream("/images/letras/rojo/"+ClientService.leterAnswered+"-red.png")));
 						}
 					}
@@ -519,8 +519,8 @@ public class GameController implements Initializable{
 		// TODO Auto-generated method stub
 		try {
 			//currentQuestion = ClientConnection.getQuestion(); 
-			crearRosco(true, panelLetrasJugador);
-			crearRosco(false, panelLetrasContrincante);
+			createRosco(true, panelLetrasJugador);
+			createRosco(false, panelLetrasContrincante);
 
 			//image of the user
 			if(ClientConnection.userIMG != null){
