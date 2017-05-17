@@ -65,8 +65,9 @@ public class ClientService extends UnicastRemoteObject implements IClientService
 			}catch (Exception e) {
 				rivalIMG = null;
 			}
-			found = true;
+			
 		}
+		found = true;
 	}
 	//TODO: implement this
 	@Override
