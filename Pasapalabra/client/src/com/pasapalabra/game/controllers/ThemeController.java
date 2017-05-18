@@ -219,6 +219,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		//		alert.setContentText("This Function is not implemented, please, do not use it");
 		//
 		//		alert.showAndWait();
+		
 
 		if(ClientConnection.playing){
 			//Alerta
