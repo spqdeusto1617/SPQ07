@@ -48,6 +48,7 @@ public class WindowUtilities {
 	 * The event must have occurred in the window in which you want
 	 * make the transition
 	 */
+	
 	public static void windowTransition(String fileName, Event event) {
 		Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		Parent panel = null;
