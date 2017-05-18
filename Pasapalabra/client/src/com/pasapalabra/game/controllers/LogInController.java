@@ -75,6 +75,9 @@ public class LogInController extends Control implements Initializable {
 
 	@FXML
 	private ImageView estadoServidor;
+	
+	@FXML
+	private ImageView imageNews; 
 
 	@FXML
 	private Polygon fuPoly;
@@ -110,6 +113,7 @@ public class LogInController extends Control implements Initializable {
 				for (File archivoGrafico : aLNoticiasFicheros) {
 					aLNoticias.add(new Image(archivoGrafico.toURI().toURL().toString()));
 				}
+				imageNews.setImage(new Image("/images/news.jpg"));
 				pagNoticias.setMaxPageIndicatorCount(4);
 				pagNoticias.setPageCount(aLNoticias.size());
 				pagNoticias.setPageFactory(new Callback<Integer, Node>() {
@@ -274,7 +278,7 @@ public class LogInController extends Control implements Initializable {
 	/**Method to go to the register window when the server is operative. 
 	 * @param event of the mouse
 	 */
-	public void registro(MouseEvent event){
+	public void signIn(MouseEvent event){
 		log.log(Level.FINEST, "Registry method inicialized");
 		if( com.pasapalabra.game.service.ClientConnection.serverReady == false ){
 			log.log(Level.INFO, "Server not ready");
@@ -294,7 +298,7 @@ public class LogInController extends Control implements Initializable {
 	/**Method to open the github page of the current project
 	 * @param event of the mouse
 	 */
-	public void irAGitHub(MouseEvent event){
+	public void goToGitHub(MouseEvent event){
 		log.log(Level.FINEST, "Go to github");
 		try {
 			//Desktop-getea el desktop-navega en-nueva URL-URL-a URI

@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,9 @@ public class AboutController extends Control implements Initializable {
 
 	@FXML
 	private Text txtEdadAsier;
+	
+	@FXML 
+	private Button btnReturn; 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, AboutController.class.getName());
@@ -130,7 +134,7 @@ public class AboutController extends Control implements Initializable {
 	/**Method to return to the previous window
 	 * @param event
 	 */
-	public void volver(MouseEvent event){
+	public void returnTo(MouseEvent event){
 		String pantallaALaQueIr = "ThemeElection";
 		log.log(Level.FINEST, "Se ha vuelto a la pantalla de " + pantallaALaQueIr);
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition(pantallaALaQueIr, event);

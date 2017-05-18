@@ -83,13 +83,13 @@ public class WindowUtilities {
 		//Crea alerta de tipo confirmación
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		//Pone título
-		alert.setTitle("Cerrar sesión");
+		alert.setTitle("Log out");
 		//Pone cabecera
-		alert.setHeaderText("¿Está seguro de querer cerrar sesión?");
+		alert.setHeaderText("Are you sure you want to log out?");
 		//Pone contenido
-		alert.setContentText("Si cierra perderá la partida en curso que\n"
-				+ "pueda estar jugando o los cambios que esté"
-				+ "haciendo en su cuenta si no los ha guardado aún.");
+		alert.setContentText("If you log out you will lose the current game that\n"
+				+ " you are playing or the changes that"
+				+ " you are doing in you account if you have not saved yet.");
 
 		//Añade modalidad
 		alert.initModality(Modality.APPLICATION_MODAL);
@@ -105,11 +105,11 @@ public class WindowUtilities {
 			//Crear alerta de tipo confirmación
 			Alert alert2 = new Alert(AlertType.CONFIRMATION);
 			//Pone título
-			alert2.setTitle("Cerrar sesión");
+			alert2.setTitle("Log out");
 			//Pone cabecera
-			alert2.setHeaderText("¿Está seguro?");
+			alert2.setHeaderText("¿Are you sure?");
 			//Pone contenido
-			alert2.setContentText("No se podrá volver atrás.");
+			alert2.setContentText("You won't be able to return.");
 			//Añade modalidad
 			alert2.initModality(Modality.APPLICATION_MODAL);
 			//Añade 'dueño'

@@ -150,12 +150,12 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnJuego" layoutX="18.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Play" textFill="#f7fff7">
+      <Button fx:id="btnJuego" layoutX="18.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#Play" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Play" textFill="#f7fff7">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnAmigos" layoutX="18.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Friends">
+      <Button fx:id="btnAmigos" layoutX="18.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#Friends" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Friends">
          <font>
             <Font size="18.0" />
          </font>
@@ -168,18 +168,18 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Button fx:id="btnPerfil" layoutX="18.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="My profile" textFill="#fffdfd">
+      <Button fx:id="btnPerfil" layoutX="18.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#MyProfile" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="My profile" textFill="#fffdfd">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnEstadisticas" layoutX="18.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Statistics" textFill="WHITE">
+      <Button fx:id="btnEstadisticas" layoutX="18.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#Statistics" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Statistics" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnCerrarSesion" layoutX="27.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Log out" textFill="WHITE" />
-      <Button fx:id="btnJugar" layoutX="582.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#aJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #0000FF;" text="Play!" textFill="WHITE">
+      <Button fx:id="btnCerrarSesion" layoutX="27.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#LogOut" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Log out" textFill="WHITE" />
+      <Button fx:id="btnJugar" layoutX="582.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#aPlay" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #0000FF;" text="Play!" textFill="WHITE">
          <font>
             <Font name="Arial" size="18.0" />
          </font>

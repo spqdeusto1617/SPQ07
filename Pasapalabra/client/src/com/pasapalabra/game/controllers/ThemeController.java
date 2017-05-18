@@ -121,7 +121,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 * @param event
 	 */
 	@FXML 
-	void btnJugar(MouseEvent event) {
+	void Play(MouseEvent event) {
 		log.log(Level.FINEST, "Botón de jugar pulsado y ClientConnection.playing = " + ClientConnection.playing);
 		//Compruebo si se está jugando
 		if(ClientConnection.playing){
@@ -130,13 +130,13 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			Alert alert = new Alert(AlertType.INFORMATION);
 			log.log(Level.FINEST, "Alerta de información creada");
 			//Añado título a la alerta
-			alert.setTitle("Información");
+			alert.setTitle("Information");
 			log.log(Level.FINEST, "Título añadido a la alerta");
 			//Seteo el contenido de la cabecera a nulo
 			alert.setHeaderText(null);
 			log.log(Level.FINEST, "Cabecera nula añadida a la alerta");
 			//Seteo el contenido
-			alert.setContentText("Ya estás jugando una partida, si quieres dejarlo\nríndete.");
+			alert.setContentText("You are already playing, if you want to go\nplease give up.");
 			log.log(Level.FINEST, "Contenido de texto añadido a la alerta");
 			//Elijo la modalidad de la alerta
 			alert.initModality(Modality.APPLICATION_MODAL);
@@ -153,13 +153,13 @@ public class ThemeController extends ExtenderClassController implements Initiali
 			Alert alert = new Alert(AlertType.INFORMATION);
 			log.log(Level.FINEST, "Alerta de información creada");
 			//Añadimos título a la alerta
-			alert.setTitle("Información");
+			alert.setTitle("Information");
 			log.log(Level.FINEST, "Título añadido a la alerta");
 			//Dejamos que la cabecera sea nula
 			alert.setHeaderText(null);
 			log.log(Level.FINEST, "Cabecera nula añadida a la alerta");
 			//Añadimos el contenido que tendrá la alerta
-			alert.setContentText("Ya estás en la ventana de juego, selecciona un modo.");
+			alert.setContentText("You are already in theme election window, select a game mode.");
 			log.log(Level.FINEST, "Contenido de texto añadido a la alerta");
 			//Añadimos modalidad de la alerta
 			alert.initModality(Modality.APPLICATION_MODAL);
@@ -175,7 +175,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 
 	@FXML
-	void btnAmigos(MouseEvent event) {
+	void Friends(MouseEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
@@ -209,7 +209,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 * @param event
 	 */
 	@FXML
-	void btnMiPerfil(MouseEvent event) {
+	void MyProfile(MouseEvent event) {
 		//		Alert alert = new Alert(AlertType.INFORMATION);
 		//
 		//		alert.setTitle("Function not yet implemented.");
@@ -223,10 +223,10 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		if(ClientConnection.playing){
 			//Alerta
 			Alert alert2 = new Alert(AlertType.INFORMATION);
-			alert2.setTitle("Juego en curso");
+			alert2.setTitle("Game in progress");
 			alert2.setHeaderText(null);
-			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
-					+ " Termina la partida para poder avanzar a esa ventana");
+			alert2.setContentText("You can not go out of the game while the game is in progress."
+					+ " Finish the game in order to go to your profile window");
 			alert2.initModality(Modality.APPLICATION_MODAL);
 			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert2.showAndWait();
@@ -253,15 +253,15 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 * @param event
 	 */
 	@FXML
-	void btnEstadisticas(MouseEvent event) {
+	void Statistics(MouseEvent event) {
 
 		if(com.pasapalabra.game.service.ClientConnection.playing){
 			//Alerta
 			Alert alert2 = new Alert(AlertType.INFORMATION);
-			alert2.setTitle("Juego en curso");
+			alert2.setTitle("Game in progress");
 			alert2.setHeaderText(null);
-			alert2.setContentText("No puedes abandonar la ventana mientras el juego esté en curso."
-					+ " Termina la partida para poder avanzar a esa ventana");
+			alert2.setContentText("You can not go out of the window while the game is in progress."
+					+ " Finish the game in order to go to statistics window");
 			alert2.initModality(Modality.APPLICATION_MODAL);
 			alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert2.showAndWait();
@@ -288,7 +288,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	 * @param event
 	 */
 	@FXML
-	void btnCerrarSesion(MouseEvent event) {
+	void LogOut(MouseEvent event) {
 		log.log(Level.FINEST, "Cierre de sesión");
 		com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	}
@@ -330,7 +330,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 	//boolean true al hacer click en los botones y si los dos son true hace latransición a game sino no. 
 	//Deportes... hacen lo mismo que el all
 	@FXML
-	void aJugar(MouseEvent event){
+	void aPlay(MouseEvent event){
 		//if(!bothClicked())return;
 		if(ClientConnection.playing) return;
 		/*Inhabilitamos rápidamente que el botón de jugar vuelva a poder ser pulsado.
@@ -434,8 +434,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		}catch (SecurityException e) {
 			// TODO Auto-generated catch block
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Error al iniciar la partida");
-			alert.setContentText("El tipo de pregunta no encaja, por favor, indique correctamente la próxima vez");
+			alert.setTitle("Error while starting the game");
+			alert.setContentText("Question type doesn't match, please, indicate correctly for the next time");
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
@@ -446,8 +446,8 @@ public class ThemeController extends ExtenderClassController implements Initiali
 
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Partida no encontrada");
-			alert.setContentText("Ha ocurrido un error al encontrar alguna partida, por favor, intenteló de nuevo más tarde");
+			alert.setTitle("Game not found");
+			alert.setContentText("An error ocurred while searching a game, please, try again later ");
 			alert.initModality(Modality.APPLICATION_MODAL);	
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
