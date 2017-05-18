@@ -8,6 +8,7 @@ import java.rmi.RemoteException;
 import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -132,6 +133,7 @@ public class ProfileController extends ExtenderClassController implements Initia
 
 			Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
 			imagenAvatar.setImage(i);
+			imgCambioFotoPerfil.setImage(i);
 		}
 
 		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
@@ -293,36 +295,36 @@ public class ProfileController extends ExtenderClassController implements Initia
 	}
 
 	public void btnMiPerfil(MouseEvent event){
-		Alert alert = new Alert(AlertType.INFORMATION);
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//
+//		alert.setTitle("Function not yet implemented.");
+//
+//		alert.setHeaderText("Do not use this function");
+//
+//		alert.setContentText("This Function is not implemented, please, do not use it");
+//
+//		alert.showAndWait();
 
-		alert.setTitle("Function not yet implemented.");
-
-		alert.setHeaderText("Do not use this function");
-
-		alert.setContentText("This Function is not implemented, please, do not use it");
-
-		alert.showAndWait();
-
-		//		Alert alert = new Alert(AlertType.INFORMATION);
-		//		log.log(Level.FINEST, "Alerta de información creada");
-		//		//Añadimos título a la alerta
-		//		alert.setTitle("Información");
-		//		log.log(Level.FINEST, "Título añadido a la alerta");
-		//		//Dejamos que la cabecera sea nula
-		//		alert.setHeaderText(null);
-		//		log.log(Level.FINEST, "Cabecera nula añadida a la alerta");
-		//		//Añadimos el contenido que tendrá la alerta
-		//		alert.setContentText("Ya estás en la ventana de perfil, selecciona una acción.");
-		//		log.log(Level.FINEST, "Contenido de texto añadido a la alerta");
-		//		//Añadimos modalidad de la alerta
-		//		alert.initModality(Modality.APPLICATION_MODAL);
-		//		log.log(Level.FINEST, "Añadida modalidad para la alerta");
-		//		//Añadimos dueño de la alerta (Ventana sobre la cual se ejecutará)
-		//		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-		//		log.log(Level.FINEST, "Añadido dueño sobre el cual se ejecuta la alerta. Se mostrará la alerta...");
-		//		//Muestra la alerta y espera a que el usuario cierre la ventana
-		//		alert.showAndWait();
-		//		log.log(Level.FINEST, "Alerta de información creada, mostrada y cerrada");
+				Alert alert = new Alert(AlertType.INFORMATION);
+				log.log(Level.FINEST, "Alerta de información creada");
+				//Añadimos título a la alerta
+				alert.setTitle("Información");
+				log.log(Level.FINEST, "Título añadido a la alerta");
+				//Dejamos que la cabecera sea nula
+				alert.setHeaderText(null);
+				log.log(Level.FINEST, "Cabecera nula añadida a la alerta");
+				//Añadimos el contenido que tendrá la alerta
+				alert.setContentText("Ya estás en la ventana de perfil, selecciona una acción.");
+				log.log(Level.FINEST, "Contenido de texto añadido a la alerta");
+				//Añadimos modalidad de la alerta
+				alert.initModality(Modality.APPLICATION_MODAL);
+				log.log(Level.FINEST, "Añadida modalidad para la alerta");
+				//Añadimos dueño de la alerta (Ventana sobre la cual se ejecutará)
+				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				log.log(Level.FINEST, "Añadido dueño sobre el cual se ejecuta la alerta. Se mostrará la alerta...");
+				//Muestra la alerta y espera a que el usuario cierre la ventana
+				alert.showAndWait();
+				log.log(Level.FINEST, "Alerta de información creada, mostrada y cerrada");
 	}
 
 
@@ -330,16 +332,17 @@ public class ProfileController extends ExtenderClassController implements Initia
 	 * @param event
 	 */
 	public void btnEstadisticas(MouseEvent event){
-		Alert alert = new Alert(AlertType.INFORMATION);
-
-		alert.setTitle("Function not yet implemented.");
-
-		alert.setHeaderText("Do not use this function");
-
-		alert.setContentText("This Function is not implemented, please, do not use it");
-
-		alert.showAndWait();
-		//com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//
+//		alert.setTitle("Function not yet implemented.");
+//
+//		alert.setHeaderText("Do not use this function");
+//
+//		alert.setContentText("This Function is not implemented, please, do not use it");
+//
+//		alert.showAndWait();
+		log.log(Level.INFO, "Transition to Stadistics");
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
 	}
 
 	/**Method to close current session

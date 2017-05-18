@@ -10,6 +10,8 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.pasapalabra.game.service.ClientConnection;
+import com.pasapalabra.game.service.ClientService;
 import com.pasapalabra.game.utilities.WindowUtilities;
 
 import javafx.application.Application;
@@ -60,13 +62,8 @@ public class Main extends Application {
 			//Añadir un escuchador para cuando se cierre la ventana 
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 				@Override public void handle(WindowEvent t) {
-					if(com.pasapalabra.game.service.ClientConnection.playing){
-						Alert alert = new Alert(AlertType.ERROR);
-						alert.setTitle("Can´t exit");
-						alert.setHeaderText("You can´t exit while playing");
-						alert.setContentText("You can´t exit while you are playing. Please wait until the game is over");
-						alert.show();
-						return;//TODO: revise this
+					if(ClientConnection.userInfo != null){
+						System.exit(0);
 					}
 					else{
 						try{

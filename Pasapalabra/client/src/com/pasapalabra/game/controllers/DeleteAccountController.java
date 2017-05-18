@@ -341,16 +341,16 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	 * @param event
 	 */
 	public void btnEstadisticas(MouseEvent event){
-		Alert alert = new Alert(AlertType.INFORMATION);
-
-		alert.setTitle("Function not yet implemented.");
-
-		alert.setHeaderText("Do not use this function");
-
-		alert.setContentText("This Function is not implemented, please, do not use it");
-
-		alert.showAndWait();
-		//WindowUtilities.windowTransition("Statistics", event);
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//
+//		alert.setTitle("Function not yet implemented.");
+//
+//		alert.setHeaderText("Do not use this function");
+//
+//		alert.setContentText("This Function is not implemented, please, do not use it");
+//
+//		alert.showAndWait();
+		WindowUtilities.windowTransition("Statistics", event);
 	}
 
 

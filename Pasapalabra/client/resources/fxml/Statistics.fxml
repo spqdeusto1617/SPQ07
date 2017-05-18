@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.StatisticsController">
+<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.StatisticsController">
    <children>
       <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
       <ImageView fx:id="logopsp" fitHeight="88.0" fitWidth="151.0" layoutX="24.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
@@ -107,7 +107,7 @@
             <Text fx:id="userNametxt" fill="#111010" layoutX="183.0" layoutY="47.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
          </children>
       </Pane>
-      <ImageView fx:id="imagenAvatar1" fitHeight="73.0" fitWidth="128.0" layoutX="32.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="avatarIMG" fitHeight="73.0" fitWidth="128.0" layoutX="32.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="btnJuego" layoutX="16.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Play" textFill="#f7fff7">
          <font>
             <Font name="Arial" size="18.0" />

@@ -423,32 +423,32 @@ public class InformationChangeController extends ExtenderClassController impleme
 	 * @param event
 	 */
 	public void btnMiPerfil(MouseEvent event){
-		Alert alert = new Alert(AlertType.INFORMATION);
-
-		alert.setTitle("Function not yet implemented.");
-
-		alert.setHeaderText("Do not use this function");
-
-		alert.setContentText("This Function is not implemented, please, do not use it");
-
-		alert.showAndWait();
-		//com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//
+//		alert.setTitle("Function not yet implemented.");
+//
+//		alert.setHeaderText("Do not use this function");
+//
+//		alert.setContentText("This Function is not implemented, please, do not use it");
+//
+//		alert.showAndWait();
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 	}
 
 	/**Transition to statistics window
 	 * @param event
 	 */
 	public void btnEstadisticas(MouseEvent event){
-		Alert alert = new Alert(AlertType.INFORMATION);
-
-		alert.setTitle("Function not yet implemented.");
-
-		alert.setHeaderText("Do not use this function");
-
-		alert.setContentText("This Function is not implemented, please, do not use it");
-
-		alert.showAndWait();
-		//com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//
+//		alert.setTitle("Function not yet implemented.");
+//
+//		alert.setHeaderText("Do not use this function");
+//
+//		alert.setContentText("This Function is not implemented, please, do not use it");
+//
+//		alert.showAndWait();
+		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
 	}
 
 	/**Method to close current session
@@ -461,13 +461,13 @@ public class InformationChangeController extends ExtenderClassController impleme
 	//Elimina nivel de transparencia
 	@FXML
 	void entrado(MouseEvent event) {
-		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		//com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 
 	//Añade nivel de transparencia
 	@FXML
 	void salido(MouseEvent event) {
-		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+		//com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
 	}
 	public void esPanel(MouseEvent event){
 		//TODO: cerrar panel	
