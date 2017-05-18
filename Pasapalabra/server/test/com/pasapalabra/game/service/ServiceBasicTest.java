@@ -41,7 +41,7 @@ public class ServiceBasicTest {
 	
 	
 	@BeforeClass
-	public static void startServer(){
+	public static void startClient(){
 		
 		try {
 			String URL = "//" + TestLauncher.SERVER_HOST + ":" + TestLauncher.SERVER_PORT + "/" + TestLauncher.SERVER_SERVICE_NAME;

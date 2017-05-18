@@ -47,7 +47,7 @@ public class Server extends Application{
 
 	    	System.out.println("Starting server...");
 	    	
-	    	if (args.length != 3) {
+	    	if (args.length < 3) {
 	    		System.out.println("args error, server won't startup.");
 	    		System.out.println("usage: java [policy] [codebase] server.Server [host] [port] [server]");
 				System.exit(0);
@@ -59,7 +59,11 @@ public class Server extends Application{
 	    	MongoClientOptions.Builder options = MongoClientOptions.builder();
 	    	options.socketKeepAlive(true);
 	    	MongoClient mongoClient = new MongoClient("127.0.0.1:27017", options.build());
-	    	mongoConnection = new MongoConnection("com.pasapalabra.game.model", mongoClient, "pasapalabra"); 	
+	    	
+	    	String dbName = "pasapalabra";
+	    	if(3 < args.length)
+	    		dbName = args[3];
+	    	mongoConnection = new MongoConnection("com.pasapalabra.game.model", mongoClient, dbName); 	
 	    	
 			String serverAddress = "//" + args[0] + ":" + args[1] + "/" + args[2];
 			

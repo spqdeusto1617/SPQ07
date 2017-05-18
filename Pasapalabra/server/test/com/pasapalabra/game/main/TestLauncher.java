@@ -1,6 +1,7 @@
 package com.pasapalabra.game.main;
 
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.util.logging.Level;
 
 import org.bson.Document;
 import org.junit.AfterClass;
@@ -53,6 +54,7 @@ public class TestLauncher {
 
 	@BeforeClass
 	public static void prepare() {
+		java.util.logging.Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 		// Inserts all data
 		for(char letter = 'a'; letter <= 'z'; letter++)
 			insertToDB(letter);
@@ -68,6 +70,7 @@ public class TestLauncher {
 			public void run() {
 				//System.setProperty("java.rmi.server.codebase",  "file:" + projectBase.getAbsolutePath() + "/");
 				System.setProperty("java.security.policy", "security/java.policy");
+				java.util.logging.Logger.getLogger("org.mongodb.driver").setLevel(Level.SEVERE);
 				try {
 					java.rmi.registry.LocateRegistry.createRegistry(1099);
 					System.out.println("RMI registry ready.");
@@ -75,7 +78,7 @@ public class TestLauncher {
 					System.out.println("Exception starting RMI registry:");
 					e.printStackTrace();
 				}
-				Server.main(new String[]{SERVER_HOST, SERVER_PORT, SERVER_SERVICE_NAME});
+				Server.main(new String[]{SERVER_HOST, SERVER_PORT, SERVER_SERVICE_NAME, DB_NAME});
 			}
 		});	
 
