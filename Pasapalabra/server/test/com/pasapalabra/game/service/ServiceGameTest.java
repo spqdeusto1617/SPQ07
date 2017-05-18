@@ -85,7 +85,6 @@ public class ServiceGameTest {
 	}
 
 	@Before
-	@Required(max = 120, average = 30)
 	public void login() {
 		try {
 			user1Token = ppService.login(user1.getUserName(), user1Password);
@@ -96,7 +95,6 @@ public class ServiceGameTest {
 	}
 
 	@Test
-	@Required(max = 100, average = 20)
 	public void exitMatchMaking(){
 		UserDTO result = null;
 		try{
@@ -116,8 +114,6 @@ public class ServiceGameTest {
 	}
 
 	@Test
-	@PerfTest(duration = 2000)
-	@Required(throughput = 2)
 	public void play(){
 		UserDTO result1 = null;
 		UserDTO result2 = null;
@@ -128,7 +124,9 @@ public class ServiceGameTest {
 		}catch (RemoteException e) {
 			throw new RuntimeException("Registry failed", e);
 		}catch (IllegalArgumentException e) {
-			throw new RuntimeException("Registry failed", e);
+			e.printStackTrace();
+			
+			throw new RuntimeException("Registry failed");
 		}
 		assertEquals("Wait", result1.getUserName());
 		try{
@@ -140,7 +138,7 @@ public class ServiceGameTest {
 
 		try{
 			question = ppService.getQuestion(user2Token);
-			assertEquals("Test", question.getQuestion());
+			assertEquals("Question", question.getQuestion());
 			assertEquals('a', question.getLeter());
 			assertEquals("Unknown", question.getCreator());
 		}catch (RemoteException e) {
