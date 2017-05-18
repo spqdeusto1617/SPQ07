@@ -1,6 +1,7 @@
 package com.pasapalabra.game.controllers;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -124,15 +125,15 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	 */
 	@FXML
 	void btnMiPerfil(MouseEvent event) {
-//		Alert alert = new Alert(AlertType.INFORMATION);
-//
-//		alert.setTitle("Function not yet implemented.");
-//
-//		alert.setHeaderText("Do not use this function");
-//
-//		alert.setContentText("This Function is not implemented, please, do not use it");
-//
-//		alert.showAndWait();
+		//		Alert alert = new Alert(AlertType.INFORMATION);
+		//
+		//		alert.setTitle("Function not yet implemented.");
+		//
+		//		alert.setHeaderText("Do not use this function");
+		//
+		//		alert.setContentText("This Function is not implemented, please, do not use it");
+		//
+		//		alert.showAndWait();
 
 		log.log(Level.FINEST, "Transición a Perfil");
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
@@ -204,6 +205,12 @@ public class StatisticsController extends ExtenderClassController implements Ini
 	public void initialize(URL location, ResourceBundle resources) {
 		com.pasapalabra.game.utilities.AppLogger.crearLogHandler(log, Main.class.getName());
 		log.log(Level.FINEST, "Inicializando EventosEstadisticas");
+		
+		try{
+			ClientConnection.retreiveUserData();
+		}catch (Exception e) {
+			log.log(Level.SEVERE, "Error trying to retreive user data", e);
+		}
 		//Poner la imagen de avatar
 		btnAmigos.setOpacity(0.3f);
 		btnEstadisticas.setOpacity(1f);
@@ -243,7 +250,9 @@ public class StatisticsController extends ExtenderClassController implements Ini
 		}
 		else{
 			try{
-				d = (ClientConnection.userInfo.getGamesWon())/(ClientConnection.userInfo.getGamesLost());
+				double n1 = ClientConnection.userInfo.getGamesWon();
+				double n2 = ClientConnection.userInfo.getGamesLost();
+				d = (n1)/(n2);
 			}catch (ArithmeticException e) {
 				// TODO: handle exception
 				log.log(Level.WARNING, "Error occurred during the operation", e);
@@ -251,9 +260,9 @@ public class StatisticsController extends ExtenderClassController implements Ini
 			}
 		}
 		try{
-		txtRatio.setText(String.valueOf(d));
+			txtRatio.setText(String.format("%.2f", d));
 		}catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
 		int result = ClientConnection.userInfo.getGamesLost() + ClientConnection.userInfo.getGamesWon();
 		txtPartidasJugadas.setText(Integer.toString(result));
