@@ -220,7 +220,7 @@ public class ThemeController extends ExtenderClassController implements Initiali
 		//
 		//		alert.showAndWait();
 		
-		
+
 
 		if(ClientConnection.playing){
 			//Alerta
