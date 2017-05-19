@@ -91,6 +91,7 @@ public class SignInController extends Control implements Initializable {
 	@FXML
 	private ImageView ImgImagenUsuario;
 	
+	
 	private String userImg;
 
 	@FXML
