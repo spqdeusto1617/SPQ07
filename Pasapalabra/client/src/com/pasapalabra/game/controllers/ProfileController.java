@@ -102,8 +102,8 @@ public class ProfileController extends ExtenderClassController implements Initia
 	@FXML public Button btnPerfil;
 	@FXML public Button btnAmigos;
 	@FXML public Button btnJuego;
-	@FXML public Button btnCambiarDatos; 
-	@FXML public Button btnEliminarCuenta; 
+	@FXML public Button btnChangeInfo; 
+	@FXML public Button btnDeleteAccount; 
 
 	// public static ArrayList<String> Datos_Necesarios_Cliente=new ArrayList<>();
 
@@ -145,14 +145,14 @@ public class ProfileController extends ExtenderClassController implements Initia
 	/**Transition to changeInformation window
 	 * @param event
 	 */
-	public void btnCambiar (MouseEvent event){
+	public void changeInfo (MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ChangeInformation", event);
 	}
 
 	/**Transition to deleteAccount window
 	 * @param event
 	 */
-	public void btnEliminar (MouseEvent event){
+	public void DeleteAccount (MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("DeleteAccount", event);
 	}
 
@@ -274,14 +274,14 @@ public class ProfileController extends ExtenderClassController implements Initia
 	/**Transition to game window
 	 * @param event
 	 */
-	public void btnJugar(MouseEvent event){
+	public void btnPlay(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
 	}
 
 	/**Transition to friends window
 	 * @param event
 	 */
-	public void btnAmigos(MouseEvent event){
+	public void btnFriends(MouseEvent event){
 		Alert alert = new Alert(AlertType.INFORMATION);
 
 		alert.setTitle("Function not yet implemented.");
@@ -294,7 +294,7 @@ public class ProfileController extends ExtenderClassController implements Initia
 		//com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Friends", event);
 	}
 
-	public void btnMiPerfil(MouseEvent event){
+	public void btnMyProfile(MouseEvent event){
 //		Alert alert = new Alert(AlertType.INFORMATION);
 //
 //		alert.setTitle("Function not yet implemented.");
@@ -331,7 +331,7 @@ public class ProfileController extends ExtenderClassController implements Initia
 	/**Transition to statistics window
 	 * @param event
 	 */
-	public void btnEstadisticas(MouseEvent event){
+	public void btnStatistics(MouseEvent event){
 //		Alert alert = new Alert(AlertType.INFORMATION);
 //
 //		alert.setTitle("Function not yet implemented.");
@@ -348,7 +348,7 @@ public class ProfileController extends ExtenderClassController implements Initia
 	/**Method to close current session
 	 * @param event
 	 */
-	public void btnCerrarSesion(MouseEvent event){
+	public void LogOut(MouseEvent event){
 		com.pasapalabra.game.utilities.WindowUtilities.closeSession(event);
 	}
 

@@ -73,7 +73,9 @@ public class SignInController extends Control implements Initializable {
 	@FXML
 	private  TextField txtNombreUsuario;
 
-
+	@FXML 
+	private TextField txtTermsAndConditions; 
+	
 	@FXML
 	private TextField txtCorreoUsuario;
 
@@ -92,10 +94,10 @@ public class SignInController extends Control implements Initializable {
 	private String userImg;
 
 	@FXML
-	private CheckBox chkTerminos;
+	private CheckBox chkTerms;
 
 	@FXML
-	private Button btnCrear;
+	private Button btnCreate;
 
 	private boolean datosCorrectos=false;
 
@@ -168,13 +170,13 @@ public class SignInController extends Control implements Initializable {
 				else{
 					userPasswordValidator2.hide();
 					datosCorrectos=true;
-					chkTerminos.setSelected(false);
+					chkTerms.setSelected(false);
 				}
 
 
 			}
 		} );
-		chkTerminos.setDisable(true);
+		chkTerms.setDisable(true);
 
 
 	}
@@ -182,7 +184,7 @@ public class SignInController extends Control implements Initializable {
 	/**Method that check that the name introduced by the user has between 8 and 16 caracters
 	 * @param event of the mouse
 	 */
-	public void comprobarNombreUsuario(Event event){
+	public void checkUserName(Event event){
 		if(userNameElegido.isShowing()){
 			userNameElegido.hide();
 		}
@@ -194,7 +196,7 @@ public class SignInController extends Control implements Initializable {
 		else{
 			userNameValidator.hide();
 			datosCorrectos=true;
-			chkTerminos.setSelected(false);
+			chkTerms.setSelected(false);
 
 		}
 
@@ -204,7 +206,7 @@ public class SignInController extends Control implements Initializable {
 	/**Method that check that the email introduced is correct or no. 
 	 * @param event of the mouse
 	 */
-	public void comprobarMailUsuario(Event event){
+	public void checkUserMail(Event event){
 		if(userMailElegido.isShowing()){
 			userMailElegido.hide();
 		}
@@ -217,7 +219,7 @@ public class SignInController extends Control implements Initializable {
 		if(matcher.matches()){
 			datosCorrectos=true;
 			userMailValidator.hide();
-			chkTerminos.setSelected(false);
+			chkTerms.setSelected(false);
 
 
 		}
@@ -231,7 +233,7 @@ public class SignInController extends Control implements Initializable {
 	 * user can not be created
 	 * @param event of the mouse
 	 */
-	public void comprobarContrasenya1(Event event){
+	public void checkPass1(Event event){
 
 		if(pflContrasenya.getText().length()<7){
 			datosCorrectos=false;
@@ -240,12 +242,12 @@ public class SignInController extends Control implements Initializable {
 		else{
 			datosCorrectos=true;
 			userPasswordValidator.hide();
-			chkTerminos.setSelected(false);
+			chkTerms.setSelected(false);
 
 		}
 	}
 	
-	public void comprobarContrasenya2(Event event){
+	public void checkPass2(Event event){
 
 			}
 
@@ -253,11 +255,11 @@ public class SignInController extends Control implements Initializable {
 	 * To the contrary, the button can not be pressed
 	 * @param event of the mouse
 	 */
-	public void crearUsuario(MouseEvent event){
+	public void createUser(MouseEvent event){
 		if(txtNombreUsuario.getText().length()<8||txtCorreoUsuario.getText().length()==0||pflContrasenya.getText().length()<8||pfdRepetirContrasenya.getText().length()<8||!pflContrasenya.getText().equals(pfdRepetirContrasenya.getText()))
 		{
 			datosCorrectos=false;
-			btnCrear.setDisable(true);
+			btnCreate.setDisable(true);
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Something fails");
 
@@ -267,7 +269,7 @@ public class SignInController extends Control implements Initializable {
 
 			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 			alert.showAndWait();
-			chkTerminos.setSelected(false);
+			chkTerms.setSelected(false);
 
 		}
 		else{
@@ -330,9 +332,9 @@ public class SignInController extends Control implements Initializable {
 
 						//userMailElegido.show(txtCorreoUsuario, Side.BOTTOM, 0, 0);
 
-						chkTerminos.setSelected(false);
+						chkTerms.setSelected(false);
 
-						btnCrear.setDisable(true);
+						btnCreate.setDisable(true);
 
 						userNameElegido.show(txtNombreUsuario, Side.BOTTOM, 0, 0);
 					}
@@ -364,7 +366,7 @@ public class SignInController extends Control implements Initializable {
 	/**Method that cancel the creation of the user
 	 * @param event
 	 */
-	public void cancelarUsuario(MouseEvent event){
+	public void cancelUser(MouseEvent event){
 		//Crea alerta de tipo confirmación
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		//Pone título
@@ -392,7 +394,7 @@ public class SignInController extends Control implements Initializable {
 	/**FileChooser for the user image of type jpg, gif, bmp o png
 	 * @param event of the mouse
 	 */
-	public void cambiarImagen(MouseEvent event){
+	public void changeImage(MouseEvent event){
 		
 //		Alert alert = new Alert(AlertType.INFORMATION);
 //
@@ -461,7 +463,7 @@ public class SignInController extends Control implements Initializable {
 	 * @param event of the mouse
 	 */
 	@SuppressWarnings("deprecation")
-	public void comprobarDia(Event event){
+	public void checkDay(Event event){
 		@SuppressWarnings("unused")
 		String st = null;
 		if(dpFechaNacimiento!=null){
@@ -480,7 +482,7 @@ public class SignInController extends Control implements Initializable {
 		if(date.getYear()-date2.getYear()>13){
 			datosCorrectos=true; 
 			userDateValidator.hide();
-			chkTerminos.setSelected(false);
+			chkTerms.setSelected(false);
 
 			//UserDTO dto=new UserDto(); No se si sería esto
 
@@ -500,7 +502,7 @@ public class SignInController extends Control implements Initializable {
 	 * @param event of the mouse
 	 */
 
-	public void irATerminos(MouseEvent event){
+	public void goToTerms(MouseEvent event){
 		//TODO: ¿path en el jar?
 
 		String path="./resources/pdfEULA/EULA.pdf";
@@ -533,7 +535,7 @@ public class SignInController extends Control implements Initializable {
 
 				e.printStackTrace();
 			}
-			chkTerminos.setDisable(false);
+			chkTerms.setDisable(false);
 		}catch(Exception a){
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
@@ -607,19 +609,19 @@ public class SignInController extends Control implements Initializable {
 	 * to create the user will be disable. 
 	 * @param event: el evento del pulsador
 	 */
-	public void aceptaTerminos(Event event){
+	public void acceptTerms(Event event){
 		if(txtNombreUsuario.getText().length()==0||txtCorreoUsuario.getText().length()==0||pflContrasenya.getText().length()==0||pfdRepetirContrasenya.getText().length()==0||dpFechaNacimiento==null)
 		{
 			datosCorrectos=false;
-			chkTerminos.setSelected(false);
+			chkTerms.setSelected(false);
 		}
 
-		if(chkTerminos.isSelected()&&datosCorrectos==true){
-			btnCrear.setDisable(false);
+		if(chkTerms.isSelected()&&datosCorrectos==true){
+			btnCreate.setDisable(false);
 
 		}
 		else{
-			btnCrear.setDisable(true);
+			btnCreate.setDisable(true);
 		}
 
 
