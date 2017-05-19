@@ -72,9 +72,6 @@ public class SignInController extends Control implements Initializable {
 
 	@FXML
 	private  TextField txtNombreUsuario;
-
-	@FXML 
-	private TextField txtTermsAndConditions; 
 	
 	@FXML
 	private TextField txtCorreoUsuario;

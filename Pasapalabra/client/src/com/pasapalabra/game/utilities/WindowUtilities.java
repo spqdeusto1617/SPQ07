@@ -108,9 +108,9 @@ public class WindowUtilities {
 			//Pone título
 			alert2.setTitle("Log out");
 			//Pone cabecera
-			alert2.setHeaderText("¿Are you sure?");
+			alert2.setHeaderText("Are you sure?");
 			//Pone contenido
-			alert2.setContentText("You won't be able to return.");
+			alert2.setContentText("You will exit the platform, and all your non saved data will be lost.");
 			//Añade modalidad
 			alert2.initModality(Modality.APPLICATION_MODAL);
 			//Añade 'dueño'
