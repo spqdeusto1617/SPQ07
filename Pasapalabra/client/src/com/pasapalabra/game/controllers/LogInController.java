@@ -114,7 +114,7 @@ public class LogInController extends Control implements Initializable {
 					aLNoticias.add(new Image(archivoGrafico.toURI().toURL().toString()));
 				}
 				imageNews.setImage(new Image("/images/news.jpg"));
-				pagNoticias.setMaxPageIndicatorCount(4);
+				pagNoticias.setMaxPageIndicatorCount(1);
 				pagNoticias.setPageCount(aLNoticias.size());
 				pagNoticias.setPageFactory(new Callback<Integer, Node>() {
 					@Override
