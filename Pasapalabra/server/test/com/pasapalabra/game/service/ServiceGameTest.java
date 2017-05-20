@@ -6,8 +6,6 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.Date;
 
-import org.databene.contiperf.PerfTest;
-import org.databene.contiperf.Required;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
