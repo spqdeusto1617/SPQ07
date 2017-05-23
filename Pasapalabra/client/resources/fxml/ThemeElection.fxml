@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.ThemeController">
+   <children>
+      <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
+      <ImageView fx:id="logopsp" fitHeight="88.0" fitWidth="151.0" layoutX="24.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/LogoPasapalabra.png" />
+         </image></ImageView>
+      <ImageView fx:id="imagenAvatar" fitHeight="73.0" fitWidth="128.0" layoutX="34.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="70.0" layoutY="533.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logged as: " />
+      <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
+      <Circle fx:id="circuloPanel" fill="#21cbffa3" layoutX="215.0" layoutY="584.0" onMouseClicked="#esPanel" radius="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Circle>
+      <Text fx:id="textoESPanel" fill="WHITE" layoutX="199.0" layoutY="588.0" onMouseClicked="#esPanel" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="&lt;&lt;" textAlignment="CENTER" wrappingWidth="32.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="selecMJ" layoutX="191.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select game mode" textAlignment="CENTER" wrappingWidth="456.6403999328613">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Text>
+      <Rectangle fx:id="vsAleatorio" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="192.0" layoutY="-110.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="vsAmigo" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#6b21ffa3" height="35.0" layoutX="461.0" layoutY="-103.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Text fx:id="selecTP" layoutX="195.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select questions type" textAlignment="CENTER" wrappingWidth="502.89795303344727">
+         <font>
+            <Font size="34.0" />
+         </font>
+      </Text>
+      <Circle fx:id="circuloPlus" fill="#38ffd4c0" layoutX="185.0" layoutY="15.0" onMouseClicked="#masInfo" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Circle>
+      <Text fx:id="textoPlus" fill="WHITE" layoutX="180.0" layoutY="20.0" onMouseClicked="#masInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="+">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="tVSAleatorio" fill="WHITE" layoutX="256.0" layoutY="-62.0" onMouseClicked="#eleccionHecha" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Aleatorio">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Text fx:id="tVSAmigo" fill="WHITE" layoutX="497.0" layoutY="-87.0" onMouseClicked="#eleccionHecha" strokeType="OUTSIDE" strokeWidth="0.0" text="VS Amigo">
+         <font>
+            <Font name="Arial" size="19.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Rectangle fx:id="tdpNSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#fff600" height="35.0" layoutX="638.0" layoutY="-58.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="mdjNSeleccionado" arcHeight="5.0" arcWidth="5.0" fill="#6b21ffa3" height="35.0" layoutX="436.0" layoutY="-68.0" onMouseClicked="#eleccionHecha" stroke="#bcbcbc" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="0.1" width="170.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Rectangle>
+      <Rectangle fx:id="fondoCarga" arcHeight="5.0" arcWidth="5.0" height="608.0" layoutX="-4.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="808.0">
+         <fill>
+            <LinearGradient endX="0.31730769230769235" endY="1.0" startX="0.3173076923076923">
+               <stops>
+                  <Stop color="#40cef2" />
+                  <Stop color="WHITE" offset="0.7992565055762081" />
+                  <Stop color="#41ff2c" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+         <cursor>
+            <Cursor fx:constant="WAIT" />
+         </cursor>
+      </Rectangle>
+      <ImageView fx:id="imgRival" fitHeight="128.0" fitWidth="128.0" layoutX="141.0" layoutY="787.0" pickOnBounds="true" />
+      <Button fx:id="btnTodos" layoutX="260.0" layoutY="248.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="All">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnDeportes" layoutX="294.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Sport">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEntretenimiento" layoutX="497.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Entertaining">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCiencia" layoutX="258.0" layoutY="391.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Science">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnHistoria" layoutX="553.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="History">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnArte" layoutX="298.0" layoutY="315.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Art">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnGeo" layoutX="523.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: fff600;" text="Geography">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAleatorio" layoutX="268.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #e417d3;" text="VS Random" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAmigo" disable="true" layoutX="478.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#eleccionHecha" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #e417d3;" text="VS Friend" textFill="#fffdff">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnJuego" layoutX="18.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#Play" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Play" textFill="#f7fff7">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAmigos" layoutX="18.0" layoutY="231.0" mnemonicParsing="false" onMouseClicked="#Friends" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Friends">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="WHITE" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button fx:id="btnPerfil" layoutX="18.0" layoutY="301.0" mnemonicParsing="false" onMouseClicked="#MyProfile" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="My profile" textFill="#fffdfd">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEstadisticas" layoutX="18.0" layoutY="374.0" mnemonicParsing="false" onMouseClicked="#Statistics" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Statistics" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCerrarSesion" layoutX="27.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#LogOut" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Log out" textFill="WHITE" />
+      <Button fx:id="btnJugar" layoutX="582.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#aPlay" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #0000FF;" text="Play!" textFill="WHITE">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Text fx:id="searchTXT" layoutX="320.0" layoutY="588.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Searching for a game..." />
+      <Button fx:id="btnCancel" layoutX="452.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#cancelMatch" text="Cancel" />
+   </children>
+</Pane>

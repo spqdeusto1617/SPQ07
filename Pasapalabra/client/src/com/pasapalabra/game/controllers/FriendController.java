@@ -1,0 +1,335 @@
+package com.pasapalabra.game.controllers;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.Random;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.pasapalabra.game.utilities.WindowUtilities;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+/**Class that manages events from Friends.fxml
+ * @author alvaro
+ *
+ */
+public class FriendController extends ExtenderClassController implements Initializable {
+	@FXML public Pane panel;
+
+	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(ThemeController.class.getName());
+	//Declaración del panel
+	@FXML public Text textoESPanel;
+
+	//@FXML public Text textoMiPerfil;
+
+	@FXML public ImageView logopsp;
+
+	//@FXML public Text textoCerrarSesion;
+
+	@FXML public Text textoPlus;
+
+	@FXML public Rectangle rectanguloPanel;
+
+	@FXML public Circle circuloPlus;
+
+	//@FXML public Rectangle rectanguloCerrarSesion;
+
+	//@FXML public Rectangle rectanguloAmigos;
+
+	//@FXML public Text textoJugar;
+
+	@FXML public Text textoLogeadoComo;
+
+	//@FXML public Rectangle rectanguloMiPerfil;
+
+	//@FXML public Rectangle rectanguloJugar;
+
+	//@FXML public Text textoAmigos;
+
+	@FXML public Circle circuloPanel;
+
+	@FXML public Text textoNombreDeUsuario;
+
+	//@FXML public Text textoEstadisticas;
+
+	@FXML public ImageView imagenAvatar;
+
+	//@FXML public Rectangle rectanguloEstadisticas;
+
+	//@FXML public Rectangle rectanguloBuscarAmigos;
+
+	//@FXML public Text texTextoBuscarAmigos;
+
+	@FXML public TableView<Person>tblTablaAmigos;
+
+	@FXML public Button boton;
+
+	@FXML public TextField txtTextoAmigos;
+	
+	//Buttons
+	@FXML public Button btnCerrarSesion;
+	@FXML public Button btnEstadisticas;
+	@FXML public Button btnPerfil;
+	@FXML public Button btnAmigos;
+	@FXML public Button btnJuego;
+	@FXML public Button btnBuscar; 
+
+
+	private final ObservableList<Person> data =
+			FXCollections.observableArrayList(new Person("A","K"));
+	public static boolean TieneAmigos; 
+
+	//final HBox hb = new HBox();
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		TableColumn firstNameCol = new TableColumn("Nombre amigo");
+		firstNameCol.setMinWidth(100);
+		firstNameCol.setCellValueFactory(
+				new PropertyValueFactory<>("Nombre amigo"));
+
+		TableColumn lastNameCol = new TableColumn("Estado amigo");
+		lastNameCol.setMinWidth(100);
+		lastNameCol.setCellValueFactory(
+				new PropertyValueFactory<>("Estado amigo"));
+
+		tblTablaAmigos.setItems(data);
+		tblTablaAmigos.getColumns().addAll(firstNameCol, lastNameCol);
+
+
+		//Intenta obtener los amigos que tiene (si no hay, se indicaría que no tiene)
+
+		try {
+				//TODO: get firends
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			Alert alert3 = new Alert(AlertType.INFORMATION);
+			alert3.setTitle("Se produjo un error al tramitar sus datos");
+			alert3.setHeaderText("Parece que se ha producido un error al obtener sus amigos");
+			alert3.setContentText("Se ha producido un error al intentar obtner sus amigos, por favor, intenteló de nuevo más tarde");
+			alert3.initModality(Modality.APPLICATION_MODAL);
+
+			alert3.showAndWait();
+
+		}
+		panel.getStylesheets().add("/css/application.css");
+		btnAmigos.setOpacity(1f);
+		btnEstadisticas.setOpacity(0.3f);
+		btnJuego.setOpacity(0.3f);
+		btnPerfil.setOpacity(0.3f);
+		if(TieneAmigos==false){
+			tblTablaAmigos.setPlaceholder(new Label("No tienes amigos aun."));
+		}
+		else{
+			//TODO: meter los amigos
+		}
+		textoNombreDeUsuario.setText(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName());
+		if(LogInController.iAvatar!=null){
+			imagenAvatar.setImage(LogInController.iAvatar);
+		}else{
+			String imagen = "fPerfil";
+			Random rand = new Random();
+			int randomNum = rand.nextInt((1000 - 1) + 1) + 1;
+			if(randomNum == 666){
+				imagen = "fPerfilPirata";
+			}
+
+			Image i = new Image(getClass().getResourceAsStream("/images/"+ imagen +".png"),imagenAvatar.getBoundsInLocal().getWidth(),imagenAvatar.getBoundsInLocal().getHeight(),false,true);
+			imagenAvatar.setImage(i);
+		}
+		Circle clip = new Circle((imagenAvatar.getX()+imagenAvatar.getBoundsInParent().getWidth())/2, (imagenAvatar.getY()+imagenAvatar.getBoundsInParent().getHeight())/2, imagenAvatar.getBoundsInLocal().getHeight()/2);
+		imagenAvatar.setClip(clip);
+		imagenAvatar.setSmooth(true); 
+		imagenAvatar.setCache(true); 
+	}
+	
+	/**Method to add new person
+	 * @param event
+	 */
+	public void Anyadir(MouseEvent event){
+		data.add(new Person("Z","P"));
+	}
+	
+	/**AccionListener to find friends. The friend is will be sent to look for the service
+	 * previously evaluated that the user is not in his/her list.
+	 * Then they are given the chance to receive a confirmation and if they accept it, 
+	 * a request will be added to both users.
+	 * @param event
+	 */
+	public void btnBuscarAmigos(MouseEvent event){
+
+		String[]Dato=new String[1];
+
+		if(txtTextoAmigos.getText().equals(com.pasapalabra.game.service.ClientConnection.userInfo.getUserName())){
+			Alert alert3 = new Alert(AlertType.ERROR);
+			alert3.setTitle("Error");
+			alert3.setHeaderText("Te estás enviando una solicitud de amistad a ti mismo");
+			alert3.setContentText("Parece que te estás enviando una solicitud de amistad a ti mismo, seguro que tienes a alguien a quien enviar la solicitud aparte de a ti mismo");
+			alert3.initModality(Modality.APPLICATION_MODAL);
+
+			alert3.showAndWait();
+		}else{
+			Dato[0]=txtTextoAmigos.getText();
+			//TODO: set invitation
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Éxito al enviar la solicitud");
+
+			alert.setContentText("La solicitud se envió con éxito a su amigo");
+			alert.initModality(Modality.APPLICATION_MODAL);	
+			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+			alert.showAndWait();
+
+		}
+	}
+	
+	/**Transition to game window
+	 * @param event
+	 */
+	public void btnJugar(MouseEvent event){
+		WindowUtilities.windowTransition("ThemeElection", event);
+	}
+
+	public void btnAmigos(MouseEvent event){
+		Alert alert = new Alert(AlertType.INFORMATION);
+
+		alert.setTitle("Function not yet implemented.");
+		
+		alert.setHeaderText("Do not use this function");
+		 
+		alert.setContentText("This Function is not implemented, please, do not use it");
+
+		alert.showAndWait();
+		
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//		log.log(Level.FINEST, "Alerta de información creada");
+//		//Añadimos título a la alerta
+//		alert.setTitle("Información");
+//		log.log(Level.FINEST, "Título añadido a la alerta");
+//		//Dejamos que la cabecera sea nula
+//		alert.setHeaderText(null);
+//		log.log(Level.FINEST, "Cabecera nula añadida a la alerta");
+//		//Añadimos el contenido que tendrá la alerta
+//		alert.setContentText("Ya estás en la ventana de amigos, selecciona algo.");
+//		log.log(Level.FINEST, "Contenido de texto añadido a la alerta");
+//		//Añadimos modalidad de la alerta
+//		alert.initModality(Modality.APPLICATION_MODAL);
+//		log.log(Level.FINEST, "Añadida modalidad para la alerta");
+//		//Añadimos dueño de la alerta (Ventana sobre la cual se ejecutará)
+//		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+//		log.log(Level.FINEST, "Añadido dueño sobre el cual se ejecuta la alerta. Se mostrará la alerta...");
+//		//Muestra la alerta y espera a que el usuario cierre la ventana
+//		alert.showAndWait();
+//		log.log(Level.FINEST, "Alerta de información creada, mostrada y cerrada");
+	}
+
+	/**Transition to profile window
+	 * @param event
+	 */
+	public void btnMiPerfil(MouseEvent event){
+		Alert alert = new Alert(AlertType.INFORMATION);
+
+		alert.setTitle("Function not yet implemented.");
+		
+		alert.setHeaderText("Do not use this function");
+		 
+		alert.setContentText("This Function is not implemented, please, do not use it");
+
+		alert.showAndWait();
+		//WindowUtilities.windowTransition("Profile", event);
+	}
+
+	/**Transition to statistics window
+	 * @param event
+	 */
+	public void btnEstadisticas(MouseEvent event){
+		Alert alert = new Alert(AlertType.INFORMATION);
+
+		alert.setTitle("Function not yet implemented.");
+		
+		alert.setHeaderText("Do not use this function");
+		 
+		alert.setContentText("This Function is not implemented, please, do not use it");
+
+		alert.showAndWait();
+		//WindowUtilities.windowTransition("Statistics", event);
+	}
+	
+	/**Method to close the current user session
+	 * @param event
+	 */
+	public void btnCerrarSesion(MouseEvent event){
+		WindowUtilities.closeSession(event);
+	}
+	//Elimina nivel de transparencia
+	@FXML
+	void entrado(MouseEvent event) {
+		WindowUtilities.efectoTransparenciaOnHover(event, this);
+	}
+
+	//Añade nivel de transparencia
+	@FXML
+	void salido(MouseEvent event) {
+		com.pasapalabra.game.utilities.WindowUtilities.efectoTransparenciaOnHover(event, this);
+	}
+	public void esPanel(MouseEvent event){
+		//TODO: cerrar panel	
+	}
+}
+
+/**Intern class to manage friends
+ * @author Ivan
+ *
+ */
+class Person {
+
+	private final SimpleStringProperty firstName;
+	private final SimpleStringProperty lastName;
+
+	Person(String fName, String lName) {
+		this.firstName = new SimpleStringProperty(fName);
+		this.lastName = new SimpleStringProperty(lName);
+	}
+	public String getFirstName() {
+		return firstName.get();
+	}
+
+	public void setFirstName(String fName) {
+		firstName.set(fName);
+	}
+
+	public String getLastName() {
+		return lastName.get();
+	}
+
+	public void setLastName(String fName) {
+		lastName.set(fName);
+	}
+}

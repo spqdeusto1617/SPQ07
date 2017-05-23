@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Esta versión ha sido creada para que utilidades.deVentana.java generalice eventos de todas las ventanas basadas en esta plantilla -->
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="panel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pasapalabra.game.controllers.StatisticsController">
+   <children>
+      <Rectangle fx:id="rectanguloPanel" arcHeight="5.0" arcWidth="5.0" fill="#1fc8ffa3" height="602.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="0.0" width="202.0" />
+      <ImageView fx:id="logopsp" fitHeight="88.0" fitWidth="151.0" layoutX="24.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/LogoPasapalabra.png" />
+         </image></ImageView>
+      <ImageView fx:id="imagenAvatar" fitHeight="128.0" fitWidth="170.0" layoutX="15.0" layoutY="937.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="textoLogeadoComo" fill="WHITE" layoutX="71.0" layoutY="534.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="Logged as: " />
+      <Text fx:id="textoNombreDeUsuario" fill="WHITE" layoutX="8.0" layoutY="558.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
+      <Circle fx:id="circuloPanel" fill="#21cbffa3" layoutX="215.0" layoutY="584.0" onMouseClicked="#esPanel" radius="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Circle>
+      <Text fx:id="textoESPanel" fill="WHITE" layoutX="199.0" layoutY="588.0" onMouseClicked="#esPanel" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="&lt;&lt;" textAlignment="CENTER" wrappingWidth="32.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Text>
+      <Circle fx:id="circuloPlus" fill="#38ffd4c0" layoutX="185.0" layoutY="15.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Text fx:id="textoPlus" fill="WHITE" layoutX="180.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
+      <Pane layoutX="199.0" prefHeight="600.0" prefWidth="603.0">
+         <children>
+            <FlowPane layoutX="90.0" layoutY="50.0" prefHeight="370.0" prefWidth="420.0">
+               <children>
+                  <BorderPane prefHeight="50.0" prefWidth="420.0">
+                     <center>
+                        <BorderPane prefHeight="50.0" prefWidth="420.0" BorderPane.alignment="CENTER">
+                           <left>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Victories" BorderPane.alignment="CENTER" />
+                           </left>
+                           <right>
+                              <Text fx:id="txtVictorias" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                           </right>
+                           <center>
+                              <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="50.0" prefWidth="420.0">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Defeats" BorderPane.alignment="CENTER" />
+                     </left>
+                     <right>
+                        <Text fx:id="txtDerrotas" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                     </right>
+                     <center>
+                        <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+                  <BorderPane prefHeight="50.0" prefWidth="420.0">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Games played" wrappingWidth="52.78466796875" BorderPane.alignment="CENTER" />
+                     </left>
+                     <center>
+                        <Line endX="100.0" startX="-100.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <right>
+                        <Text fx:id="txtPartidasJugadas" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                     </right></BorderPane>
+                  <Region prefHeight="100.0" prefWidth="420.0" />
+                  <BorderPane prefHeight="70.0" prefWidth="420.0">
+                     <top>
+                        <BorderPane prefHeight="50.0" prefWidth="420.0" BorderPane.alignment="CENTER">
+                           <bottom>
+                              <Text fx:id="txtRatio" strokeType="OUTSIDE" strokeWidth="0.0" text="0" BorderPane.alignment="CENTER" />
+                           </bottom>
+                           <center>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Victories/Defeats proportion" BorderPane.alignment="CENTER" />
+                           </center>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
+               </children>
+            </FlowPane>
+            <Text layoutX="248.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statistics">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="userNametxt" fill="#111010" layoutX="209.0" layoutY="47.0" stroke="#ebebeba3" strokeLineJoin="ROUND" strokeType="INSIDE" text="username" textAlignment="CENTER" wrappingWidth="184.24898529052734" />
+         </children>
+      </Pane>
+      <ImageView fx:id="avatarIMG" fitHeight="73.0" fitWidth="128.0" layoutX="32.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnJuego" layoutX="16.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#btnJugar" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #56da66;" text="Play" textFill="#f7fff7">
+         <font>
+            <Font name="Arial" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAmigos" layoutX="16.0" layoutY="226.0" mnemonicParsing="false" onMouseClicked="#btnAmigos" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Friends">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="WHITE" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+      <Button fx:id="btnPerfil" layoutX="16.0" layoutY="296.0" mnemonicParsing="false" onMouseClicked="#btnMiPerfil" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="My profile" textFill="#fffdfd">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEstadisticas" layoutX="16.0" layoutY="369.0" mnemonicParsing="false" onMouseClicked="#btnEstadisticas" onMouseEntered="#entrado" onMouseExited="#salido" prefHeight="35.0" prefWidth="170.0" style="-fx-background-color: #21ff44;" text="Statistics" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnCerrarSesion" layoutX="25.0" layoutY="566.0" mnemonicParsing="false" onMouseClicked="#btnCerrarSesion" prefHeight="25.0" prefWidth="136.0" style="-fx-background-color: #ff0000;" text="Log out" textFill="WHITE" />
+   </children>
+</Pane>
