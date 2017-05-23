@@ -423,7 +423,6 @@ public class PasapalabraService implements IPasapalabraService{
 				}
 			}
 		}
-		else throw new RemoteException("Error delogin");
 
 	}
 

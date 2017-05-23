@@ -8,8 +8,10 @@ import java.util.Date;
 
 import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.pasapalabra.game.main.TestLauncher;
@@ -18,7 +20,9 @@ import com.pasapalabra.game.service.auth.Token;
 import com.pasapalabra.game.service.auth.TokenGenerator;
 
 public class ServiceAccountModifyTest {
-
+	@Rule
+	public ContiPerfRule i = new ContiPerfRule();
+	
 	public static IPasapalabraService ppService;
 
 	private static boolean registrationSucceded = false;
@@ -82,8 +86,8 @@ public class ServiceAccountModifyTest {
 		}
 		assertEquals(true, modificationSucceded);
 	}
-	
-	
+
+
 	@Test
 	public void modifyUserPassword() {
 		String previousPassword = userPassword;
@@ -96,8 +100,8 @@ public class ServiceAccountModifyTest {
 		}
 		assertEquals(true, modificationSucceded);
 	}
-	
-	
+
+
 	@Test
 	@PerfTest(invocations = 200)
 	@Required(max = 2000, average = 350)
@@ -111,5 +115,5 @@ public class ServiceAccountModifyTest {
 		}
 		assertEquals(true, modificationSucceded);
 	}
-	
+
 }
