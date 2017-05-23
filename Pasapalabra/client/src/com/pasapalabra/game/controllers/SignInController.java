@@ -297,9 +297,9 @@ public class SignInController extends Control implements Initializable {
 
 						alert2.setTitle("User created succesfuly");
 
-						alert2.setHeaderText("Operation succes");
+						alert2.setHeaderText("Operation success");
 
-						alert2.setContentText("The user has been created succesfuly");
+						alert2.setContentText("The user has been created successfuly");
 
 
 						alert2.initModality(Modality.APPLICATION_MODAL);

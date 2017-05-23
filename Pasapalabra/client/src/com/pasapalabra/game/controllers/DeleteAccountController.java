@@ -137,9 +137,9 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	 */
 	public void btnEliminarCuenta(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Confirmar cambios");
-		alert.setHeaderText("¿Está seguro de que quiere eliminar su cuenta?");
-		alert.setContentText("Si elige sí, se perderán todos sus datos, ¿está seguro?");
+		alert.setTitle("Confirm changes");
+		alert.setHeaderText("Are you sure you want to delete your account");
+		alert.setContentText("If you delete your account, you will lose all your progress and data, are you sure?");
 		alert.initModality(Modality.APPLICATION_MODAL);
 
 		//Elijo el dueño de la alerta (o la base) de la misma.
@@ -148,9 +148,9 @@ public class DeleteAccountController extends ExtenderClassController implements 
 
 		if (result.get() == ButtonType.OK){
 			Alert alert2 = new Alert(AlertType.CONFIRMATION);
-			alert2.setTitle("Confirmar cambios");
-			alert2.setHeaderText("¿Realmente está seguro?");
-			alert2.setContentText("Lamento ser pesado, pero si elimina su cuenta se perderán todos sus datos, partidas, amigos..., ¿está completamente seguro?");
+			alert2.setTitle("Confirm changes (2)");
+			alert2.setHeaderText("Are you completely sure?");
+			alert2.setContentText("I don´t want to be nuisance, but are you completely and ultimate sure you want to remove your account?");
 			alert2.initModality(Modality.APPLICATION_MODAL);
 
 			//Elijo el dueño de la alerta (o la base) de la misma.
@@ -161,9 +161,9 @@ public class DeleteAccountController extends ExtenderClassController implements 
 				if(!tfdCorreo.getText().equals(com.pasapalabra.game.service.ClientConnection.userInfo.getMail())){
 					datos_Correctos=false;
 					Alert alert3 = new Alert(AlertType.ERROR);
-					alert3.setTitle("Mail no coincide");
-					alert3.setHeaderText("El mail no coincide con el suyo");
-					alert3.setContentText("Su antiguo mail no coincide, por favor, revíseló de nuevo");
+					alert3.setTitle("Mail doesn´t match");
+					alert3.setHeaderText("This email does not match your previous mail");
+					alert3.setContentText("Your introduced mail is incorrect. Please, reintroduce your old email and try again");
 					alert3.initModality(Modality.APPLICATION_MODAL);
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert3.showAndWait();
@@ -172,9 +172,9 @@ public class DeleteAccountController extends ExtenderClassController implements 
 				if(!pfdContrasenya.getText().equals(pfdRepetirContrasenya.getText())){
 					datos_Correctos=false;
 					Alert alert3 = new Alert(AlertType.ERROR);
-					alert3.setTitle("Contraseñas no coinciden");
-					alert3.setHeaderText("Las contraseñas no coinciden");
-					alert3.setContentText("Las contrasñeas no coinciden, por favor, reviselas y vuelva a intentarlo");
+					alert3.setTitle("The passwords don´t match");
+					alert3.setHeaderText("The introduced passwords don´t match");
+					alert3.setContentText("The introduced passwords don´t match, please, check the passwords and try again");
 					alert3.initModality(Modality.APPLICATION_MODAL);
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert3.showAndWait();
@@ -243,19 +243,19 @@ public class DeleteAccountController extends ExtenderClassController implements 
 					}
 					catch(Exception a){
 						Alert alert3 = new Alert(AlertType.INFORMATION);
-						alert3.setTitle("Se produjo un error al tramitar sus datos");
-						alert3.setHeaderText("Parece que se ha producido un error al cambiar los datos");
-						alert3.setContentText("Se ha producido un error al intentar cambiar los datos, por favor, intenteló de nuevo más tarde");
+						alert3.setTitle("Unexpected error occurred");
+						alert3.setHeaderText("An unexpected error occurred");
+						alert3.setContentText("Please, check your connection and try again.");
 						alert3.initModality(Modality.APPLICATION_MODAL);
 						alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 						alert3.showAndWait();
 					}
 				}
 				else{
-					Alert alert3 = new Alert(AlertType.INFORMATION);
-					alert3.setTitle("Revise los problemas");
-					alert3.setHeaderText("Ha habido problemas al tramitar la solicitud");
-					alert3.setContentText("Hay errores con sus datos, por favor, reviselós y vuelva a intentarlo");
+					Alert alert3 = new Alert(AlertType.CONFIRMATION);
+					alert3.setTitle("Revise the previous problems");
+					alert3.setHeaderText("Errors occurred trying to change your data");
+					alert3.setContentText("There are errors in your data, please check those and try again");
 					alert3.initModality(Modality.APPLICATION_MODAL);
 					alert3.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert3.showAndWait();
@@ -277,12 +277,16 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	 */
 	public void btnDescartar(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Descartar cambios");
-		alert.setHeaderText("¿Está seguro de que quiere descartar los cambios?");
-		alert.setContentText("Si sale se perderán todos los cambios que quiera hacer en su cuenta, ¿Está seguro de querer desacer los cambios");
-		alert.initModality(Modality.APPLICATION_MODAL);
+		//Pone título
+		alert.setTitle("Discart the changes");
+		//Pone cabecera
+		alert.setHeaderText("Are you sure?");
+		//Pone contenido
+		alert.setContentText("Are you sure you want to discard the changes?");
 
-		//Elijo el dueño de la alerta (o la base) de la misma.
+		//Añade modalidad
+		alert.initModality(Modality.APPLICATION_MODAL);
+		//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
 		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 		Optional<ButtonType> result = alert.showAndWait();
 
@@ -341,15 +345,15 @@ public class DeleteAccountController extends ExtenderClassController implements 
 	 * @param event
 	 */
 	public void btnEstadisticas(MouseEvent event){
-//		Alert alert = new Alert(AlertType.INFORMATION);
-//
-//		alert.setTitle("Function not yet implemented.");
-//
-//		alert.setHeaderText("Do not use this function");
-//
-//		alert.setContentText("This Function is not implemented, please, do not use it");
-//
-//		alert.showAndWait();
+		//		Alert alert = new Alert(AlertType.INFORMATION);
+		//
+		//		alert.setTitle("Function not yet implemented.");
+		//
+		//		alert.setHeaderText("Do not use this function");
+		//
+		//		alert.setContentText("This Function is not implemented, please, do not use it");
+		//
+		//		alert.showAndWait();
 		WindowUtilities.windowTransition("Statistics", event);
 	}
 

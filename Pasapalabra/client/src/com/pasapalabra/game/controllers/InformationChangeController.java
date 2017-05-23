@@ -159,9 +159,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 			if(!tflViejoMail.getText().equals(ClientConnection.userInfo.getMail())){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
-				alert2.setTitle("Mail no coincide");
-				alert2.setHeaderText("El mail no coincide con el suyo");
-				alert2.setContentText("Su antiguo mail no coincide, por favor, revíseló de nuevo");
+				alert2.setTitle("Mail doesn´t match");
+				alert2.setHeaderText("This email does not match your previous mail");
+				alert2.setContentText("Your introduced mail is incorrect. Please, reintroduce your old email and try again");
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
@@ -169,9 +169,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 			if(!tflNuevoMail.getText().equals(tflNuevoMail2.getText())){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
-				alert2.setTitle("Mail no coincide");
-				alert2.setHeaderText("Los nuevos Mails no coinciden");
-				alert2.setContentText("Los mails no coinciden, por favor, reviselos y vuelva a intentarlo");
+				alert2.setTitle("Mail don´t match");
+				alert2.setHeaderText("The new mails don´t match");
+				alert2.setContentText("The new introduced mail don´t match. Please check those and try again");
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
@@ -183,9 +183,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 			if(!matcher.matches()){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
-				alert2.setTitle("Mail no válido");
-				alert2.setHeaderText("El mail que ha introducido no es válido");
-				alert2.setContentText("El mail que se ha introducido no es válido, intente introducir uno válido la próxima vez");
+				alert2.setTitle("Email not acceptable");
+				alert2.setHeaderText("The introduced mail is not acceptable");
+				alert2.setContentText("Please, introduce a valid mail and try again");
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
@@ -239,9 +239,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 				}
 				catch(Exception a){
 					Alert alert2 = new Alert(AlertType.INFORMATION);
-					alert2.setTitle("Se produjo un error al tramitar sus datos");
-					alert2.setHeaderText("Parece que se ha producido un error al cambiar los datos");
-					alert2.setContentText("Se ha producido un error al intentar cambiar los datos, por favor, intenteló de nuevo más tarde");
+					alert2.setTitle("Unexpected error occurred");
+					alert2.setHeaderText("An unexpected error occurred");
+					alert2.setContentText("Please, check your connection and try again.");
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
@@ -249,9 +249,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 			}
 			else{
 				Alert alert2 = new Alert(AlertType.CONFIRMATION);
-				alert2.setTitle("Revise los problemas");
-				alert2.setHeaderText("Ha habido problemas al tramitar la solicitud");
-				alert2.setContentText("Hay errores con sus datos, por favor, reviselós y vuelva a intentarlo");
+				alert2.setTitle("Revise the previous problems");
+				alert2.setHeaderText("An error occurred trying to change your data");
+				alert2.setContentText("There are errors in your data, please check those and try again");
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
@@ -267,9 +267,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 	 */
 	public void btnCambiarContrasenya(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Confirmar cambios");
-		alert.setHeaderText("¿Está seguro de que quiere realizar estos cambios?");
-		alert.setContentText("Si elige sí, se perderán todos los datos anteriores, ¿está seguro?");
+		alert.setTitle("Confirm changes");
+		alert.setHeaderText("Are you sure you want those changes?");
+		alert.setContentText("All the previous data will be lost, are you sure?");
 		alert.initModality(Modality.APPLICATION_MODAL);
 
 		//Elijo el dueño de la alerta (o la base) de la misma.
@@ -282,9 +282,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 			if(!pfdNuevaContrasenya.getText().equals(pfdNuevaContrasenya1.getText())){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
-				alert2.setTitle("Contraseña no coincide");
-				alert2.setHeaderText("Las nuevas contraseñas no coinciden");
-				alert2.setContentText("Las nuevas contraseñas no coinciden, por favor, reviselas y vuelva a intentarlo");
+				alert2.setTitle("New passwords don´t match");
+				alert2.setHeaderText("The new passwords don´t match");
+				alert2.setContentText("The new passwords don´t match, please, check the passwords and try again");
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
@@ -293,9 +293,9 @@ public class InformationChangeController extends ExtenderClassController impleme
 			if(pfdNuevaContrasenya.getText().length()<7){
 				datos_Correctos=false;
 				Alert alert2 = new Alert(AlertType.ERROR);
-				alert2.setTitle("Nueva contraseña corta");
-				alert2.setHeaderText("La nueva contraseña es muy corta");
-				alert2.setContentText("La nuevas contraseña es demasiado corta, intente introducir una más lafga(8 caracteres mínimo)");
+				alert2.setTitle("New password sort");
+				alert2.setHeaderText("The new password is too sort");
+				alert2.setContentText("The new password is too sort, please introduce a pass of at least 8 characters");
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
@@ -346,19 +346,19 @@ public class InformationChangeController extends ExtenderClassController impleme
 				}
 				catch(Exception a){
 					Alert alert2 = new Alert(AlertType.INFORMATION);
-					alert2.setTitle("Se produjo un error al tramitar sus datos");
-					alert2.setHeaderText("Parece que se ha producido un error al cambiar los datos");
-					alert2.setContentText("Se ha producido un error al intentar cambiar los datos, por favor, intenteló de nuevo más tarde");
+					alert2.setTitle("Unexpected error occurred");
+					alert2.setHeaderText("An unexpected error occurred");
+					alert2.setContentText("Please, check your connection and try again.");
 					alert2.initModality(Modality.APPLICATION_MODAL);
 					alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 					alert2.showAndWait();
 				}
 			}
 			else{
-				Alert alert2 = new Alert(AlertType.INFORMATION);
-				alert2.setTitle("Revise los problemas");
-				alert2.setHeaderText("Ha habido problemas al tramitar la solicitud");
-				alert2.setContentText("Hay errores con sus datos, por favor, reviselós y vuelva a intentarlo");
+				Alert alert2 = new Alert(AlertType.CONFIRMATION);
+				alert2.setTitle("Revise the previous problems");
+				alert2.setHeaderText("Errors occurred trying to change your data");
+				alert2.setContentText("There are errors in your data, please check those and try again");
 				alert2.initModality(Modality.APPLICATION_MODAL);
 				alert2.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert2.showAndWait();
@@ -375,13 +375,18 @@ public class InformationChangeController extends ExtenderClassController impleme
 	 */
 	public void btnDescartar(Event event){
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Descartar cambios");
-		alert.setHeaderText("¿Está seguro de que quiere descartar los cambios?");
-		alert.setContentText("Si sale se perderán todos los cambios que quiera hacer en su cuenta, ¿Está seguro de querer desacer los cambios");
-		alert.initModality(Modality.APPLICATION_MODAL);
+		//Pone título
+		alert.setTitle("Discart the changes");
+		//Pone cabecera
+		alert.setHeaderText("Are you sure?");
+		//Pone contenido
+		alert.setContentText("Are you sure you want to discard the changes?");
 
-		//Elijo el dueño de la alerta (o la base) de la misma.
+		//Añade modalidad
+		alert.initModality(Modality.APPLICATION_MODAL);
+		//Añade 'dueño'. (=La ventana sobre la cual se va a posicionar y la cual bloqueará)
 		alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+
 		Optional<ButtonType> result = alert.showAndWait();
 
 		if (result.get() == ButtonType.OK){
@@ -423,15 +428,15 @@ public class InformationChangeController extends ExtenderClassController impleme
 	 * @param event
 	 */
 	public void btnMiPerfil(MouseEvent event){
-//		Alert alert = new Alert(AlertType.INFORMATION);
-//
-//		alert.setTitle("Function not yet implemented.");
-//
-//		alert.setHeaderText("Do not use this function");
-//
-//		alert.setContentText("This Function is not implemented, please, do not use it");
-//
-//		alert.showAndWait();
+		//		Alert alert = new Alert(AlertType.INFORMATION);
+		//
+		//		alert.setTitle("Function not yet implemented.");
+		//
+		//		alert.setHeaderText("Do not use this function");
+		//
+		//		alert.setContentText("This Function is not implemented, please, do not use it");
+		//
+		//		alert.showAndWait();
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Profile", event);
 	}
 
@@ -439,15 +444,15 @@ public class InformationChangeController extends ExtenderClassController impleme
 	 * @param event
 	 */
 	public void btnEstadisticas(MouseEvent event){
-//		Alert alert = new Alert(AlertType.INFORMATION);
-//
-//		alert.setTitle("Function not yet implemented.");
-//
-//		alert.setHeaderText("Do not use this function");
-//
-//		alert.setContentText("This Function is not implemented, please, do not use it");
-//
-//		alert.showAndWait();
+		//		Alert alert = new Alert(AlertType.INFORMATION);
+		//
+		//		alert.setTitle("Function not yet implemented.");
+		//
+		//		alert.setHeaderText("Do not use this function");
+		//
+		//		alert.setContentText("This Function is not implemented, please, do not use it");
+		//
+		//		alert.showAndWait();
 		com.pasapalabra.game.utilities.WindowUtilities.windowTransition("Statistics", event);
 	}
 

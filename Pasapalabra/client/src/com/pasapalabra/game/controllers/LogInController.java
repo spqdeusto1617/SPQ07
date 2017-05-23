@@ -44,7 +44,7 @@ public class LogInController extends Control implements Initializable {
 	public static ArrayList<Image> aLNoticias;
 
 	public static ArrayList<File> aLNoticiasFicheros = new ArrayList<File>();
-	
+
 	static boolean serverNotFound;
 
 	public static Logger log = com.pasapalabra.game.utilities.AppLogger.getWindowLogger(LogInController.class.getName());
@@ -53,7 +53,7 @@ public class LogInController extends Control implements Initializable {
 
 	@FXML
 	private Button btnLogin;
-	
+
 
 	@FXML
 	private Label txtIncorrecto;
@@ -75,7 +75,7 @@ public class LogInController extends Control implements Initializable {
 
 	@FXML
 	private ImageView estadoServidor;
-	
+
 	@FXML
 	private ImageView imageNews; 
 
@@ -97,7 +97,7 @@ public class LogInController extends Control implements Initializable {
 			log.log(Level.INFO, "Server offline");
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("No connection with the server");
-			
+
 			alert.setContentText("The server is currenlty offlile, please check your connection and try again");
 			alert.initModality(Modality.APPLICATION_MODAL);			
 			alert.showAndWait();
@@ -106,7 +106,7 @@ public class LogInController extends Control implements Initializable {
 		}
 		else btnLogin.setDisable(false);
 		try{
-			
+
 			log.log(Level.INFO, "Conenction started correctly");
 			aLNoticias = new ArrayList<>();
 			if((aLNoticiasFicheros != null) || (!aLNoticiasFicheros.isEmpty())){
@@ -118,12 +118,12 @@ public class LogInController extends Control implements Initializable {
 				pagNoticias.setPageCount(aLNoticias.size());
 				pagNoticias.setPageFactory(new Callback<Integer, Node>() {
 					@Override
-					
+
 					public Node call(Integer pageIndex) {
 						return createPage(pageIndex, aLNoticias);
 					}
 				});
-				
+
 			}
 		}catch(NullPointerException a){
 			a.printStackTrace();
@@ -135,7 +135,7 @@ public class LogInController extends Control implements Initializable {
 			alert.showAndWait();
 			log.log(Level.SEVERE, "Error trying to retreive data from the server. ",a);
 		}catch (Exception e) {
-			
+
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Something went wrong");
 
@@ -153,41 +153,41 @@ public class LogInController extends Control implements Initializable {
 	public void loginSession(MouseEvent event){
 		log.log(Level.FINEST, "Login event");
 		//Se controlan todos los datos.
-		
+
 		if(txtUsuario.getText().length()>0&&txtContra.getText().length()>0){
 			//txtIncorrecto.setText("Usuario y/o contraseña incorrecto/s");
 			try {	log.log(Level.FINEST, "Checking credentials");
-				com.pasapalabra.game.service.ClientConnection.login(txtUsuario.getText(), txtContra.getText());
-				
-				//com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
-			} catch (AccessControlException e) {
-				log.log(Level.SEVERE, "LoginError, user does not exist", e);
-				//Aviso
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("User name or password incorrect");
+			com.pasapalabra.game.service.ClientConnection.login(txtUsuario.getText(), txtContra.getText());
 
-				alert.setContentText("Your username and/or password are incorrect, please check them and try again");
-				alert.initModality(Modality.APPLICATION_MODAL);	
-				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				alert.showAndWait();
-				txtContra.setText("");
-				return;
-				
+			//com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
+			}catch (RemoteException e) {
+				if(e.getMessage().endsWith("Error")){
+					
+					log.log(Level.SEVERE, "Login error, data incorrect", e);
+					//Aviso
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("User name or password incorrect");
 
-			} catch (RemoteException e) {
-				log.log(Level.SEVERE, "Login error, impossible to connect to the server", e);
-				//Aviso
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Error accesing the server");
+					alert.setContentText("Your username and/or password are incorrect, please check them and try again");
+					alert.initModality(Modality.APPLICATION_MODAL);	
+					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert.showAndWait();
+					txtContra.setText("");
+					return;
+				}
+				else{
+					log.log(Level.SEVERE, "Login error, impossible to connect to the server", e);
+					//Aviso
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error accesing the server");
 
-				alert.setContentText("An error ocurred while trying to connect to the server. Please, check your connection and try again");
-				alert.initModality(Modality.APPLICATION_MODAL);	
-				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-				alert.showAndWait();
-				txtContra.setText("");
-				e.printStackTrace();
-				return;
-
+					alert.setContentText("An error ocurred while trying to connect to the server. Please, check your connection and try again");
+					alert.initModality(Modality.APPLICATION_MODAL);	
+					alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+					alert.showAndWait();
+					txtContra.setText("");
+					return;
+				}
 			}catch (SecurityException e) {
 				log.log(Level.SEVERE, "Login error, duplicated username", e);
 				//Aviso
@@ -199,7 +199,7 @@ public class LogInController extends Control implements Initializable {
 				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
 				alert.showAndWait();
 				txtContra.setText("");
-				
+
 				e.printStackTrace();
 				return;
 			}
@@ -219,48 +219,48 @@ public class LogInController extends Control implements Initializable {
 			}
 			try {	log.log(Level.FINEST, "LogIn OK. Retreiving userdata");
 			com.pasapalabra.game.service.ClientConnection.retreiveUserData();
-			
+
 			com.pasapalabra.game.utilities.WindowUtilities.windowTransition("ThemeElection", event);
-		} catch (SecurityException e) {
-			log.log(Level.SEVERE, "Login Error, impossible to retreive your userdata", e);
-			//Aviso
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Impossible to retreive your info");
+			} catch (SecurityException e) {
+				log.log(Level.SEVERE, "Login Error, impossible to retreive your userdata", e);
+				//Aviso
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Impossible to retreive your info");
 
-			alert.setContentText("An error occured trying to retrevie your information, please try again");
-			alert.initModality(Modality.APPLICATION_MODAL);	
-			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-			alert.showAndWait();
-			txtContra.setText("");
-			
+				alert.setContentText("An error occured trying to retrevie your information, please try again");
+				alert.initModality(Modality.APPLICATION_MODAL);	
+				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				alert.showAndWait();
+				txtContra.setText("");
 
-		} catch (RemoteException e) {
-			log.log(Level.SEVERE, "Error retreiving userdata, connection not ok", e);
-			//Aviso
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error accesing the server");
 
-			alert.setContentText("An error ocurred while trying to download from the server. Please, check your connection and try again");
-			alert.initModality(Modality.APPLICATION_MODAL);	
-			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-			alert.showAndWait();
-			txtContra.setText("");
-	
+			} catch (RemoteException e) {
+				log.log(Level.SEVERE, "Error retreiving userdata, connection not ok", e);
+				//Aviso
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error accesing the server");
 
-		}
-		catch (Exception e) {
-			log.log(Level.SEVERE, "Error retreiving userdata, unexpected error", e);
-			//Aviso
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Unexpected error occured during the login");
+				alert.setContentText("An error ocurred while trying to download from the server. Please, check your connection and try again");
+				alert.initModality(Modality.APPLICATION_MODAL);	
+				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				alert.showAndWait();
+				txtContra.setText("");
 
-			alert.setContentText("An unexpeced error occurred during the login, please try again");
-			alert.initModality(Modality.APPLICATION_MODAL);	
-			alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
-			alert.showAndWait();
-			txtContra.setText("");
-			e.printStackTrace();
-		}
+
+			}
+			catch (Exception e) {
+				log.log(Level.SEVERE, "Error retreiving userdata, unexpected error", e);
+				//Aviso
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Unexpected error occured during the login");
+
+				alert.setContentText("An unexpeced error occurred during the login, please try again");
+				alert.initModality(Modality.APPLICATION_MODAL);	
+				alert.initOwner((Stage) ((Node) event.getSource()).getScene().getWindow());
+				alert.showAndWait();
+				txtContra.setText("");
+				e.printStackTrace();
+			}
 		}
 		else{
 			log.log(Level.INFO, "Login error - User tried to login without data.");
@@ -312,11 +312,11 @@ public class LogInController extends Control implements Initializable {
 	public Pane createPage(int pageIndex, ArrayList<Image> aLNoticias) {
 		Pane pageBox = new Pane();
 		try{
-		ImageView iv = new ImageView(aLNoticias.get(pageIndex));
-		iv.setX(0); iv.setY(0);
-		iv.setFitHeight(300); iv.setFitWidth(300);
-		pageBox.getChildren().add(iv);
-		return pageBox;
+			ImageView iv = new ImageView(aLNoticias.get(pageIndex));
+			iv.setX(0); iv.setY(0);
+			iv.setFitHeight(300); iv.setFitWidth(300);
+			pageBox.getChildren().add(iv);
+			return pageBox;
 		}catch(Exception a){
 			return null;
 		}

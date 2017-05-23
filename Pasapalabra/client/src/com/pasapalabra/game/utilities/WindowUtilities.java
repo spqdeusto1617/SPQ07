@@ -13,6 +13,7 @@ import com.pasapalabra.game.controllers.FriendController;
 import com.pasapalabra.game.controllers.StatisticsController;
 import com.pasapalabra.game.controllers.ThemeController;
 import com.pasapalabra.game.service.ClientConnection;
+import com.pasapalabra.game.service.ClientService;
 import com.pasapalabra.game.controllers.ProfileController;
 
 import javafx.event.Event;
@@ -125,9 +126,11 @@ public class WindowUtilities {
 				//En la clase del servidor habrá una rutina para cerrar sesión.
 				try {
 					if(ClientConnection.delogging()){
-						com.pasapalabra.game.service.ClientConnection.sessionAuth = null;
+						ClientConnection.sessionAuth = null;
 
-						com.pasapalabra.game.service.ClientConnection.userInfo = null;
+						ClientConnection.userInfo = null;
+						
+						ClientConnection.userIMG = null;
 
 						windowTransition("LogIn", event);
 
@@ -192,6 +195,10 @@ public class WindowUtilities {
 		ClientConnection.userInfo = null;
 		
 		ClientConnection.userIMG = null;
+		
+		ClientService.rivalData = null;
+		
+		ClientService.rivalIMG = null;
 
 		windowTransition("LogIn", event);
 
