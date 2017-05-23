@@ -68,6 +68,7 @@ public class PasapalabraService implements IPasapalabraService{
 		if(uDao.checkIfExists(userName)){
 			User user = uDao.getUserByLogin(userName, pass);
 			//User user = new User(userName, "a@a", pass, null, new Date(), 0, 0, 0);
+			if(user == null)return null;
 			if(SessionManager.userExist(userName)) {
 				deLogin(new Token(getUserToken(userName)));
 				log.log(Level.INFO, "user "+userName+" exists");
