@@ -8,8 +8,10 @@ import java.util.Date;
 
 import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfRule;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 import com.pasapalabra.game.main.TestLauncher;
@@ -18,7 +20,9 @@ import com.pasapalabra.game.service.auth.Token;
 import com.pasapalabra.game.service.auth.TokenGenerator;
 
 public class ServiceLoginTest {
-
+	@Rule
+	public ContiPerfRule i = new ContiPerfRule();
+	
 	public static IPasapalabraService ppService;
 	private static UserDTO userToTest = new UserDTO(
 			TokenGenerator.nextUniqueID().getToken(),
@@ -61,15 +65,14 @@ public class ServiceLoginTest {
 
 
 	@Test
-	@PerfTest(invocations = 200)
-	@Required(max = 2000, average = 350)
+	 @PerfTest(duration = 20000)
 	public void login() {
 		assertNotEquals(null, userToken);
 	}
 
 	@Test
 	@PerfTest(invocations = 200)
-	@Required(max = 2000, average = 350)
+	@Required(throughput = 20)
 	public void logout() {
 		try {
 			ppService.deLogin(userToken);

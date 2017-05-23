@@ -4,10 +4,10 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.logging.Level;
 
 import org.bson.Document;
+import org.databene.contiperf.junit.ContiPerfSuiteRunner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.mongodb.MongoClient;
@@ -23,7 +23,7 @@ import com.pasapalabra.game.service.ServiceGameTest;
 import com.pasapalabra.game.service.ServiceLoginTest;
 import com.pasapalabra.game.service.ServiceRegisterTest;
 
-@RunWith(Suite.class)
+@RunWith(ContiPerfSuiteRunner.class)
 @SuiteClasses({
 	MongoTest.class,
 	QuestionDAOTest.class, UserDAOTest.class,
