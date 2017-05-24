@@ -1,0 +1,4 @@
+<map id="com.pasapalabra.game.dao.QuestionDAO.getRandomQuestionByLeter" name="com.pasapalabra.game.dao.QuestionDAO.getRandomQuestionByLeter">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#ae4df2a5e58d60e62832b1bce90a04b6d" title="com.pasapalabra.game.service.\lPasapalabraService.play" alt="" coords="345,5,551,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_question_d_a_o_test.html#a10aeb3ca5e49a1dc11e09659c19683a8" title="com.pasapalabra.game.dao.mongodb.\lQuestionDAOTest.getQuestionByLetter" alt="" coords="323,71,573,112"/>
+</map>

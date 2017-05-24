@@ -1,0 +1,4 @@
+<map id="com.pasapalabra.game.model.User.getPass" name="com.pasapalabra.game.model.User.getPass">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_user_d_a_o_test.html#ae3b4f7131d8bb7fe9c1ff19729025f48" title="com.pasapalabra.game.dao.mongodb.\lUserDAOTest.getUserByLogin" alt="" coords="253,5,496,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_user_d_a_o_test.html#a4f800e26a718b23872959aace5c47b3b" title="com.pasapalabra.game.dao.mongodb.\lUserDAOTest.updateScore" alt="" coords="253,71,496,112"/>
+</map>

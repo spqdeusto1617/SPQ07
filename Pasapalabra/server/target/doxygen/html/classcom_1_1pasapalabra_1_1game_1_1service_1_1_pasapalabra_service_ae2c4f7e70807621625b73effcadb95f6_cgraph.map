@@ -1,0 +1,11 @@
+<map id="com.pasapalabra.game.service.PasapalabraService.getQuestion" name="com.pasapalabra.game.service.PasapalabraService.getQuestion">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_session_manager.html#aab36252eec1219dcbf2489052ba68a69" title="com.pasapalabra.game.service.auth.\lSessionManager.isValidSession" alt="" coords="576,9,811,50"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#a15bb1e9a21493ce0567abe385994d817" title="com.pasapalabra.game.service.\lPasapalabraService.allQuestionAnswered" alt="" coords="265,41,527,82"/>
+<area shape="rect" id="node5" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_question.html#af192d99c62b31d706e58cdd59e9b138e" title="com.pasapalabra.game.model.\lQuestion.isAnswered" alt="" coords="593,99,793,141"/>
+<area shape="rect" id="node6" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1assembler_1_1_question_assembler.html#a20663ae45f15609b9551a337f9b7cf94" title="com.pasapalabra.game.model.assembler.\lQuestionAssembler.getInstance" alt="" coords="264,158,528,199"/>
+<area shape="rect" id="node7" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1assembler_1_1_question_assembler.html#a51d55c8d05a993b76505981a33cce633" title="com.pasapalabra.game.model.assembler.\lQuestionAssembler.assembleToDTO" alt="" coords="264,223,528,265"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_token.html#a0b023c850c3bab625104923c23919f82" title="com.pasapalabra.game.service.auth.\lToken.getToken" alt="" coords="859,9,1093,50"/>
+<area shape="rect" id="node8" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_question.html#a2b4cc59e7d51fda407bafbed70b7dff5" title="com.pasapalabra.game.model.\lQuestion.getQuestion" alt="" coords="593,165,793,206"/>
+<area shape="rect" id="node9" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_question.html#a0b09096f8e123c4930582f1c4d4f3eb6" title="com.pasapalabra.game.model.\lQuestion.getLeter" alt="" coords="593,230,793,271"/>
+<area shape="rect" id="node10" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_question.html#a869fd04c31bd8eead6fb929c3edd2930" title="com.pasapalabra.game.model.\lQuestion.getCreator" alt="" coords="593,295,793,337"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$interfacecom_1_1pasapalabra_1_1game_1_1service_1_1_i_client_service.html" title="com.pasapalabra.game.service.\lIClientService" alt="" coords="120,5,325,47"/>
+<area shape="rect" id="node4" href="$interfacecom_1_1pasapalabra_1_1game_1_1service_1_1_i_pasapalabra_service.html" title="com.pasapalabra.game.service.\lIPasapalabraService" alt="" coords="120,256,325,297"/>
+<area shape="rect" id="node3" href="$classhelpers_1_1_client_service.html" title="helpers.ClientService" alt="" coords="419,13,562,39"/>
+<area shape="rect" id="node5" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html" title="com.pasapalabra.game.service.\lPasapalabraService" alt="" coords="388,325,593,367"/>
+<area shape="rect" id="node7" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_d_t_o_1_1_question_d_t_o.html" title="com.pasapalabra.game.model.\lDTO.QuestionDTO" alt="" coords="391,64,591,105"/>
+<area shape="rect" id="node8" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_d_t_o_1_1_user_d_t_o.html" title="com.pasapalabra.game.model.\lDTO.UserDTO" alt="" coords="391,129,591,171"/>
+<area shape="rect" id="node9" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_d_t_o_1_1_user_score_d_t_o.html" title="com.pasapalabra.game.model.\lDTO.UserScoreDTO" alt="" coords="391,195,591,236"/>
+<area shape="rect" id="node10" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_token.html" title="com.pasapalabra.game.service.auth.\lToken" alt="" coords="373,260,608,301"/>
+</map>

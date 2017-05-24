@@ -1,0 +1,8 @@
+<map id="com.pasapalabra.game.model.assembler.UserAssembler.assembleToDTO" name="com.pasapalabra.game.model.assembler.UserAssembler.assembleToDTO">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a00348be50d8b23262b1a001f4a9e254c" title="com.pasapalabra.game.model.\lUser.getUserName" alt="" coords="317,5,517,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a1dca39200ed70c88853c739f041aade4" title="com.pasapalabra.game.model.\lUser.getMail" alt="" coords="317,71,517,112"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a34b400e4d6d060005e7b3d45b9863929" title="com.pasapalabra.game.model.\lUser.getProfileImage" alt="" coords="317,136,517,177"/>
+<area shape="rect" id="node5" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#abbfb1d5ba1923aa7d65ec2c67cacf9cf" title="com.pasapalabra.game.model.\lUser.getDOB" alt="" coords="317,201,517,243"/>
+<area shape="rect" id="node6" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#abd05c74a9e670b737e4d64602794091f" title="com.pasapalabra.game.model.\lUser.getGamesWon" alt="" coords="317,267,517,308"/>
+<area shape="rect" id="node7" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a9f7e9ccc35e3f3f76d5cde5728e23da1" title="com.pasapalabra.game.model.\lUser.getGamesLost" alt="" coords="317,332,517,373"/>
+</map>

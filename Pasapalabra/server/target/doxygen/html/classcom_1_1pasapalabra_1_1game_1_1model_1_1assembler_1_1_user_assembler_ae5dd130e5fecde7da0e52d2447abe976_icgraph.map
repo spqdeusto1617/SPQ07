@@ -1,0 +1,4 @@
+<map id="com.pasapalabra.game.model.assembler.UserAssembler.getInstance" name="com.pasapalabra.game.model.assembler.UserAssembler.getInstance">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#a3ca6a99d7275db0b8a24b6b171d9d397" title="com.pasapalabra.game.service.\lPasapalabraService.getData" alt="" coords="317,5,523,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#ae4df2a5e58d60e62832b1bce90a04b6d" title="com.pasapalabra.game.service.\lPasapalabraService.play" alt="" coords="317,71,523,112"/>
+</map>

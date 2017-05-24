@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['log',['log',['../classcom_1_1pasapalabra_1_1game_1_1server_1_1_capture_window.html#a63b05c0d584519cc80f5322838ea9685',1,'com.pasapalabra.game.server.CaptureWindow.log()'],['../classcom_1_1pasapalabra_1_1game_1_1server_1_1_server.html#a76320fe0410714583ff201efc24cb6e1',1,'com.pasapalabra.game.server.Server.log()'],['../classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#aaeab5386429d491bc0910997409cf01b',1,'com.pasapalabra.game.service.PasapalabraService.log()'],['../classcom_1_1pasapalabra_1_1game_1_1utilities_1_1_app_logger.html#a4844a325446a3c7e2354d9a6130634c1',1,'com.pasapalabra.game.utilities.AppLogger.log()'],['../classcom_1_1pasapalabra_1_1game_1_1utilities_1_1_window_utilites.html#a5be179536ebfaf28e82f107e67cb3097',1,'com.pasapalabra.game.utilities.WindowUtilites.log()']]]
+];

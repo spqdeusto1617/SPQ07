@@ -1,0 +1,9 @@
+<map id="com.pasapalabra.game.model.User.getUserName" name="com.pasapalabra.game.model.User.getUserName">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1assembler_1_1_user_assembler.html#acea53a04a226a1b5938e7532469c3f15" title="com.pasapalabra.game.model.assembler.\lUserAssembler.assembleToDTO" alt="" coords="253,37,517,79"/>
+<area shape="rect" id="node5" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#aeca6783f9052c02da304cf960bb4d271" title="com.pasapalabra.game.model.\lUser.equals" alt="" coords="285,103,485,144"/>
+<area shape="rect" id="node6" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_user_d_a_o_test.html#ae3b4f7131d8bb7fe9c1ff19729025f48" title="com.pasapalabra.game.dao.mongodb.\lUserDAOTest.getUserByLogin" alt="" coords="264,168,507,209"/>
+<area shape="rect" id="node7" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_user_d_a_o_test.html#a8430ec1e53347fe855c84dd5b4aa4439" title="com.pasapalabra.game.dao.mongodb.\lUserDAOTest.checkIfExists" alt="" coords="264,233,507,275"/>
+<area shape="rect" id="node8" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_user_d_a_o_test.html#a4f800e26a718b23872959aace5c47b3b" title="com.pasapalabra.game.dao.mongodb.\lUserDAOTest.updateScore" alt="" coords="264,299,507,340"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#a3ca6a99d7275db0b8a24b6b171d9d397" title="com.pasapalabra.game.service.\lPasapalabraService.getData" alt="" coords="565,5,771,47"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#ae4df2a5e58d60e62832b1bce90a04b6d" title="com.pasapalabra.game.service.\lPasapalabraService.play" alt="" coords="565,71,771,112"/>
+</map>

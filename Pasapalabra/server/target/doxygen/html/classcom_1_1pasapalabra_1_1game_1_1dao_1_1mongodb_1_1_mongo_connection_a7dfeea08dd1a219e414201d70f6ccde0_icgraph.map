@@ -1,0 +1,5 @@
+<map id="com.pasapalabra.game.dao.mongodb.MongoConnection.close" name="com.pasapalabra.game.dao.mongodb.MongoConnection.close">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_question_d_a_o_test.html#a71c305831bf1c8c914b92a43f1811d5e" title="com.pasapalabra.game.dao.mongodb.\lQuestionDAOTest.closeConnection" alt="" coords="296,5,539,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_user_d_a_o_test.html#ab564ec7dd9bca1846e2dc0c0520a1251" title="com.pasapalabra.game.dao.mongodb.\lUserDAOTest.closeConnection" alt="" coords="296,71,539,112"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1db_1_1_mongo_test.html#ab0bbc474474bdff840f30201086c0608" title="com.pasapalabra.game.db.\lMongoTest.closeConnection" alt="" coords="324,136,511,177"/>
+</map>

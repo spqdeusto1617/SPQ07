@@ -1,0 +1,14 @@
+<map id="com.pasapalabra.game.service.PasapalabraService.play" name="com.pasapalabra.game.service.PasapalabraService.play">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_session_manager.html#aab36252eec1219dcbf2489052ba68a69" title="com.pasapalabra.game.service.auth.\lSessionManager.isValidSession" alt="" coords="276,5,511,47"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1_question_d_a_o.html#a3d713369ba256c608b362234417766fa" title="com.pasapalabra.game.dao.\lQuestionDAO.getRandomQuestionByLeter" alt="" coords="259,71,528,112"/>
+<area shape="rect" id="node5" href="$interfacecom_1_1pasapalabra_1_1game_1_1service_1_1_i_client_service.html#ab21606be16d7dd3be42f4de16b56e961" title="com.pasapalabra.game.service.\lIClientService.getUser" alt="" coords="291,136,496,177"/>
+<area shape="rect" id="node6" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1assembler_1_1_user_assembler.html#ae5dd130e5fecde7da0e52d2447abe976" title="com.pasapalabra.game.model.assembler.\lUserAssembler.getInstance" alt="" coords="261,201,525,243"/>
+<area shape="rect" id="node7" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1assembler_1_1_user_assembler.html#acea53a04a226a1b5938e7532469c3f15" title="com.pasapalabra.game.model.assembler.\lUserAssembler.assembleToDTO" alt="" coords="261,267,525,308"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_token.html#a0b023c850c3bab625104923c23919f82" title="com.pasapalabra.game.service.auth.\lToken.getToken" alt="" coords="576,5,811,47"/>
+<area shape="rect" id="node8" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a00348be50d8b23262b1a001f4a9e254c" title="com.pasapalabra.game.model.\lUser.getUserName" alt="" coords="593,103,793,144"/>
+<area shape="rect" id="node9" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a1dca39200ed70c88853c739f041aade4" title="com.pasapalabra.game.model.\lUser.getMail" alt="" coords="593,168,793,209"/>
+<area shape="rect" id="node10" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a34b400e4d6d060005e7b3d45b9863929" title="com.pasapalabra.game.model.\lUser.getProfileImage" alt="" coords="593,233,793,275"/>
+<area shape="rect" id="node11" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#abbfb1d5ba1923aa7d65ec2c67cacf9cf" title="com.pasapalabra.game.model.\lUser.getDOB" alt="" coords="593,299,793,340"/>
+<area shape="rect" id="node12" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#abd05c74a9e670b737e4d64602794091f" title="com.pasapalabra.game.model.\lUser.getGamesWon" alt="" coords="593,364,793,405"/>
+<area shape="rect" id="node13" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a9f7e9ccc35e3f3f76d5cde5728e23da1" title="com.pasapalabra.game.model.\lUser.getGamesLost" alt="" coords="593,429,793,471"/>
+</map>

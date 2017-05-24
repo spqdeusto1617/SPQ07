@@ -1,0 +1,7 @@
+<map id="com.pasapalabra.game.model.User.getGamesWon" name="com.pasapalabra.game.model.User.getGamesWon">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_user_mongo_d_a_o.html#a1e55c0e52a27e1ae6dfa79d56d96d4fa" title="com.pasapalabra.game.dao.mongodb.\lUserMongoDAO.updateScore" alt="" coords="264,5,507,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1assembler_1_1_user_assembler.html#acea53a04a226a1b5938e7532469c3f15" title="com.pasapalabra.game.model.assembler.\lUserAssembler.assembleToDTO" alt="" coords="253,71,517,112"/>
+<area shape="rect" id="node6" href="$classcom_1_1pasapalabra_1_1game_1_1dao_1_1mongodb_1_1_user_d_a_o_test.html#a4f800e26a718b23872959aace5c47b3b" title="com.pasapalabra.game.dao.mongodb.\lUserDAOTest.updateScore" alt="" coords="264,136,507,177"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#a3ca6a99d7275db0b8a24b6b171d9d397" title="com.pasapalabra.game.service.\lPasapalabraService.getData" alt="" coords="565,39,771,80"/>
+<area shape="rect" id="node5" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#ae4df2a5e58d60e62832b1bce90a04b6d" title="com.pasapalabra.game.service.\lPasapalabraService.play" alt="" coords="565,104,771,145"/>
+</map>

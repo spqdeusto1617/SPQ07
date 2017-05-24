@@ -1,0 +1,4 @@
+<map id="com.pasapalabra.game.model.DTO.UserDTO.getMail" name="com.pasapalabra.game.model.DTO.UserDTO.getMail">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_account_check_test.html#a2a2fab8bd84be543b9b9d9409902d53b" title="com.pasapalabra.game.service.\lServiceAccountCheckTest.getData" alt="" coords="276,5,499,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_account_modify_test.html#ad344bcacbe690acbec41fac3d9b65bbb" title="com.pasapalabra.game.service.\lServiceAccountModifyTest.modifyUserMail" alt="" coords="253,71,521,112"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="com.pasapalabra.game.db.MongoTest.update" name="com.pasapalabra.game.db.MongoTest.update">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#adb97271b4317d9be8c59d631da8f6e5c" title="com.pasapalabra.game.model.\lUser.setPass" alt="" coords="249,5,449,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_token_generator.html#afd71bade57c1eb4b3a9fee65ba2451a9" title="com.pasapalabra.game.service.auth.\lTokenGenerator.nextUniqueID" alt="" coords="232,71,467,112"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_token.html#a0b023c850c3bab625104923c23919f82" title="com.pasapalabra.game.service.auth.\lToken.getToken" alt="" coords="232,136,467,177"/>
+</map>

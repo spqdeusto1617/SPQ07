@@ -1,0 +1,4 @@
+<map id="com.pasapalabra.game.model.UserScore.getRightAnswered" name="com.pasapalabra.game.model.UserScore.getRightAnswered">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1assembler_1_1_score_assembler.html#a33c21660c497feccf3bb868a23977df1" title="com.pasapalabra.game.model.assembler.\lScoreAssembler.assembleToDTO" alt="" coords="253,5,517,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#ae753ee5c650fe36dff7c7715c25b8407" title="com.pasapalabra.game.service.\lPasapalabraService.getResults" alt="" coords="565,35,771,76"/>
+</map>

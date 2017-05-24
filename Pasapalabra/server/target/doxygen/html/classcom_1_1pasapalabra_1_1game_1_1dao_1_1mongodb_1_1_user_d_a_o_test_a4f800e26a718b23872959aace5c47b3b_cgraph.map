@@ -1,0 +1,6 @@
+<map id="com.pasapalabra.game.dao.mongodb.UserDAOTest.updateScore" name="com.pasapalabra.game.dao.mongodb.UserDAOTest.updateScore">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#abd05c74a9e670b737e4d64602794091f" title="com.pasapalabra.game.model.\lUser.getGamesWon" alt="" coords="296,5,496,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a9f7e9ccc35e3f3f76d5cde5728e23da1" title="com.pasapalabra.game.model.\lUser.getGamesLost" alt="" coords="296,71,496,112"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a00348be50d8b23262b1a001f4a9e254c" title="com.pasapalabra.game.model.\lUser.getUserName" alt="" coords="296,136,496,177"/>
+<area shape="rect" id="node5" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user.html#a3d99c1aac4418b7b10edd9c31c187eb7" title="com.pasapalabra.game.model.\lUser.getPass" alt="" coords="296,201,496,243"/>
+</map>

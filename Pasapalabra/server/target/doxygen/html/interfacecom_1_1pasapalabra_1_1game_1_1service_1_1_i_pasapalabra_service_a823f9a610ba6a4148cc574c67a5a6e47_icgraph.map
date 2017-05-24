@@ -1,0 +1,7 @@
+<map id="com.pasapalabra.game.service.IPasapalabraService.registry" name="com.pasapalabra.game.service.IPasapalabraService.registry">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_account_check_test.html#a4af41bbadad51d7ec000f3fbeb3cba4c" title="com.pasapalabra.game.service.\lServiceAccountCheckTest.startClient" alt="" coords="259,5,497,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_account_modify_test.html#ab0605fdd73596da89dbca41f4eba4b62" title="com.pasapalabra.game.service.\lServiceAccountModifyTest.startClient" alt="" coords="259,71,497,112"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_game_test.html#a31346e0d653101c6de8ff4cfbbb07be3" title="com.pasapalabra.game.service.\lServiceGameTest.startServer" alt="" coords="275,136,481,177"/>
+<area shape="rect" id="node5" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_login_test.html#a3f626e431391800155c3623630d579a4" title="com.pasapalabra.game.service.\lServiceLoginTest.startClient" alt="" coords="275,201,481,243"/>
+<area shape="rect" id="node6" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_register_test.html#aeb3b4de40334b81f278df7610bcec017" title="com.pasapalabra.game.service.\lServiceRegisterTest.register" alt="" coords="275,267,481,308"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="com.pasapalabra.game.server.Server.start" name="com.pasapalabra.game.server.Server.start">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1utilities_1_1_app_logger.html#ad3dcf1628d14c79558d5f9217f4d6d76" title="com.pasapalabra.game.utilities.\lAppLogger.crearLogHandler" alt="" coords="252,5,459,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1utilities_1_1_window_utilites.html#a821ebee2464bf7b6f2e6cf31a822bc8d" title="com.pasapalabra.game.utilities.\lWindowUtilites.centerWindow" alt="" coords="252,71,459,112"/>
+</map>

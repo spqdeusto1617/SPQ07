@@ -1,0 +1,7 @@
+<map id="com.pasapalabra.game.dao.UserDAO.getUserByLogin" name="com.pasapalabra.game.dao.UserDAO.getUserByLogin">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#abadc9b6563d38fb56388fd73deeafa4f" title="com.pasapalabra.game.service.\lPasapalabraService.login" alt="" coords="257,5,462,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#a05cb75556c5e8cba183660ddba07e096" title="com.pasapalabra.game.service.\lPasapalabraService.changeUserIMG" alt="" coords="243,71,476,112"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#a2aae20b4b6ade43eff8a9759fca15d11" title="com.pasapalabra.game.service.\lPasapalabraService.changeUserMail" alt="" coords="243,136,476,177"/>
+<area shape="rect" id="node5" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#ac2a9c59c563fc0f59ed2bcf1f5d64916" title="com.pasapalabra.game.service.\lPasapalabraService.changeUserPass" alt="" coords="240,201,479,243"/>
+<area shape="rect" id="node6" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#a4c6ab00c1dc3fc39f62f70e45f99f58b" title="com.pasapalabra.game.service.\lPasapalabraService.removeUser" alt="" coords="255,267,463,308"/>
+</map>

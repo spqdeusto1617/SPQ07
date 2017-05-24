@@ -1,0 +1,4 @@
+<map id="com.pasapalabra.game.dao.UserDAO.checkIfExists" name="com.pasapalabra.game.dao.UserDAO.checkIfExists">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#a1a2ed5e4fcc31500ab56400a29306a4c" title="com.pasapalabra.game.service.\lPasapalabraService.registry" alt="" coords="240,5,445,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_pasapalabra_service.html#abadc9b6563d38fb56388fd73deeafa4f" title="com.pasapalabra.game.service.\lPasapalabraService.login" alt="" coords="240,71,445,112"/>
+</map>

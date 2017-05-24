@@ -1,0 +1,5 @@
+<map id="com.pasapalabra.game.model.assembler.ScoreAssembler.assembleToDTO" name="com.pasapalabra.game.model.assembler.ScoreAssembler.assembleToDTO">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user_score.html#acc908a4adb2a7684c10abbd1f14bc74b" title="com.pasapalabra.game.model.\lUserScore.getRightAnswered" alt="" coords="317,5,517,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user_score.html#a8cbcf2e431661e81c88807b96bda1646" title="com.pasapalabra.game.model.\lUserScore.getWrongAnswered" alt="" coords="317,71,517,112"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_user_score.html#ac75b11902931a608bec1beb42b289e20" title="com.pasapalabra.game.model.\lUserScore.isVictory" alt="" coords="317,136,517,177"/>
+</map>

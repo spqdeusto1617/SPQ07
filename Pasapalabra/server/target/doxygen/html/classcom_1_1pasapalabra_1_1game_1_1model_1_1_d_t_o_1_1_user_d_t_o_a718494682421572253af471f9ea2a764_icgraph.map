@@ -1,0 +1,10 @@
+<map id="com.pasapalabra.game.model.DTO.UserDTO.getUserName" name="com.pasapalabra.game.model.DTO.UserDTO.getUserName">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1model_1_1_d_t_o_1_1_user_d_t_o.html#ab6e17428093d8a4fc499b9af80920446" title="com.pasapalabra.game.model.\lDTO.UserDTO.equals" alt="" coords="267,5,467,47"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_account_check_test.html#a1f8b99e1d8e016e6852a97af60bf9d5b" title="com.pasapalabra.game.service.\lServiceAccountCheckTest.login" alt="" coords="264,71,469,112"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_account_check_test.html#a2a2fab8bd84be543b9b9d9409902d53b" title="com.pasapalabra.game.service.\lServiceAccountCheckTest.getData" alt="" coords="255,136,478,177"/>
+<area shape="rect" id="node5" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_account_modify_test.html#afd6384b1128fd16ce66e36cb40b363da" title="com.pasapalabra.game.service.\lServiceAccountModifyTest.login" alt="" coords="263,201,470,243"/>
+<area shape="rect" id="node6" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_game_test.html#aa6b36f12d2736f661adefae5c8a1028a" title="com.pasapalabra.game.service.\lServiceGameTest.login" alt="" coords="264,267,469,308"/>
+<area shape="rect" id="node7" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_game_test.html#a7468a38c0483df720c7457d617de958e" title="com.pasapalabra.game.service.\lServiceGameTest.exitMatchMaking" alt="" coords="253,332,480,373"/>
+<area shape="rect" id="node8" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_game_test.html#af490d993cf919303c5d7773923059e0a" title="com.pasapalabra.game.service.\lServiceGameTest.play" alt="" coords="264,397,469,439"/>
+<area shape="rect" id="node9" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1_service_login_test.html#a2b6e9af7b74452d519c198a463108397" title="com.pasapalabra.game.service.\lServiceLoginTest.loginHook" alt="" coords="264,463,469,504"/>
+</map>

@@ -1,0 +1,6 @@
+<map id="com.pasapalabra.game.service.PasapalabraService.deLogin" name="com.pasapalabra.game.service.PasapalabraService.deLogin">
+<area shape="rect" id="node2" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_session_manager.html#aab36252eec1219dcbf2489052ba68a69" title="com.pasapalabra.game.service.auth.\lSessionManager.isValidSession" alt="" coords="259,5,493,47"/>
+<area shape="rect" id="node4" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_session_manager.html#aac0724f0f23a31b37ff3d29000a472d2" title="com.pasapalabra.game.service.auth.\lSessionManager.removeUser" alt="" coords="259,71,493,112"/>
+<area shape="rect" id="node5" href="$interfacecom_1_1pasapalabra_1_1game_1_1service_1_1_i_client_service.html#adf474647fda5cba1d397e67df16926fc" title="com.pasapalabra.game.service.\lIClientService.otherDisconnected" alt="" coords="270,136,482,177"/>
+<area shape="rect" id="node3" href="$classcom_1_1pasapalabra_1_1game_1_1service_1_1auth_1_1_token.html#a0b023c850c3bab625104923c23919f82" title="com.pasapalabra.game.service.auth.\lToken.getToken" alt="" coords="541,39,776,80"/>
+</map>
